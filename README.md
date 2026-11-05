@@ -16,7 +16,7 @@ applicatif ni secret.
 
 | Chemin | Contenu |
 |---|---|
-| `logos/` | Logos en SVG et PNG 256 px (icônes Unraid), avatar du profil (`profil.*`) |
+| `logos/` | Logos en SVG et PNG 256 px (icônes Unraid), logo de la suite (`labs.*`), avatar du profil (`profil.*`) |
 | `kit/` | Kit Labs OS : feuille de style, script, polices, script de synchro, modèle de workflow, démo |
 | `docs/` | Règles communes : principes, thèmes, couleurs, typographie, composants, vocabulaire, logos, icônes Unraid, contribution |
 | `apps/<appli>/README.md` | Charte d'une appli : identité, couleur, vocabulaire propre, écarts |

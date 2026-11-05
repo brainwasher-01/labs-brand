@@ -50,3 +50,18 @@ couleur propre ni d'entrée au catalogue.
 Écarts assumés : fond plein et PNG 512 px (GitHub demande au moins 420 px et
 un fond opaque). Une nouvelle appli ajoute une ligne de sa couleur, en
 resserrant le pas pour rester dans la zone y 20–44.
+
+## Logo de la suite
+
+`logos/labs.svg` et `logos/labs.png` (256×256, fond transparent) : la suite
+Labs dans son ensemble, par exemple l'icône du dossier « Labs » dans Unraid.
+
+| Élément | Valeur |
+|---|---|
+| Fond | Aucun, ni tuile ni bordure |
+| Cadrage | `viewBox="11 11 42 42"` : marges réduites pour remplir l'icône |
+| Crochets | Mêmes tracés que les logos, en dégradé des couleurs des applis (Backup → Finance → Projet → Torrent, de haut à gauche à bas à droite) |
+| Contenu | Invite `>_` en `#e6edf3` : chevron `M25 25l6 6-6 6` (trait 4 arrondi), curseur `rect x=33 y=38 w=7 h=4 rx=1` |
+
+Adresse pour Unraid :
+`https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/labs.png`
