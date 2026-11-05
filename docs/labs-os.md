@@ -63,6 +63,10 @@ d'une appli.
    sur `body` ; un menu latéral en `position: fixed` doit se décaler de
    `var(--lo-dock-w)`.
 
+API : `LabsOS.open(texte)` ouvre la palette, `LabsOS.update({ version })` change une option après coup,
+`LabsOS.setStatus([...])` remplace l'état affiché, `LabsOS.refresh()` relance l'état et les décorations,
+`LabsOS.setMode('auto' | 'dark' | 'light')`, `LabsOS.url('backup')` donne l'adresse d'une autre appli.
+
 Options facultatives : `host` (nom affiché, défaut : nom d'hôte), `suite`
 (adresses des autres applis), `statusBar: false`, `aurora: false`,
 `paletteKey: false` (l'appli ouvre elle-même la palette avec `LabsOS.open()`),

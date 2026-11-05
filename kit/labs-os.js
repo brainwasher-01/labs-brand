@@ -228,6 +228,11 @@
     if (c.run) c.run(els.input.value.trim());
   }
 
+  /* Une fenêtre de l'appli est-elle ouverte (et visible) ? */
+  function modalOpen() {
+    return [].some.call(document.querySelectorAll('dialog[open], [aria-modal="true"], [role="dialog"]'), function (m) { return !m.closest('.lo-scrim') && m.getClientRects().length > 0; });
+  }
+
   /* ── Clavier ── */
   document.addEventListener('keydown', function (e) {
     if (!started) return;
@@ -242,7 +247,7 @@
     }
     var t = document.activeElement, typing = t && (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable);
     if (typing || e.ctrlKey || e.metaKey || e.altKey || opts.appKeys === false) return;
-    if (/^[1-5]$/.test(e.key) && !document.querySelector('dialog[open], [aria-modal="true"]:not(.lo-palette)')) { var a = APPS[+e.key - 1]; if (a.id !== opts.app) { e.preventDefault(); goApp(a.id); } }
+    if (/^[1-5]$/.test(e.key) && !modalOpen()) { var a = APPS[+e.key - 1]; if (a.id !== opts.app) { e.preventDefault(); goApp(a.id); } }
   }, true);
 
   /* ── API publique ── */
@@ -259,6 +264,7 @@
     open: function (query) { openPalette({ query: query }); },
     close: closePalette,
     refresh: function () { refreshStatus(); decorate(); },
+    update: function (o) { Object.keys(o || {}).forEach(function (k) { opts[k] = o[k]; }); if (started) { renderStatus(); decorate(); } },
     setStatus: function (items) { statusItems = items || []; renderStatus(); },
     mode: function () { return root.getAttribute('data-lo-mode'); },
     setMode: function (m) { save(MODE_KEY, m); applyMode(); renderStatus(); },
