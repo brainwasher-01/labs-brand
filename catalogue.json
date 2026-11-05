@@ -139,7 +139,7 @@
   ],
   "kit": {
     "name": "Labs OS",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "path": "kit/",
     "doc": "docs/labs-os.md",
     "dispatch_event": "labs-kit"

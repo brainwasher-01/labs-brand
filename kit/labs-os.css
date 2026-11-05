@@ -5,7 +5,7 @@
    « pont » (bridge), une petite feuille qui relie ses variables à celles-ci.
 
    Contenu : polices embarquées, jetons (--lo-*), coque injectée par labs-os.js
-   (dock de la suite, palette Ctrl K, barre d'état), crochets (titres, cartes).
+   (palette Ctrl K, barre d'état), crochets (titres, cartes). Pas de dock (retiré en 1.1.0).
    Tout est préfixé lo- / --lo- pour ne jamais heurter les styles d'une appli.
    ═══════════════════════════════════════════════════════════════════════════ */
 
@@ -24,7 +24,7 @@
   --lo-font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --lo-font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
   --lo-r: 10px; --lo-r-sm: 6px;
-  --lo-dock-w: 4.25rem; --lo-status-h: 1.875rem; --lo-dock-h: 0px;
+  --lo-dock-w: 0px; --lo-status-h: 1.875rem; --lo-dock-h: 0px;
   /* Couleur de chaque appli : [sombre] et variante foncée [clair] ≥ 4,5:1 sur blanc */
   --lo-c-backup: #7ee2a8; --lo-c-projet: #b49cff; --lo-c-torrent: #ff9b6a; --lo-c-finance: #6cc7f0; --lo-c-asset: #f2b84b;
 }
@@ -69,25 +69,8 @@ html.lo-on body::after { content: ""; position: fixed; inset: 0; pointer-events:
 :root[data-lo-mode="light"] .lo-aurora { opacity: .6; }
 
 /* ── Place réservée à la coque ──────────────────────────────────────────── */
-html.lo-on body { padding-left: var(--lo-dock-w); padding-bottom: var(--lo-status-h); }
+html.lo-on body { padding-bottom: var(--lo-status-h); }
 html.lo-on.lo-no-status body { padding-bottom: 0; }
-
-/* ── Dock de la suite ───────────────────────────────────────────────────── */
-.lo-dock { position: fixed; z-index: 2147482000; top: 0; left: 0; bottom: var(--lo-status-h); width: var(--lo-dock-w); display: flex; flex-direction: column; align-items: center; gap: .5rem; padding: .875rem 0; background: var(--lo-bg); border-right: 1px solid var(--lo-line); font-family: var(--lo-font-sans); }
-.lo-dock-btn { position: relative; display: block; width: 2.75rem; height: 2.75rem; padding: 0; border: 0; border-radius: 12px; background: none; cursor: pointer; transition: transform 160ms; text-decoration: none; }
-.lo-dock-btn svg { display: block; width: 100%; height: 100%; filter: saturate(.55) brightness(.8); opacity: .62; transition: filter 200ms, opacity 200ms; }
-.lo-dock-btn:hover { transform: translateY(-1px); }
-.lo-dock-btn:hover svg, .lo-dock-btn[aria-current="page"] svg { filter: none; opacity: 1; }
-.lo-dock-btn[aria-current="page"]::after { content: ""; position: absolute; inset: -5px; border-radius: 16px; box-shadow: 0 0 0 1.5px var(--lo-accent); }
-.lo-dock-btn[data-unknown] svg { opacity: .35; }
-.lo-dock-btn:focus-visible { outline: 2px solid var(--lo-accent); outline-offset: 4px; }
-.lo-tip { position: absolute; left: calc(100% + .75rem); top: 50%; transform: translate(-4px, -50%); white-space: nowrap; background: var(--lo-s3); color: var(--lo-strong); font: 500 .8125rem/1.3 var(--lo-font-mono); padding: .25rem .5rem; border-radius: var(--lo-r-sm); border: 1px solid var(--lo-line-2); opacity: 0; pointer-events: none; transition: opacity 120ms, transform 120ms; }
-.lo-dock-btn:hover .lo-tip, .lo-dock-btn:focus-visible .lo-tip { opacity: 1; transform: translate(0, -50%); }
-.lo-tip kbd { margin-left: .5rem; color: var(--lo-faint); font: inherit; }
-.lo-dock-foot { margin-top: auto; display: grid; gap: .375rem; justify-items: center; }
-.lo-icon-btn { width: 2.5rem; height: 2.5rem; display: grid; place-items: center; border: 0; border-radius: var(--lo-r-sm); background: none; color: var(--lo-muted); cursor: pointer; }
-.lo-icon-btn:hover { background: var(--lo-s2); color: var(--lo-strong); }
-.lo-icon-btn svg { width: 1.125rem; height: 1.125rem; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ── Barre d'état ───────────────────────────────────────────────────────── */
 .lo-status { position: fixed; z-index: 2147482000; left: 0; right: 0; bottom: 0; height: var(--lo-status-h); display: flex; align-items: center; gap: 1.25rem; padding: 0 1rem; background: var(--lo-bg-2); border-top: 1px solid var(--lo-line); font: 400 .75rem/1 var(--lo-font-mono); color: var(--lo-faint); white-space: nowrap; overflow: hidden; }
@@ -133,21 +116,16 @@ html.lo-on.lo-no-status body { padding-bottom: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   :root { transition: none; }
-  .lo-scrim.lo-open, .lo-palette, .lo-card::before, .lo-card::after, .lo-dock-btn, .lo-dock-btn svg { animation: none !important; transition: none !important; }
+  .lo-scrim.lo-open, .lo-palette, .lo-card::before, .lo-card::after { animation: none !important; transition: none !important; }
 }
 
-/* ── Mobile : dock en barre du bas, pas de barre d'état ─────────────────── */
+/* ── Mobile : pas de barre d'état ── */
 @media (max-width: 52rem) {
-  :root { --lo-dock-w: 0px; --lo-status-h: 0px; --lo-dock-h: calc(4rem + env(safe-area-inset-bottom)); }
-  html.lo-on body { padding-left: 0; padding-bottom: var(--lo-dock-h); }
-  .lo-dock { top: auto; right: 0; bottom: 0; width: auto; height: var(--lo-dock-h); flex-direction: row; justify-content: space-around; padding: .5rem .75rem calc(.5rem + env(safe-area-inset-bottom)); border-right: 0; border-top: 1px solid var(--lo-line); background: color-mix(in srgb, var(--lo-bg) 90%, transparent); backdrop-filter: blur(14px); }
-  .lo-tip, .lo-status { display: none; }
-  .lo-dock { justify-content: space-between; gap: .25rem; }
-  .lo-dock-btn { width: 2.5rem; height: 2.5rem; }
-  .lo-dock-foot { margin: 0; display: flex; gap: .125rem; }
-  .lo-icon-btn { width: 2.5rem; height: 2.5rem; }
+  :root { --lo-status-h: 0px; }
+  html.lo-on body { padding-bottom: 0; }
+  .lo-status { display: none; }
   .lo-palette input, .lo-palette input:focus { font-size: 1rem; }
   .lo-palette-foot { display: none; }
   .lo-scrim { padding-top: 8vh; }
 }
-@media print { .lo-dock, .lo-status, .lo-scrim, .lo-aurora { display: none !important; } html.lo-on body { padding: 0; } }
+@media print { .lo-status, .lo-scrim, .lo-aurora { display: none !important; } html.lo-on body { padding: 0; } }

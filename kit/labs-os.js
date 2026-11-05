@@ -3,7 +3,6 @@
    NE PAS MODIFIER DANS UNE APPLI : recopié par la propagation.
 
    Ajoute à n'importe quelle appli de la suite :
-   - le dock des 5 applis (logos officiels), qui passe en barre du bas sur mobile ;
    - la palette de commandes (Ctrl K ou Cmd K), avec les commandes de l'appli,
      ses liens de navigation et, si elle le fournit, sa recherche ;
    - la barre d'état (version, état fourni par l'appli, heure) ;
@@ -18,7 +17,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '1.0.1';
+  var KIT_VERSION = '1.1.0';
   var APPS = [
     { id: 'backup',  name: 'Backup Labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet Labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
@@ -102,21 +101,6 @@
     root.classList.add('lo-on');
     if (opts.statusBar === false) root.classList.add('lo-no-status');
     if (opts.aurora !== false) { var au = document.createElement('div'); au.className = 'lo-aurora'; au.setAttribute('aria-hidden', 'true'); document.body.prepend(au); }
-
-    var dock = document.createElement('nav'); dock.className = 'lo-dock'; dock.setAttribute('aria-label', 'Applis de la suite Labs');
-    dock.innerHTML = APPS.map(function (a, i) {
-      var cur = a.id === opts.app, u = cur ? null : urlFor(a.id);
-      return '<a class="lo-dock-btn" href="' + (u ? esc(u) : '#') + '" data-lo-app="' + a.id + '"' + (cur ? ' aria-current="page"' : '') + (!cur && !u ? ' data-unknown=""' : '') + ' aria-label="' + a.name + '">' + logo(a) +
-        '<span class="lo-tip">' + a.name + (cur ? '' : u ? '<kbd>' + (i + 1) + '</kbd>' : '<kbd>à régler</kbd>') + '</span></a>';
-    }).join('') + '<div class="lo-dock-foot"><button class="lo-icon-btn" type="button" data-lo-act="mode" aria-label="Clair, sombre ou automatique">' + svgIcon('sun') + '</button>' +
-      '<button class="lo-icon-btn" type="button" data-lo-act="palette" aria-label="Palette de commandes (Ctrl K)">' + svgIcon('search') + '</button></div>';
-    document.body.appendChild(dock); els.dock = dock;
-    dock.addEventListener('click', function (e) {
-      var b = e.target.closest('.lo-dock-btn');
-      if (b) { var u = b.getAttribute('href'); if (b.getAttribute('aria-current') || !u || u === '#') { e.preventDefault(); goApp(b.getAttribute('data-lo-app')); } return; }
-      var act = e.target.closest('[data-lo-act]'); if (!act) return;
-      if (act.getAttribute('data-lo-act') === 'mode') cycleMode(); else openPalette();
-    });
 
     if (opts.statusBar !== false) { var st = document.createElement('footer'); st.className = 'lo-status'; document.body.appendChild(st); els.status = st;
       st.addEventListener('click', function (e) { var b = e.target.closest('[data-lo-act]'); if (!b) return; b.getAttribute('data-lo-act') === 'mode' ? cycleMode() : openPalette(); });

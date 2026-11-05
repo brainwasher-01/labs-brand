@@ -7,14 +7,16 @@ jour par **propagation**.
 
 ## Ce que le kit apporte
 
+Pas de dock d'applis : retiré en 1.1.0 à la demande d'Aurélien. On passe
+d'une appli à l'autre par la palette (`Ctrl K`, touches `1` à `5`).
+
 | Élément | Comportement |
 |---|---|
-| **Dock de la suite** | Les 5 logos officiels à gauche ; l'appli ouverte est entourée d'un anneau de sa couleur. Sur téléphone, barre du bas. |
-| **Palette de commandes** | `Ctrl K` (ou `Cmd K`) : ouvrir une autre appli, lancer une action, aller à une page, chercher dans l'appli. Touches `1` à `5` : changer d'appli. |
+| **Palette de commandes** | `Ctrl K` (ou `Cmd K`, ou le bouton « Ctrl K » de la barre d'état) : ouvrir une autre appli, lancer une action, aller à une page, chercher dans l'appli. Touches `1` à `5` : changer d'appli. |
 | **Barre d'état** | En bas, façon éditeur : serveur, `appli.labs vX.Y.Z`, état fourni par l'appli, mode, heure. Masquée sur téléphone. |
 | **Crochets** | Titres de page entre `[ ]` ; coins en crochet au survol des cartes, en permanence sur la carte vedette. |
 | **Couleur d'appli** | `--lo-app` (sombre) et `--lo-app-ink` (clair, ≥ 4,5:1 sur blanc) ; l'accent suit le mode. |
-| **Mode** | Automatique, sombre ou clair ; mémorisé par navigateur (`labs.mode`), appliqué avant l'affichage. |
+| **Mode** | Automatique, sombre ou clair (bouton de la barre d'état ou palette) ; mémorisé par navigateur (`labs.mode`), appliqué avant l'affichage. |
 | **Ambiance** | Fond bleu nuit, léger grain, aurore de la couleur d'appli en haut de page. Aucun halo coloré. |
 | **Polices** | IBM Plex Sans (texte) et JetBrains Mono (données, nom écrit), embarquées (licence OFL). |
 
@@ -59,9 +61,7 @@ d'une appli.
 
 3. Écrire le **pont** de l'appli : une petite feuille qui donne à ses propres
    variables les valeurs `--lo-*` (fond, surfaces, texte, accent, états,
-   polices). La coque réserve sa place avec `padding-left` / `padding-bottom`
-   sur `body` ; un menu latéral en `position: fixed` doit se décaler de
-   `var(--lo-dock-w)`.
+   polices). La barre d'état réserve sa place avec `padding-bottom` sur `body`.
 
 API : `LabsOS.open(texte)` ouvre la palette, `LabsOS.update({ version })` change une option après coup,
 `LabsOS.setStatus([...])` remplace l'état affiché, `LabsOS.refresh()` relance l'état et les décorations,
@@ -82,8 +82,8 @@ Par ordre de priorité :
 3. la déduction depuis le nom d'hôte : `projet-labs.mondomaine.fr` →
    `backup-labs.mondomaine.fr`.
 
-Une appli dont l'adresse est inconnue apparaît en transparence dans le dock ;
-un clic ouvre la palette pour la saisir.
+Pour une appli dont l'adresse est inconnue, la palette indique « à régler » et
+ouvre un champ pour la saisir.
 
 ## Propagation
 
