@@ -95,6 +95,13 @@ Crate garde les termes d'usage de la musique et de ses outils, même anglais
 Crate n'est pas une appli Labs : ces écarts sont voulus et ne sont pas à
 corriger.
 
+- **Interface** : Crate n'utilise **pas Labs OS** ([`../../docs/labs-os.md`](../../docs/labs-os.md)) :
+  ni le kit, ni le workflow « Kit Labs OS », ni la propagation depuis Projet
+  Labs, qui ne vise que les applis du catalogue. Les changements faits pour la
+  suite Labs ne s'appliquent pas à Crate, et ceux de Crate ne vont pas dans la
+  suite. Un projet du groupe « Crate » créé dans Projet Labs reprend cette
+  charte, et elle seule.
+
 - **Logo** : C découpé dans un vinyle, pas les crochets de
   [`../../docs/logos.md`](../../docs/logos.md) ; tuile `#18181b` sans bordure
   de couleur ; fichiers dans `apps/crate/logo/` et non dans `logos/`.

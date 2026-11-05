@@ -109,6 +109,20 @@ Le jeton GitHub de Projet Labs doit pouvoir écrire sur les dépôts des applis
 exige pour l'événement `labs-kit` — et *Metadata* en lecture ; *Actions* en
 lecture suffit ; ou un jeton classique avec `repo`).
 
+## Crate, appli associée : hors Labs OS
+
+Crate garde sa propre charte ([`../apps/crate/`](../apps/crate/README.md)) :
+la propagation ne le vise jamais (elle ne lit que la liste `apps` de
+`catalogue.json`, où Crate n'est pas), et ses changements ne reviennent pas
+dans la suite.
+
+## Projets créés dans Projet Labs
+
+Un projet du groupe **Labs** reprend à sa création la charte de la suite
+(`CHARTE.md` : applis et couleurs, principes, règles communes, Labs OS ; et un
+bloc dans `CLAUDE.md`). Un projet du groupe **Crate** reprend la charte de
+Crate seule.
+
 ## Ce qui reste propre à chaque appli
 
 Ses écrans, son vocabulaire métier, ses couleurs de données (graphiques, tags
