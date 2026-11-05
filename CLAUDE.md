@@ -16,5 +16,8 @@ chartes par appli. Pas de code applicatif.
 - Rien de privé : pas d'adresse IP, de secret, de jeton, de donnée personnelle
   dans les textes ou les captures.
 - Documentation en français, commits en anglais (Conventional Commits).
+- **Commits signés au nom d'Aurélien** (`git config user.name "Aurélien Coiffard"`,
+  `git config user.email aurelien.coiffard@gmail.com`), **sans aucune mention de
+  Claude** : pas de ligne `Co-Authored-By`, `Claude-Session` ni « Generated with ».
 - Logos : construction dans `docs/logos.md` ; toujours fournir SVG + PNG
   256×256 à fond transparent.
