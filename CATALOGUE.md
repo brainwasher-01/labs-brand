@@ -11,7 +11,7 @@ de couleur ou de charte.
 | [Asset Labs](apps/asset-labs/README.md) | `asset.labs` | `#f2b84b` | ![](logos/asset-labs.svg) | Curation de la bibliothèque Plex (ex-Plex Labs) | à compléter | [thèmes](apps/asset-labs/theme.md) |
 | [Finance Labs](apps/finance-labs/README.md) | `finance.labs` | `#6cc7f0` | ![](logos/finance-labs.svg) | <à compléter> | à compléter | [thèmes](apps/finance-labs/theme.md) |
 | [Projet Labs](apps/projet-labs/README.md) | `projet.labs` | `#b49cff` | ![](logos/projet-labs.svg) | <à compléter> | à compléter | [thèmes](apps/projet-labs/theme.md) |
-| [Torrent Labs](apps/torrent-labs/README.md) | `torrent.labs` | `#ff9b6a` | ![](logos/torrent-labs.svg) | Recherche de torrents (ex-TorrentScope) | à compléter | [thèmes](apps/torrent-labs/theme.md) |
+| [Torrent Labs](apps/torrent-labs/README.md) | `torrent.labs` | `#ff9b6a` | ![](logos/torrent-labs.svg) | Recherche de torrents sur tous les indexeurs de Prowlarr, résultats en direct, envoi vers qBittorrent (ex-TorrentScope) | complète | [thèmes](apps/torrent-labs/theme.md) |
 
 ## Règles communes
 
