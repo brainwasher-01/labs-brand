@@ -1,5 +1,15 @@
 # Torrent Labs — thèmes
 
+## Labs OS (thème actuel)
+
+Depuis le 2026-11-05, l'appli utilise **Labs OS**, l'interface commune de la suite ([docs/labs-os.md](../../docs/labs-os.md)) : kit copié dans `static/labs-os/`, mis à jour par propagation depuis Projet Labs. Dock des applis, palette `Ctrl K`, barre d'état, crochets, mode automatique / sombre / clair (clé `labs.mode`), IBM Plex Sans + JetBrains Mono, accent = couleur de l'appli (`#ff9b6a` en sombre, `#b3470f` en clair).
+
+Le thème « Terminal » ci-dessous est **retiré** (0.3.0). Pont `static/css/labs-os-bridge.css`, chargé après `terminal.css` : bleu nuit, accent orange de l'appli (le bleu `#00aaff` ne sert plus), IBM Plex Sans pour l'interface, JetBrains Mono pour les données (titres de torrents, tailles, compteurs), plus de majuscules, de cadres ASCII ni de scanlines. Menu à gauche, barre de recherche entre crochets. Restent propres à l'appli les 12 couleurs des trackers. Interface en anglais.
+
+---
+
+*Thème d'origine, avant Labs OS (historique) :*
+
 Fichiers : [`theme/torrent-labs.css`](theme/torrent-labs.css) (copie de
 référence de la feuille de style de l'appli, `static/css/terminal.css`) et
 [`theme/tokens.json`](theme/tokens.json). Pas de sélecteur de thème.

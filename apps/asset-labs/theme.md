@@ -1,5 +1,15 @@
 # Asset Labs — thèmes
 
+## Labs OS (thème actuel)
+
+Depuis le 2026-11-05, l'appli utilise **Labs OS**, l'interface commune de la suite ([docs/labs-os.md](../../docs/labs-os.md)) : kit copié dans `app/static/labs-os/`, mis à jour par propagation depuis Projet Labs. Dock des applis, palette `Ctrl K`, barre d'état, crochets, mode automatique / sombre / clair (clé `labs.mode`), IBM Plex Sans + JetBrains Mono, accent = couleur de l'appli (`#f2b84b` en sombre, `#8a5c00` en clair).
+
+Pont en tête d'`app/static/app.css` (`:root[data-theme]`) : fonds, surfaces, textes, états et polices → jetons `--lo-*`. Restent propres à l'appli l'ambre des boutons principaux (`--accent` `#f2b84b`, texte foncé dessus), l'indigo des assets, le teal des médias et les fonds des affiches. `data-theme` suit le mode du kit (ancien choix `pcs-theme` repris une fois). Racine à 85 % sur ordinateur.
+
+---
+
+*Thème d'origine, avant Labs OS (historique) :*
+
 Fichiers : [`theme/asset-labs.css`](theme/asset-labs.css) (copie de référence
 des variables de l'interface) et [`theme/tokens.json`](theme/tokens.json).
 Thème clair par défaut, sombre si le système l'est ; le bouton du menu force

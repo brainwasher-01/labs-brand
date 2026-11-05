@@ -76,10 +76,10 @@
       "wordmark": "projet.labs",
       "initial": "P",
       "color": "#b49cff",
-      "role": null,
+      "role": "Base de connaissances Markdown versionnée, pont MCP avec Claude, restauration en un clic ; cohérence de la suite et propagation de Labs OS",
       "container": "projet-labs",
-      "status": "à compléter",
-      "charter_status": "à compléter",
+      "status": "en service",
+      "charter_status": "complète",
       "charter": "apps/projet-labs/README.md",
       "theme": "apps/projet-labs/theme.md",
       "logo_svg": "logos/projet-labs.svg",
@@ -139,7 +139,7 @@
   ],
   "kit": {
     "name": "Labs OS",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "path": "kit/",
     "doc": "docs/labs-os.md",
     "dispatch_event": "labs-kit"

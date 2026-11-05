@@ -1,5 +1,15 @@
 # Finance Labs — thèmes
 
+## Labs OS (thème actuel)
+
+Depuis le 2026-11-05, l'appli utilise **Labs OS**, l'interface commune de la suite ([docs/labs-os.md](../../docs/labs-os.md)) : kit copié dans `app/static/labs-os/`, mis à jour par propagation depuis Projet Labs. Dock des applis, palette `Ctrl K`, barre d'état, crochets, mode automatique / sombre / clair (clé `labs.mode`), IBM Plex Sans + JetBrains Mono, accent = couleur de l'appli (`#6cc7f0` en sombre, `#16729f` en clair).
+
+Pont en tête de `app/static/index.html` : variables Nuit / Jour → jetons `--lo-*`. Restent propres à l'appli les couleurs des graphiques `--c1…--c9` (valeurs propres au mode clair sous `data-lo-mode="light"`). Menu passé à gauche, contenu sur toute la largeur, tailles en rem (85 % sur ordinateur). La page de connexion garde son thème bleu autonome.
+
+---
+
+*Thème d'origine, avant Labs OS (historique) :*
+
 Un seul thème aux couleurs du logo (bleu `#6cc7f0` sur `#0b1015`), en deux
 variantes choisies par le système (`prefers-color-scheme`), sans sélecteur.
 Variables CSS en tête de la page de l'appli ; copie de référence dans

@@ -16,8 +16,7 @@
 
 ## Thèmes
 
-Un seul thème sombre, « Terminal » : voir [theme.md](theme.md), fichiers
-dans [`theme/`](theme/).
+**Labs OS** (interface commune de la suite) depuis la 0.3.0, mode clair ou sombre ; l'ancien thème « Terminal » est retiré. Voir [theme.md](theme.md).
 
 ## Écrans
 

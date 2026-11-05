@@ -10,7 +10,7 @@ de couleur ou de charte.
 | [Backup Labs](apps/backup-labs/README.md) | `backup.labs` | `#7ee2a8` | ![](logos/backup-labs.svg) | Sauvegarde tout-en-un pour Unraid (applications, Plex, dossiers, clé Unraid ; copies sur une autre machine) | complète | [thèmes](apps/backup-labs/theme.md) |
 | [Asset Labs](apps/asset-labs/README.md) | `asset.labs` | `#f2b84b` | ![](logos/asset-labs.svg) | Gestion des visuels d'une médiathèque Plex : synchronisation des affiches, logos et backgrounds, création de covers, cartes d'épisodes et placeholders (ex-Plex Labs) | complète | [thèmes](apps/asset-labs/theme.md) |
 | [Finance Labs](apps/finance-labs/README.md) | `finance.labs` | `#6cc7f0` | ![](logos/finance-labs.svg) | Finances personnelles du foyer, 100 % locales : import des relevés bancaires, comptes et titulaires, vue d'ensemble du patrimoine, simulateur | complète | [thèmes](apps/finance-labs/theme.md) |
-| [Projet Labs](apps/projet-labs/README.md) | `projet.labs` | `#b49cff` | ![](logos/projet-labs.svg) | <à compléter> | à compléter | [thèmes](apps/projet-labs/theme.md) |
+| [Projet Labs](apps/projet-labs/README.md) | `projet.labs` | `#b49cff` | ![](logos/projet-labs.svg) | Base de connaissances Markdown versionnée, pont MCP avec Claude, restauration en un clic ; cohérence de la suite et propagation de Labs OS | complète | [thèmes](apps/projet-labs/theme.md) |
 | [Torrent Labs](apps/torrent-labs/README.md) | `torrent.labs` | `#ff9b6a` | ![](logos/torrent-labs.svg) | Recherche de torrents sur tous les indexeurs de Prowlarr, résultats en direct, envoi vers qBittorrent (ex-TorrentScope) | complète | [thèmes](apps/torrent-labs/theme.md) |
 
 ## Applis associées (hors suite Labs)
@@ -28,7 +28,7 @@ dossier `apps/<appli>/`.
 
 | Sujet | Document |
 |---|---|
-| **Interface commune Labs OS** (kit 1.0.0, propagé depuis Projet Labs) | [docs/labs-os.md](docs/labs-os.md), [kit/](kit/) |
+| **Interface commune Labs OS** (kit 1.0.1, propagé depuis Projet Labs) | [docs/labs-os.md](docs/labs-os.md), [kit/](kit/) |
 | Principes | [docs/principes.md](docs/principes.md) |
 | Thèmes (Labs OS + pont de chaque appli) | [docs/themes.md](docs/themes.md) |
 | Couleurs | [docs/couleurs.md](docs/couleurs.md) |

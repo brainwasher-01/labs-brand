@@ -1,5 +1,15 @@
 # Backup Labs — thèmes
 
+## Labs OS (thème actuel)
+
+Depuis le 2026-11-05, l'appli utilise **Labs OS**, l'interface commune de la suite ([docs/labs-os.md](../../docs/labs-os.md)) : kit copié dans `web/static/labs-os/`, mis à jour par propagation depuis Projet Labs. Dock des applis, palette `Ctrl K`, barre d'état, crochets, mode automatique / sombre / clair (clé `labs.mode`), IBM Plex Sans + JetBrains Mono, accent = couleur de l'appli (`#7ee2a8` en sombre, `#13784a` en clair).
+
+Pont dans `web/src/lib/styles.css` : variables Console → jetons `--lo-*` ; restent propres à l'appli les couleurs vives de la frise des passages (`--ok-bar`, `--warn-bar`, `--fail-bar`). Mode : `theme.ts` délègue au kit, `data-mode` porte toujours le mode résolu ; l'ancien choix `backuplabs.mode` est repris une fois. Données en JetBrains Mono (au lieu d'IBM Plex Mono).
+
+---
+
+*Thème d'origine, avant Labs OS (historique) :*
+
 Fichiers : [`theme/backup-labs.css`](theme/backup-labs.css) (copie de
 référence de l'interface) et [`theme/tokens.json`](theme/tokens.json).
 Aperçu : [`preview.html`](preview.html).

@@ -18,7 +18,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '1.0.0';
+  var KIT_VERSION = '1.0.1';
   var APPS = [
     { id: 'backup',  name: 'Backup Labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet Labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
@@ -37,7 +37,10 @@
     box: '<path d="M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10"/>',
     down: '<path d="M12 4v11M7 11l5 5 5-5M5 20h14"/>',
     restore: '<path d="M4 12a8 8 0 108-8M4 4v5h5"/>',
-    home: '<path d="M3 11l9-8 9 8M5 10v10h14V10"/>'
+    home: '<path d="M3 11l9-8 9 8M5 10v10h14V10"/>',
+    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+    wallet: '<path d="M3 7h16a2 2 0 012 2v9H5a2 2 0 01-2-2zM3 7l12-3v3M16 13h3"/>'
   };
   var root = document.documentElement;
   var opts = {}, started = false, els = {}, cmds = [], shown = [], sel = 0, inputMode = null, searchSeq = 0;
