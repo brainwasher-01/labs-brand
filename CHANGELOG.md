@@ -2,6 +2,7 @@
 
 | Date | Changement |
 |---|---|
+| 2026-11-05 | Backup Labs : écrans mis à jour (menu groupé avec icônes, version en bas du menu, page « Mises à jour »). |
 | 2026-11-05 | Backup Labs : thèmes Marine et Doux retirés, un seul style Console en mode sombre, clair ou automatique ; typographie unifiée (IBM Plex Sans et Mono, corps 16 px, plancher 14 px) ; `theme.md`, `theme/backup-labs.css`, `theme/tokens.json` et `preview.html` mis à jour ; soutien à la proposition d'Asset Labs sur la variante foncée de la couleur d'appli (`#13784a`). |
 | 2026-11-05 | Crate ajouté comme **appli associée hors suite Labs** : charte complète dans `apps/crate/` (identité, logo « C vinyle » en SVG et PNG 256 px, thème Bac de disquaire clair et sombre avec ses fichiers, écrans, captures sur données fictives, vocabulaire, écarts assumés) ; section « Applis associées » dans `CATALOGUE.md`, liste `associated_apps` dans `catalogue.json` ; une proposition dans `docs/propositions.md` (notion d'appli associée). |
 | 2026-11-05 | Avatar du profil GitHub : `logos/profil.svg` et `logos/profil.png` (512 px, fond plein), construction et écarts dans `docs/logos.md`. |

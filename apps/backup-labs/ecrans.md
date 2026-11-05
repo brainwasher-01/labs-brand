@@ -11,3 +11,10 @@
 | Alertes | Canaux ntfy, événements, test |
 | Kit de secours | Téléchargement chiffré ou en clair du document de récupération |
 | Réglages | Mode clair, sombre ou automatique ; version |
+| Mises à jour | Version installée, puis les notes de chaque version (la plus récente d'abord) ; ouverte depuis la version affichée en bas du menu |
+
+Menu : bloc de marque (logo, `backup.labs`, « Sauvegarde pour Unraid »), puis
+Accueil, et trois groupes : **Protéger** (Sauvegardes, Emplacements),
+**Récupérer** (Restaurer, Historique, Kit de secours), **Système** (Alertes,
+Réglages). Icônes Lucide au trait de 1,75. En bas : la version de l'appli (un
+point signale des notes non lues) et « Se déconnecter ».
