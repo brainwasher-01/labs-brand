@@ -105,8 +105,9 @@ Labs OS* → *Run workflow*). Projet Labs affiche, pour chaque appli, la version
 du kit qu'elle embarque et signale celles en retard.
 
 Le jeton GitHub de Projet Labs doit pouvoir écrire sur les dépôts des applis
-(droit *Contents : read and write* et *Actions : read and write*, ou un jeton
-classique avec `repo` et `workflow`).
+(jeton *fine-grained* : *Contents* en lecture et écriture — c'est ce que GitHub
+exige pour l'événement `labs-kit` — et *Metadata* en lecture ; *Actions* en
+lecture suffit ; ou un jeton classique avec `repo`).
 
 ## Ce qui reste propre à chaque appli
 
