@@ -109,7 +109,7 @@
       '<button class="lo-icon-btn" type="button" data-lo-act="palette" aria-label="Palette de commandes (Ctrl K)">' + svgIcon('search') + '</button></div>';
     document.body.appendChild(dock); els.dock = dock;
     dock.addEventListener('click', function (e) {
-      var b = e.target.closest('[data-lo-app]');
+      var b = e.target.closest('.lo-dock-btn');
       if (b) { var u = b.getAttribute('href'); if (b.getAttribute('aria-current') || !u || u === '#') { e.preventDefault(); goApp(b.getAttribute('data-lo-app')); } return; }
       var act = e.target.closest('[data-lo-act]'); if (!act) return;
       if (act.getAttribute('data-lo-act') === 'mode') cycleMode(); else openPalette();

@@ -103,7 +103,7 @@ html.lo-on.lo-no-status body { padding-bottom: 0; }
 .lo-palette { width: min(40rem, 100%); background: var(--lo-s1); color: var(--lo-text); border: 1px solid var(--lo-line-2); border-radius: 14px; box-shadow: var(--lo-pop); overflow: hidden; animation: lo-pop 200ms cubic-bezier(.2,.7,.2,1) both; }
 .lo-palette-in { display: flex; align-items: center; gap: .75rem; padding: 0 1.125rem; border-bottom: 1px solid var(--lo-line); }
 .lo-palette-in .lo-b { font: 500 1.25rem var(--lo-font-mono); color: var(--lo-accent); }
-.lo-palette input { flex: 1; min-width: 0; height: 3.5rem; border: 0; background: none; outline: none; color: var(--lo-strong); font: 400 1.125rem var(--lo-font-sans); }
+.lo-palette input, .lo-palette input:focus { flex: 1; min-width: 0; width: auto; height: 3.5rem; min-height: 0; margin: 0; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; outline: none; color: var(--lo-strong); font: 400 1.125rem var(--lo-font-sans); -webkit-appearance: none; appearance: none; }
 .lo-palette ul { list-style: none; margin: 0; padding: .375rem; max-height: min(24rem, 55vh); overflow: auto; }
 .lo-grp { padding: .625rem .75rem .25rem; font: 500 .75rem var(--lo-font-sans); color: var(--lo-faint); }
 .lo-it { display: flex; align-items: center; gap: .75rem; min-height: 2.75rem; padding: 0 .75rem; border-radius: 8px; cursor: pointer; color: var(--lo-text); }
@@ -141,8 +141,13 @@ html.lo-on.lo-no-status body { padding-bottom: 0; }
   :root { --lo-dock-w: 0px; --lo-status-h: 0px; --lo-dock-h: calc(4rem + env(safe-area-inset-bottom)); }
   html.lo-on body { padding-left: 0; padding-bottom: var(--lo-dock-h); }
   .lo-dock { top: auto; right: 0; bottom: 0; width: auto; height: var(--lo-dock-h); flex-direction: row; justify-content: space-around; padding: .5rem .75rem calc(.5rem + env(safe-area-inset-bottom)); border-right: 0; border-top: 1px solid var(--lo-line); background: color-mix(in srgb, var(--lo-bg) 90%, transparent); backdrop-filter: blur(14px); }
-  .lo-dock-foot, .lo-tip, .lo-status { display: none; }
-  .lo-palette input { font-size: 1rem; }
+  .lo-tip, .lo-status { display: none; }
+  .lo-dock { justify-content: space-between; gap: .25rem; }
+  .lo-dock-btn { width: 2.5rem; height: 2.5rem; }
+  .lo-dock-foot { margin: 0; display: flex; gap: .125rem; }
+  .lo-icon-btn { width: 2.5rem; height: 2.5rem; }
+  .lo-palette input, .lo-palette input:focus { font-size: 1rem; }
+  .lo-palette-foot { display: none; }
   .lo-scrim { padding-top: 8vh; }
 }
 @media print { .lo-dock, .lo-status, .lo-scrim, .lo-aurora { display: none !important; } html.lo-on body { padding: 0; } }
