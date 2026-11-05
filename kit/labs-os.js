@@ -17,7 +17,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '1.1.0';
+  var KIT_VERSION = '1.2.0';
   var APPS = [
     { id: 'backup',  name: 'Backup Labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet Labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
@@ -39,7 +39,13 @@
     home: '<path d="M3 11l9-8 9 8M5 10v10h14V10"/>',
     clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
-    wallet: '<path d="M3 7h16a2 2 0 012 2v9H5a2 2 0 01-2-2zM3 7l12-3v3M16 13h3"/>'
+    wallet: '<path d="M3 7h16a2 2 0 012 2v9H5a2 2 0 01-2-2zM3 7l12-3v3M16 13h3"/>',
+    activity: '<path d="M3 12h4l3-8 4 16 3-8h4"/>',
+    logout: '<path d="M14 4h5v16h-5M10 8l-4 4 4 4M6 12h11"/>',
+    moon: '<path d="M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z"/>',
+    auto: '<circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 010 16z" fill="currentColor"/>',
+    tag: '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="7.5" r="1.2"/>',
+    list: '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>'
   };
   var root = document.documentElement;
   var opts = {}, started = false, els = {}, cmds = [], shown = [], sel = 0, inputMode = null, searchSeq = 0;
@@ -68,7 +74,46 @@
   }
   function cycleMode() {
     var order = ['auto', 'dark', 'light'], cur = wantedMode();
-    save(MODE_KEY, order[(order.indexOf(cur) + 1) % 3]); applyMode(); renderStatus();
+    save(MODE_KEY, order[(order.indexOf(cur) + 1) % 3]); applyMode(); renderStatus(); renderFoot();
+  }
+  var MODE_LABEL = { auto: 'Mode automatique', dark: 'Mode sombre', light: 'Mode clair' };
+
+  /* ── Pied du menu commun : lignes d'état, version (lien vers les notes), outils, bouton de mode ── */
+  var foot = { el: null, spec: null };
+  function renderFoot() {
+    var el = foot.el, s = foot.spec; if (!el || !s) return;
+    var h = '<div class="lo-foot-st">';
+    (s.rows || []).forEach(function (r) {
+      if (!r || r.hidden) return;
+      var tag = r.href ? 'a' : 'div';
+      h += '<' + tag + ' class="lo-foot-row"' + (r.href ? ' href="' + esc(r.href) + '"' : '') + (r.title ? ' title="' + esc(r.title) + '"' : '') + '>' +
+        (r.icon ? svgIcon(r.icon) : '<span class="lo-dot' + (r.tone ? ' lo-' + esc(r.tone) : '') + '"></span>') + '<span class="lo-t">' + esc(r.label) + '</span></' + tag + '>';
+    });
+    if (s.version) h += '<a class="lo-foot-row lo-foot-ver" href="' + esc(s.version.href || '#') + '" title="' + esc(s.version.title || 'Notes de version') + '">' + svgIcon('tag') + '<span class="lo-t">' + esc(s.version.label) + '</span></a>';
+    h += '</div><div class="lo-foot-tools">';
+    (s.tools || []).forEach(function (t, i) {
+      if (t === '-') { h += '<span class="lo-sp"></span>'; return; }
+      if (!t || t.hidden) return;
+      var cur = t.href && location.hash && t.href === location.hash.split('?')[0] ? ' aria-current="page"' : '';
+      h += t.href ? '<a class="lo-tool" href="' + esc(t.href) + '"' + cur : '<button type="button" class="lo-tool" data-lo-tool="' + i + '"';
+      h += ' title="' + esc(t.label) + '" aria-label="' + esc(t.label) + '">' + svgIcon(t.icon) + (t.href ? '</a>' : '</button>');
+    });
+    if (s.mode !== false) { var m = wantedMode(); h += '<button type="button" class="lo-tool" data-lo-tool="mode" title="' + MODE_LABEL[m] + ' (changer)" aria-label="' + MODE_LABEL[m] + ', changer">' + svgIcon(m === 'auto' ? 'auto' : m === 'dark' ? 'moon' : 'sun') + '</button>'; }
+    el.innerHTML = h + '</div>';
+  }
+  function setFoot(target, spec) {
+    var el = typeof target === 'string' ? document.querySelector(target) : target; if (!el) return;
+    if (foot.el !== el) {
+      el.classList.add('lo-foot');
+      el.addEventListener('click', function (e) {
+        var b = e.target.closest('[data-lo-tool]'); if (!b) return;
+        var k = b.getAttribute('data-lo-tool');
+        if (k === 'mode') { cycleMode(); return; }
+        var t = (foot.spec.tools || [])[+k]; if (t && t.run) t.run(e);
+      });
+      window.addEventListener('hashchange', renderFoot);
+    }
+    foot.el = el; foot.spec = spec || {}; renderFoot();
   }
   if (mq && mq.addEventListener) mq.addEventListener('change', function () { if (wantedMode() === 'auto') applyMode(); });
   applyMode();
@@ -254,7 +299,9 @@
     update: function (o) { Object.keys(o || {}).forEach(function (k) { opts[k] = o[k]; }); if (started) { renderStatus(); decorate(); } },
     setStatus: function (items) { statusItems = items || []; renderStatus(); },
     mode: function () { return root.getAttribute('data-lo-mode'); },
-    setMode: function (m) { save(MODE_KEY, m); applyMode(); renderStatus(); },
+    setMode: function (m) { save(MODE_KEY, m); applyMode(); renderStatus(); renderFoot(); },
+    cycleMode: cycleMode,
+    foot: setFoot,
     url: urlFor
   };
 })();

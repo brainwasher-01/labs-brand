@@ -38,5 +38,7 @@ embarquées par le kit. Tout en rem, racine à 85 % sur ordinateur.
 ## Formes
 
 Rayons 8 px (cartes), 6 px (boutons, champs) ; bordures 1 px ; pas d'ombre
-hors fenêtres. Titres de page entre crochets, coins en crochet au survol des
-cartes (`.card`), en permanence sur les cartes vedettes (`.card.hero`).
+hors fenêtres. Titres de page entre crochets ; cartes vedettes (`.card.star`)
+bordées d'un simple contour lavande. Menu en catégories (Notes, Code, Suite,
+Système) et pied du menu commun Labs OS (sauvegarde, Claude, travaux en cours,
+version → page Versions, journal, réglages, mode).

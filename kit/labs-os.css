@@ -5,7 +5,7 @@
    « pont » (bridge), une petite feuille qui relie ses variables à celles-ci.
 
    Contenu : polices embarquées, jetons (--lo-*), coque injectée par labs-os.js
-   (palette Ctrl K, barre d'état), crochets (titres, cartes). Pas de dock (retiré en 1.1.0).
+   (palette Ctrl K, barre d'état), crochets (titres), pied du menu commun. Pas de dock (retiré en 1.1.0).
    Tout est préfixé lo- / --lo- pour ne jamais heurter les styles d'une appli.
    ═══════════════════════════════════════════════════════════════════════════ */
 
@@ -62,7 +62,8 @@
 :root { transition: --lo-app 600ms cubic-bezier(.2,.7,.2,1); }
 
 /* ── Ambiance : grain et aurore de la couleur d'appli ───────────────────── */
-html.lo-on body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 2147483000; opacity: var(--lo-grain);
+/* Le grain reste SOUS le contenu (z-index -1) : posé par-dessus, il salissait les bords du texte. */
+html.lo-on body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1; opacity: var(--lo-grain);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 .lo-aurora { position: fixed; inset: 0 0 auto 0; height: 36rem; z-index: -1; pointer-events: none;
   background: radial-gradient(50rem 20rem at 22% -5rem, var(--lo-glow), transparent 70%), radial-gradient(32rem 16rem at 88% -6rem, color-mix(in srgb, var(--lo-app) 13%, transparent), transparent 70%); }
@@ -105,18 +106,34 @@ html.lo-on.lo-no-status body { padding-bottom: 0; }
 /* ── Crochets : la signature de la suite ────────────────────────────────── */
 .lo-br::before, .lo-br::after { font-family: var(--lo-font-mono); font-weight: 400; color: var(--lo-accent); letter-spacing: -.08em; }
 .lo-br::before { content: "[\00a0"; } .lo-br::after { content: "\00a0]"; }
-.lo-card { --lo-cr: .875rem; }
-.lo-card::before, .lo-card::after { content: ""; position: absolute; width: var(--lo-cr); height: var(--lo-cr); border: 2px solid var(--lo-accent); opacity: 0; transition: opacity 220ms, transform 220ms; pointer-events: none; z-index: 1; }
-.lo-card::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; border-top-left-radius: var(--lo-r); transform: translate(4px, 4px); }
-.lo-card::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0; border-bottom-right-radius: var(--lo-r); transform: translate(-4px, -4px); }
-.lo-card:hover::before, .lo-card:hover::after, .lo-card.lo-star::before, .lo-card.lo-star::after { opacity: 1; transform: none; }
+/* Carte mise en avant : un seul contour fin, de la couleur de l'appli (pas de coins en équerre depuis 1.2.0). */
+.lo-star { outline: 1px solid color-mix(in srgb, var(--lo-accent) 62%, transparent); outline-offset: -1px; }
+
+/* ── Pied du menu commun : états, version, outils (LabsOS.foot) ─────────── */
+.lo-foot { display: grid; gap: .375rem; padding-top: .625rem; border-top: 1px solid var(--lo-line); font: 400 .8125rem/1.35 var(--lo-font-sans); color: var(--lo-muted); }
+.lo-foot-st { display: grid; gap: .125rem; }
+.lo-foot .lo-foot-row { display: flex; align-items: center; gap: .5rem; min-width: 0; min-height: 1.625rem; padding: .125rem .375rem; margin: 0 -.375rem; border: 0; border-radius: var(--lo-r-sm); background: none; color: inherit; font: inherit; text-align: left; text-decoration: none; }
+.lo-foot a.lo-foot-row:hover { background: var(--lo-s2); color: var(--lo-text); }
+.lo-foot .lo-t { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lo-foot .lo-dot { flex: none; width: .4375rem; height: .4375rem; margin: 0 .1875rem; border-radius: 50%; background: var(--lo-faint); }
+.lo-foot .lo-dot.lo-ok { background: var(--lo-ok); } .lo-foot .lo-dot.lo-warn { background: var(--lo-warn); }
+.lo-foot .lo-dot.lo-fail { background: var(--lo-fail); } .lo-foot .lo-dot.lo-busy { background: var(--lo-busy); }
+.lo-foot .lo-foot-ver { font-family: var(--lo-font-mono); font-size: .75rem; }
+.lo-foot svg { flex: none; width: .875rem; height: .875rem; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.lo-foot-tools { display: flex; align-items: center; gap: .25rem; }
+.lo-foot-tools .lo-sp { flex: 1; }
+.lo-foot .lo-tool { display: grid; place-items: center; width: 2rem; height: 2rem; min-height: 0; padding: 0; border: 0; border-radius: var(--lo-r-sm); background: none; box-shadow: none; color: var(--lo-muted); cursor: pointer; }
+.lo-foot .lo-tool:hover { background: var(--lo-s2); color: var(--lo-text); }
+.lo-foot .lo-tool[aria-current="page"] { background: var(--lo-s3); color: var(--lo-text); }
+.lo-foot .lo-tool svg { width: 1.0625rem; height: 1.0625rem; }
+.lo-foot [hidden] { display: none !important; }
 
 /* Touches clavier affichées par une appli */
 .lo-keycap { font: 500 .75rem var(--lo-font-mono); padding: .0625rem .375rem; border-radius: 4px; border: 1px solid currentColor; border-bottom-width: 2px; opacity: .7; }
 
 @media (prefers-reduced-motion: reduce) {
   :root { transition: none; }
-  .lo-scrim.lo-open, .lo-palette, .lo-card::before, .lo-card::after { animation: none !important; transition: none !important; }
+  .lo-scrim.lo-open, .lo-palette { animation: none !important; transition: none !important; }
 }
 
 /* ── Mobile : pas de barre d'état ── */
