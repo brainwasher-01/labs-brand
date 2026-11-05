@@ -1,43 +1,34 @@
-# Labs — logos et système visuel
+# Labs — identité et chartes de la suite
 
-Ressources communes de la suite Labs (homelab) : Backup Labs, Asset Labs,
-Finance Labs, Projet Labs, Torrent Labs. Ce dépôt est public pour qu'Unraid
+Ressources communes de la suite Labs (homelab) : **Backup Labs, Asset Labs,
+Finance Labs, Projet Labs, Torrent Labs**. Ce dépôt est public pour qu'Unraid
 puisse télécharger les icônes des conteneurs ; il ne contient ni code
 applicatif ni secret.
 
-| Dossier | Contenu |
-|---|---|
-| `logos/` | Logos en PNG 256 px (icônes Unraid) et SVG |
-| `css/labs.css` | Feuille de style commune : 3 thèmes (console, marine, doux) et composants |
-| `css/tokens.json` | Les mêmes couleurs et réglages, pour d'autres outils |
-| `DESIGN.md` | Principes, thèmes, composants, vocabulaire |
-| `preview.html` | Aperçu des composants dans les 3 thèmes |
+- **Vue d'ensemble de toutes les applis** : [CATALOGUE.md](CATALOGUE.md)
+  (et [catalogue.json](catalogue.json) pour les outils, dont Projet Labs).
+- **Règles communes** : [DESIGN.md](DESIGN.md).
+- **Charte de chaque appli** : `apps/<appli>/`.
+- **Déposer ou mettre à jour sa charte** : [docs/contribuer.md](docs/contribuer.md).
 
-## Icône d'un template Unraid
+## Organisation
+
+| Chemin | Contenu |
+|---|---|
+| `logos/` | Logos en SVG et PNG 256 px (icônes Unraid) |
+| `docs/` | Règles communes : principes, thèmes, couleurs, typographie, composants, vocabulaire, logos, icônes Unraid, contribution |
+| `apps/<appli>/README.md` | Charte d'une appli : identité, couleur, vocabulaire propre, écarts |
+| `apps/<appli>/theme.md` | Thèmes de l'appli (chacune les siens pour l'instant) |
+| `apps/<appli>/theme/` | Fichiers du thème, facultatif |
+| `apps/_modele/` | Modèles de charte et de thème à copier |
+| `CATALOGUE.md`, `catalogue.json` | Index de toute la suite |
+| `CHANGELOG.md` | Historique des changements |
+| `CLAUDE.md` | Consignes pour les assistants qui travaillent sur ce dépôt |
+
+## Icône d'un conteneur Unraid
 
 ```xml
 <Icon>https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/backup-labs.png</Icon>
 ```
 
-## Logos
-
-| Application | Initiale | Couleur | PNG (256 px) | SVG |
-|---|---|---|---|---|
-| Backup Labs | B | `#7ee2a8` | `logos/backup-labs.png` | `logos/backup-labs.svg` |
-| Asset Labs | A | `#f2b84b` | `logos/asset-labs.png` | `logos/asset-labs.svg` |
-| Finance Labs | F | `#6cc7f0` | `logos/finance-labs.png` | `logos/finance-labs.svg` |
-| Projet Labs | P | `#b49cff` | `logos/projet-labs.png` | `logos/projet-labs.svg` |
-| Torrent Labs | T | `#ff9b6a` | `logos/torrent-labs.png` | `logos/torrent-labs.svg` |
-
-Règles pour une nouvelle application : tuile 64×64 à coins de 12, fond
-`#0b1015`, bordure de 2,5 dans la couleur ; crochets en trait de 4 à
-extrémités carrées ; initiale en trait de 4 à extrémités arrondies ; une
-couleur nouvelle de même clarté. Le nom s'écrit en minuscules et en police
-mono, suivi de `.labs` dans la couleur : `backup.labs`.
-
-## Utiliser la feuille de style
-
-Copier `css/labs.css` dans l'application (ou la référencer à une version
-précise), embarquer les polices (paquets `@fontsource` : IBM Plex Sans,
-JetBrains Mono, Plus Jakarta Sans, Manrope) et poser `data-theme` sur
-`<html>`. Détails dans `DESIGN.md`.
+Toutes les adresses : [docs/icones-unraid.md](docs/icones-unraid.md).

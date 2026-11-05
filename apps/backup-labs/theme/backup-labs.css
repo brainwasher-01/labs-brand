@@ -1,15 +1,15 @@
 /*
- * Labs — feuille de style commune à la suite (Backup, Asset, Finance,
- * Projet, Torrent Labs). Trois thèmes, choisis par l'attribut data-theme
- * sur <html> : console (défaut), marine, doux.
+ * Backup Labs — feuille de style de l'interface (copie de référence de
+ * web/src/lib/styles.css du dépôt backup-labs). Trois thèmes, choisis par
+ * l'attribut data-theme sur <html> : console (défaut), marine, doux.
+ * Les autres applis Labs ont leurs propres thèmes : ce fichier est un
+ * exemple, pas une obligation.
  *
  * Polices : IBM Plex Sans, JetBrains Mono (console), Plus Jakarta Sans
  * (marine), Manrope (doux). Les embarquer dans l'application (paquets
  * @fontsource) plutôt que de les charger depuis Internet : les applis
  * tournent sur le réseau local.
  *
- * Chaque appli redéfinit seulement --accent (et --accent-text) avec sa
- * couleur de logo si elle le souhaite ; tout le reste est commun.
  */
 :root,
 :root[data-theme='console'] {
