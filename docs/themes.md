@@ -1,4 +1,15 @@
-# Thèmes : chacun les siens, pour l'instant
+# Thèmes : Labs OS pour toute la suite
+
+Depuis le 2026-11-05, toutes les applis partagent l'interface **Labs OS** :
+mêmes fonds bleu nuit, mêmes polices, même coque, la couleur d'appli comme
+accent. Le kit et son mode d'emploi : [labs-os.md](labs-os.md).
+
+Chaque appli garde dans `apps/<appli>/theme.md` ce qui lui reste propre : son
+pont vers les jetons `--lo-*`, ses couleurs de données, ses écarts assumés.
+
+---
+
+*Historique — avant Labs OS :*
 
 Les applis de la suite n'ont **pas** de thème commun aujourd'hui : chacune a
 ses propres couleurs, polices et variantes claires ou sombres. Chaque appli

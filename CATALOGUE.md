@@ -28,8 +28,9 @@ dossier `apps/<appli>/`.
 
 | Sujet | Document |
 |---|---|
+| **Interface commune Labs OS** (kit 1.0.0, propagé depuis Projet Labs) | [docs/labs-os.md](docs/labs-os.md), [kit/](kit/) |
 | Principes | [docs/principes.md](docs/principes.md) |
-| Thèmes (chacun les siens pour l'instant) | [docs/themes.md](docs/themes.md) |
+| Thèmes (Labs OS + pont de chaque appli) | [docs/themes.md](docs/themes.md) |
 | Couleurs | [docs/couleurs.md](docs/couleurs.md) |
 | Typographie et écriture du nom | [docs/typographie.md](docs/typographie.md) |
 | Composants et motifs d'interface | [docs/composants.md](docs/composants.md) |

@@ -8,6 +8,7 @@ applicatif ni secret.
 - **Vue d'ensemble de toutes les applis** : [CATALOGUE.md](CATALOGUE.md)
   (et [catalogue.json](catalogue.json) pour les outils, dont Projet Labs).
 - **Règles communes** : [DESIGN.md](DESIGN.md).
+- **Interface commune Labs OS** (kit propagé à toutes les applis) : [docs/labs-os.md](docs/labs-os.md), dossier [kit/](kit/).
 - **Charte de chaque appli** : `apps/<appli>/`.
 - **Déposer ou mettre à jour sa charte** : [docs/contribuer.md](docs/contribuer.md).
 
@@ -16,9 +17,10 @@ applicatif ni secret.
 | Chemin | Contenu |
 |---|---|
 | `logos/` | Logos en SVG et PNG 256 px (icônes Unraid), avatar du profil (`profil.*`) |
+| `kit/` | Kit Labs OS : feuille de style, script, polices, script de synchro, modèle de workflow, démo |
 | `docs/` | Règles communes : principes, thèmes, couleurs, typographie, composants, vocabulaire, logos, icônes Unraid, contribution |
 | `apps/<appli>/README.md` | Charte d'une appli : identité, couleur, vocabulaire propre, écarts |
-| `apps/<appli>/theme.md` | Thèmes de l'appli (chacune les siens pour l'instant) |
+| `apps/<appli>/theme.md` | Pont de l'appli vers Labs OS, couleurs de données, écarts |
 | `apps/<appli>/theme/` | Fichiers du thème, facultatif |
 | `apps/_modele/` | Modèles de charte et de thème à copier |
 | `CATALOGUE.md`, `catalogue.json` | Index de toute la suite |

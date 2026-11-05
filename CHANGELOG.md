@@ -2,6 +2,7 @@
 
 | Date | Changement |
 |---|---|
+| 2026-11-05 | **Labs OS** : interface commune de toute la suite. Kit `kit/` (feuille `labs-os.css`, script `labs-os.js`, polices IBM Plex Sans et JetBrains Mono embarquées, `VERSION` 1.0.0, script `sync-labs-kit.sh`, modèle de workflow `labs-kit.yml`, page `demo.html`) ; mode d'emploi et propagation dans `docs/labs-os.md` ; `themes.md`, `DESIGN.md`, `README.md` mis à jour ; `catalogue.json` : bloc `kit`, dépôt et dossier du kit de chaque appli ; propositions « Labs OS » et « variante foncée de la couleur d'appli » retenues. |
 | 2026-11-05 | Backup Labs : interface à 85 % sur ordinateur, sur toute la largeur. |
 | 2026-11-05 | Backup Labs : interface à l'échelle 80 % sur ordinateur, tailles de la charte mises à jour. |
 | 2026-11-05 | Backup Labs : écrans mis à jour (menu groupé avec icônes, version en bas du menu, page « Mises à jour »). |

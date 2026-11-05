@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Labs OS — démo du kit</title>
+<link rel="stylesheet" href="labs-os.css">
+<script src="labs-os.js"></script>
+<script>
+  LabsOS.init({
+    app: 'projet', version: '1.0.0', host: 'skynet',
+    title: 'h1', cards: '.card', star: '.card.vedette', nav: 'nav.menu a',
+    commands: [{ group: 'Actions', label: 'Action de démonstration', hint: 'démo', icon: 'play', run: function () { document.querySelector('h1').textContent = 'Action lancée'; } }],
+    search: function (q) { return [{ label: 'Document « ' + q + ' »', hint: 'recherche', icon: 'file', run: function () {} }]; },
+    status: function () { return [{ label: 'Sauvegarde', value: 'à jour', tone: 'ok' }, { label: 'Projets', value: 6 }]; }
+  });
+</script>
+<style>
+  /* Pont minimal : l'appli lit les jetons --lo-* */
+  html { font-size: 85%; } @media (max-width: 52rem) { html { font-size: 100%; } }
+  body { margin: 0; background: var(--lo-bg); color: var(--lo-text); font: 400 1rem/1.5 var(--lo-font-sans); }
+  .wrap { display: grid; grid-template-columns: 15rem minmax(0, 1fr); min-height: 100vh; }
+  nav.menu { background: var(--lo-bg-2); border-right: 1px solid var(--lo-line); padding: 1.25rem .75rem; display: grid; align-content: start; gap: 2px; }
+  nav.menu .wm { font: 700 1.25rem var(--lo-font-mono); color: var(--lo-strong); padding: 0 .625rem 1rem; } nav.menu .wm b { color: var(--lo-accent); }
+  nav.menu a { color: var(--lo-muted); text-decoration: none; padding: .5rem .625rem; border-radius: 6px; } nav.menu a:hover { background: var(--lo-s2); color: var(--lo-strong); }
+  main { padding: 2.25rem 2rem; display: grid; gap: 1.25rem; align-content: start; }
+  h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -.045em; font-weight: 600; color: var(--lo-strong); }
+  .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+  .card { background: var(--lo-s1); border: 1px solid var(--lo-line); border-radius: var(--lo-r); padding: 1.125rem 1.25rem; }
+  .card h2 { margin: 0 0 .5rem; font: 500 .875rem var(--lo-font-sans); color: var(--lo-muted); }
+  .card b { font-size: 2.25rem; letter-spacing: -.04em; color: var(--lo-strong); }
+  .btn { background: var(--lo-accent); color: var(--lo-on-accent); border: 0; border-radius: 6px; padding: .625rem 1rem; font: 600 1rem var(--lo-font-sans); cursor: pointer; }
+  @media (max-width: 52rem) { .wrap { grid-template-columns: 1fr; } nav.menu { display: none; } main { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="menu"><div class="wm">projet<b>.labs</b></div><a href="#accueil">Accueil</a><a href="#projets">Projets</a><a href="#graphe">Graphe</a><a href="#reglages">Réglages</a></nav>
+  <main>
+    <h1>Démo du kit Labs OS</h1>
+    <p style="color:var(--lo-muted);margin:0">Ctrl K pour la palette, touches 1 à 5 pour changer d'appli, survolez les cartes.</p>
+    <div class="grid"><div class="card vedette"><h2>Carte vedette</h2><b>214</b></div><div class="card"><h2>Carte</h2><b>6</b></div><div class="card"><h2>Carte</h2><b>99 %</b></div></div>
+    <div><button class="btn" type="button" onclick="LabsOS.open()">Ouvrir la palette</button></div>
+  </main>
+</div>
+</body>
+</html>

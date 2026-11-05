@@ -1,0 +1,39 @@
+# Labs OS — modèle du workflow de propagation, à copier dans .github/workflows/labs-kit.yml de chaque appli.
+# Remplacer KIT_DIR (dossier servi par l'appli, ex. app/static/labs-os) et IMAGE_WORKFLOW (fichier du workflow d'image).
+# Déclenché par Projet Labs (bouton « Propager à la suite », événement repository_dispatch « labs-kit »),
+# à la main (Actions → Kit Labs OS → Run workflow) ou chaque nuit.
+name: Kit Labs OS
+on:
+  repository_dispatch:
+    types: [labs-kit]
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * *"
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: labs-kit
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Recopier le kit depuis labs-brand
+        id: sync
+        env:
+          REF: ${{ github.event.client_payload.ref || 'main' }}
+        run: echo "result=$(sh scripts/sync-labs-kit.sh KIT_DIR "$REF")" >> "$GITHUB_OUTPUT"
+      - name: Commiter et reconstruire l'image
+        if: startsWith(steps.sync.outputs.result, 'changed')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "Aurélien Coiffard"
+          git config user.email "aurelien.coiffard@gmail.com"
+          git add KIT_DIR
+          git commit -m "chore(ui): sync Labs OS kit $(cat KIT_DIR/VERSION)"
+          git push
+          # Un push fait avec le jeton du workflow ne relance pas les autres workflows : on lance l'image explicitement.
+          gh workflow run IMAGE_WORKFLOW --ref "${GITHUB_REF_NAME}"

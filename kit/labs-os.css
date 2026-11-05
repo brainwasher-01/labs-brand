@@ -1,0 +1,148 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Labs OS — kit commun de la suite Labs (dépôt labs-brand, dossier kit/).
+   NE PAS MODIFIER DANS UNE APPLI : ce fichier est recopié par la propagation
+   (scripts/sync-labs-kit.sh). Les réglages propres à une appli vont dans son
+   « pont » (bridge), une petite feuille qui relie ses variables à celles-ci.
+
+   Contenu : polices embarquées, jetons (--lo-*), coque injectée par labs-os.js
+   (dock de la suite, palette Ctrl K, barre d'état), crochets (titres, cartes).
+   Tout est préfixé lo- / --lo- pour ne jamais heurter les styles d'une appli.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url(fonts/ibm-plex-sans-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 500; font-display: swap; src: url(fonts/ibm-plex-sans-latin-500-normal.woff2) format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 600; font-display: swap; src: url(fonts/ibm-plex-sans-latin-600-normal.woff2) format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 700; font-display: swap; src: url(fonts/ibm-plex-sans-latin-700-normal.woff2) format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url(fonts/jetbrains-mono-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 500; font-display: swap; src: url(fonts/jetbrains-mono-latin-500-normal.woff2) format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 700; font-display: swap; src: url(fonts/jetbrains-mono-latin-700-normal.woff2) format("woff2"); }
+
+@property --lo-app { syntax: '<color>'; inherits: true; initial-value: #7ee2a8; }
+
+/* ── Jetons ─────────────────────────────────────────────────────────────── */
+:root {
+  --lo-font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --lo-font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --lo-r: 10px; --lo-r-sm: 6px;
+  --lo-dock-w: 4.25rem; --lo-status-h: 1.875rem; --lo-dock-h: 0px;
+  /* Couleur de chaque appli : [sombre] et variante foncée [clair] ≥ 4,5:1 sur blanc */
+  --lo-c-backup: #7ee2a8; --lo-c-projet: #b49cff; --lo-c-torrent: #ff9b6a; --lo-c-finance: #6cc7f0; --lo-c-asset: #f2b84b;
+}
+:root[data-lo-app="backup"]  { --lo-app: #7ee2a8; --lo-app-ink: #13784a; }
+:root[data-lo-app="projet"]  { --lo-app: #b49cff; --lo-app-ink: #5b3fd1; }
+:root[data-lo-app="torrent"] { --lo-app: #ff9b6a; --lo-app-ink: #b3470f; }
+:root[data-lo-app="finance"] { --lo-app: #6cc7f0; --lo-app-ink: #16729f; }
+:root[data-lo-app="asset"]   { --lo-app: #f2b84b; --lo-app-ink: #8a5c00; }
+
+/* Sombre (défaut) — bleu nuit */
+:root, :root[data-lo-mode="dark"] {
+  --lo-bg: #07090f; --lo-bg-2: #0b0e16; --lo-s1: #0f131d; --lo-s2: #151a26; --lo-s3: #1c2232;
+  --lo-text: #e8ecf4; --lo-strong: #ffffff; --lo-muted: #9aa4b8; --lo-faint: #7d889e;
+  --lo-line: rgb(255 255 255 / .08); --lo-line-2: rgb(255 255 255 / .14);
+  --lo-ok: #86f0b4; --lo-warn: #ffc457; --lo-fail: #ff8a80; --lo-busy: #9cc3ff;
+  --lo-ok-soft: rgb(134 240 180 / .13); --lo-warn-soft: rgb(255 196 87 / .13); --lo-fail-soft: rgb(255 138 128 / .13); --lo-busy-soft: rgb(156 195 255 / .13);
+  --lo-accent: var(--lo-app); --lo-on-accent: #07090f; --lo-accent-soft: color-mix(in srgb, var(--lo-app) 16%, transparent);
+  --lo-glow: color-mix(in srgb, var(--lo-app) 32%, transparent);
+  --lo-shadow: 0 1px 2px rgb(0 0 0 / .4); --lo-pop: 0 24px 60px -20px rgb(0 0 0 / .7);
+  --lo-grain: .045;
+  color-scheme: dark;
+}
+:root[data-lo-mode="light"] {
+  --lo-bg: #f4f6fa; --lo-bg-2: #eef1f6; --lo-s1: #ffffff; --lo-s2: #f3f5f9; --lo-s3: #e8ecf2;
+  --lo-text: #171e2c; --lo-strong: #0a0f18; --lo-muted: #4a566a; --lo-faint: #5b677b;
+  --lo-line: rgb(10 20 40 / .09); --lo-line-2: rgb(10 20 40 / .17);
+  --lo-ok: #11713f; --lo-warn: #8a5300; --lo-fail: #b42318; --lo-busy: #1d4ed8;
+  --lo-ok-soft: #e2f3e9; --lo-warn-soft: #fbefd6; --lo-fail-soft: #fce6e4; --lo-busy-soft: #e5ecfd;
+  --lo-accent: var(--lo-app-ink); --lo-on-accent: #ffffff; --lo-accent-soft: color-mix(in srgb, var(--lo-app-ink) 11%, transparent);
+  --lo-glow: color-mix(in srgb, var(--lo-app) 26%, transparent);
+  --lo-shadow: 0 1px 2px rgb(20 22 30 / .06); --lo-pop: 0 24px 60px -20px rgb(20 22 30 / .35);
+  --lo-grain: .02;
+  color-scheme: light;
+}
+:root { transition: --lo-app 600ms cubic-bezier(.2,.7,.2,1); }
+
+/* ── Ambiance : grain et aurore de la couleur d'appli ───────────────────── */
+html.lo-on body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 2147483000; opacity: var(--lo-grain);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.lo-aurora { position: fixed; inset: 0 0 auto 0; height: 36rem; z-index: -1; pointer-events: none;
+  background: radial-gradient(50rem 20rem at 22% -5rem, var(--lo-glow), transparent 70%), radial-gradient(32rem 16rem at 88% -6rem, color-mix(in srgb, var(--lo-app) 13%, transparent), transparent 70%); }
+:root[data-lo-mode="light"] .lo-aurora { opacity: .6; }
+
+/* ── Place réservée à la coque ──────────────────────────────────────────── */
+html.lo-on body { padding-left: var(--lo-dock-w); padding-bottom: var(--lo-status-h); }
+html.lo-on.lo-no-status body { padding-bottom: 0; }
+
+/* ── Dock de la suite ───────────────────────────────────────────────────── */
+.lo-dock { position: fixed; z-index: 2147482000; top: 0; left: 0; bottom: var(--lo-status-h); width: var(--lo-dock-w); display: flex; flex-direction: column; align-items: center; gap: .5rem; padding: .875rem 0; background: var(--lo-bg); border-right: 1px solid var(--lo-line); font-family: var(--lo-font-sans); }
+.lo-dock-btn { position: relative; display: block; width: 2.75rem; height: 2.75rem; padding: 0; border: 0; border-radius: 12px; background: none; cursor: pointer; transition: transform 160ms; text-decoration: none; }
+.lo-dock-btn svg { display: block; width: 100%; height: 100%; filter: saturate(.55) brightness(.8); opacity: .62; transition: filter 200ms, opacity 200ms; }
+.lo-dock-btn:hover { transform: translateY(-1px); }
+.lo-dock-btn:hover svg, .lo-dock-btn[aria-current="page"] svg { filter: none; opacity: 1; }
+.lo-dock-btn[aria-current="page"]::after { content: ""; position: absolute; inset: -5px; border-radius: 16px; box-shadow: 0 0 0 1.5px var(--lo-accent); }
+.lo-dock-btn[data-unknown] svg { opacity: .35; }
+.lo-dock-btn:focus-visible { outline: 2px solid var(--lo-accent); outline-offset: 4px; }
+.lo-tip { position: absolute; left: calc(100% + .75rem); top: 50%; transform: translate(-4px, -50%); white-space: nowrap; background: var(--lo-s3); color: var(--lo-strong); font: 500 .8125rem/1.3 var(--lo-font-mono); padding: .25rem .5rem; border-radius: var(--lo-r-sm); border: 1px solid var(--lo-line-2); opacity: 0; pointer-events: none; transition: opacity 120ms, transform 120ms; }
+.lo-dock-btn:hover .lo-tip, .lo-dock-btn:focus-visible .lo-tip { opacity: 1; transform: translate(0, -50%); }
+.lo-tip kbd { margin-left: .5rem; color: var(--lo-faint); font: inherit; }
+.lo-dock-foot { margin-top: auto; display: grid; gap: .375rem; justify-items: center; }
+.lo-icon-btn { width: 2.5rem; height: 2.5rem; display: grid; place-items: center; border: 0; border-radius: var(--lo-r-sm); background: none; color: var(--lo-muted); cursor: pointer; }
+.lo-icon-btn:hover { background: var(--lo-s2); color: var(--lo-strong); }
+.lo-icon-btn svg { width: 1.125rem; height: 1.125rem; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ── Barre d'état ───────────────────────────────────────────────────────── */
+.lo-status { position: fixed; z-index: 2147482000; left: 0; right: 0; bottom: 0; height: var(--lo-status-h); display: flex; align-items: center; gap: 1.25rem; padding: 0 1rem; background: var(--lo-bg-2); border-top: 1px solid var(--lo-line); font: 400 .75rem/1 var(--lo-font-mono); color: var(--lo-faint); white-space: nowrap; overflow: hidden; }
+.lo-status b { color: var(--lo-muted); font-weight: 500; }
+.lo-status .lo-live { color: var(--lo-accent); }
+.lo-status .lo-ok { color: var(--lo-ok); } .lo-status .lo-warn { color: var(--lo-warn); } .lo-status .lo-fail { color: var(--lo-fail); } .lo-status .lo-busy { color: var(--lo-busy); }
+.lo-status .lo-end { margin-left: auto; }
+.lo-status button { all: unset; cursor: pointer; } .lo-status button:hover { color: var(--lo-strong); }
+
+/* ── Palette de commandes ───────────────────────────────────────────────── */
+.lo-scrim { position: fixed; inset: 0; z-index: 2147483100; display: none; place-items: start center; padding: 12vh 1rem 1rem; background: rgb(3 5 10 / .55); backdrop-filter: blur(6px); font-family: var(--lo-font-sans); }
+.lo-scrim.lo-open { display: grid; animation: lo-fade 160ms both; }
+.lo-palette { width: min(40rem, 100%); background: var(--lo-s1); color: var(--lo-text); border: 1px solid var(--lo-line-2); border-radius: 14px; box-shadow: var(--lo-pop); overflow: hidden; animation: lo-pop 200ms cubic-bezier(.2,.7,.2,1) both; }
+.lo-palette-in { display: flex; align-items: center; gap: .75rem; padding: 0 1.125rem; border-bottom: 1px solid var(--lo-line); }
+.lo-palette-in .lo-b { font: 500 1.25rem var(--lo-font-mono); color: var(--lo-accent); }
+.lo-palette input { flex: 1; min-width: 0; height: 3.5rem; border: 0; background: none; outline: none; color: var(--lo-strong); font: 400 1.125rem var(--lo-font-sans); }
+.lo-palette ul { list-style: none; margin: 0; padding: .375rem; max-height: min(24rem, 55vh); overflow: auto; }
+.lo-grp { padding: .625rem .75rem .25rem; font: 500 .75rem var(--lo-font-sans); color: var(--lo-faint); }
+.lo-it { display: flex; align-items: center; gap: .75rem; min-height: 2.75rem; padding: 0 .75rem; border-radius: 8px; cursor: pointer; color: var(--lo-text); }
+.lo-it > svg { width: 1.5rem; height: 1.5rem; flex: none; }
+.lo-it .lo-ic { width: 1.5rem; height: 1.5rem; display: grid; place-items: center; color: var(--lo-faint); flex: none; }
+.lo-it .lo-ic svg { width: 1.0625rem; height: 1.0625rem; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.lo-it .lo-l { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lo-it .lo-h { font: 400 .8125rem var(--lo-font-mono); color: var(--lo-faint); white-space: nowrap; }
+.lo-it[aria-selected="true"] { background: var(--lo-s3); color: var(--lo-strong); }
+.lo-it[aria-selected="true"] .lo-h { color: var(--lo-accent); }
+.lo-palette-foot { display: flex; flex-wrap: wrap; gap: .5rem 1rem; padding: .625rem 1.125rem; border-top: 1px solid var(--lo-line); font-size: .75rem; color: var(--lo-faint); }
+.lo-kbd, .lo-palette kbd { font: 500 .75rem var(--lo-font-mono); color: var(--lo-muted); padding: .125rem .4rem; border-radius: 4px; border: 1px solid var(--lo-line-2); border-bottom-width: 2px; background: linear-gradient(var(--lo-s2), var(--lo-s1)); }
+@keyframes lo-fade { from { opacity: 0; } }
+@keyframes lo-pop { from { transform: scale(.97) translateY(-6px); opacity: 0; } }
+
+/* ── Crochets : la signature de la suite ────────────────────────────────── */
+.lo-br::before, .lo-br::after { font-family: var(--lo-font-mono); font-weight: 400; color: var(--lo-accent); letter-spacing: -.08em; }
+.lo-br::before { content: "[\00a0"; } .lo-br::after { content: "\00a0]"; }
+.lo-card { --lo-cr: .875rem; }
+.lo-card::before, .lo-card::after { content: ""; position: absolute; width: var(--lo-cr); height: var(--lo-cr); border: 2px solid var(--lo-accent); opacity: 0; transition: opacity 220ms, transform 220ms; pointer-events: none; z-index: 1; }
+.lo-card::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; border-top-left-radius: var(--lo-r); transform: translate(4px, 4px); }
+.lo-card::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0; border-bottom-right-radius: var(--lo-r); transform: translate(-4px, -4px); }
+.lo-card:hover::before, .lo-card:hover::after, .lo-card.lo-star::before, .lo-card.lo-star::after { opacity: 1; transform: none; }
+
+/* Touches clavier affichées par une appli */
+.lo-keycap { font: 500 .75rem var(--lo-font-mono); padding: .0625rem .375rem; border-radius: 4px; border: 1px solid currentColor; border-bottom-width: 2px; opacity: .7; }
+
+@media (prefers-reduced-motion: reduce) {
+  :root { transition: none; }
+  .lo-scrim.lo-open, .lo-palette, .lo-card::before, .lo-card::after, .lo-dock-btn, .lo-dock-btn svg { animation: none !important; transition: none !important; }
+}
+
+/* ── Mobile : dock en barre du bas, pas de barre d'état ─────────────────── */
+@media (max-width: 52rem) {
+  :root { --lo-dock-w: 0px; --lo-status-h: 0px; --lo-dock-h: calc(4rem + env(safe-area-inset-bottom)); }
+  html.lo-on body { padding-left: 0; padding-bottom: var(--lo-dock-h); }
+  .lo-dock { top: auto; right: 0; bottom: 0; width: auto; height: var(--lo-dock-h); flex-direction: row; justify-content: space-around; padding: .5rem .75rem calc(.5rem + env(safe-area-inset-bottom)); border-right: 0; border-top: 1px solid var(--lo-line); background: color-mix(in srgb, var(--lo-bg) 90%, transparent); backdrop-filter: blur(14px); }
+  .lo-dock-foot, .lo-tip, .lo-status { display: none; }
+  .lo-palette input { font-size: 1rem; }
+  .lo-scrim { padding-top: 8vh; }
+}
+@media print { .lo-dock, .lo-status, .lo-scrim, .lo-aurora { display: none !important; } html.lo-on body { padding: 0; } }
