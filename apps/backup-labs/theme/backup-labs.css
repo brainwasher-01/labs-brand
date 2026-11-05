@@ -9,8 +9,8 @@
  * décide (prefers-color-scheme).
  *
  * Polices : IBM Plex Sans (tout le texte) et IBM Plex Mono (données
- * seulement : chemins, identifiants, heures). Tailles en rem ; racine à 80 %
- * sur ordinateur (corps 12,8 px), 100 % sur téléphone (corps 16 px).
+ * seulement : chemins, identifiants, heures). Tailles en rem ; racine à 85 %
+ * sur ordinateur (corps 13,6 px), 100 % sur téléphone (corps 16 px).
  * Les embarquer dans l'application (paquets @fontsource) plutôt que de les
  * charger depuis Internet : les applis tournent sur le réseau local.
  *
@@ -132,8 +132,8 @@
 	--font-sans: 'IBM Plex Sans', system-ui, sans-serif;
 	--font-mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
 
-	/* Type scale (rem, at 12.8 px): small 11.2 px, body 12.8 px, then
-	   headings 14.4, 17.6 and 22.4 px. */
+	/* Type scale (rem, at 13.6 px): small 11.9 px, body 13.6 px, then
+	   headings 15.3, 18.7 and 23.8 px. */
 	--text-sm: 0.875rem;
 	--text-base: 1rem;
 	--text-lg: 1.125rem;
@@ -150,7 +150,7 @@
 	box-sizing: border-box;
 }
 
-/* On computers the whole interface is drawn at 80 % (12.8 px per rem): every
+/* On computers the whole interface is drawn at 85 % (13.6 px per rem): every
    size is in rem, so text, spacing and controls shrink together and keep
    their proportions. Phones keep 100 % for legibility. A percentage still
    honours the browser's font setting. */
@@ -159,7 +159,7 @@ html {
 }
 @media (min-width: 52rem) {
 	html {
-		font-size: 80%;
+		font-size: 85%;
 	}
 }
 
@@ -375,10 +375,15 @@ code,
 }
 
 /* Choice cards: big selectable tiles used by the wizards. */
+/* Flex rather than grid: a full-width card (grid-column: 1 / -1) left empty
+   columns at the end of the row; flex items always fill it. */
 .choices {
-	display: grid;
+	display: flex;
+	flex-wrap: wrap;
 	gap: 0.75rem;
-	grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+.choices > * {
+	flex: 1 1 14rem;
 }
 .choice {
 	position: relative;
