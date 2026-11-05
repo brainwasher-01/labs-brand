@@ -1,0 +1,368 @@
+/* ───────────────────────────────────────────────────────────────────────────
+   Composants dont la FORME dépend du thème (ADR-0079). Chaque règle ci-dessous est
+   la forme de base ; le fichier de thème (skins/bac.css) la redéfinit sous
+   [data-skin='bac']. Les pages n'écrivent jamais de couleur d'état ni de style de titre
+   à la main : elles passent par ces classes (via les composants React du même nom).
+   ─────────────────────────────────────────────────────────────────────────── */
+
+@layer components {
+  /* Marque « Crate » (rail et barre du haut sur téléphone) */
+  .c-rail-brand {
+    font-family: var(--font-display);
+    font-weight: var(--title-weight);
+    letter-spacing: var(--title-tracking);
+    text-transform: var(--title-transform);
+    font-stretch: var(--title-stretch);
+    font-size: 1.25rem;
+  }
+
+  /* Titre de page (liste, curation, système) */
+  .c-page-title {
+    font-family: var(--font-display);
+    font-weight: var(--title-weight);
+    letter-spacing: var(--title-tracking);
+    text-transform: var(--title-transform);
+    font-stretch: var(--title-stretch);
+    font-size: 1.875rem;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+  @media (min-width: 64rem) {
+    .c-page-title {
+      font-size: 2.25rem;
+    }
+  }
+
+  /* Titre de fiche (album, artiste, label, piste) */
+  .c-entity-title {
+    font-family: var(--font-display);
+    font-weight: var(--title-weight);
+    letter-spacing: var(--title-tracking);
+    text-transform: var(--title-transform);
+    font-stretch: var(--title-stretch);
+    font-size: 2rem;
+    line-height: 1.02;
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+  }
+  @media (min-width: 64rem) {
+    .c-entity-title {
+      font-size: 2.875rem;
+    }
+  }
+
+  /* Chiffre d'un compteur (tableau de bord, Qualité) */
+  .c-stat-value {
+    font-family: var(--font-display);
+    font-weight: var(--title-weight);
+    letter-spacing: var(--title-tracking);
+    font-stretch: var(--title-stretch);
+    font-size: 1.75rem;
+    line-height: 1.05;
+  }
+
+  /* En-tête de section : titre, compteur, filet (masqué en Bac), actions */
+  .c-section-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.875rem;
+  }
+  .c-section-title {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.625rem;
+    font-family: var(--font-code);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .c-section-count {
+    font-family: var(--font-code);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--muted-foreground);
+  }
+  .c-section-rule {
+    flex: 1 1 2rem;
+    min-width: 1rem;
+    border-top: 1px solid var(--border-strong);
+  }
+  .c-section-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  /* Marque d'état : forme de base (tampon à double filet), redéfinie en gommette par Bac */
+  .c-mark {
+    --mark: var(--state-neutral);
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.3rem;
+    margin: 2px;
+    padding: 0.25rem 0.4rem;
+    border: 1.5px solid var(--mark);
+    outline: 1px solid var(--mark);
+    outline-offset: 1px;
+    border-radius: 2px;
+    color: var(--mark);
+    font-family: var(--font-code);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .c-mark[data-tone='ok'] {
+    --mark: var(--state-ok);
+  }
+  .c-mark[data-tone='warn'] {
+    --mark: var(--state-warn);
+  }
+  .c-mark[data-tone='bad'] {
+    --mark: var(--state-bad);
+  }
+  .c-mark[data-tone='info'] {
+    --mark: var(--state-info);
+  }
+  .c-mark > svg {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  /* Identifiant d'entité : forme de base (cote mono), masqué par Bac */
+  .c-entity-ref {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    font-family: var(--font-code);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-brand-text);
+  }
+  .c-entity-ref small,
+  .c-entity-ref .c-ref-fact,
+  .c-entity-ref .c-ref-cat {
+    display: none;
+  }
+  .c-entity-ref b {
+    font-weight: 500;
+  }
+
+  /* Faits d'une fiche en relief (FactGrid) : étiquette mono en petites capitales au-dessus de
+     la valeur en texte plein. Rangée fluide : chaque fait prend sa largeur naturelle. */
+  .c-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem 1.75rem;
+    margin: 0;
+  }
+  .c-fact {
+    min-width: 0;
+  }
+  .c-fact-label {
+    font-family: var(--font-code);
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+  .c-fact-value {
+    margin-top: 0.125rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--foreground);
+    overflow-wrap: anywhere;
+  }
+  .c-fact-value a {
+    text-decoration-line: underline;
+    text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
+    text-underline-offset: 0.2em;
+  }
+  .c-fact-value a:hover {
+    text-decoration-color: currentColor;
+  }
+  @media (max-width: 40rem) {
+    .c-fact-wide {
+      flex-basis: 100%;
+    }
+  }
+
+  /* En-tête de fiche : lavis de la couleur de pochette, masqué sauf thème qui le montre */
+  .c-entity-tint {
+    display: none;
+  }
+
+  /* Mini-lecteur : couleurs de la pochette posées en ligne (MiniPlayer), repli sur le rail */
+  .c-player {
+    --p-bg: var(--sidebar);
+    --p-bg2: var(--sidebar);
+    --p-acc: var(--sidebar-foreground);
+    --p-on: var(--sidebar);
+    --p-fg: var(--sidebar-foreground);
+    --p-mut: color-mix(in oklab, var(--p-fg) 72%, transparent);
+    background: linear-gradient(90deg, var(--p-bg), var(--p-bg2));
+    color: var(--p-fg);
+  }
+  .c-player-play {
+    background: var(--p-acc);
+    color: var(--p-on);
+  }
+  .c-player-sub {
+    color: var(--p-mut);
+  }
+  .c-player-sub a {
+    color: inherit;
+  }
+  .c-player-range {
+    accent-color: var(--p-acc);
+  }
+  /* Étoiles posées sur le fond du lecteur (toujours sombre avec une palette) : les jetons du
+     thème, pensés pour le fond de page, deviendraient illisibles en mode clair. */
+  .c-player {
+    --star-on: color-mix(in oklab, var(--p-acc) 55%, white);
+    --star-off: color-mix(in oklab, var(--p-fg) 38%, transparent);
+  }
+  /* Vue plein écran : fond de la palette, pochette floutée par-dessus (ADR-0092), puis un
+     voile du dégradé de la palette pour garder le texte clair lisible */
+  .c-player-full {
+    background: linear-gradient(180deg, var(--p-bg), var(--p-bg2));
+  }
+  .c-player-backdrop {
+    filter: blur(48px) saturate(1.4);
+    opacity: 0.7;
+  }
+  /* Fond de la fiche album (PageBackdrop) : pochette floutée, voile de la couleur de fond du
+     thème, plus dense vers le bas pour que listes et textes gardent leur contraste. */
+  .c-page-backdrop {
+    filter: blur(64px) saturate(1.3);
+    opacity: 0.55;
+  }
+  .c-page-veil {
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--background) 45%, transparent),
+      color-mix(in oklab, var(--background) 80%, transparent) 70%
+    );
+  }
+  /* Carte posée sur un fond de page flouté (0.73.0) : fond de carte translucide et flou, pour
+     ne pas faire un bloc blanc sur la pochette floutée ; sur un fond uni, elle reste une
+     carte ordinaire à peine teintée. */
+  .c-glass-card {
+    background: color-mix(in oklab, var(--card) 55%, transparent);
+    backdrop-filter: blur(12px) saturate(1.2);
+    -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  }
+  .c-player-veil {
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--p-bg) 35%, transparent),
+      color-mix(in oklab, var(--p-bg2) 72%, transparent)
+    );
+  }
+  .c-player-header {
+    background: color-mix(in oklab, var(--p-bg) 60%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  /* Commandes secondaires : trait clair ; actif = accent éclairci (lisible sur fond sombre) + point */
+  .c-player-tool {
+    color: var(--p-fg);
+  }
+  .c-player-tool:hover {
+    background: color-mix(in oklab, var(--p-fg) 10%, transparent);
+  }
+  .c-player-tool[aria-pressed='true'] {
+    color: color-mix(in oklab, var(--p-acc) 65%, white);
+  }
+  .c-player-dot {
+    background: currentColor;
+  }
+  .c-player-grabber {
+    background: color-mix(in oklab, var(--p-fg) 45%, transparent);
+  }
+  .c-player-track {
+    background: color-mix(in oklab, var(--p-fg) 18%, transparent);
+  }
+  .c-player-fill {
+    background: var(--p-acc);
+  }
+  .c-player-current {
+    background: color-mix(in oklab, var(--p-fg) 12%, transparent);
+  }
+  .c-player-row:hover,
+  .c-player-row:focus-visible {
+    background: color-mix(in oklab, var(--p-fg) 8%, transparent);
+  }
+  /* Vue plein écran : pochette posée (ombre), colonne de file séparée par un filet dès lg */
+  .c-player-cover {
+    box-shadow: 0 24px 48px -16px rgb(0 0 0 / 0.6);
+  }
+  /* Faits techniques du plein écran : cases séparées par un filet clair */
+  .c-player-fact + .c-player-fact {
+    border-left: 1px solid color-mix(in oklab, var(--p-fg) 16%, transparent);
+  }
+  /* Barre de lecture de l'ordinateur : filet clair en haut, au-dessus du contenu */
+  .c-player-bar {
+    border-top: 1px solid color-mix(in oklab, var(--p-fg) 14%, transparent);
+    box-shadow: 0 -8px 24px -12px rgb(0 0 0 / 0.35);
+  }
+  .c-player-aside {
+    border-left: 1px solid color-mix(in oklab, var(--p-fg) 12%, transparent);
+  }
+
+  /* Étoiles */
+  .c-star-on {
+    color: var(--star-on);
+  }
+  .c-star-off {
+    color: var(--star-off);
+  }
+
+  /* Ligne sélectionnée (lots, piste en cours) */
+  .c-selected {
+    background: var(--selection);
+  }
+}
+
+/* Surfaces du navigateur : sélection, curseur, barres de défilement, chiffres. */
+::selection {
+  background: var(--selection);
+  color: var(--foreground);
+}
+html {
+  caret-color: var(--accent-brand);
+  scrollbar-color: var(--border-strong) transparent;
+}
+.tabular,
+time,
+.font-mono {
+  font-variant-numeric: tabular-nums;
+}
+
+@layer components {
+  /* Index alphabétique des listes (0.27.0) : colonne discrète, bulle de la lettre visée. */
+  .c-alpha-index {
+    background: color-mix(in oklab, var(--background) 72%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .c-alpha-active {
+    background: var(--accent-brand);
+    color: var(--accent-brand-foreground, var(--background));
+  }
+  .c-alpha-bubble {
+    background: var(--popover);
+    color: var(--popover-foreground);
+    box-shadow: 0 8px 24px -8px rgb(0 0 0 / 0.4);
+    border: 1px solid var(--border);
+  }
+}

@@ -13,6 +13,17 @@ de couleur ou de charte.
 | [Projet Labs](apps/projet-labs/README.md) | `projet.labs` | `#b49cff` | ![](logos/projet-labs.svg) | <à compléter> | à compléter | [thèmes](apps/projet-labs/theme.md) |
 | [Torrent Labs](apps/torrent-labs/README.md) | `torrent.labs` | `#ff9b6a` | ![](logos/torrent-labs.svg) | Recherche de torrents sur tous les indexeurs de Prowlarr, résultats en direct, envoi vers qBittorrent (ex-TorrentScope) | complète | [thèmes](apps/torrent-labs/theme.md) |
 
+## Applis associées (hors suite Labs)
+
+Applis qui ne font pas partie de la suite Labs : elles gardent leur nom, leur
+logo et leur thème. Elles sont référencées ici pour avoir toutes les applis
+au même endroit ; leur charte, leur logo et leurs captures sont dans leur
+dossier `apps/<appli>/`.
+
+| Appli | Nom écrit | Couleur | Logo | Rôle | Charte | Thèmes |
+|---|---|---|---|---|---|---|
+| [Crate](apps/crate/README.md) | `CRATE` | `#d9701f` | ![](apps/crate/logo/crate.svg) | Curation et enrichissement d'une bibliothèque musicale auto-hébergée : fiches, notes, playlists, qualité des métadonnées, nouveautés des artistes suivis, téléchargements Soulseek, lecteur audio — **hors suite Labs (appli associée)** | complète | [thèmes](apps/crate/theme.md) |
+
 ## Règles communes
 
 | Sujet | Document |

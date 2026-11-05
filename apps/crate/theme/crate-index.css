@@ -1,0 +1,209 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import '@fontsource-variable/jetbrains-mono';
+@import '@fontsource-variable/archivo/standard.css';
+@import './skins/bac.css';
+@import './components.css';
+
+/* Tailwind v4 ne déclare PAS la variante `dark` automatiquement : on l'attache au
+   sélecteur de classe (dark mode class-based, piloté par ThemeProvider sur <html>). */
+@custom-variant dark (&:is(.dark *));
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Variants Radix + utility, inlinés depuis node_modules/shadcn/dist/tailwind.css
+   (preset radix-nova) pour découpler le build prod du package `shadcn`. Le CLI
+   shadcn ne sert plus qu'à `npx shadcn add …` (7b), il n'est plus une dépendance.
+   NB : les keyframes accordion ne sont PAS reprises ici — tw-animate-css les
+   fournit déjà (--animate-accordion-down/-up). Consommés par les composants Radix
+   de shadcn à partir de 7b.
+   ─────────────────────────────────────────────────────────────────────────── */
+@custom-variant data-open {
+  &:where([data-state='open']),
+  &:where([data-open]:not([data-open='false'])) {
+    @slot;
+  }
+}
+@custom-variant data-closed {
+  &:where([data-state='closed']),
+  &:where([data-closed]:not([data-closed='false'])) {
+    @slot;
+  }
+}
+@custom-variant data-checked {
+  &:where([data-state='checked']),
+  &:where([data-checked]:not([data-checked='false'])) {
+    @slot;
+  }
+}
+@custom-variant data-unchecked {
+  &:where([data-state='unchecked']),
+  &:where([data-unchecked]:not([data-unchecked='false'])) {
+    @slot;
+  }
+}
+@custom-variant data-selected {
+  &:where([data-selected='true']) {
+    @slot;
+  }
+}
+@custom-variant data-disabled {
+  &:where([data-disabled='true']),
+  &:where([data-disabled]:not([data-disabled='false'])) {
+    @slot;
+  }
+}
+@custom-variant data-active {
+  &:where([data-state='active']),
+  &:where([data-active]:not([data-active='false'])) {
+    @slot;
+  }
+}
+@custom-variant data-horizontal {
+  &:where([data-orientation='horizontal']) {
+    @slot;
+  }
+}
+@custom-variant data-vertical {
+  &:where([data-orientation='vertical']) {
+    @slot;
+  }
+}
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Thème (ADR-0079, un seul thème depuis la suppression d'Archive, Catalogue et
+   Standard) : « Bac de disquaire » définit TOUS les jetons (shadcn + métier Crate) en
+   clair (`:root`, `[data-skin='bac']`) et en sombre (`.dark`). Le mode clair/sombre est
+   porté par la classe `.dark` de <html> (clair, sombre ou auto = prefers-color-scheme) ;
+   index.html l'applique avant le premier rendu, ThemeProvider le resynchronise.
+   Layout du shell : jetons communs.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --topbar-height: 3.5rem;
+  /* Barre de lecture de l'ordinateur (PlayerBar, dès lg, 0.33.0). */
+  --player-bar-height: 4.5rem;
+  --sidebar-width: 15rem;
+  --sidebar-width-collapsed: 4rem;
+  --content-max-width: 96rem;
+  /* Plaque des logos de labels (ADR-0081) : toujours claire, dans tous les thèmes et les deux
+     modes. Les logos sont dessinés pour un fond clair (encre noire sur transparent) ; posés
+     sur un fond sombre, la moitié deviendrait invisible. */
+  --logo-plate: #ffffff;
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Exposition des tokens à Tailwind v4 (génère les utilitaires : bg-surface,
+   border-border-subtle, text-accent-brand, h-topbar, w-sidebar, max-w-content…).
+   `inline` est requis car ces tokens référencent d'autres custom properties.
+   ─────────────────────────────────────────────────────────────────────────── */
+@theme inline {
+  --font-heading: var(--font-display);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-code);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Tokens métier Crate. */
+  --color-surface: var(--surface);
+  --color-surface-artwork: var(--surface-artwork);
+  --color-border-subtle: var(--border-subtle);
+  --color-accent-brand: var(--accent-brand);
+  --color-accent-brand-foreground: var(--accent-brand-foreground);
+  --color-accent-brand-text: var(--accent-brand-text);
+  --color-border-strong: var(--border-strong);
+  --color-selection: var(--selection);
+  --color-state-ok: var(--state-ok);
+  --color-state-warn: var(--state-warn);
+  --color-state-bad: var(--state-bad);
+  --color-state-info: var(--state-info);
+  --color-state-neutral: var(--state-neutral);
+  --color-star-on: var(--star-on);
+  --color-star-off: var(--star-off);
+  --color-sidebar-muted: var(--sidebar-muted);
+  --color-entity-album: var(--entity-album);
+  --color-entity-artist: var(--entity-artist);
+  --color-entity-track: var(--entity-track);
+  --color-entity-label: var(--entity-label);
+  --color-logo-plate: var(--logo-plate);
+
+  /* Layout : génère h-topbar, w-sidebar, w-sidebar-collapsed, max-w-content. */
+  --spacing-topbar: var(--topbar-height);
+  --spacing-player-bar: var(--player-bar-height);
+  --spacing-sidebar: var(--sidebar-width);
+  --spacing-sidebar-collapsed: var(--sidebar-width-collapsed);
+  --spacing-content: var(--content-max-width);
+
+  --radius-cover: var(--cover-radius);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    margin: 0;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* Respect de « réduire les animations » : on neutralise transitions, animations et défilements
+   fluides (le contenu et l'état restent identiques, seul le mouvement disparaît). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

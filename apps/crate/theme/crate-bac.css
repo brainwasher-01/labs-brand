@@ -1,0 +1,239 @@
+/* ───────────────────────────────────────────────────────────────────────────
+   Thème « Bac de disquaire » (ADR-0079), seul thème de Crate.
+   Monde : intercalaires en carton coloré d'un bac de disques, gommettes collées sur les
+   pochettes. Noir vinyle, cinq couleurs d'intercalaire, Archivo étroit et très gras en
+   capitales pour les titres. Les sections sont des onglets, les états des gommettes.
+   Déclaré sur :root pour servir de repli quand <html> n'a pas de data-skin.
+   ─────────────────────────────────────────────────────────────────────────── */
+:root,
+[data-skin='bac'] {
+  color-scheme: light;
+  --font-body: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-code: 'JetBrains Mono Variable', ui-monospace, monospace;
+  --title-weight: 900;
+  --title-tracking: -0.005em;
+  --title-transform: uppercase;
+  --title-stretch: 72%;
+  --radius: 0.375rem;
+  --cover-radius: 3px;
+
+  /* Couleurs d'intercalaire (gommettes et onglets) : identiques en clair et en sombre. */
+  --tab-1: #ef8a3c;
+  --tab-2: #2fa596;
+  --tab-3: #e9c543;
+  --tab-4: #e0688f;
+  --tab-5: #5b86d6;
+  --tab-ink: #17171a;
+
+  --background: #ececee;
+  --foreground: #18181b;
+  --card: #f6f6f7;
+  --card-foreground: #18181b;
+  --popover: #ffffff;
+  --popover-foreground: #18181b;
+  --primary: #18181b;
+  --primary-foreground: #f6f6f7;
+  --secondary: #e0e0e3;
+  --secondary-foreground: #18181b;
+  --muted: #e2e2e5;
+  --muted-foreground: #55555c;
+  --accent: #dfdfe3;
+  --accent-foreground: #18181b;
+  --destructive: #b8355f;
+  --border: #d3d3d8;
+  --input: #bdbdc4;
+  --ring: #d9701f;
+
+  --sidebar: #18181b;
+  --sidebar-foreground: #dcdcdf;
+  --sidebar-primary: #ef8a3c;
+  --sidebar-primary-foreground: #18181b;
+  --sidebar-accent: #ef8a3c;
+  --sidebar-accent-foreground: #17171a;
+  --sidebar-border: #2c2c31;
+  --sidebar-ring: #ef8a3c;
+  --sidebar-muted: #9b9aa0;
+
+  --surface: #f6f6f7;
+  --surface-artwork: #e2e2e5;
+  --border-subtle: #dcdce0;
+  --border-strong: #a9a9b1;
+  --accent-brand: #d9701f;
+  --accent-brand-foreground: #18181b;
+  --accent-brand-text: #a85310;
+  --selection: #fbe2c9;
+  --state-ok: #18736a;
+  --state-warn: #8a6400;
+  --state-bad: #b8355f;
+  --state-info: #345fae;
+  --state-neutral: #5f5f66;
+  --star-on: #18181b;
+  --star-off: #c6c6cc;
+  --entity-album: #ef8a3c;
+  --entity-artist: #e0688f;
+  --entity-track: #2fa596;
+  --entity-label: #5b86d6;
+
+  --chart-1: #ef8a3c;
+  --chart-2: #2fa596;
+  --chart-3: #e9c543;
+  --chart-4: #e0688f;
+  --chart-5: #5b86d6;
+}
+
+.dark,
+[data-skin='bac'].dark {
+  color-scheme: dark;
+  --background: #17171a;
+  --foreground: #f1efe9;
+  --card: #1f1f23;
+  --card-foreground: #f1efe9;
+  --popover: #232328;
+  --popover-foreground: #f1efe9;
+  --primary: #ef8a3c;
+  --primary-foreground: #17171a;
+  --secondary: #26262b;
+  --secondary-foreground: #f1efe9;
+  --muted: #222226;
+  --muted-foreground: #a6a39c;
+  --accent: #28282e;
+  --accent-foreground: #f1efe9;
+  --destructive: #ee7fa2;
+  --border: #2e2e34;
+  --input: #3d3d44;
+  --ring: #ef8a3c;
+
+  --sidebar: #0f0f11;
+  --sidebar-foreground: #d9d6cf;
+  --sidebar-primary: #ef8a3c;
+  --sidebar-primary-foreground: #17171a;
+  --sidebar-accent: #ef8a3c;
+  --sidebar-accent-foreground: #17171a;
+  --sidebar-border: #232327;
+  --sidebar-ring: #ef8a3c;
+  --sidebar-muted: #8d8a84;
+
+  --surface: #1f1f23;
+  --surface-artwork: #202024;
+  --border-subtle: #27272c;
+  --border-strong: #4a4a52;
+  --accent-brand: #ef8a3c;
+  --accent-brand-foreground: #17171a;
+  --accent-brand-text: #f4a466;
+  --selection: #3b2c1e;
+  --state-ok: #4cc2b2;
+  --state-warn: #e9c543;
+  --state-bad: #ee7fa2;
+  --state-info: #84a6e6;
+  --state-neutral: #a6a39c;
+  --star-on: #e9c543;
+  --star-off: #3c3c42;
+}
+
+/* ── Formes propres au thème ── */
+@layer components {
+  /* Gommette : pastille de couleur pleine, encre noire, capitales étroites */
+  [data-skin='bac'] .c-mark {
+    --mark: var(--border-strong);
+    border: 0;
+    outline: 0;
+    margin: 0;
+    padding: 0.3rem 0.5rem;
+    border-radius: 3px;
+    background: var(--mark);
+    color: var(--tab-ink);
+    font-family: var(--font-display);
+    font-size: 0.6875rem;
+    font-weight: 800;
+    font-stretch: 80%;
+    letter-spacing: 0.02em;
+  }
+  [data-skin='bac'] .c-mark[data-tone='ok'] {
+    --mark: var(--tab-2);
+  }
+  [data-skin='bac'] .c-mark[data-tone='warn'] {
+    --mark: var(--tab-3);
+  }
+  [data-skin='bac'] .c-mark[data-tone='bad'] {
+    --mark: var(--tab-4);
+  }
+  [data-skin='bac'] .c-mark[data-tone='info'] {
+    --mark: var(--tab-5);
+  }
+  [data-skin='bac'] .c-mark[data-tone='neutral'] {
+    color: var(--foreground);
+  }
+
+  /* Section : onglet d'intercalaire posé sur un trait épais */
+  [data-skin='bac'] .c-section-head {
+    align-items: flex-end;
+    border-bottom: 2px solid var(--foreground);
+  }
+  [data-skin='bac'] .c-section-title {
+    padding: 0.4rem 0.9rem 0.3rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+    background: var(--tab-2);
+    color: var(--tab-ink);
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 800;
+    font-stretch: 75%;
+    letter-spacing: 0.02em;
+  }
+  [data-skin='bac'] h3.c-section-title,
+  [data-skin='bac'] h4.c-section-title {
+    background: var(--tab-3);
+    font-size: 0.875rem;
+  }
+  [data-skin='bac'] .c-section-count {
+    color: var(--tab-ink);
+    opacity: 0.7;
+  }
+  [data-skin='bac'] .c-section-rule {
+    display: none;
+  }
+  [data-skin='bac'] .c-section-actions {
+    margin-left: auto;
+    padding-bottom: 0.375rem;
+  }
+
+  /* Identifiant d'entité : absent dans ce thème */
+  [data-skin='bac'] .c-entity-ref {
+    display: none;
+  }
+
+  /* Rail : chaque entrée porte la couleur d'un intercalaire */
+  [data-skin='bac'] .c-rail-item {
+    border-left: 4px solid var(--tab, transparent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+  [data-skin='bac'] .c-rail-item[data-tab='1'] {
+    --tab: var(--tab-1);
+  }
+  [data-skin='bac'] .c-rail-item[data-tab='2'] {
+    --tab: var(--tab-2);
+  }
+  [data-skin='bac'] .c-rail-item[data-tab='3'] {
+    --tab: var(--tab-3);
+  }
+  [data-skin='bac'] .c-rail-item[data-tab='4'] {
+    --tab: var(--tab-4);
+  }
+  [data-skin='bac'] .c-rail-item[data-tab='5'] {
+    --tab: var(--tab-5);
+  }
+  [data-skin='bac'] .c-rail-item.is-active {
+    background: var(--tab);
+    color: var(--tab-ink);
+  }
+  [data-skin='bac'] .c-bnav-item.is-active {
+    color: var(--tab-1);
+  }
+  [data-skin='bac'] .c-bnav-item.is-active::before {
+    background: var(--tab-1);
+  }
+  [data-skin='bac'] .c-rail-brand {
+    font-size: 1.375rem;
+  }
+}

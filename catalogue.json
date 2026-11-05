@@ -95,5 +95,35 @@
       "logo_png": "logos/torrent-labs.png",
       "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/torrent-labs.png"
     }
+  ],
+  "associated_apps": [
+    {
+      "id": "crate",
+      "name": "Crate",
+      "wordmark": "CRATE",
+      "initial": null,
+      "color": "#d9701f",
+      "color_text_on_light": "#a85310",
+      "role": "Curation et enrichissement d'une bibliothèque musicale auto-hébergée : fiches, notes, playlists, qualité des métadonnées, nouveautés des artistes suivis, téléchargements Soulseek, lecteur audio",
+      "suite": false,
+      "suite_note": "hors suite Labs (appli associée)",
+      "repository": "brainwasher-01/crate",
+      "container": "crate",
+      "status": "en service",
+      "charter_status": "complète",
+      "charter": "apps/crate/README.md",
+      "theme": "apps/crate/theme.md",
+      "screens": "apps/crate/ecrans.md",
+      "theme_files": [
+        "apps/crate/theme/crate-bac.css",
+        "apps/crate/theme/crate-index.css",
+        "apps/crate/theme/crate-components.css",
+        "apps/crate/theme/tokens.json"
+      ],
+      "captures": "apps/crate/captures/",
+      "logo_svg": "apps/crate/logo/crate.svg",
+      "logo_png": "apps/crate/logo/crate.png",
+      "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/apps/crate/logo/crate.png"
+    }
   ]
 }
