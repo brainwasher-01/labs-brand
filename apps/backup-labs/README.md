@@ -58,3 +58,4 @@ Voir [ecrans.md](ecrans.md).
 | 2026-11-05 | Charte créée ; thèmes Console, Marine, Doux ; logo `[B]` |
 | 2026-11-05 | Thèmes Marine et Doux retirés : Console seul, en mode sombre, clair ou automatique ; typographie unifiée (IBM Plex Sans et Mono, corps 16 px, plancher 14 px) ; fichiers de thème et aperçu mis à jour |
 | 2026-11-05 | v0.5.0 : menu groupé avec icônes Lucide, version de l'appli en bas du menu et page « Mises à jour » |
+| 2026-11-05 | Interface à l'échelle 80 % sur ordinateur (racine `html` à 80 %), 100 % sur téléphone |

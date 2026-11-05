@@ -9,7 +9,8 @@
  * décide (prefers-color-scheme).
  *
  * Polices : IBM Plex Sans (tout le texte) et IBM Plex Mono (données
- * seulement : chemins, identifiants, heures). Corps 16 px, rien sous 14 px.
+ * seulement : chemins, identifiants, heures). Tailles en rem ; racine à 80 %
+ * sur ordinateur (corps 12,8 px), 100 % sur téléphone (corps 16 px).
  * Les embarquer dans l'application (paquets @fontsource) plutôt que de les
  * charger depuis Internet : les applis tournent sur le réseau local.
  *
@@ -131,7 +132,8 @@
 	--font-sans: 'IBM Plex Sans', system-ui, sans-serif;
 	--font-mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
 
-	/* Type scale (rem): small 14px, body 16px, then headings. */
+	/* Type scale (rem, at 12.8 px): small 11.2 px, body 12.8 px, then
+	   headings 14.4, 17.6 and 22.4 px. */
 	--text-sm: 0.875rem;
 	--text-base: 1rem;
 	--text-lg: 1.125rem;
@@ -148,8 +150,17 @@
 	box-sizing: border-box;
 }
 
+/* On computers the whole interface is drawn at 80 % (12.8 px per rem): every
+   size is in rem, so text, spacing and controls shrink together and keep
+   their proportions. Phones keep 100 % for legibility. A percentage still
+   honours the browser's font setting. */
 html {
 	-webkit-text-size-adjust: 100%;
+}
+@media (min-width: 52rem) {
+	html {
+		font-size: 80%;
+	}
 }
 
 body {

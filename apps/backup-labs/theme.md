@@ -70,13 +70,18 @@ plus vives, car elles se lisent comme des surfaces.
 Une seule famille : la chasse fixe est réservée aux données, jamais employée
 pour faire « technique ». Chiffres tabulaires partout.
 
-| Taille | Variable | Valeur |
-|---|---|---|
-| Petite (plancher : libellés, aides, en-têtes de tableau) | `--text-sm` | 14 px |
-| Corps (texte, boutons, menu, tableaux) | `--text-base` | 16 px |
-| Titre de section | `--text-lg` | 18 px |
-| Titre intermédiaire | `--text-xl` | 22 px |
-| Titre de page | `--text-2xl` | 28 px |
+Toutes les tailles sont en rem. Sur ordinateur (plus de 52rem de large),
+la racine est à **80 %** : l'interface entière, texte, espacements et
+contrôles, est dessinée comme avec un zoom à 80 %. Sur téléphone, elle reste
+à 100 %, pour la lisibilité.
+
+| Taille | Variable | Ordinateur | Téléphone |
+|---|---|---|---|
+| Petite (plancher : libellés, aides, en-têtes de tableau) | `--text-sm` | 11,2 px | 14 px |
+| Corps (texte, boutons, menu, tableaux) | `--text-base` | 12,8 px | 16 px |
+| Titre de section | `--text-lg` | 14,4 px | 18 px |
+| Titre intermédiaire | `--text-xl` | 17,6 px | 22 px |
+| Titre de page | `--text-2xl` | 22,4 px | 28 px |
 
 ## Formes
 
