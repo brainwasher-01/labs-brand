@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr" data-theme="console">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Labs — aperçu du système visuel</title>
+<!-- Polices chargées depuis Google pour cet aperçu seulement : les applis les embarquent. -->
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;800&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/labs.css">
+<style>
+main{max-width:72rem;margin:0 auto;padding:2rem 1rem;display:grid;gap:1rem}
+.row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.logos img{width:64px;height:64px}
+</style>
+</head>
+<body>
+<main>
+  <header class="page-head">
+    <div><h1>Système visuel Labs</h1><span class="sub">Aperçu des composants de labs.css</span></div>
+    <div class="actions">
+      <button class="btn" onclick="document.documentElement.dataset.theme='console'">Console</button>
+      <button class="btn" onclick="document.documentElement.dataset.theme='marine'">Marine</button>
+      <button class="btn" onclick="document.documentElement.dataset.theme='doux'">Doux</button>
+    </div>
+  </header>
+  <section class="panel">
+    <h2>Logos</h2>
+    <div class="row logos">
+      <img src="logos/backup-labs.svg" alt="Backup Labs"><img src="logos/asset-labs.svg" alt="Asset Labs">
+      <img src="logos/finance-labs.svg" alt="Finance Labs"><img src="logos/projet-labs.svg" alt="Projet Labs">
+      <img src="logos/torrent-labs.svg" alt="Torrent Labs">
+    </div>
+  </section>
+  <section class="panel stack">
+    <h2>Boutons et messages</h2>
+    <div class="row"><button class="btn primary">Action principale</button><button class="btn">Secondaire</button><button class="btn small">Petit</button><button class="btn danger">Supprimer</button></div>
+    <div class="notice ok">Tout est protégé.</div>
+    <div class="notice warn">Une sauvegarde est à vérifier.</div>
+    <div class="notice fail">Le passage a échoué.</div>
+    <div class="notice info">Contrôle de parité en cours.</div>
+  </section>
+  <section class="panel stack">
+    <h2>Assistant</h2>
+    <div class="choices">
+      <label class="choice"><input type="radio" name="c" checked><strong>Des applications</strong><span>Les données de vos conteneurs</span></label>
+      <label class="choice"><input type="radio" name="c"><strong>Des dossiers</strong><span>Photos, documents…</span></label>
+      <label class="choice"><input type="radio" name="c"><strong>La clé Unraid</strong><span>La configuration du serveur</span></label>
+    </div>
+    <div class="grid-2">
+      <label class="field"><span class="label">Nom</span><input value="Applications"></label>
+      <label class="field"><span class="label">Dossier</span><input class="mono" value="/mnt/user/backups"><span class="hint">Créé s'il n'existe pas.</span></label>
+    </div>
+    <label class="check"><input type="checkbox" checked> Inclure les affiches</label>
+    <details class="advanced"><summary>Options avancées</summary><p class="muted">Réglages techniques.</p></details>
+  </section>
+  <section class="panel">
+    <h2>Tableau</h2>
+    <div class="table-wrap"><table class="data">
+      <thead><tr><th>Sauvegarde</th><th>Quand</th><th>État</th></tr></thead>
+      <tbody><tr><td>Applications</td><td>Chaque nuit à 03:00</td><td>Réussie</td></tr><tr><td>Plex</td><td>Chaque nuit à 04:00</td><td>À vérifier</td></tr></tbody>
+    </table></div>
+    <div class="chips" style="margin-top:1rem"><span class="chip">sonarr</span><span class="chip">radarr</span></div>
+  </section>
+</main>
+</body>
+</html>
