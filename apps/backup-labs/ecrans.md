@@ -10,4 +10,4 @@
 | Emplacements | Liste ; ajout : autre machine Backup Labs (code d'appairage), dossier, SMB, SFTP, rest-server ; bouton « Réveiller » |
 | Alertes | Canaux ntfy, événements, test |
 | Kit de secours | Téléchargement chiffré ou en clair du document de récupération |
-| Réglages | Thème, version |
+| Réglages | Mode clair, sombre ou automatique ; version |

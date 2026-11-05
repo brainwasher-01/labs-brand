@@ -1,57 +1,92 @@
 # Backup Labs — thèmes
 
 Fichiers : [`theme/backup-labs.css`](theme/backup-labs.css) (copie de
-référence de l'interface) et [`theme/tokens.json`](theme/tokens.json). Choix
-mémorisé par navigateur (`localStorage`, clé `backuplabs.theme`).
+référence de l'interface) et [`theme/tokens.json`](theme/tokens.json).
+Aperçu : [`preview.html`](preview.html).
 
 ## Liste des thèmes
 
+Un seul style, **Console**, en deux modes. Dans Réglages, l'utilisateur
+choisit **Automatique** (par défaut, suit le réglage de l'appareil),
+**Sombre** ou **Clair**. Le choix est mémorisé par navigateur
+(`localStorage`, clé `backuplabs.mode`) et appliqué avant le premier affichage
+par l'attribut `data-mode` de `<html>` (`light` ou `dark` ; absent en
+automatique).
+
 | Thème | Par défaut | Clair ou sombre | Esprit |
 |---|---|---|---|
-| Console | oui | sombre | dense, terminal, contrasté |
-| Marine | non | clair, menu sombre | sérieux, chiffres clés |
-| Doux | non | clair | chaleureux, arrondi |
+| Console sombre | oui (si le système est sombre) | sombre | dense, terminal, contrasté |
+| Console clair | oui (si le système est clair) | clair | le même, lisible en pleine journée |
 
-## Console
+Les thèmes Marine et Doux ont été retirés le 2026-11-05.
+
+## Couleurs
+
+### Console sombre
 
 | Rôle | Variable | Valeur |
 |---|---|---|
-| Fond | `--bg` | `#070a0e` |
-| Surface | `--surface` / `--surface-2` | `#111921` / `#1b2733` |
-| Texte | `--text` / `--strong` | `#e8eef4` / `#ffffff` |
-| Texte secondaire | `--muted` / `--faint` | `#b3c0cc` / `#8c9cab` |
-| Bordures | `--line` / `--line-strong` | `#263546` / `#3b5068` |
-| Accent | `--accent` (texte dessus `--accent-text`) | `#7ee2a8` (`#07120c`) |
-| Menu | `--nav-bg` / `--nav-active-bg` | `#0c1218` / `#1f2e3c` |
+| Fond | `--bg` | `#080b0f` |
+| Surface (cartes) | `--surface` / `--surface-2` | `#10171e` / `#18222c` |
+| Texte | `--text` / `--strong` | `#e6edf3` / `#ffffff` |
+| Texte secondaire | `--muted` / `--faint` | `#a9b6c3` / `#8796a5` |
+| Bordures | `--line` / `--line-strong` | `#222f3c` / `#364859` |
+| Accent (actions) | `--accent` (texte dessus `--accent-text`) | `#7ee2a8` (`#06130b`) |
+| Menu | `--nav-bg` / `--nav-active-bg` | `#0b1116` / `#1b2733` |
 | Réussi / À vérifier / Échec / En cours | `--ok` `--warn` `--fail` `--busy` | `#86f0b4` `#ffc457` `#ff8a80` `#9cc3ff` |
+| Frise des passages | `--ok-bar` `--warn-bar` `--fail-bar` | `#3ccf86` `#ffc457` `#ff7b70` |
 
-Polices : IBM Plex Sans (texte, titres 600), JetBrains Mono (menu, boutons,
-libellés de tableau, code). Rayons : 6 px (cartes), 4 px (boutons). Sans ombre.
+### Console clair
 
-## Marine
+| Rôle | Variable | Valeur |
+|---|---|---|
+| Fond | `--bg` | `#f2f4f6` |
+| Surface (cartes) | `--surface` / `--surface-2` | `#ffffff` / `#eceff3` |
+| Texte | `--text` / `--strong` | `#18212b` / `#0b1117` |
+| Texte secondaire | `--muted` / `--faint` | `#4a5868` / `#5b6979` |
+| Bordures | `--line` / `--line-strong` | `#dbe1e7` / `#b4bec9` |
+| Accent (actions) | `--accent` (texte dessus `--accent-text`) | `#13784a` (`#ffffff`) |
+| Liens | `--link` | `#0f6b40` |
+| Menu | `--nav-bg` / `--nav-active-bg` | `#e8ecf0` / `#d7dee5` |
+| Réussi / À vérifier / Échec / En cours | `--ok` `--warn` `--fail` `--busy` | `#11713f` `#8a5300` `#b42318` `#1d4ed8` |
+| Frise des passages | `--ok-bar` `--warn-bar` `--fail-bar` | `#2fa66a` `#e9a520` `#dc4437` |
 
-| Rôle | Valeur |
-|---|---|
-| Fond / surface | `#eef1f6` / `#ffffff` |
-| Texte / secondaire | `#172033` / `#44506b` |
-| Bordures | `#d5dce8` / `#aeb9cc` |
-| Accent | `#c2410c` (texte blanc) |
-| Menu | fond `#13203a`, texte `#c9d3e6`, actif `#22345a` |
-| États | `#1f6b43` `#8a5300` `#b42318` `#1d4ed8` |
+En clair, l'accent est une **variante foncée** de la couleur de l'appli :
+`#7ee2a8` ne fait que 1,6:1 sur blanc, `#13784a` fait 5,5:1. C'est aussi
+cette variante qui colore le « .labs » du nom écrit en mode clair.
 
-Police : Plus Jakarta Sans (titres 800). Rayons : 14 px / 10 px. Le bandeau
-d'état de l'accueil prend le fond du menu.
+Les couleurs d'état ont deux usages : en texte (`--ok`, `--warn`…), elles
+respectent 4,5:1 sur leur fond ; en barre de la frise (`--*-bar`), elles sont
+plus vives, car elles se lisent comme des surfaces.
 
-## Doux
+## Typographie
 
-| Rôle | Valeur |
-|---|---|
-| Fond / surface | `#f3f2ee` / `#ffffff` |
-| Texte / secondaire | `#1f2523` / `#434b48` |
-| Bordures | `#e0ddd5` / `#c3bfb5` |
-| Accent | `#0f7f72` (texte blanc) |
-| Menu | même fond que la page, entrée active en pilule `#1f2523` |
-| États | `#0b6f64` `#8a5a00` `#b42318` `#3b5bdb` |
+| Usage | Police | Graisses |
+|---|---|---|
+| Texte, menu, boutons, libellés | IBM Plex Sans | 400, 500, 600 |
+| Titres | IBM Plex Sans | 600 |
+| Données : chemins, identifiants, heures, commandes ; nom écrit `backup.labs` | IBM Plex Mono | 400, 500 |
 
-Police : Manrope (titres 800). Rayons : 20 px / 12 px, ombre légère
-`0 2px 10px rgb(30 40 35 / 0.06)`, cartes sans bordure.
+Une seule famille : la chasse fixe est réservée aux données, jamais employée
+pour faire « technique ». Chiffres tabulaires partout.
+
+| Taille | Variable | Valeur |
+|---|---|---|
+| Petite (plancher : libellés, aides, en-têtes de tableau) | `--text-sm` | 14 px |
+| Corps (texte, boutons, menu, tableaux) | `--text-base` | 16 px |
+| Titre de section | `--text-lg` | 18 px |
+| Titre intermédiaire | `--text-xl` | 22 px |
+| Titre de page | `--text-2xl` | 28 px |
+
+## Formes
+
+Rayons : 8 px (cartes, `--radius`), 6 px (boutons et champs, `--radius-sm`).
+Bordures de 1 px. Aucune ombre. Champs de saisie sur le fond de la page.
+Transitions de 120 ms sur le survol, coupées si l'utilisateur réduit les
+animations.
+
+## Fichiers
+
+[`theme/backup-labs.css`](theme/backup-labs.css) (les deux modes, les
+composants communs) et [`theme/tokens.json`](theme/tokens.json) (les
+variables de chaque mode, extraites de la feuille de style).

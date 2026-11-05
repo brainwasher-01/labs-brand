@@ -1,26 +1,28 @@
 <!doctype html>
-<html lang="fr" data-theme="console">
+<html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Backup Labs — aperçu des thèmes</title>
+<title>Backup Labs — aperçu</title>
 <!-- Polices chargées depuis Google pour cet aperçu seulement : les applis les embarquent. -->
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;800&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="theme/backup-labs.css">
 <style>
 main{max-width:72rem;margin:0 auto;padding:2rem 1rem;display:grid;gap:1rem}
 .row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
 .logos img{width:64px;height:64px}
+.ok-text{color:var(--ok);font-weight:500}.warn-text{color:var(--warn);font-weight:500}
+.type p{max-width:none}.type .s{font-size:var(--text-sm)}.type .b{font-size:var(--text-base)}.type .l{font-size:var(--text-lg)}.type .x{font-size:var(--text-xl)}.type .xx{font-size:var(--text-2xl);font-weight:600}
 </style>
 </head>
 <body>
 <main>
   <header class="page-head">
-    <div><h1>Backup Labs</h1><span class="sub">Aperçu des thèmes et composants de Backup Labs</span></div>
-    <div class="actions">
-      <button class="btn" onclick="document.documentElement.dataset.theme='console'">Console</button>
-      <button class="btn" onclick="document.documentElement.dataset.theme='marine'">Marine</button>
-      <button class="btn" onclick="document.documentElement.dataset.theme='doux'">Doux</button>
+    <div><h1>Backup Labs</h1><span class="sub">Style Console et ses composants, en mode sombre ou clair</span></div>
+    <div class="actions" role="group" aria-label="Mode">
+      <button class="btn" onclick="delete document.documentElement.dataset.mode">Automatique</button>
+      <button class="btn" onclick="document.documentElement.dataset.mode='dark'">Sombre</button>
+      <button class="btn" onclick="document.documentElement.dataset.mode='light'">Clair</button>
     </div>
   </header>
   <section class="panel">
@@ -30,6 +32,15 @@ main{max-width:72rem;margin:0 auto;padding:2rem 1rem;display:grid;gap:1rem}
       <img src="../../logos/finance-labs.svg" alt="Finance Labs"><img src="../../logos/projet-labs.svg" alt="Projet Labs">
       <img src="../../logos/torrent-labs.svg" alt="Torrent Labs">
     </div>
+  </section>
+  <section class="panel stack type">
+    <h2>Typographie</h2>
+    <p class="xx">Tout est protégé — 28 px</p>
+    <p class="x">Titre intermédiaire — 22 px</p>
+    <p class="l">Titre de section — 18 px</p>
+    <p class="b">Texte courant, boutons et menu — 16 px. Dernier passage il y a 3 h.</p>
+    <p class="s muted">Libellés et aides — 14 px, le plancher.</p>
+    <p class="b">Données en chasse fixe : <code>/mnt/user/appdata/sonarr</code> · <code>46bbe9e8</code> · <code>03:00</code></p>
   </section>
   <section class="panel stack">
     <h2>Boutons et messages</h2>
@@ -57,7 +68,7 @@ main{max-width:72rem;margin:0 auto;padding:2rem 1rem;display:grid;gap:1rem}
     <h2>Tableau</h2>
     <div class="table-wrap"><table class="data">
       <thead><tr><th>Sauvegarde</th><th>Quand</th><th>État</th></tr></thead>
-      <tbody><tr><td>Applications</td><td>Chaque nuit à 03:00</td><td>Réussie</td></tr><tr><td>Plex</td><td>Chaque nuit à 04:00</td><td>À vérifier</td></tr></tbody>
+      <tbody><tr><td>Applications</td><td>Chaque nuit à 03:00</td><td class="ok-text">Réussie</td></tr><tr><td>Plex</td><td>Chaque nuit à 04:30</td><td class="warn-text">À vérifier</td></tr></tbody>
     </table></div>
     <div class="chips" style="margin-top:1rem"><span class="chip">sonarr</span><span class="chip">radarr</span></div>
   </section>

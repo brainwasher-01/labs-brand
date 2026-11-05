@@ -16,7 +16,8 @@
 
 ## Thèmes
 
-Trois thèmes au choix dans Réglages, Console par défaut : voir
+Un seul style, Console, en mode sombre, clair ou automatique (choix dans
+Réglages, automatique par défaut) ; typographie IBM Plex Sans et Mono : voir
 [theme.md](theme.md), fichiers dans [`theme/`](theme/), aperçu
 [`preview.html`](preview.html).
 
@@ -42,10 +43,17 @@ Voir [ecrans.md](ecrans.md).
 
 ## Écarts assumés avec le commun
 
-Aucun.
+- **`.labs` et actions en `#13784a` en mode clair**, variante foncée de la
+  couleur de l'appli, comme le propose Asset Labs dans
+  [`../../docs/propositions.md`](../../docs/propositions.md) : `#7ee2a8` ne
+  fait que 1,6:1 sur blanc, `#13784a` fait 5,5:1. En sombre, `#7ee2a8`.
+- **Nom écrit en IBM Plex Mono, graisse 500**, plutôt que JetBrains Mono en
+  gras (référence de [`../../docs/typographie.md`](../../docs/typographie.md)) :
+  l'appli n'embarque plus qu'une famille de polices, IBM Plex Sans et Mono.
 
 ## Journal
 
 | Date | Changement |
 |---|---|
 | 2026-11-05 | Charte créée ; thèmes Console, Marine, Doux ; logo `[B]` |
+| 2026-11-05 | Thèmes Marine et Doux retirés : Console seul, en mode sombre, clair ou automatique ; typographie unifiée (IBM Plex Sans et Mono, corps 16 px, plancher 14 px) ; fichiers de thème et aperçu mis à jour |
