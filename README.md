@@ -15,7 +15,7 @@ applicatif ni secret.
 
 | Chemin | Contenu |
 |---|---|
-| `logos/` | Logos en SVG et PNG 256 px (icônes Unraid) |
+| `logos/` | Logos en SVG et PNG 256 px (icônes Unraid), avatar du profil (`profil.*`) |
 | `docs/` | Règles communes : principes, thèmes, couleurs, typographie, composants, vocabulaire, logos, icônes Unraid, contribution |
 | `apps/<appli>/README.md` | Charte d'une appli : identité, couleur, vocabulaire propre, écarts |
 | `apps/<appli>/theme.md` | Thèmes de l'appli (chacune les siens pour l'instant) |

@@ -34,3 +34,19 @@ Initiales existantes (chemins SVG) :
 2. Exporter en PNG 256×256 à fond transparent.
 3. Ajouter la ligne dans [couleurs.md](couleurs.md), `catalogue.json` et
    `CATALOGUE.md`.
+
+## Avatar du profil GitHub
+
+`logos/profil.svg` et `logos/profil.png` (512×512) : l'avatar du compte
+`brainwasher-01`, qui signe toute la suite. Ce n'est pas une appli : pas de
+couleur propre ni d'entrée au catalogue.
+
+| Élément | Valeur |
+|---|---|
+| Fond | Carré plein `#0b1015`, sans tuile ni bordure : GitHub recadre en cercle |
+| Crochets | Mêmes tracés que les logos, en `#e6edf3` |
+| Contenu | Cinq lignes alignées à gauche, trait 3,2 arrondi, une par appli dans l'ordre Backup, Asset, Finance, Projet, Torrent : `M24.5 21.5h15`, `M24.5 26.75h10`, `M24.5 32h13`, `M24.5 37.25h7`, `M24.5 42.5h11` (pas de 5,25) |
+
+Écarts assumés : fond plein et PNG 512 px (GitHub demande au moins 420 px et
+un fond opaque). Une nouvelle appli ajoute une ligne de sa couleur, en
+resserrant le pas pour rester dans la zone y 20–44.
