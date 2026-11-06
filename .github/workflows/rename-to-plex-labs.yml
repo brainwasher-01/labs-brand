@@ -1,6 +1,6 @@
 # Renommage Asset Labs -> Plex Labs : à lancer UNE fois (Actions -> Renommage Plex Labs -> Run workflow).
 # Fait le remplacement (scripts/rename-brand-to-plex-labs.sh), commite au nom d'Aurélien et pousse sur main.
-# Après usage : supprimer ce fichier (Projet Labs : delete_doc) ; le script se supprime tout seul.
+# Après usage : supprimer ce fichier (Projet Labs : delete_doc) ; les scripts se suppriment tout seuls.
 name: Renommage Plex Labs
 on:
   workflow_dispatch:
@@ -19,7 +19,7 @@ jobs:
         run: |
           git config user.name "Aurélien Coiffard"
           git config user.email "aurelien.coiffard@gmail.com"
-          git rm -q -f scripts/rename-brand-to-plex-labs.sh
+          git rm -q -f scripts/rename-brand-to-plex-labs.sh scripts/rename_brand.py scripts/plex-labs.svg
           git add -A
           git commit -m "chore: rename Asset Labs to Plex Labs, kit Labs OS 1.6.1"
           git push
