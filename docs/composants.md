@@ -53,17 +53,20 @@ Règles :
 - Un groupe de segments (`lo-seg`) a la hauteur d'un bouton : ses boutons internes remplissent le groupe, sans le déborder.
 
 
-## Échelle de texte et écarts (kit 1.5.0)
+## Échelle de texte et écarts (kit 1.6.0)
 
-1 rem = 16 px partout (le kit l'impose). Toute taille de texte vient d'un jeton ; **rien sous 13 px**.
+Le kit impose la racine (1.6.0) : 1 rem = 14 px sur ordinateur, 16 px sur téléphone. Toute taille de texte vient d'un
+jeton ; **rien sous `--lo-fs-xs`**.
 
-| Jeton | Taille | Pour |
-|---|---|---|
-| `--lo-fs-xs` | 13 px | plancher : ligne d'infos (chasse fixe), adresses, pastilles, compteurs, en-têtes de tableau |
-| `--lo-fs-sm` | 14 px | libellés de champ, aides, compteur d'une barre d'outils |
-| `--lo-fs` | 16 px | texte courant, boutons, menu, détail d'une carte |
-| `--lo-fs-lg` | 18 px | **titre de carte**, nom d'un élément de liste |
-| `--lo-fs-xl` / `--lo-fs-2xl` | 22 / 28 px | titres intermédiaires / titre de page |
+| Jeton | Ordinateur | Téléphone | Pour |
+|---|---|---|---|
+| `--lo-fs-xs` | 12,25 px | 14 px | plancher : ligne d'infos (chasse fixe), adresses, pastilles, compteurs, en-têtes de tableau |
+| `--lo-fs-sm` | 13,1 px | 15 px | libellés de champ, aides, compteur d'une barre d'outils |
+| `--lo-fs` | 14 px | 16 px | texte courant, boutons, menu, détail d'une carte |
+| `--lo-fs-lg` | 15,75 px | 18 px | **titre de carte**, nom d'un élément de liste |
+| `--lo-fs-xl` / `--lo-fs-2xl` | 19,25 / 24,5 px | 22 / 28 px | titres intermédiaires / titre de page |
+
+Les écarts ci-dessous sont en rem : sur ordinateur, multiplier par 14 px.
 
 | Écart | Valeur | Entre |
 |---|---|---|
@@ -77,6 +80,10 @@ Règles :
 | `--lo-item-gap` | 0,375 rem | lignes d'une carte de liste (nom, détail, adresse, infos) |
 
 ## Composants de contenu (kit 1.5.0)
+
+Bouton à **icône seule** : le marquer explicitement (classe propre à l'appli, ex. `.sq` dans Asset). Ne jamais le détecter
+par `:has(> svg:only-child)` : le texte n'est pas un élément, un bouton icône + texte serait forcé en carré.
+
 
 | Classe | Rôle |
 |---|---|

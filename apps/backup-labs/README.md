@@ -61,3 +61,4 @@ Voir [ecrans.md](ecrans.md).
 | 2026-11-05 | Interface à l'échelle 80 % sur ordinateur (racine `html` à 80 %), 100 % sur téléphone |
 | 2026-11-05 | Échelle portée à 85 % sur ordinateur, contenu sur toute la largeur |
 | 2026-11-06 | Échelle ramenée à 100 % (kit Labs OS 1.5.0) : texte courant 16 px dans toute la suite |
+| 2026-11-06 | Échelle 87,5 % sur ordinateur (kit Labs OS 1.6.0) : texte courant 14 px, 16 px sur téléphone |

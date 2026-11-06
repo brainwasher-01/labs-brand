@@ -21,6 +21,7 @@ Voir [[JOURNAL]].
 ## État
 - 2026-11-06 : kit 1.4.0 (échelle unique des hauteurs de contrôles, rangées alignées ; les 5 applis s'alignent dessus).
 - 2026-11-06 : kit 1.5.0 (1 rem = 16 px imposé partout, plancher de texte 13 px, jetons d'écart des formulaires et cartes, composants lo-panel / lo-field / lo-check / lo-item / lo-pill / lo-toolbar ; les 5 applis passent à 100 %).
+- 2026-11-06 : kit 1.6.0 (racine 87,5 % sur ordinateur / 100 % sur téléphone imposée par le kit, petits jetons relevés : 1.5.0 était trop gros et faisait déborder Asset).
 - 2026-11-06 : kit 1.3.0 (gabarit commun, recherche en haut, palette identique sans changement d'appli, écarts de Backup Labs).
 
 ## Feuille de route

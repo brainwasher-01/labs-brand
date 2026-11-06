@@ -80,18 +80,17 @@ plus vives, car elles se lisent comme des surfaces.
 Une seule famille : la chasse fixe est réservée aux données, jamais employée
 pour faire « technique ». Chiffres tabulaires partout.
 
-Toutes les tailles sont en rem, **1 rem = 16 px sur ordinateur comme sur
-téléphone** depuis le kit Labs OS 1.5.0 (0.6.7 ; la racine à 85 % de
-novembre 2026 rendait toute la suite trop petite). Les variables sont
-branchées sur les jetons du kit.
+Toutes les tailles sont en rem. La racine est imposée par le kit Labs OS
+1.6.0 (0.6.8) : **87,5 % sur ordinateur** (1 rem = 14 px), **100 % sur
+téléphone**. Les variables sont branchées sur les jetons du kit.
 
-| Taille | Variable | Taille |
-|---|---|---|
-| Petite (plancher : libellés, aides, en-têtes de tableau) | `--text-sm` | 14 px |
-| Corps (texte, boutons, menu, tableaux) | `--text-base` | 16 px |
-| Titre de section | `--text-lg` | 18 px |
-| Titre intermédiaire | `--text-xl` | 22 px |
-| Titre de page | `--text-2xl` | 28 px |
+| Taille | Variable | Ordinateur | Téléphone |
+|---|---|---|---|
+| Petite (plancher : libellés, aides, en-têtes de tableau) | `--text-sm` | 13,1 px | 15 px |
+| Corps (texte, boutons, menu, tableaux) | `--text-base` | 14 px | 16 px |
+| Titre de section | `--text-lg` | 15,75 px | 18 px |
+| Titre intermédiaire | `--text-xl` | 19,25 px | 22 px |
+| Titre de page | `--text-2xl` | 24,5 px | 28 px |
 
 ## Formes
 

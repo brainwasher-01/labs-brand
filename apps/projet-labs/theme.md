@@ -33,8 +33,8 @@ suite si le projet en est une, sinon monogramme gris.
 ## Typographie
 
 IBM Plex Sans (texte), JetBrains Mono (menu, nom `projet.labs`, données),
-embarquées par le kit. Tout en rem, 1 rem = 16 px partout (kit 1.5.0) ; rien sous 13 px
-(`--lo-fs-xs`) hors touches clavier ; titre de carte (`.card-h h2`) en 18 px gras comme le reste de la suite.
+embarquées par le kit. Tout en rem, racine imposée par le kit 1.6.0 (14 px sur ordinateur, 16 px sur téléphone) ; rien sous
+`--lo-fs-xs` hors touches clavier ; titre de carte (`.card-h h2`) en 18 px gras comme le reste de la suite.
 
 ## Formes
 
