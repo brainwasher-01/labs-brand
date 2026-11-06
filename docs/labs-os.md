@@ -145,10 +145,14 @@ Règles :
 - **Barre de recherche** toujours en haut, jamais dans le menu ; résultats au fil de la frappe, par catégorie.
   Les éléments de l'appli placés dans `.lo-top` restent à droite (ex. bouton « Rechercher » de Torrent Labs) ;
   avec la classe `lo-top-start`, avant le champ.
-- **Texte et écarts** (référence Backup Labs) : racine à 85 % sur ordinateur, 100 % sur téléphone ; jetons
-  `--lo-fs-*` (0,8125 · 0,875 · 1 · 1,125 · 1,375 · 1,75 rem), `--lo-page-x` / `--lo-page-y` (marges de page),
-  `--lo-head-gap` (titre → contenu), `--lo-gap` (entre blocs), `--lo-pad` (intérieur des cartes), `--lo-r` (8 px).
-  Une appli relie ses cartes, grilles et titres à ces jetons dans son pont.
+- **Texte et écarts** (référence Backup Labs, kit 1.5.0) : **1 rem = 16 px sur ordinateur comme sur téléphone** — le kit
+  l'impose (`:root:root { font-size: 100% }`), les anciennes racines à 85 % des applis sont neutralisées. Échelle de texte
+  `--lo-fs-*` : 13 · 14 · 16 · 18 · 22 · 28 px ; **rien sous `--lo-fs-xs` (13 px)**, sauf barre d'état et touches clavier.
+  Écarts : `--lo-page-x` / `--lo-page-y` (marges de page), `--lo-head-gap` (titre de page → contenu), `--lo-gap` (entre blocs),
+  `--lo-gap-sm` (entre éléments d'une liste), `--lo-pad` (intérieur des cartes), `--lo-title-gap` (titre de carte → contenu),
+  `--lo-field-gap` (libellé → champ → aide), `--lo-form-gap` (rangées d'un formulaire), `--lo-item-gap` (lignes d'une carte
+  de liste), `--lo-r` (8 px). Une appli ne fixe **aucune** taille de texte en dur : elle lit ces jetons (directement ou par
+  ses propres variables branchées dessus dans son pont). Composants prêts à l'emploi : voir `docs/composants.md`.
 - **Téléphone** (moins de 52 rem) : le menu devient un tiroir (bouton menu à gauche de la recherche), plus de barre d'état.
 - **Toute l'interface en français.**
 

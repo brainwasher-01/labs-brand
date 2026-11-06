@@ -6,6 +6,9 @@
 
    Contenu : polices embarquées, jetons (--lo-*), coque injectée par labs-os.js
    (palette Ctrl K, barre d'état), crochets (titres), pied du menu commun. Pas de dock (retiré en 1.1.0).
+   Depuis 1.5.0 : échelle 100 % imposée par le kit (1 rem = 16 px partout, fini les 85 %), plancher de texte
+   --lo-fs-xs (13 px), jetons d'écart des formulaires, composants lo-panel, lo-field, lo-label, lo-hint,
+   lo-check, lo-item (carte de liste : contenu + pastille et boutons sur UNE rangée centrée), lo-pill, lo-sub.
    Depuis 1.4.0 : échelle unique des contrôles (--lo-ctl-h / --lo-ctl-h-sm) et rangées alignées (lo-row, lo-row-end, lo-ctl, lo-seg).
    Depuis 1.3.0 : gabarit commun (menu lo-side de la largeur d'Asset Labs, barre de recherche lo-top tout
    en haut, tiroir sur téléphone) et échelle de texte / d'espacement reprise de Backup Labs.
@@ -28,8 +31,10 @@
   --lo-font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
   --lo-r: 8px; --lo-r-sm: 6px;
   --lo-dock-w: 0px; --lo-status-h: 1.875rem; --lo-dock-h: 0px;
-  /* Gabarit commun (1.3.0) — à 85 % sur ordinateur, 1 rem = 13,6 px.
-     Menu : largeur d'Asset Labs. Texte et espacements : ceux de Backup Labs. */
+  /* Gabarit commun — 1 rem = 16 px sur ordinateur comme sur téléphone (1.5.0).
+     Menu : largeur d'Asset Labs. Texte et espacements : ceux de Backup Labs.
+     Échelle de texte : 13 / 14 / 16 / 18 / 22 / 28 px. RIEN en dessous de --lo-fs-xs (13 px),
+     sauf la barre d'état et les touches clavier (12 px). */
   --lo-side-w: 15.5rem;              /* largeur du menu */
   --lo-top-h: 3.75rem;               /* barre de recherche du haut = ligne du logo */
   --lo-fs-xs: .8125rem; --lo-fs-sm: .875rem; --lo-fs: 1rem; --lo-fs-lg: 1.125rem; --lo-fs-xl: 1.375rem; --lo-fs-2xl: 1.75rem;
@@ -40,6 +45,11 @@
   --lo-gap: 1.25rem;                     /* entre deux blocs (cartes, sections) */
   --lo-gap-sm: .75rem;                   /* entre éléments d'un même bloc */
   --lo-pad-y: 1.25rem; --lo-pad-x: 1.5rem; --lo-pad: var(--lo-pad-y) var(--lo-pad-x);   /* intérieur des cartes */
+  /* Formulaires et cartes (1.5.0) — repris de Backup Labs */
+  --lo-title-gap: 1rem;                  /* titre de carte → contenu */
+  --lo-field-gap: .5rem;                 /* libellé → champ, champ → aide */
+  --lo-form-gap: 1rem;                   /* entre deux rangées d'un formulaire (champs, case à cocher, aide) */
+  --lo-item-gap: .375rem;                /* entre les lignes d'une carte de liste (nom, détail, adresse, infos) */
   /* Contrôles (1.4.0) : UNE échelle pour toute la suite. Un bouton et un champ côte à côte ont la même
      hauteur ; seuls deux crans existent. Les applis lisent ces jetons, elles ne fixent plus de hauteur. */
   --lo-ctl-h: 2.5rem;                    /* standard : boutons, champs, listes, recherche, segments */
@@ -54,6 +64,10 @@
 :root[data-lo-app="torrent"] { --lo-app: #ff9b6a; --lo-app-ink: #b3470f; }
 :root[data-lo-app="finance"] { --lo-app: #6cc7f0; --lo-app-ink: #16729f; }
 :root[data-lo-app="asset"]   { --lo-app: #f2b84b; --lo-app-ink: #8a5c00; }
+
+/* Échelle (1.5.0) : le kit impose 1 rem = 16 px. Sélecteur renforcé (:root:root) pour l'emporter sur les
+   anciens « html { font-size: 85% } » des applis, quel que soit l'ordre de chargement des feuilles. */
+:root:root { font-size: 100%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
 /* Sombre (défaut) — bleu nuit */
 :root, :root[data-lo-mode="dark"] {
@@ -218,7 +232,7 @@ html.lo-on.lo-no-status body { padding-bottom: 0; }
    .lo-seg      groupe de segments (Tout / Films / Séries) de la hauteur d'un bouton.
    Règle : ne jamais fixer la hauteur d'un bouton ou d'un champ en dur ; utiliser ces jetons. */
 .lo-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--lo-ctl-gap); min-width: 0; }
-.lo-row-end { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--lo-ctl-gap) var(--lo-gap-sm); min-width: 0; }
+.lo-row-end { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--lo-form-gap) var(--lo-gap-sm); min-width: 0; }
 .lo-row > .lo-grow, .lo-row-end > .lo-grow { flex: 1 1 0; min-width: 0; }
 .lo-row > .lo-end { margin-left: auto; }
 .lo-ctl, .lo-ctl-sm { box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: .45rem; }
@@ -227,6 +241,51 @@ html.lo-on.lo-no-status body { padding-bottom: 0; }
 .lo-seg { box-sizing: border-box; display: inline-flex; align-items: stretch; gap: 2px; min-height: var(--lo-ctl-h); padding: 3px; border-radius: var(--lo-r); background: var(--lo-s2); }
 .lo-seg > button, .lo-seg > a { display: inline-flex; align-items: center; justify-content: center; gap: .375rem; min-height: 0; padding: 0 var(--lo-ctl-px-sm); border: 0; border-radius: var(--lo-r-sm); background: none; color: var(--lo-muted); font: 500 var(--lo-fs-sm)/1 var(--lo-font-sans); text-decoration: none; cursor: pointer; }
 .lo-seg > .on, .lo-seg > [aria-pressed="true"], .lo-seg > [aria-current] { background: var(--lo-s1); color: var(--lo-strong); box-shadow: var(--lo-shadow); }
+
+
+/* ── Composants de contenu (1.5.0) ─────────────────────────────────────────────────────────
+   Mêmes tailles et mêmes écarts dans toute la suite. Classes à poser sur le balisage de l'appli :
+     .lo-stack       pile verticale de blocs (écart --lo-gap) ; .lo-stack-sm (écart --lo-gap-sm)
+     .lo-panel       carte de contenu ; .lo-panel-title (h2) puis contenu à --lo-title-gap
+     .lo-form        pile de rangées d'un formulaire (écart --lo-form-gap)
+     .lo-field       libellé (.lo-label) + champ + aide (.lo-hint), écart --lo-field-gap
+     .lo-check       case à cocher + phrase, alignées sur le centre
+     .lo-item        carte de liste : .lo-item-main (lignes) | .lo-item-aside (pastille + boutons, UNE rangée centrée)
+     .lo-item-title  nom ; .lo-item-text détail ; .lo-sub ligne d'infos (chasse fixe, 13 px)
+     .lo-pill        pastille d'état (.lo-ok .lo-warn .lo-fail .lo-busy) — se centre avec les boutons voisins
+     .lo-toolbar     rangée « compteur à gauche, actions à droite » au-dessus d'une liste                    */
+.lo-stack { display: flex; flex-direction: column; gap: var(--lo-gap); min-width: 0; }
+.lo-stack-sm { display: flex; flex-direction: column; gap: var(--lo-gap-sm); min-width: 0; }
+.lo-stack > *, .lo-stack-sm > * { margin-block: 0; }
+.lo-panel { box-sizing: border-box; min-width: 0; padding: var(--lo-pad); border: 1px solid var(--lo-line); border-radius: var(--lo-r); background: var(--lo-s1); }
+.lo-panel-title { margin: 0 0 var(--lo-title-gap); font: 600 var(--lo-fs-lg)/1.3 var(--lo-font-sans); letter-spacing: -.005em; color: var(--lo-strong); text-transform: none; }
+.lo-form { display: flex; flex-direction: column; gap: var(--lo-form-gap); min-width: 0; }
+.lo-form > * { margin-block: 0; }
+.lo-field { display: grid; gap: var(--lo-field-gap); min-width: 0; margin: 0; }
+.lo-label { display: block; font: 500 var(--lo-fs-sm)/1.3 var(--lo-font-sans); color: var(--lo-muted); text-transform: none; letter-spacing: 0; }
+.lo-hint { margin: 0; max-width: 80ch; font: 400 var(--lo-fs-sm)/1.55 var(--lo-font-sans); color: var(--lo-faint); }
+.lo-hint b, .lo-hint strong { color: var(--lo-muted); font-weight: 600; }
+.lo-check { display: inline-flex; align-items: flex-start; gap: .625rem; min-height: var(--lo-ctl-h-sm); font: 400 var(--lo-fs)/1.4 var(--lo-font-sans); color: var(--lo-text); cursor: pointer; }
+.lo-check input[type="checkbox"], .lo-check input[type="radio"] { flex: none; width: 1.125rem; height: 1.125rem; min-height: 0; margin: .1875rem 0 0; accent-color: var(--lo-accent); }
+.lo-item { box-sizing: border-box; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--lo-gap-sm) var(--lo-gap); min-width: 0;
+  padding: var(--lo-pad-y) var(--lo-pad-x); border: 1px solid var(--lo-line); border-radius: var(--lo-r); background: var(--lo-s1); }
+.lo-item-main { display: grid; gap: var(--lo-item-gap); min-width: 0; }
+.lo-item-aside { display: flex; align-items: center; justify-content: flex-end; gap: var(--lo-ctl-gap); flex-wrap: nowrap; }
+.lo-item-aside > .lo-pill { margin-right: .5rem; }
+.lo-item-title { margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 600 var(--lo-fs-lg)/1.3 var(--lo-font-sans); color: var(--lo-strong); }
+.lo-item-text { margin: 0; font: 400 var(--lo-fs)/1.45 var(--lo-font-sans); color: var(--lo-muted); }
+.lo-sub { margin: 0; min-width: 0; overflow-wrap: anywhere; font: 400 var(--lo-fs-xs)/1.5 var(--lo-font-mono); color: var(--lo-faint); }
+.lo-sub a { color: inherit; text-decoration: none; } .lo-sub a:hover { color: var(--lo-text); text-decoration: underline; }
+.lo-pill { box-sizing: border-box; display: inline-flex; align-items: center; gap: .45rem; height: 1.75rem; padding: 0 .75rem; border: 1px solid var(--lo-line-2); border-radius: 999px;
+  font: 500 var(--lo-fs-xs)/1 var(--lo-font-sans); color: var(--lo-muted); white-space: nowrap; }
+.lo-pill::before { content: ""; flex: none; width: .5rem; height: .5rem; border-radius: 50%; background: currentColor; }
+.lo-pill.lo-ok   { color: var(--lo-ok);   border-color: color-mix(in srgb, var(--lo-ok) 50%, transparent);   background: var(--lo-ok-soft); }
+.lo-pill.lo-warn { color: var(--lo-warn); border-color: color-mix(in srgb, var(--lo-warn) 50%, transparent); background: var(--lo-warn-soft); }
+.lo-pill.lo-fail { color: var(--lo-fail); border-color: color-mix(in srgb, var(--lo-fail) 50%, transparent); background: var(--lo-fail-soft); }
+.lo-pill.lo-busy { color: var(--lo-busy); border-color: color-mix(in srgb, var(--lo-busy) 50%, transparent); background: var(--lo-busy-soft); }
+.lo-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--lo-ctl-gap) var(--lo-gap-sm); min-width: 0; }
+.lo-toolbar > .lo-end { margin-left: auto; }
+.lo-count { font: 400 var(--lo-fs-sm)/1.4 var(--lo-font-sans); color: var(--lo-muted); }
 
 /* Touches clavier affichées par une appli */
 .lo-keycap { font: 500 .75rem var(--lo-font-mono); padding: .0625rem .375rem; border-radius: 4px; border: 1px solid currentColor; border-bottom-width: 2px; opacity: .7; }
@@ -242,6 +301,10 @@ html.lo-on.lo-no-status body { padding-bottom: 0; }
   :root { --lo-ctl-h: 2.75rem; --lo-ctl-h-sm: 2.25rem; }   /* cibles tactiles ≥ 44 px */
   :root { --lo-status-h: 0px; --lo-top-h: 3.5rem; --lo-page-y: 1.25rem; --lo-head-gap: 1.25rem; --lo-gap: 1rem; --lo-pad-y: 1rem; --lo-pad-x: 1.125rem; }
   .lo-shell { grid-template-columns: minmax(0, 1fr); }
+  .lo-item { grid-template-columns: minmax(0, 1fr); }
+  .lo-item-aside { justify-content: flex-start; flex-wrap: wrap; }
+  .lo-item-aside > .lo-pill { margin-right: auto; }
+  .lo-row-end > .lo-field, .lo-row-end > .lo-grow { flex: 1 1 100%; }   /* champs empilés, pleine largeur */
   .lo-side { position: fixed; z-index: 2147482500; top: 0; bottom: 0; left: 0; width: min(84vw, 19rem); height: auto; border-right: 1px solid var(--lo-line-2);
     padding-bottom: env(safe-area-inset-bottom, 0px); box-shadow: var(--lo-pop); transform: translateX(-104%); visibility: hidden; transition: transform .24s ease, visibility 0s .24s; }
   html.lo-drawer .lo-side { transform: none; visibility: visible; transition: transform .24s ease; }

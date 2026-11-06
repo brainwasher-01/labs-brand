@@ -9,8 +9,8 @@
  * décide (prefers-color-scheme).
  *
  * Polices : IBM Plex Sans (tout le texte) et IBM Plex Mono (données
- * seulement : chemins, identifiants, heures). Tailles en rem ; racine à 85 %
- * sur ordinateur (corps 13,6 px), 100 % sur téléphone (corps 16 px).
+ * seulement : chemins, identifiants, heures). Tailles en rem ; racine à 100 %
+ * partout (corps 16 px, kit Labs OS 1.5.0).
  * Les embarquer dans l'application (paquets @fontsource) plutôt que de les
  * charger depuis Internet : les applis tournent sur le réseau local.
  *
@@ -150,17 +150,10 @@
 	box-sizing: border-box;
 }
 
-/* On computers the whole interface is drawn at 85 % (13.6 px per rem): every
-   size is in rem, so text, spacing and controls shrink together and keep
-   their proportions. Phones keep 100 % for legibility. A percentage still
-   honours the browser's font setting. */
+/* 1 rem = 16 px on computers and phones alike (Labs OS kit 1.5.0). */
 html {
+	font-size: 100%;
 	-webkit-text-size-adjust: 100%;
-}
-@media (min-width: 52rem) {
-	html {
-		font-size: 85%;
-	}
 }
 
 body {

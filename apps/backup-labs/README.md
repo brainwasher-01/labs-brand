@@ -60,3 +60,4 @@ Voir [ecrans.md](ecrans.md).
 | 2026-11-05 | v0.5.0 : menu groupé avec icônes Lucide, version de l'appli en bas du menu et page « Mises à jour » |
 | 2026-11-05 | Interface à l'échelle 80 % sur ordinateur (racine `html` à 80 %), 100 % sur téléphone |
 | 2026-11-05 | Échelle portée à 85 % sur ordinateur, contenu sur toute la largeur |
+| 2026-11-06 | Échelle ramenée à 100 % (kit Labs OS 1.5.0) : texte courant 16 px dans toute la suite |

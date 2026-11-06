@@ -1,7 +1,11 @@
 # Typographie
 
-Chaque appli choisit ses polices dans son thème (voir `apps/<appli>/theme.md`).
-Deux règles communes :
+Polices de la suite (embarquées par le kit Labs OS) : **IBM Plex Sans** pour l'interface, **JetBrains Mono** pour les données.
+
+**Échelle commune (kit 1.5.0)** : 1 rem = 16 px sur ordinateur comme sur téléphone ; tailles par jetons uniquement,
+13 · 14 · 16 · 18 · 22 · 28 px (`--lo-fs-xs` … `--lo-fs-2xl`), **plancher 13 px**. Détail et usages : `composants.md`.
+
+Règles communes :
 
 - le **nom de l'appli** s'écrit en police à chasse fixe et en gras :
   `backup` puis `.labs` dans la couleur de l'appli (police de référence :

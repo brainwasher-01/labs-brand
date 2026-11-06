@@ -52,3 +52,46 @@ Règles :
 - Une rangée de boutons seuls (barre d'outils, actions de page) est alignée sur le **centre** (`lo-row`), avec l'écart `--lo-ctl-gap`.
 - Un groupe de segments (`lo-seg`) a la hauteur d'un bouton : ses boutons internes remplissent le groupe, sans le déborder.
 
+
+## Échelle de texte et écarts (kit 1.5.0)
+
+1 rem = 16 px partout (le kit l'impose). Toute taille de texte vient d'un jeton ; **rien sous 13 px**.
+
+| Jeton | Taille | Pour |
+|---|---|---|
+| `--lo-fs-xs` | 13 px | plancher : ligne d'infos (chasse fixe), adresses, pastilles, compteurs, en-têtes de tableau |
+| `--lo-fs-sm` | 14 px | libellés de champ, aides, compteur d'une barre d'outils |
+| `--lo-fs` | 16 px | texte courant, boutons, menu, détail d'une carte |
+| `--lo-fs-lg` | 18 px | **titre de carte**, nom d'un élément de liste |
+| `--lo-fs-xl` / `--lo-fs-2xl` | 22 / 28 px | titres intermédiaires / titre de page |
+
+| Écart | Valeur | Entre |
+|---|---|---|
+| `--lo-head-gap` | 1,75 rem | titre de page → premier bloc |
+| `--lo-gap` | 1,25 rem | deux blocs (cartes, sections, carte → barre d'outils) |
+| `--lo-gap-sm` | 0,75 rem | éléments d'une liste, barre d'outils → liste |
+| `--lo-pad` | 1,25 / 1,5 rem | intérieur d'une carte |
+| `--lo-title-gap` | 1 rem | titre de carte → contenu |
+| `--lo-form-gap` | 1 rem | rangées d'un formulaire (champs, case à cocher, aide) |
+| `--lo-field-gap` | 0,5 rem | libellé → champ → aide |
+| `--lo-item-gap` | 0,375 rem | lignes d'une carte de liste (nom, détail, adresse, infos) |
+
+## Composants de contenu (kit 1.5.0)
+
+| Classe | Rôle |
+|---|---|
+| `lo-stack` / `lo-stack-sm` | pile verticale de blocs (écart `--lo-gap` / `--lo-gap-sm`) |
+| `lo-panel` + `lo-panel-title` | carte de contenu, titre 18 px gras |
+| `lo-form` | pile des rangées d'un formulaire |
+| `lo-field` + `lo-label` + `lo-hint` | champ : libellé 14 px au-dessus, aide 14 px en dessous |
+| `lo-check` | case à cocher + phrase ; la case reste calée sur la 1re ligne si la phrase en fait plusieurs |
+| `lo-item` | carte de liste : `lo-item-main` (nom `lo-item-title`, détail `lo-item-text`, infos `lo-sub`) à gauche, `lo-item-aside` à droite |
+| `lo-pill` (+ `lo-ok`, `lo-warn`, `lo-fail`, `lo-busy`) | pastille d'état, 28 px de haut, fond teinté |
+| `lo-toolbar` + `lo-count` | rangée « compteur à gauche, action à droite » au-dessus d'une liste |
+
+Règles :
+- **Pastille et boutons d'une carte de liste sont sur UNE rangée** (`lo-item-aside`), centrée verticalement sur la carte :
+  jamais la pastille en haut à droite et les boutons au milieu. Sur téléphone : une colonne, pastille à gauche, boutons à droite.
+- Un formulaire sur une ligne utilise `lo-row-end` ; ses rangées se suivent à `--lo-form-gap`. Sur téléphone, les champs s'empilent en pleine largeur.
+- Une barre « compteur + action » garde l'action sur la même ligne, même sur téléphone.
+- Exemple vivant : `kit/demo.html`.

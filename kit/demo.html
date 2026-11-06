@@ -25,11 +25,14 @@
 </script>
 <style>
   /* Pont minimal : l'appli lit les jetons --lo-* */
-  html { font-size: 85%; } @media (max-width: 52rem) { html { font-size: 100%; } }
   body { margin: 0; background: var(--lo-bg); color: var(--lo-text); font: 400 var(--lo-fs)/var(--lo-lh) var(--lo-font-sans); }
   .grid { display: grid; gap: var(--lo-gap); grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
   .card { background: var(--lo-s1); border: 1px solid var(--lo-line); border-radius: var(--lo-r); padding: var(--lo-pad); }
   .card h2 { margin: 0 0 var(--lo-gap-sm); font: 500 var(--lo-fs-sm) var(--lo-font-sans); color: var(--lo-muted); }
+  .demo-in { box-sizing: border-box; width: 100%; height: var(--lo-ctl-h); padding: 0 .75rem; border: 1px solid var(--lo-line-2); border-radius: var(--lo-r-sm); background: var(--lo-bg); color: var(--lo-text); font: 400 var(--lo-fs) var(--lo-font-sans); }
+  .demo-btn { border: 1px solid var(--lo-line-2); border-radius: var(--lo-r-sm); background: var(--lo-s1); color: var(--lo-text); font: 500 var(--lo-fs) var(--lo-font-sans); cursor: pointer; }
+  .demo-btn.primary { background: var(--lo-accent); color: var(--lo-on-accent); border-color: transparent; font-weight: 600; }
+  .demo-btn.danger { color: var(--lo-fail); border-color: var(--lo-fail); background: none; }
   .card b { font-size: 2.25rem; letter-spacing: -.04em; color: var(--lo-strong); }
 </style>
 </head>
@@ -48,6 +51,31 @@
     <main class="lo-page">
       <div class="lo-page-head"><div><h1>Démo du kit Labs OS</h1><span class="lo-meta">6 projets · 214 notes</span></div></div>
       <div class="grid"><div class="card vedette"><h2>Carte vedette</h2><b>214</b></div><div class="card"><h2>Carte</h2><b>6</b></div><div class="card"><h2>Carte</h2><b>99 %</b></div></div>
+      <div class="lo-stack" style="margin-top: var(--lo-gap)">
+        <section class="lo-panel">
+          <h2 class="lo-panel-title">Formulaire (lo-panel, lo-form, lo-field)</h2>
+          <div class="lo-form">
+            <div class="lo-row-end">
+              <label class="lo-field lo-grow" style="flex-grow:2"><span class="lo-label">Adresse</span><input class="demo-in" type="text" placeholder="https://exemple.club/register"></label>
+              <label class="lo-field lo-grow"><span class="lo-label">Nom (facultatif)</span><input class="demo-in" type="text"></label>
+              <button class="demo-btn primary lo-ctl">Valider</button>
+            </div>
+            <label class="lo-check"><input type="checkbox" checked> Une phrase qui dit ce qui se passe quand c'est coché</label>
+            <p class="lo-hint">Aide sous le formulaire : 14 px, interligne aéré, <b>mots clés</b> en gras.</p>
+          </div>
+        </section>
+        <div class="lo-stack-sm">
+          <div class="lo-toolbar"><span class="lo-count">2 éléments</span><button class="demo-btn lo-ctl lo-end">Tout vérifier</button></div>
+          <article class="lo-item">
+            <div class="lo-item-main"><h3 class="lo-item-title">Élément de liste</h3><p class="lo-item-text">Détail lisible à 16 px.</p><p class="lo-sub">https://exemple.club/register · vérifié à l'instant</p></div>
+            <div class="lo-item-aside"><span class="lo-pill lo-warn">Sur code</span><button class="demo-btn lo-ctl">Vérifier</button><button class="demo-btn danger lo-ctl">Retirer</button></div>
+          </article>
+          <article class="lo-item">
+            <div class="lo-item-main"><h3 class="lo-item-title">Autre élément</h3><p class="lo-sub">vérifié il y a 5 min</p></div>
+            <div class="lo-item-aside"><span class="lo-pill lo-ok">Ouvertes</span><button class="demo-btn lo-ctl">Vérifier</button><button class="demo-btn danger lo-ctl">Retirer</button></div>
+          </article>
+        </div>
+      </div>
     </main>
   </div>
 </div>
