@@ -35,3 +35,20 @@ chaque appli peut garder les siens, l'important est le comportement.
 - Menu latéral d'environ 14,5 rem, contenu sur toute la largeur restante.
 - Sous 52 rem : menu replié derrière un bouton « Menu ».
 - Grilles `repeat(auto-fit, minmax(…, 1fr))`, cibles cliquables ≥ 40 px.
+
+## Hauteurs et alignement des contrôles (kit 1.4.0)
+
+Un bouton et un champ côte à côte ont **toujours la même hauteur**. Il n'y a que deux crans, définis dans le kit :
+
+| Jeton | Valeur | Pour |
+|---|---|---|
+| `--lo-ctl-h` | 2,5 rem (2,75 rem sur téléphone) | Boutons, champs, listes déroulantes, recherche, segments, icônes d'en-tête |
+| `--lo-ctl-h-sm` | 2 rem (2,25 rem sur téléphone) | Petits boutons (`.btn.small`), puces, actions dans un tableau ou une carte |
+
+Règles :
+- Ne jamais écrire `height` ou `min-height` en dur sur un bouton, un champ ou un segment : lire ces jetons.
+- Un bouton qui ne contient qu'une icône est **carré** (largeur = hauteur du cran).
+- Une rangée de champs avec libellé au-dessus (formulaire sur une ligne) est alignée sur le **bas** (`align-items: flex-end`, classe `lo-row-end`) : le bouton tombe à hauteur des champs.
+- Une rangée de boutons seuls (barre d'outils, actions de page) est alignée sur le **centre** (`lo-row`), avec l'écart `--lo-ctl-gap`.
+- Un groupe de segments (`lo-seg`) a la hauteur d'un bouton : ses boutons internes remplissent le groupe, sans le déborder.
+

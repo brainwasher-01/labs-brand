@@ -19,6 +19,7 @@ Reprise de labs-brand le 2026-11-05 : voir [[CHARTE]].
 Voir [[JOURNAL]].
 
 ## État
+- 2026-11-06 : kit 1.4.0 (échelle unique des hauteurs de contrôles, rangées alignées ; les 5 applis s'alignent dessus).
 - 2026-11-06 : kit 1.3.0 (gabarit commun, recherche en haut, palette identique sans changement d'appli, écarts de Backup Labs).
 
 ## Feuille de route

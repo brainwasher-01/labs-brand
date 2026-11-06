@@ -6,6 +6,7 @@
 
    Contenu : polices embarquées, jetons (--lo-*), coque injectée par labs-os.js
    (palette Ctrl K, barre d'état), crochets (titres), pied du menu commun. Pas de dock (retiré en 1.1.0).
+   Depuis 1.4.0 : échelle unique des contrôles (--lo-ctl-h / --lo-ctl-h-sm) et rangées alignées (lo-row, lo-row-end, lo-ctl, lo-seg).
    Depuis 1.3.0 : gabarit commun (menu lo-side de la largeur d'Asset Labs, barre de recherche lo-top tout
    en haut, tiroir sur téléphone) et échelle de texte / d'espacement reprise de Backup Labs.
    Tout est préfixé lo- / --lo- pour ne jamais heurter les styles d'une appli.
@@ -39,7 +40,12 @@
   --lo-gap: 1.25rem;                     /* entre deux blocs (cartes, sections) */
   --lo-gap-sm: .75rem;                   /* entre éléments d'un même bloc */
   --lo-pad-y: 1.25rem; --lo-pad-x: 1.5rem; --lo-pad: var(--lo-pad-y) var(--lo-pad-x);   /* intérieur des cartes */
-  --lo-ctl-h: 2.5rem;                    /* hauteur des champs et boutons */
+  /* Contrôles (1.4.0) : UNE échelle pour toute la suite. Un bouton et un champ côte à côte ont la même
+     hauteur ; seuls deux crans existent. Les applis lisent ces jetons, elles ne fixent plus de hauteur. */
+  --lo-ctl-h: 2.5rem;                    /* standard : boutons, champs, listes, recherche, segments */
+  --lo-ctl-h-sm: 2rem;                   /* compact : petits boutons, puces, barres d'outils denses, icônes d'en-tête */
+  --lo-ctl-px: 1rem; --lo-ctl-px-sm: .75rem;   /* marges latérales des boutons */
+  --lo-ctl-gap: .5rem;                   /* entre deux contrôles d'une même rangée */
   /* Couleur de chaque appli : [sombre] et variante foncée [clair] ≥ 4,5:1 sur blanc */
   --lo-c-backup: #7ee2a8; --lo-c-projet: #b49cff; --lo-c-torrent: #ff9b6a; --lo-c-finance: #6cc7f0; --lo-c-asset: #f2b84b;
 }
@@ -204,6 +210,24 @@ html.lo-on.lo-no-status body { padding-bottom: 0; }
 .lo-it .lo-thumb { flex: none; width: 1.5rem; height: 2.25rem; object-fit: cover; border-radius: 3px; background: var(--lo-s3); }
 .lo-it:has(.lo-thumb) { min-height: 3rem; }
 
+/* ── Rangées de contrôles (1.4.0) ──────────────────────────────────────────────────────────
+   .lo-row      rangée de boutons / champs : alignés sur le centre, retour à la ligne, même écart.
+   .lo-row-end  rangée de champs AVEC libellé au-dessus (formulaire sur une ligne) : tout est calé sur le bas,
+                le bouton tombe donc exactement à hauteur des champs, jamais plus haut ni plus bas.
+   .lo-ctl / .lo-ctl-sm  donnent la hauteur standard / compacte à n'importe quel élément (bouton, lien, segment).
+   .lo-seg      groupe de segments (Tout / Films / Séries) de la hauteur d'un bouton.
+   Règle : ne jamais fixer la hauteur d'un bouton ou d'un champ en dur ; utiliser ces jetons. */
+.lo-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--lo-ctl-gap); min-width: 0; }
+.lo-row-end { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--lo-ctl-gap) var(--lo-gap-sm); min-width: 0; }
+.lo-row > .lo-grow, .lo-row-end > .lo-grow { flex: 1 1 0; min-width: 0; }
+.lo-row > .lo-end { margin-left: auto; }
+.lo-ctl, .lo-ctl-sm { box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: .45rem; }
+.lo-ctl { min-height: var(--lo-ctl-h); padding-block: 0; padding-inline: var(--lo-ctl-px); }
+.lo-ctl-sm { min-height: var(--lo-ctl-h-sm); padding-block: 0; padding-inline: var(--lo-ctl-px-sm); }
+.lo-seg { box-sizing: border-box; display: inline-flex; align-items: stretch; gap: 2px; min-height: var(--lo-ctl-h); padding: 3px; border-radius: var(--lo-r); background: var(--lo-s2); }
+.lo-seg > button, .lo-seg > a { display: inline-flex; align-items: center; justify-content: center; gap: .375rem; min-height: 0; padding: 0 var(--lo-ctl-px-sm); border: 0; border-radius: var(--lo-r-sm); background: none; color: var(--lo-muted); font: 500 var(--lo-fs-sm)/1 var(--lo-font-sans); text-decoration: none; cursor: pointer; }
+.lo-seg > .on, .lo-seg > [aria-pressed="true"], .lo-seg > [aria-current] { background: var(--lo-s1); color: var(--lo-strong); box-shadow: var(--lo-shadow); }
+
 /* Touches clavier affichées par une appli */
 .lo-keycap { font: 500 .75rem var(--lo-font-mono); padding: .0625rem .375rem; border-radius: 4px; border: 1px solid currentColor; border-bottom-width: 2px; opacity: .7; }
 
@@ -215,6 +239,7 @@ html.lo-on.lo-no-status body { padding-bottom: 0; }
 
 /* ── Mobile : pas de barre d'état ── */
 @media (max-width: 52rem) {
+  :root { --lo-ctl-h: 2.75rem; --lo-ctl-h-sm: 2.25rem; }   /* cibles tactiles ≥ 44 px */
   :root { --lo-status-h: 0px; --lo-top-h: 3.5rem; --lo-page-y: 1.25rem; --lo-head-gap: 1.25rem; --lo-gap: 1rem; --lo-pad-y: 1rem; --lo-pad-x: 1.125rem; }
   .lo-shell { grid-template-columns: minmax(0, 1fr); }
   .lo-side { position: fixed; z-index: 2147482500; top: 0; bottom: 0; left: 0; width: min(84vw, 19rem); height: auto; border-right: 1px solid var(--lo-line-2);

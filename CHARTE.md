@@ -99,7 +99,7 @@ d'une appli.
 <script>
   LabsOS.init({
     app: 'projet',                 // backup | projet | torrent | finance | asset
-    version: '1.3.0',              // affichée dans la barre d'état
+    version: '1.4.0',              // affichée dans la barre d'état
     title: '.page-head h1',        // titres mis entre crochets
     cards: '.card, .panel',        // cartes qui reçoivent les coins en crochet
     star: '.card.featured',        // carte vedette (crochets permanents)
