@@ -12,7 +12,7 @@ d'une appli à l'autre avec les touches `1` à `5` (depuis 1.3.0, la palette ne
 propose plus d'ouvrir une autre appli).
 
 Depuis **1.3.0**, le kit fournit aussi le **gabarit commun** : même menu (largeur
-d'Asset Labs, catégories façon Backup Labs), même barre de recherche tout en haut,
+d'Plex Labs, catégories façon Backup Labs), même barre de recherche tout en haut,
 même tiroir sur téléphone, même échelle de texte et mêmes écarts entre blocs
 (référence : Backup Labs). Détail plus bas, « Gabarit commun ».
 
@@ -114,7 +114,7 @@ LabsOS.foot('#pied', {
 ```
 
 `tone` : `ok`, `warn`, `fail`, `busy` ou vide (gris). Une ligne `null` ou `hidden: true` est ignorée.
-Rappeler `LabsOS.foot` avec de nouvelles données le met à jour. Modèle : le pied d'Asset Labs.
+Rappeler `LabsOS.foot` avec de nouvelles données le met à jour. Modèle : le pied d'Plex Labs.
 
 ### Gabarit commun (depuis 1.3.0)
 
@@ -139,7 +139,7 @@ Décidé le 2026-11-06 par Aurélien : les 5 applis ont le même menu, la même 
 
 Règles :
 
-- **Largeur du menu** : `--lo-side-w` = 15,5 rem (celle d'Asset Labs). Ligne du logo de la hauteur de la barre du haut (`--lo-top-h`).
+- **Largeur du menu** : `--lo-side-w` = 15,5 rem (celle d'Plex Labs). Ligne du logo de la hauteur de la barre du haut (`--lo-top-h`).
 - **Pas de page « Journal », « Logs » ni « Versions » dans le menu** : on y accède par les icônes et la ligne de version
   du pied du menu ; la palette et la barre du haut les retrouvent (« Aller à »).
 - **Barre de recherche** toujours en haut, jamais dans le menu ; résultats au fil de la frappe, par catégorie.

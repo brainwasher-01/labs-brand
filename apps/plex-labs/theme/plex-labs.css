@@ -1,4 +1,4 @@
-/* Asset Labs — jetons de thème (copie de référence des variables de app/static/app.css de l'appli).
+/* Plex Labs — jetons de thème (copie de référence des variables de app/static/app.css de l'appli).
    Clair par défaut (suit le système, choix mémorisé par navigateur : localStorage « pcs-theme ») ;
    sombre via :root[data-theme="dark"]. Les styles des composants restent dans l'appli. */
 :root {

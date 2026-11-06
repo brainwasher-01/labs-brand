@@ -18,13 +18,13 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '1.6.0';
+  var KIT_VERSION = '1.6.1';
   var APPS = [
     { id: 'backup',  name: 'Backup Labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet Labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
     { id: 'torrent', name: 'Torrent Labs', color: '#ff9b6a', d: 'M24 20h16 M32 20v24' },
     { id: 'finance', name: 'Finance Labs', color: '#6cc7f0', d: 'M27 44V20h11 M27 31h9' },
-    { id: 'asset',   name: 'Asset Labs',   color: '#f2b84b', d: 'M24.5 44 32 20l7.5 24 M27 36h10' }
+    { id: 'asset',   name: 'Plex Labs',    color: '#f2b84b', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' }
   ];
   var ICONS = {
     search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',

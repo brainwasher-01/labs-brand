@@ -1,6 +1,6 @@
 # Labs — identité et chartes de la suite
 
-Ressources communes de la suite Labs (homelab) : **Backup Labs, Asset Labs,
+Ressources communes de la suite Labs (homelab) : **Backup Labs, Plex Labs,
 Finance Labs, Projet Labs, Torrent Labs**. Ce dépôt est public pour qu'Unraid
 puisse télécharger les icônes des conteneurs ; il ne contient ni code
 applicatif ni secret.

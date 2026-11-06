@@ -1,16 +1,16 @@
-# Asset Labs — charte
+# Plex Labs — charte
 
 ## Identité
 
 | | |
 |---|---|
-| Nom affiché | Asset Labs |
-| Nom écrit (logo texte) | `asset.labs` |
+| Nom affiché | Plex Labs |
+| Nom écrit (logo texte) | `plex.labs` |
 | Rôle | Gestion des visuels d'une médiathèque Plex : copie les affiches, logos et backgrounds préparés vers les dossiers des films et séries puis rafraîchit Plex, et crée covers, cartes de titre d'épisodes, vignettes de bandes-annonces et placeholders « À venir » (anciennement « Plex Labs ») |
-| Nom du conteneur | `asset-labs` |
+| Nom du conteneur | `plex-labs` |
 | Couleur | `#f2b84b` |
-| Logo | [`../../logos/asset-labs.svg`](../../logos/asset-labs.svg), [`png`](../../logos/asset-labs.png) (copiés dans l'appli : favicon, menu, page de connexion, écran d'accueil iPhone) |
-| Icône Unraid | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/asset-labs.png` |
+| Logo | [`../../logos/plex-labs.svg`](../../logos/plex-labs.svg), [`png`](../../logos/plex-labs.png) (copiés dans l'appli : favicon, menu, page de connexion, écran d'accueil iPhone) |
+| Icône Unraid | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/plex-labs.png` |
 | Technologie de l'interface | HTML + CSS + JavaScript sans framework ni étape de build, servis par FastAPI (Python 3.12) |
 | État | En service |
 
@@ -77,4 +77,4 @@ Voir [ecrans.md](ecrans.md).
 | Date | Changement |
 |---|---|
 | 2026-11-05 | Dossier créé avec le logo |
-| 2026-11-05 | Charte complétée (v0.25.4) : identité, thèmes clair et sombre documentés avec leurs jetons, écrans, vocabulaire, écarts ; logo, nom écrit `asset.labs` et icône Unraid de labs-brand adoptés dans l'appli |
+| 2026-11-05 | Charte complétée (v0.25.4) : identité, thèmes clair et sombre documentés avec leurs jetons, écrans, vocabulaire, écarts ; logo, nom écrit `plex.labs` et icône Unraid de labs-brand adoptés dans l'appli |

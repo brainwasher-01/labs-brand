@@ -13,7 +13,7 @@ coller l'adresse, *Apply*.
 | Appli | Adresse |
 |---|---|
 | Backup Labs | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/backup-labs.png` |
-| Asset Labs | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/asset-labs.png` |
+| Plex Labs | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/plex-labs.png` |
 | Finance Labs | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/finance-labs.png` |
 | Projet Labs | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/projet-labs.png` |
 | Torrent Labs | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/torrent-labs.png` |

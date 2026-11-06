@@ -1,4 +1,4 @@
-# Asset Labs — écrans
+# Plex Labs — écrans
 
 | Écran | Rôle |
 |---|---|

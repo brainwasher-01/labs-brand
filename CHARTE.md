@@ -7,7 +7,7 @@
 | Appli | Nom écrit | Couleur | Rôle |
 |---|---|---|---|
 | Backup Labs | `backup.labs` | `#7ee2a8` | Sauvegarde tout-en-un pour Unraid (applications, Plex, dossiers, clé Unraid ; copies sur une autre machine) |
-| Asset Labs | `asset.labs` | `#f2b84b` | Gestion des visuels d'une médiathèque Plex : synchronisation des affiches, logos et backgrounds, création de covers, cartes d'épisodes et placeholders (ex-Plex Labs) |
+| Plex Labs | `plex.labs` | `#f2b84b` | Gestion des visuels d'une médiathèque Plex : synchronisation des affiches, logos et backgrounds, création de covers, cartes d'épisodes et placeholders (ex-Asset Labs) |
 | Finance Labs | `finance.labs` | `#6cc7f0` | Finances personnelles du foyer, 100 % locales : import des relevés bancaires, comptes et titulaires, vue d'ensemble du patrimoine, simulateur |
 | Projet Labs | `projet.labs` | `#b49cff` | — |
 | Torrent Labs | `torrent.labs` | `#ff9b6a` | Recherche de torrents sur tous les indexeurs de Prowlarr, résultats en direct, envoi vers qBittorrent (ex-TorrentScope) |

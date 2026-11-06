@@ -44,7 +44,7 @@ Voir [ecrans.md](ecrans.md).
 ## Écarts assumés avec le commun
 
 - **`.labs` et actions en `#13784a` en mode clair**, variante foncée de la
-  couleur de l'appli, comme le propose Asset Labs dans
+  couleur de l'appli, comme le propose Plex Labs dans
   [`../../docs/propositions.md`](../../docs/propositions.md) : `#7ee2a8` ne
   fait que 1,6:1 sur blanc, `#13784a` fait 5,5:1. En sombre, `#7ee2a8`.
 - **Nom écrit en IBM Plex Mono, graisse 500**, plutôt que JetBrains Mono en

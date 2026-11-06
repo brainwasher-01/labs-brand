@@ -17,9 +17,8 @@ Initiales existantes (chemins SVG) :
 | Appli | Tracé |
 |---|---|
 | B | `M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7` |
-| A | `M24.5 44 32 20l7.5 24 M27 36h10` |
 | F | `M27 44V20h11 M27 31h9` |
-| P | `M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26` |
+| P (Projet Labs et Plex Labs, de couleurs différentes) | `M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26` |
 | T | `M24 20h16 M32 20v24` |
 | D | `M26 20h4.5a12 12 0 0 1 0 24H26z` |
 
@@ -53,7 +52,7 @@ couleur propre ni d'entrée au catalogue.
 |---|---|
 | Fond | Carré plein `#0b1015`, sans tuile ni bordure : GitHub recadre en cercle |
 | Crochets | Mêmes tracés que les logos, en `#e6edf3` |
-| Contenu | Cinq lignes alignées à gauche, trait 3,2 arrondi, une par appli dans l'ordre Backup, Asset, Finance, Projet, Torrent : `M24.5 21.5h15`, `M24.5 26.75h10`, `M24.5 32h13`, `M24.5 37.25h7`, `M24.5 42.5h11` (pas de 5,25) |
+| Contenu | Cinq lignes alignées à gauche, trait 3,2 arrondi, une par appli dans l'ordre Backup, Plex, Finance, Projet, Torrent : `M24.5 21.5h15`, `M24.5 26.75h10`, `M24.5 32h13`, `M24.5 37.25h7`, `M24.5 42.5h11` (pas de 5,25) |
 
 Écarts assumés : fond plein et PNG 512 px (GitHub demande au moins 420 px et
 un fond opaque). Une nouvelle appli ajoute une ligne de sa couleur, en

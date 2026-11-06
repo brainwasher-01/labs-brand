@@ -1,4 +1,4 @@
-# Asset Labs — thèmes
+# Plex Labs — thèmes
 
 ## Labs OS (thème actuel)
 
@@ -10,7 +10,7 @@ Pont en tête d'`app/static/app.css` (`:root[data-theme]`) : fonds, surfaces, te
 
 *Thème d'origine, avant Labs OS (historique) :*
 
-Fichiers : [`theme/asset-labs.css`](theme/asset-labs.css) (copie de référence
+Fichiers : [`theme/plex-labs.css`](theme/plex-labs.css) (copie de référence
 des variables de l'interface) et [`theme/tokens.json`](theme/tokens.json).
 Thème clair par défaut, sombre si le système l'est ; le bouton du menu force
 l'un ou l'autre, choix mémorisé par navigateur (`localStorage`, clé
@@ -77,7 +77,7 @@ Mêmes rôles ; seules les valeurs ci-dessous changent (l'ambre d'action
 | Texte | Figtree (variable, embarquée) | 500 ; 550 menu |
 | Titres | Figtree | 750 (sections), 800 (pages) |
 | Boutons, pastilles, étiquettes | Figtree | 650 |
-| Nom écrit `asset.labs`, fichiers, chemins, heures du journal | Geist Mono (variable, embarquée) | 700 (nom), 500 |
+| Nom écrit `plex.labs`, fichiers, chemins, heures du journal | Geist Mono (variable, embarquée) | 700 (nom), 500 |
 
 Tailles en `rem` : 0,75 / 0,8125 / 0,875 / 1 / 1,25 / 1,75 rem. La racine
 vaut 16 px jusqu'à 1920 px de large, puis grandit avec l'écran (24 px sur un
@@ -95,5 +95,5 @@ vaut 16 px jusqu'à 1920 px de large, puis grandit avec l'écran (24 px sur un
 
 ## Fichiers
 
-[`theme/asset-labs.css`](theme/asset-labs.css) (variables des deux thèmes) et
+[`theme/plex-labs.css`](theme/plex-labs.css) (variables des deux thèmes) et
 [`theme/tokens.json`](theme/tokens.json). Le reste des styles vit dans l'appli.

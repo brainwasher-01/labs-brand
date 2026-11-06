@@ -5,7 +5,7 @@
 | Application | Couleur | Usage |
 |---|---|---|
 | Backup Labs | `#7ee2a8` | logo (et accent de son thème Console) |
-| Asset Labs | `#f2b84b` | logo |
+| Plex Labs | `#f2b84b` | logo |
 | Finance Labs | `#6cc7f0` | logo |
 | Projet Labs | `#b49cff` | logo |
 | Torrent Labs | `#ff9b6a` | logo |
