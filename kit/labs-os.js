@@ -18,13 +18,13 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '1.6.1';
+  var KIT_VERSION = '1.6.2';
   var APPS = [
     { id: 'backup',  name: 'Backup Labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet Labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
     { id: 'torrent', name: 'Torrent Labs', color: '#ff9b6a', d: 'M24 20h16 M32 20v24' },
     { id: 'finance', name: 'Finance Labs', color: '#6cc7f0', d: 'M27 44V20h11 M27 31h9' },
-    { id: 'asset',   name: 'Plex Labs',    color: '#f2b84b', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' }
+    { id: 'plex',    name: 'Plex Labs',    color: '#f2b84b', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' }
   ];
   var ICONS = {
     search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
@@ -130,7 +130,7 @@
   function urlFor(id) {
     if (opts.suite && opts.suite[id]) return opts.suite[id];
     var s = savedUrls(); if (s[id]) return s[id];
-    var m = location.hostname.match(/^(backup|projet|torrent|finance|asset)-labs(\..+)$/);
+    var m = location.hostname.match(/^(backup|projet|torrent|finance|plex|asset)-labs(\..+)$/);
     if (m) return location.protocol + '//' + id + '-labs' + m[2] + (location.port ? ':' + location.port : '') + '/';
     return null;
   }
@@ -408,6 +408,7 @@
     apps: APPS.map(function (a) { return { id: a.id, name: a.name, color: a.color }; }),
     init: function (o) {
       opts = o || {};
+      if (opts.app === 'asset') opts.app = 'plex';   // ancien identifiant de Plex Labs, accepté jusqu'à la mise à jour de l'appli
       if (opts.app) root.setAttribute('data-lo-app', opts.app);
       applyMode();
       // Barre du haut montée tout de suite si son conteneur existe déjà : les scripts « defer » de l'appli la trouvent.
