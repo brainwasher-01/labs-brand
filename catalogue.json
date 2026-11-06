@@ -1,6 +1,6 @@
 {
   "suite": "Labs",
-  "updated": "2026-11-05",
+  "updated": "2026-11-06",
   "repository": "https://github.com/brainwasher-01/labs-brand",
   "common_docs": {
     "principes": "docs/principes.md",
@@ -105,6 +105,20 @@
       "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/torrent-labs.png",
       "repository": "brainwasher-01/torrent-labs",
       "kit_dir": "static/labs-os"
+    },
+    {
+      "id": "dashboard-labs",
+      "name": "Dashboard Labs",
+      "wordmark": "dashboard.labs",
+      "initial": "D",
+      "color": "#f27ec6",
+      "color_text_on_light": "#c2378a",
+      "role": "Page d'accueil et tableau de bord du quotidien (ordinateur, iPad, iPhone) : Skynet, médias, maison, journée, veille, accès rapide, avec un assistant qui agit",
+      "container": "dashboard-labs",
+      "status": "en conception",
+      "charter_status": "à compléter",
+      "logo_svg": "logos/dashboard-labs.svg",
+      "repository": "brainwasher-01/dashboard-labs"
     }
   ],
   "associated_apps": [
