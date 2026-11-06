@@ -1,0 +1,25 @@
+# Renommage Asset Labs -> Plex Labs : à lancer UNE fois (Actions -> Renommage Plex Labs -> Run workflow).
+# Fait le remplacement (scripts/rename-brand-to-plex-labs.sh), commite au nom d'Aurélien et pousse sur main.
+# Après usage : supprimer ce fichier (Projet Labs : delete_doc) ; le script se supprime tout seul.
+name: Renommage Plex Labs
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  renommer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Outil de rendu du logo
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq librsvg2-bin
+      - name: Remplacer Asset Labs par Plex Labs
+        run: bash scripts/rename-brand-to-plex-labs.sh
+      - name: Commiter et pousser
+        run: |
+          git config user.name "Aurélien Coiffard"
+          git config user.email "aurelien.coiffard@gmail.com"
+          git rm -q -f scripts/rename-brand-to-plex-labs.sh
+          git add -A
+          git commit -m "chore: rename Asset Labs to Plex Labs, kit Labs OS 1.6.1"
+          git push
