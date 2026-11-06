@@ -111,13 +111,20 @@
       "name": "Dashboard Labs",
       "wordmark": "dashboard.labs",
       "initial": "D",
-      "color": "#f27ec6",
-      "color_text_on_light": "#c2378a",
+      "color": "#e6edf3",
+      "color_text_on_light": "#1b2230",
+      "color_name": "Lunaire",
+      "color_note": "neutre (sans teinte) : la règle des 40° ne s'applique pas ; crochets du logo en dégradé de la suite",
       "role": "Page d'accueil et tableau de bord du quotidien (ordinateur, iPad, iPhone) : Skynet, médias, maison, journée, veille, accès rapide, avec un assistant qui agit",
       "container": "dashboard-labs",
       "status": "en conception",
-      "charter_status": "à compléter",
+      "charter_status": "complète",
+      "charter": "apps/dashboard-labs/README.md",
+      "theme": "apps/dashboard-labs/theme.md",
       "logo_svg": "logos/dashboard-labs.svg",
+      "logo_png": "logos/dashboard-labs.png",
+      "logo_png_status": "à exporter",
+      "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/dashboard-labs.png",
       "repository": "brainwasher-01/dashboard-labs"
     }
   ],
@@ -150,6 +157,9 @@
       "logo_png": "apps/crate/logo/crate.png",
       "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/apps/crate/logo/crate.png"
     }
+  ],
+  "reserved_colors": [
+    { "color": "#f27ec6", "name": "rose", "note": "réservé par Aurélien pour un futur projet (2026-11-06)" }
   ],
   "kit": {
     "name": "Labs OS",

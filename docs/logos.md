@@ -21,6 +21,14 @@ Initiales existantes (chemins SVG) :
 | F | `M27 44V20h11 M27 31h9` |
 | P | `M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26` |
 | T | `M24 20h16 M32 20v24` |
+| D | `M26 20h4.5a12 12 0 0 1 0 24H26z` |
+
+## Variante prisme (Dashboard Labs)
+
+Dashboard Labs montre toute la suite : ses crochets reprennent le dégradé du
+logo de la suite (`#7ee2a8` → `#6cc7f0` → `#b49cff` → `#ff9b6a`, de haut à
+gauche à bas à droite, `x1=14 y1=17 x2=50 y2=47` en coordonnées de la grille).
+Tuile, bordure 2,5 et initiale D en Lunaire `#e6edf3`. Réservée à cette appli.
 
 ## Fichiers
 
