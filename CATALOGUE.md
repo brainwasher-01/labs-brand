@@ -12,6 +12,7 @@ de couleur ou de charte.
 | [Finance Labs](apps/finance-labs/README.md) | `finance.labs` | `#6cc7f0` | ![](logos/finance-labs.svg) | Finances personnelles du foyer, 100 % locales : import des relevés bancaires, comptes et titulaires, vue d'ensemble du patrimoine, simulateur | complète | [thèmes](apps/finance-labs/theme.md) |
 | [Projet Labs](apps/projet-labs/README.md) | `projet.labs` | `#b49cff` | ![](logos/projet-labs.svg) | Base de connaissances Markdown versionnée, pont MCP avec Claude, restauration en un clic ; cohérence de la suite et propagation de Labs OS | complète | [thèmes](apps/projet-labs/theme.md) |
 | [Torrent Labs](apps/torrent-labs/README.md) | `torrent.labs` | `#ff9b6a` | ![](logos/torrent-labs.svg) | Recherche de torrents sur tous les indexeurs de Prowlarr, résultats en direct, envoi vers qBittorrent (ex-TorrentScope) | complète | [thèmes](apps/torrent-labs/theme.md) |
+| Dashboard Labs (en conception) | `dashboard.labs` | `#f27ec6` (`#c2378a` sur fond clair) | ![](logos/dashboard-labs.svg) | Page d'accueil et tableau de bord du quotidien (ordinateur, iPad, iPhone) : Skynet, médias, maison, journée, veille, accès rapide, avec un assistant qui agit. Logo proposé, voir [propositions](docs/propositions.md) | à compléter | — |
 
 ## Applis associées (hors suite Labs)
 
