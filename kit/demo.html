@@ -9,39 +9,51 @@
 <script>
   LabsOS.init({
     app: 'projet', version: '1.0.0', host: 'skynet',
-    title: 'h1', cards: '.card', star: '.card.vedette', nav: 'nav.menu a',
+    title: '.lo-page-head h1', cards: '.card', star: '.card.vedette', nav: '.lo-nav a',
+    top: '#haut',
+    searchPlaceholder: 'Chercher une note, un projet…',
     commands: [{ group: 'Actions', label: 'Action de démonstration', hint: 'démo', icon: 'play', run: function () { document.querySelector('h1').textContent = 'Action lancée'; } }],
-    search: function (q) { return [{ label: 'Document « ' + q + ' »', hint: 'recherche', icon: 'file', run: function () {} }]; },
+    search: function (q) {
+      return [
+        { group: 'Projets', label: 'Projet « ' + q + ' »', hint: 'Labs', icon: 'box', run: function () {} },
+        { group: 'Notes', label: 'Note sur ' + q, sub: 'projet-labs / docs', icon: 'file', run: function () {} },
+        { group: 'Notes', label: 'Autre note sur ' + q, sub: 'backup-labs / PROJECT.md', icon: 'file', run: function () {} }
+      ];
+    },
     status: function () { return [{ label: 'Sauvegarde', value: 'à jour', tone: 'ok' }, { label: 'Projets', value: 6 }]; }
   });
 </script>
 <style>
   /* Pont minimal : l'appli lit les jetons --lo-* */
   html { font-size: 85%; } @media (max-width: 52rem) { html { font-size: 100%; } }
-  body { margin: 0; background: var(--lo-bg); color: var(--lo-text); font: 400 1rem/1.5 var(--lo-font-sans); }
-  .wrap { display: grid; grid-template-columns: 15rem minmax(0, 1fr); min-height: 100vh; }
-  nav.menu { background: var(--lo-bg-2); border-right: 1px solid var(--lo-line); padding: 1.25rem .75rem; display: grid; align-content: start; gap: 2px; }
-  nav.menu .wm { font: 700 1.25rem var(--lo-font-mono); color: var(--lo-strong); padding: 0 .625rem 1rem; } nav.menu .wm b { color: var(--lo-accent); }
-  nav.menu a { color: var(--lo-muted); text-decoration: none; padding: .5rem .625rem; border-radius: 6px; } nav.menu a:hover { background: var(--lo-s2); color: var(--lo-strong); }
-  main { padding: 2.25rem 2rem; display: grid; gap: 1.25rem; align-content: start; }
-  h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -.045em; font-weight: 600; color: var(--lo-strong); }
-  .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
-  .card { background: var(--lo-s1); border: 1px solid var(--lo-line); border-radius: var(--lo-r); padding: 1.125rem 1.25rem; }
-  .card h2 { margin: 0 0 .5rem; font: 500 .875rem var(--lo-font-sans); color: var(--lo-muted); }
+  body { margin: 0; background: var(--lo-bg); color: var(--lo-text); font: 400 var(--lo-fs)/var(--lo-lh) var(--lo-font-sans); }
+  .grid { display: grid; gap: var(--lo-gap); grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+  .card { background: var(--lo-s1); border: 1px solid var(--lo-line); border-radius: var(--lo-r); padding: var(--lo-pad); }
+  .card h2 { margin: 0 0 var(--lo-gap-sm); font: 500 var(--lo-fs-sm) var(--lo-font-sans); color: var(--lo-muted); }
   .card b { font-size: 2.25rem; letter-spacing: -.04em; color: var(--lo-strong); }
-  .btn { background: var(--lo-accent); color: var(--lo-on-accent); border: 0; border-radius: 6px; padding: .625rem 1rem; font: 600 1rem var(--lo-font-sans); cursor: pointer; }
-  @media (max-width: 52rem) { .wrap { grid-template-columns: 1fr; } nav.menu { display: none; } main { padding: 1.5rem 1rem; } }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <nav class="menu"><div class="wm">projet<b>.labs</b></div><a href="#accueil">Accueil</a><a href="#projets">Projets</a><a href="#graphe">Graphe</a><a href="#reglages">Réglages</a></nav>
-  <main>
-    <h1>Démo du kit Labs OS</h1>
-    <p style="color:var(--lo-muted);margin:0">Ctrl K pour la palette, touches 1 à 5 pour changer d'appli, survolez les cartes.</p>
-    <div class="grid"><div class="card vedette"><h2>Carte vedette</h2><b>214</b></div><div class="card"><h2>Carte</h2><b>6</b></div><div class="card"><h2>Carte</h2><b>99 %</b></div></div>
-    <div><button class="btn" type="button" onclick="LabsOS.open()">Ouvrir la palette</button></div>
-  </main>
+<div class="lo-shell">
+  <aside class="lo-side" aria-label="Menu">
+    <div class="lo-side-head"><a class="lo-brand" href="#"><svg viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="12" fill="#0b1015" stroke="#b49cff" stroke-width="2.5"/></svg><span class="lo-wm">projet<i>.labs</i></span></a></div>
+    <nav class="lo-nav">
+      <div class="lo-nav-sec"><a href="#accueil" aria-current="page"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Accueil</a></div>
+      <div class="lo-nav-sec"><span class="lo-nav-title">Notes</span><a href="#graphe"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg>Graphe</a><a href="#tags"><svg viewBox="0 0 24 24"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></svg>Tags<span class="lo-n">12</span></a></div>
+    </nav>
+    <footer id="pied"></footer>
+  </aside>
+  <div class="lo-main">
+    <header id="haut"></header>
+    <main class="lo-page">
+      <div class="lo-page-head"><div><h1>Démo du kit Labs OS</h1><span class="lo-meta">6 projets · 214 notes</span></div></div>
+      <div class="grid"><div class="card vedette"><h2>Carte vedette</h2><b>214</b></div><div class="card"><h2>Carte</h2><b>6</b></div><div class="card"><h2>Carte</h2><b>99 %</b></div></div>
+    </main>
+  </div>
 </div>
+<script>
+  LabsOS.foot('#pied', { rows: [{ tone: 'ok', label: 'Aucun travail en cours' }], version: { label: 'v1.0.0', href: '#versions' },
+    tools: [{ icon: 'activity', label: 'Journal', href: '#journal' }, { icon: 'gear', label: 'Réglages', href: '#reglages' }, '-', { icon: 'logout', label: 'Se déconnecter', run: function () {} }] });
+</script>
 </body>
 </html>

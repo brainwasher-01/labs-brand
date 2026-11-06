@@ -6,6 +6,8 @@
 
    Contenu : polices embarquées, jetons (--lo-*), coque injectée par labs-os.js
    (palette Ctrl K, barre d'état), crochets (titres), pied du menu commun. Pas de dock (retiré en 1.1.0).
+   Depuis 1.3.0 : gabarit commun (menu lo-side de la largeur d'Asset Labs, barre de recherche lo-top tout
+   en haut, tiroir sur téléphone) et échelle de texte / d'espacement reprise de Backup Labs.
    Tout est préfixé lo- / --lo- pour ne jamais heurter les styles d'une appli.
    ═══════════════════════════════════════════════════════════════════════════ */
 
@@ -23,8 +25,21 @@
 :root {
   --lo-font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --lo-font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
-  --lo-r: 10px; --lo-r-sm: 6px;
+  --lo-r: 8px; --lo-r-sm: 6px;
   --lo-dock-w: 0px; --lo-status-h: 1.875rem; --lo-dock-h: 0px;
+  /* Gabarit commun (1.3.0) — à 85 % sur ordinateur, 1 rem = 13,6 px.
+     Menu : largeur d'Asset Labs. Texte et espacements : ceux de Backup Labs. */
+  --lo-side-w: 15.5rem;              /* largeur du menu */
+  --lo-top-h: 3.75rem;               /* barre de recherche du haut = ligne du logo */
+  --lo-fs-xs: .8125rem; --lo-fs-sm: .875rem; --lo-fs: 1rem; --lo-fs-lg: 1.125rem; --lo-fs-xl: 1.375rem; --lo-fs-2xl: 1.75rem;
+  --lo-lh: 1.55;
+  --lo-page-x: clamp(1rem, 3vw, 3rem);   /* marges gauche / droite du contenu */
+  --lo-page-y: 2rem;                     /* espace sous la barre du haut */
+  --lo-head-gap: 1.75rem;                /* titre de page → premier bloc */
+  --lo-gap: 1.25rem;                     /* entre deux blocs (cartes, sections) */
+  --lo-gap-sm: .75rem;                   /* entre éléments d'un même bloc */
+  --lo-pad-y: 1.25rem; --lo-pad-x: 1.5rem; --lo-pad: var(--lo-pad-y) var(--lo-pad-x);   /* intérieur des cartes */
+  --lo-ctl-h: 2.5rem;                    /* hauteur des champs et boutons */
   /* Couleur de chaque appli : [sombre] et variante foncée [clair] ≥ 4,5:1 sur blanc */
   --lo-c-backup: #7ee2a8; --lo-c-projet: #b49cff; --lo-c-torrent: #ff9b6a; --lo-c-finance: #6cc7f0; --lo-c-asset: #f2b84b;
 }
@@ -87,7 +102,7 @@ html.lo-on.lo-no-status body { padding-bottom: 0; }
 .lo-palette { width: min(40rem, 100%); background: var(--lo-s1); color: var(--lo-text); border: 1px solid var(--lo-line-2); border-radius: 14px; box-shadow: var(--lo-pop); overflow: hidden; animation: lo-pop 200ms cubic-bezier(.2,.7,.2,1) both; }
 .lo-palette-in { display: flex; align-items: center; gap: .75rem; padding: 0 1.125rem; border-bottom: 1px solid var(--lo-line); }
 .lo-palette-in .lo-b { font: 500 1.25rem var(--lo-font-mono); color: var(--lo-accent); }
-.lo-palette input, .lo-palette input:focus { flex: 1; min-width: 0; width: auto; height: 3.5rem; min-height: 0; margin: 0; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; outline: none; color: var(--lo-strong); font: 400 1.125rem var(--lo-font-sans); -webkit-appearance: none; appearance: none; }
+.lo-scrim .lo-palette input[type="text"], .lo-scrim .lo-palette input[type="text"]:focus { flex: 1; min-width: 0; width: auto; height: 3.5rem; min-height: 0; margin: 0; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; outline: none; color: var(--lo-strong); font: 400 1.125rem var(--lo-font-sans); -webkit-appearance: none; appearance: none; }
 .lo-palette ul { list-style: none; margin: 0; padding: .375rem; max-height: min(24rem, 55vh); overflow: auto; }
 .lo-grp { padding: .625rem .75rem .25rem; font: 500 .75rem var(--lo-font-sans); color: var(--lo-faint); }
 .lo-it { display: flex; align-items: center; gap: .75rem; min-height: 2.75rem; padding: 0 .75rem; border-radius: 8px; cursor: pointer; color: var(--lo-text); }
@@ -128,21 +143,94 @@ html.lo-on.lo-no-status body { padding-bottom: 0; }
 .lo-foot .lo-tool svg { width: 1.0625rem; height: 1.0625rem; }
 .lo-foot [hidden] { display: none !important; }
 
+/* ── Gabarit commun (1.3.0) : menu à gauche, barre de recherche en haut, page ─────────────
+   Classes à poser sur le balisage de l'appli :
+     .lo-shell   conteneur (grille menu + contenu)       .lo-main   colonne de droite
+     .lo-side    menu (sticky, tiroir sur téléphone)     .lo-top    barre du haut (remplie par LabsOS)
+     .lo-side-head / .lo-brand / .lo-wm (nom écrit, « .labs » dans <i>)
+     .lo-nav > .lo-nav-sec > .lo-nav-title + a           .lo-page   intérieur de la page
+     .lo-foot    pied du menu (LabsOS.foot)              .lo-page-head  titre de page (+ .lo-meta)  */
+.lo-shell, .lo-side, .lo-side *, .lo-top, .lo-top *, .lo-palette, .lo-palette * { box-sizing: border-box; }
+.lo-shell { display: grid; grid-template-columns: var(--lo-side-w) minmax(0, 1fr); min-height: calc(100dvh - var(--lo-status-h)); }
+.lo-main { min-width: 0; display: flex; flex-direction: column; }
+.lo-page { flex: 1; min-width: 0; padding: var(--lo-page-y) var(--lo-page-x) 4rem; }
+.lo-page-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem; margin: 0 0 var(--lo-head-gap); }
+.lo-page-head h1 { margin: 0; font: 600 var(--lo-fs-2xl)/1.25 var(--lo-font-sans); letter-spacing: -.015em; color: var(--lo-strong); }
+.lo-meta { display: block; margin-top: .75rem; font: 400 var(--lo-fs-sm)/1.4 var(--lo-font-mono); color: var(--lo-faint); }
+
+.lo-side { position: sticky; top: 0; z-index: 30; height: calc(100dvh - var(--lo-status-h)); display: flex; flex-direction: column; min-width: 0;
+  background: var(--lo-bg-2); border-right: 1px solid var(--lo-line); overflow: hidden auto; overscroll-behavior: contain; scrollbar-width: thin; font-family: var(--lo-font-sans); }
+.lo-side-head { flex: none; display: flex; align-items: center; gap: .5rem; height: var(--lo-top-h); padding: 0 1.25rem; border-bottom: 1px solid var(--lo-line); }
+.lo-brand { display: flex; align-items: center; gap: .75rem; min-width: 0; color: var(--lo-strong); text-decoration: none; }
+.lo-brand:hover { text-decoration: none; }
+.lo-brand img, .lo-brand > svg { flex: none; width: 1.75rem; height: 1.75rem; }
+.lo-wm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 700 var(--lo-fs-lg)/1 var(--lo-font-mono); letter-spacing: -.02em; color: var(--lo-strong); }
+.lo-wm i, .lo-wm em, .lo-wm b { font-style: normal; font-weight: 400; color: var(--lo-accent); }
+.lo-nav { flex: none; display: grid; align-content: start; gap: 1.1rem; padding: .9rem .75rem; }
+.lo-nav-sec { display: grid; gap: 2px; min-width: 0; }
+.lo-nav-title, .lo-side .lo-label { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: 0 .75rem .4rem; font: 600 var(--lo-fs-sm)/1.3 var(--lo-font-sans); color: var(--lo-faint); }
+.lo-nav a, .lo-nav .lo-nav-it { display: flex; align-items: center; gap: .7rem; min-width: 0; min-height: 2.375rem; padding: .5rem .75rem; border: 0; border-radius: var(--lo-r-sm); background: none;
+  color: var(--lo-muted); font: 500 var(--lo-fs)/1.3 var(--lo-font-sans); text-align: left; text-decoration: none; cursor: pointer; transition: background-color 120ms ease-out, color 120ms ease-out; }
+.lo-nav a > svg, .lo-nav .lo-nav-it > svg, .lo-nav a .lo-ico { flex: none; width: 1.0625rem; height: 1.0625rem; opacity: .85; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.lo-nav a:hover, .lo-nav .lo-nav-it:hover { background: var(--lo-s2); color: var(--lo-strong); text-decoration: none; }
+.lo-nav a[aria-current="page"], .lo-nav a.active, .lo-nav a.on { background: color-mix(in srgb, var(--lo-accent) 13%, transparent); color: var(--lo-strong); font-weight: 600; }
+.lo-nav a[aria-current="page"] > svg, .lo-nav a.active > svg, .lo-nav a.on > svg, .lo-nav a[aria-current="page"] .lo-ico, .lo-nav a.active .lo-ico, .lo-nav a.on .lo-ico { color: var(--lo-accent); stroke: var(--lo-accent); opacity: 1; }
+.lo-nav .lo-t { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lo-nav .lo-n { flex: none; margin-left: auto; font: 400 var(--lo-fs-xs) var(--lo-font-mono); color: var(--lo-faint); }
+.lo-side > .lo-foot { margin-top: auto; padding: .625rem 1rem .75rem; }
+.lo-side-scrim { display: none; }
+
+/* Barre du haut : bouton menu (téléphone), recherche entre crochets, actions de l'appli à droite */
+.lo-top { position: sticky; top: 0; z-index: 40; flex: none; display: flex; align-items: center; gap: .75rem; height: var(--lo-top-h); padding: 0 var(--lo-page-x);
+  background: color-mix(in srgb, var(--lo-bg) 84%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--lo-line); font-family: var(--lo-font-sans); }
+.lo-top > :not(.lo-q):not(.lo-burger) { flex: none; }
+.lo-burger { display: none; place-items: center; flex: none; width: var(--lo-ctl-h); height: var(--lo-ctl-h); min-height: 0; padding: 0; border: 1px solid var(--lo-line-2); border-radius: var(--lo-r-sm); background: none; color: var(--lo-text); cursor: pointer; }
+.lo-burger svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; }
+.lo-q { position: relative; flex: 1; min-width: 0; display: flex; align-items: center; gap: .5rem; height: var(--lo-ctl-h); padding: 0 .5rem 0 .875rem;
+  border: 1px solid var(--lo-line-2); border-radius: var(--lo-r); background: var(--lo-s1); transition: border-color 120ms, box-shadow 120ms; }
+.lo-q:focus-within { border-color: color-mix(in srgb, var(--lo-accent) 60%, var(--lo-line-2)); box-shadow: 0 0 0 3px color-mix(in srgb, var(--lo-accent) 14%, transparent); }
+.lo-q .lo-b { flex: none; font: 400 var(--lo-fs-lg)/1 var(--lo-font-mono); color: var(--lo-accent); }
+.lo-top .lo-q input[type="search"], .lo-top .lo-q input[type="search"]:focus { flex: 1; min-width: 0; width: auto; height: 100%; min-height: 0; margin: 0; padding: 0 .125rem; border: 0; border-radius: 0; background: none; box-shadow: none; outline: none;
+  color: var(--lo-strong); font: 400 var(--lo-fs)/1 var(--lo-font-sans); -webkit-appearance: none; appearance: none; }
+.lo-q input::placeholder { color: var(--lo-faint); opacity: 1; }
+.lo-q input::-webkit-search-cancel-button { -webkit-appearance: none; }
+.lo-q .lo-q-k { flex: none; font: 500 .75rem var(--lo-font-mono); color: var(--lo-faint); padding: .0625rem .4rem; border: 1px solid var(--lo-line-2); border-bottom-width: 2px; border-radius: 4px; }
+.lo-q:focus-within .lo-q-k { visibility: hidden; }
+.lo-drop { position: absolute; top: calc(100% + .375rem); left: -1px; right: -1px; z-index: 50; margin: 0; padding: .375rem; list-style: none; max-height: min(30rem, 70vh); overflow: auto;
+  background: var(--lo-s1); color: var(--lo-text); border: 1px solid var(--lo-line-2); border-radius: 12px; box-shadow: var(--lo-pop); animation: lo-fade 120ms both; }
+.lo-drop[hidden] { display: none; }
+.lo-empty { padding: 1rem .75rem; font-size: var(--lo-fs-sm); color: var(--lo-faint); }
+.lo-it .lo-l small { display: block; overflow: hidden; text-overflow: ellipsis; font: 400 var(--lo-fs-xs)/1.3 var(--lo-font-mono); color: var(--lo-faint); }
+.lo-it .lo-thumb { flex: none; width: 1.5rem; height: 2.25rem; object-fit: cover; border-radius: 3px; background: var(--lo-s3); }
+.lo-it:has(.lo-thumb) { min-height: 3rem; }
+
 /* Touches clavier affichées par une appli */
 .lo-keycap { font: 500 .75rem var(--lo-font-mono); padding: .0625rem .375rem; border-radius: 4px; border: 1px solid currentColor; border-bottom-width: 2px; opacity: .7; }
 
 @media (prefers-reduced-motion: reduce) {
   :root { transition: none; }
+  .lo-side, .lo-side-scrim, .lo-drop { transition: none !important; animation: none !important; }
   .lo-scrim.lo-open, .lo-palette { animation: none !important; transition: none !important; }
 }
 
 /* ── Mobile : pas de barre d'état ── */
 @media (max-width: 52rem) {
-  :root { --lo-status-h: 0px; }
+  :root { --lo-status-h: 0px; --lo-top-h: 3.5rem; --lo-page-y: 1.25rem; --lo-head-gap: 1.25rem; --lo-gap: 1rem; --lo-pad-y: 1rem; --lo-pad-x: 1.125rem; }
+  .lo-shell { grid-template-columns: minmax(0, 1fr); }
+  .lo-side { position: fixed; z-index: 2147482500; top: 0; bottom: 0; left: 0; width: min(84vw, 19rem); height: auto; border-right: 1px solid var(--lo-line-2);
+    padding-bottom: env(safe-area-inset-bottom, 0px); box-shadow: var(--lo-pop); transform: translateX(-104%); visibility: hidden; transition: transform .24s ease, visibility 0s .24s; }
+  html.lo-drawer .lo-side { transform: none; visibility: visible; transition: transform .24s ease; }
+  .lo-side-scrim { position: fixed; inset: 0; z-index: 2147482400; display: block; background: rgb(3 5 10 / .5); opacity: 0; pointer-events: none; transition: opacity .2s; }
+  html.lo-drawer .lo-side-scrim { opacity: 1; pointer-events: auto; }
+  html.lo-drawer, html.lo-drawer body { overflow: hidden; }
+  .lo-burger { display: grid; }
+  .lo-top { padding: 0 1rem; gap: .5rem; }
+  .lo-q .lo-q-k { display: none; }
+  .lo-drop { position: fixed; top: calc(var(--lo-top-h) + .25rem); left: .5rem; right: .5rem; max-height: calc(100dvh - var(--lo-top-h) - 1rem); }
   html.lo-on body { padding-bottom: 0; }
   .lo-status { display: none; }
-  .lo-palette input, .lo-palette input:focus { font-size: 1rem; }
+  .lo-scrim .lo-palette input[type="text"] { font-size: 1rem; }
   .lo-palette-foot { display: none; }
   .lo-scrim { padding-top: 8vh; }
 }
-@media print { .lo-status, .lo-scrim, .lo-aurora { display: none !important; } html.lo-on body { padding: 0; } }
+@media print { .lo-status, .lo-scrim, .lo-aurora, .lo-top, .lo-side { display: none !important; } .lo-shell { display: block; } html.lo-on body { padding: 0; } }

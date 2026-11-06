@@ -3,8 +3,9 @@
    NE PAS MODIFIER DANS UNE APPLI : recopié par la propagation.
 
    Ajoute à n'importe quelle appli de la suite :
-   - la palette de commandes (Ctrl K ou Cmd K), avec les commandes de l'appli,
-     ses liens de navigation et, si elle le fournit, sa recherche ;
+   - la barre de recherche du haut (résultats au fil de la frappe, rangés par catégorie)
+     et la palette de commandes (Ctrl K ou Cmd K), qui partagent les mêmes résultats ;
+   - le menu commun (classes lo-side, lo-nav…) et son tiroir sur téléphone ;
    - la barre d'état (version, état fourni par l'appli, heure) ;
    - les crochets : titres de page entre [ ] et coins en crochet sur les cartes ;
    - le mode clair / sombre / automatique, appliqué avant l'affichage.
@@ -17,7 +18,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '1.2.0';
+  var KIT_VERSION = '1.3.0';
   var APPS = [
     { id: 'backup',  name: 'Backup Labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet Labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
@@ -45,10 +46,14 @@
     moon: '<path d="M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z"/>',
     auto: '<circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 010 16z" fill="currentColor"/>',
     tag: '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="7.5" r="1.2"/>',
-    list: '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>'
+    list: '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+    menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+    film: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/>',
+    tv: '<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/>',
+    folder: '<path d="M3 6h6l2 2h10v11H3z"/>'
   };
   var root = document.documentElement;
-  var opts = {}, started = false, els = {}, cmds = [], shown = [], sel = 0, inputMode = null, searchSeq = 0;
+  var opts = {}, started = false, els = {}, shown = [], sel = 0, inputMode = null, searchSeq = 0, top = { el: null, input: null, drop: null, shown: [], sel: -1, seq: 0, timer: 0 };
 
   /* ── Stockage prudent ── */
   function load(k, d) { try { var v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } }
@@ -158,6 +163,8 @@
     scrim.addEventListener('click', function (e) { if (e.target === scrim) closePalette(); var it = e.target.closest('.lo-it'); if (it) runItem(+it.getAttribute('data-i')); });
     els.input.addEventListener('input', function () { sel = 0; drawPalette(); });
 
+    if (opts.top) buildTop(opts.top);
+    buildDrawer();
     decorate();
     if (window.MutationObserver) { var t = null; new MutationObserver(function () { clearTimeout(t); t = setTimeout(decorate, 60); }).observe(document.body, { childList: true, subtree: true }); }
   }
@@ -188,34 +195,72 @@
   }
 
   /* ── Palette ── */
+  /* Commandes locales (palette et barre du haut). Depuis 1.3.0 : plus d'entrées « Ouvrir une autre appli »
+     ni « Régler l'adresse » dans les résultats ; on change d'appli avec les touches 1 à 5. Le Journal, les
+     Réglages et les notes de version (pied du menu) restent trouvables ici, puisqu'ils ne sont plus dans le menu. */
   function baseCommands() {
-    var list = [];
-    APPS.forEach(function (a, i) {
-      if (a.id === opts.app) return;
-      list.push({ group: 'Applis de la suite', label: 'Ouvrir ' + a.name, hint: urlFor(a.id) ? String(i + 1) : 'à régler', logo: a, run: function () { goApp(a.id); } });
-    });
-    (opts.commands || []).forEach(function (c) { list.push(c); });
+    var list = [], seen = {};
+    function add(c) { var k = norm(c.label); if (seen[k]) return; seen[k] = 1; list.push(c); }
+    (opts.commands || []).forEach(add);
     if (opts.nav) {
-      var seen = {};
       document.querySelectorAll(opts.nav).forEach(function (l) {
         var label = (l.getAttribute('aria-label') || l.textContent || '').replace(/\s+/g, ' ').trim(), href = l.getAttribute('href');
-        if (!label || !href || seen[label]) return; seen[label] = 1;
-        list.push({ group: 'Aller à', label: label, icon: 'arrow', run: function () { l.click(); } });
+        if (!label || !href) return;
+        add({ group: 'Aller à', label: label, icon: 'arrow', run: function () { l.click(); } });
       });
     }
-    list.push({ group: 'Réglages', label: 'Basculer clair / sombre / automatique', hint: 'mode', icon: 'sun', run: cycleMode });
-    APPS.forEach(function (a) {
-      if (a.id === opts.app) return;
-      list.push({ group: 'Réglages', label: 'Régler l\'adresse de ' + a.name, hint: urlFor(a.id) ? 'modifier' : 'à régler', icon: 'link', keywords: 'url adresse lien',
-        run: function () { openPalette({ input: { id: a.id, prompt: 'Adresse de ' + a.name + ' (ex. https://' + a.id + '-labs.mondomaine.fr)' } }); } });
-    });
+    var fs = foot.spec || {};
+    (fs.tools || []).forEach(function (t) { if (t && t !== '-' && t.href && !t.hidden) add({ group: 'Aller à', label: t.label, icon: t.icon, href: t.href }); });
+    if (fs.version && fs.version.href) add({ group: 'Aller à', label: 'Notes de version', hint: fs.version.label, icon: 'tag', keywords: 'versions mises à jour changelog', href: fs.version.href });
+    add({ group: 'Réglages', label: 'Basculer clair / sombre / automatique', hint: 'mode', icon: 'sun', run: cycleMode });
     return list;
+  }
+  /* Résultats d'une requête : recherche de l'appli d'abord (ses catégories), puis pages et commandes.
+     cb(items) est rappelé une seconde fois quand la recherche asynchrone répond. */
+  function collect(q, cb, isLive) {
+    var nq = norm(q), words = nq.split(/\s+/).filter(Boolean);
+    var local = baseCommands().filter(function (c) {
+      if (!words.length) return true;
+      var hay = norm(c.label + ' ' + (c.hint || '') + ' ' + (c.group || '') + ' ' + (c.keywords || ''));
+      return words.every(function (w) { return hay.indexOf(w) >= 0; });
+    });
+    cb(local, !!(opts.search && q.length >= 2));
+    if (!opts.search || q.length < 2) return;
+    Promise.resolve(opts.search(q)).then(function (res) {
+      if (!isLive()) return;
+      res = (res || []).filter(Boolean);
+      res.forEach(function (r) { r.group = r.group || 'Résultats'; });
+      // Garder les catégories groupées (une catégorie n'apparaît qu'une fois, dans l'ordre de première apparition).
+      var order = [], by = {};
+      res.forEach(function (r) { if (!by[r.group]) { by[r.group] = []; order.push(r.group); } by[r.group].push(r); });
+      var sorted = []; order.forEach(function (g) { sorted = sorted.concat(by[g]); });
+      cb(sorted.concat(local), false);
+    }).catch(function () { if (isLive()) cb(local, false); });
+  }
+  function itemHtml(c, i, selected) {
+    var lead = c.thumb ? '<img class="lo-thumb" src="' + esc(c.thumb) + '" alt="" loading="lazy">' : c.logo ? logo(c.logo) : '<span class="lo-ic">' + svgIcon(c.icon) + '</span>';
+    return '<li class="lo-it" role="option" id="lo-opt-' + i + '" data-i="' + i + '" aria-selected="' + selected + '">' + lead +
+      '<span class="lo-l">' + esc(c.label) + (c.sub ? '<small>' + esc(c.sub) + '</small>' : '') + '</span>' + (c.hint ? '<span class="lo-h">' + esc(c.hint) + '</span>' : '') + '</li>';
+  }
+  function listHtml(items, cur, empty) {
+    var g = null, html = '';
+    items.forEach(function (c, i) {
+      if (c.group !== g) { g = c.group; html += '<li class="lo-grp" role="presentation">' + esc(g) + '</li>'; }
+      html += itemHtml(c, i, i === cur);
+    });
+    if (empty) html += '<li class="lo-empty" role="presentation">' + esc(empty) + '</li>';
+    return html;
+  }
+  function runCmd(c, q) {
+    if (!c) return;
+    if (c.href) { location.href = c.href; return; }
+    if (c.run) c.run(q);
   }
   function openPalette(o) {
     o = o || {};
     if (!started) return;
-    inputMode = o.input || null;
-    cmds = baseCommands(); sel = 0;
+    closeTop();
+    inputMode = o.input || null; sel = 0;
     els.scrim.classList.add('lo-open');
     els.input.value = o.query || '';
     els.input.placeholder = inputMode ? inputMode.prompt : (opts.placeholder || 'Aller, lancer, chercher…');
@@ -229,35 +274,107 @@
       paint(q ? '' : 'Collez l\'adresse complète de l\'appli, puis Entrée. Elle est mémorisée dans ce navigateur.');
       return;
     }
-    var nq = norm(q), words = nq.split(/\s+/).filter(Boolean);
-    shown = cmds.filter(function (c) { var hay = norm(c.label + ' ' + (c.hint || '') + ' ' + (c.group || '') + ' ' + (c.keywords || '')); return words.every(function (w) { return hay.indexOf(w) >= 0; }); });
-    paint(shown.length ? '' : 'Rien ne correspond.');
-    if (opts.search && q.length >= 2) {
-      var seq = ++searchSeq;
-      Promise.resolve(opts.search(q)).then(function (res) {
-        if (seq !== searchSeq || !els.scrim.classList.contains('lo-open')) return;
-        (res || []).forEach(function (r) { r.group = r.group || 'Résultats'; });
-        shown = shown.concat(res || []); paint(shown.length ? '' : 'Rien ne correspond.');
-      }).catch(function () {});
-    }
+    var seq = ++searchSeq;
+    collect(q, function (items, pending) { shown = items; paint(items.length ? '' : pending ? 'Recherche…' : 'Rien ne correspond.'); },
+      function () { return seq === searchSeq && els.scrim.classList.contains('lo-open'); });
   }
   function paint(empty) {
     sel = Math.min(sel, Math.max(0, shown.length - 1));
-    var g = null, html = '';
-    shown.forEach(function (c, i) {
-      if (c.group !== g) { g = c.group; html += '<li class="lo-grp" role="presentation">' + esc(g) + '</li>'; }
-      html += '<li class="lo-it" role="option" data-i="' + i + '" aria-selected="' + (i === sel) + '">' + (c.logo ? logo(c.logo) : '<span class="lo-ic">' + svgIcon(c.icon) + '</span>') +
-        '<span class="lo-l">' + esc(c.label) + '</span>' + (c.hint ? '<span class="lo-h">' + esc(c.hint) + '</span>' : '') + '</li>';
-    });
-    if (empty) html += '<li class="lo-grp" style="padding:1rem .75rem">' + esc(empty) + '</li>';
-    els.list.innerHTML = html;
+    els.list.innerHTML = listHtml(shown, sel, empty);
     var cur = els.list.querySelector('[aria-selected="true"]'); if (cur && cur.scrollIntoView) cur.scrollIntoView({ block: 'nearest' });
   }
   function runItem(i) {
     var c = shown[i]; if (!c) return;
-    var keep = !!c.keepOpen; if (!keep) closePalette();
-    if (c.href) { location.href = c.href; return; }
-    if (c.run) c.run(els.input.value.trim());
+    if (!c.keepOpen) closePalette();
+    runCmd(c, els.input.value.trim());
+  }
+
+  /* ── Barre de recherche du haut (1.3.0) ──
+     Montée dans l'élément donné par l'appli (option top). Résultats au fil de la frappe, rangés par catégorie,
+     mêmes données que la palette. Sur téléphone, le bouton menu ouvre le tiroir .lo-side. */
+  function buildTop(target) {
+    var el = typeof target === 'string' ? document.querySelector(target) : target;
+    if (!el || el.querySelector('.lo-q')) return;
+    el.classList.add('lo-top');
+    var start = [].filter.call(el.children, function (c) { return c.classList.contains('lo-top-start'); });
+    var burger = document.createElement('button');
+    burger.type = 'button'; burger.className = 'lo-burger'; burger.setAttribute('aria-label', 'Ouvrir le menu'); burger.setAttribute('aria-expanded', 'false');
+    burger.innerHTML = svgIcon('menu');
+    burger.addEventListener('click', function () { setDrawer(!root.classList.contains('lo-drawer')); });
+    var box = document.createElement('div');
+    box.className = 'lo-q'; box.setAttribute('role', 'search');
+    box.innerHTML = '<span class="lo-b" aria-hidden="true">[</span><input type="search" autocomplete="off" spellcheck="false" enterkeyhint="search" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="lo-drop" aria-label="Rechercher">' +
+      '<span class="lo-b" aria-hidden="true">]</span><kbd class="lo-q-k" aria-hidden="true">/</kbd><ul class="lo-drop" id="lo-drop" role="listbox" hidden></ul>';
+    el.insertBefore(box, el.firstChild);
+    start.forEach(function (c) { el.insertBefore(c, box); });
+    el.insertBefore(burger, el.firstChild);
+    if (opts.searchInputId) box.querySelector('input').id = opts.searchInputId;
+    top.el = el; top.input = box.querySelector('input'); top.drop = box.querySelector('.lo-drop'); top.box = box;
+    var narrow = window.matchMedia ? window.matchMedia('(max-width: 52rem)') : null;
+    var setPh = function () { top.input.placeholder = (narrow && narrow.matches && opts.searchPlaceholderShort) || opts.searchPlaceholder || opts.placeholder || 'Rechercher…'; };
+    setPh(); if (narrow && narrow.addEventListener) narrow.addEventListener('change', setPh);
+    top.input.addEventListener('input', function () { clearTimeout(top.timer); top.timer = setTimeout(drawTop, 120); });
+    top.input.addEventListener('focus', function () { if (top.input.value.trim()) drawTop(); });
+    top.input.addEventListener('keydown', function (e) {
+      var n = top.shown.length;
+      if (e.key === 'ArrowDown') { e.preventDefault(); if (n) { top.sel = (top.sel + 1) % n; paintTop(); } }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); if (n) { top.sel = (top.sel - 1 + n) % n; paintTop(); } }
+      else if (e.key === 'Escape') { if (!top.drop.hidden) { e.preventDefault(); e.stopPropagation(); closeTop(); } else top.input.blur(); }
+      else if (e.key === 'Enter') {
+        e.preventDefault();
+        var q = top.input.value.trim(); if (!q) return;
+        clearTimeout(top.timer);
+        var c = top.shown[top.sel >= 0 ? top.sel : 0];
+        if (opts.submit && (top.sel < 0 || !c)) { closeTop(); opts.submit(q); return; }
+        if (c) { closeTop(); top.input.blur(); runCmd(c, q); }
+        else if (opts.submit) { closeTop(); opts.submit(q); }
+      }
+    });
+    top.drop.addEventListener('mousedown', function (e) { e.preventDefault(); });
+    top.drop.addEventListener('click', function (e) {
+      var it = e.target.closest('.lo-it'); if (!it) return;
+      var c = top.shown[+it.getAttribute('data-i')], q = top.input.value.trim();
+      closeTop(); top.input.blur(); runCmd(c, q);
+    });
+    document.addEventListener('mousedown', function (e) { if (top.box && !top.box.contains(e.target)) closeTop(); });
+  }
+  function drawTop() {
+    var q = top.input.value.trim();
+    if (!q) { closeTop(); return; }
+    var seq = ++top.seq;
+    collect(q, function (items, pending) {
+      // Sans recherche de l'appli, Entrée choisit le premier résultat ; avec opts.submit, rien n'est présélectionné.
+      top.shown = items; top.sel = opts.submit ? -1 : (items.length ? 0 : -1);
+      top.empty = items.length ? '' : pending ? 'Recherche…' : 'Rien ne correspond.';
+      paintTop();
+    }, function () { return seq === top.seq && document.activeElement === top.input; });
+  }
+  function paintTop() {
+    top.drop.innerHTML = listHtml(top.shown, top.sel, top.empty);
+    top.drop.hidden = false; top.input.setAttribute('aria-expanded', 'true');
+    if (top.sel >= 0) top.input.setAttribute('aria-activedescendant', 'lo-opt-' + top.sel); else top.input.removeAttribute('aria-activedescendant');
+    var cur = top.drop.querySelector('[aria-selected="true"]'); if (cur && cur.scrollIntoView) cur.scrollIntoView({ block: 'nearest' });
+  }
+  function closeTop() {
+    if (!top.drop) return;
+    top.seq++; top.drop.hidden = true; top.shown = []; top.sel = -1;
+    top.input.setAttribute('aria-expanded', 'false'); top.input.removeAttribute('aria-activedescendant');
+  }
+  /* Tiroir du menu sur téléphone : html.lo-drawer ouvre .lo-side ; un lien du menu le referme. */
+  function setDrawer(on) {
+    root.classList.toggle('lo-drawer', !!on);
+    var b = top.el && top.el.querySelector('.lo-burger');
+    if (b) { b.setAttribute('aria-expanded', on ? 'true' : 'false'); b.setAttribute('aria-label', on ? 'Fermer le menu' : 'Ouvrir le menu'); }
+    if (opts.onDrawer) { try { opts.onDrawer(!!on); } catch (e) {} }
+  }
+  function buildDrawer() {
+    var sc = document.createElement('div'); sc.className = 'lo-side-scrim'; sc.setAttribute('aria-hidden', 'true');
+    sc.addEventListener('click', function () { setDrawer(false); });
+    document.body.appendChild(sc);
+    document.addEventListener('click', function (e) {
+      if (!root.classList.contains('lo-drawer')) return;
+      var a = e.target.closest('.lo-side a[href]'); if (a) setDrawer(false);
+    });
   }
 
   /* Une fenêtre de l'appli est-elle ouverte (et visible) ? */
@@ -277,8 +394,11 @@
       else if (e.key === 'Enter') { e.preventDefault(); runItem(sel); }
       return;
     }
+    if (e.key === 'Escape' && root.classList.contains('lo-drawer')) { setDrawer(false); return; }
     var t = document.activeElement, typing = t && (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable);
-    if (typing || e.ctrlKey || e.metaKey || e.altKey || opts.appKeys === false) return;
+    if (typing || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key === '/' && top.input && !modalOpen()) { e.preventDefault(); top.input.focus(); top.input.select(); return; }
+    if (opts.appKeys === false) return;
     if (/^[1-5]$/.test(e.key) && !modalOpen()) { var a = APPS[+e.key - 1]; if (a.id !== opts.app) { e.preventDefault(); goApp(a.id); } }
   }, true);
 
@@ -290,6 +410,8 @@
       opts = o || {};
       if (opts.app) root.setAttribute('data-lo-app', opts.app);
       applyMode();
+      // Barre du haut montée tout de suite si son conteneur existe déjà : les scripts « defer » de l'appli la trouvent.
+      if (opts.top && typeof opts.top === 'string' && document.querySelector(opts.top)) buildTop(opts.top);
       var go = function () { if (started) return; started = true; build(); };
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
     },
@@ -302,6 +424,9 @@
     setMode: function (m) { save(MODE_KEY, m); applyMode(); renderStatus(); renderFoot(); },
     cycleMode: cycleMode,
     foot: setFoot,
+    top: function (target) { if (started) buildTop(target); else opts.top = target; },
+    focusSearch: function (q) { if (!top.input) return; if (q != null) top.input.value = q; top.input.focus(); if (q) drawTop(); },
+    drawer: setDrawer,
     url: urlFor
   };
 })();

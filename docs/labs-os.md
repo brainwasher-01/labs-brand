@@ -8,11 +8,19 @@ jour par **propagation**.
 ## Ce que le kit apporte
 
 Pas de dock d'applis : retiré en 1.1.0 à la demande d'Aurélien. On passe
-d'une appli à l'autre par la palette (`Ctrl K`, touches `1` à `5`).
+d'une appli à l'autre avec les touches `1` à `5` (depuis 1.3.0, la palette ne
+propose plus d'ouvrir une autre appli).
+
+Depuis **1.3.0**, le kit fournit aussi le **gabarit commun** : même menu (largeur
+d'Asset Labs, catégories façon Backup Labs), même barre de recherche tout en haut,
+même tiroir sur téléphone, même échelle de texte et mêmes écarts entre blocs
+(référence : Backup Labs). Détail plus bas, « Gabarit commun ».
 
 | Élément | Comportement |
 |---|---|
-| **Palette de commandes** | `Ctrl K` (ou `Cmd K`, ou le bouton « Ctrl K » de la barre d'état) : ouvrir une autre appli, lancer une action, aller à une page, chercher dans l'appli. Touches `1` à `5` : changer d'appli. |
+| **Barre de recherche** (1.3.0) | Tout en haut de chaque page, entre crochets. Les résultats s'affichent en tapant, rangés par catégorie (ceux de l'appli d'abord, puis pages et actions). `/` y place le curseur. |
+| **Palette de commandes** | `Ctrl K` (ou `Cmd K`, ou le bouton « Ctrl K » de la barre d'état) : mêmes résultats que la barre du haut, dans une fenêtre identique dans toutes les applis. Touches `1` à `5` : changer d'appli. |
+| **Menu commun** (1.3.0) | Classes `lo-side`, `lo-nav`… : largeur `--lo-side-w` (15,5 rem), catégories, entrée active teintée, pied `LabsOS.foot`. Tiroir sur téléphone (bouton menu de la barre du haut). |
 | **Barre d'état** | En bas, façon éditeur : serveur, `appli.labs vX.Y.Z`, état fourni par l'appli, mode, heure. Masquée sur téléphone. |
 | **Crochets** | Titres de page entre `[ ]`. La carte vedette (`star`) a un simple contour fin de la couleur d'appli (plus de coins en équerre depuis 1.2.0). |
 | **Pied du menu** | Composant commun `LabsOS.foot` : lignes d'état (travaux en cours, mode, connexions…), version avec lien vers les notes de version, outils (journal, réglages, déconnexion, mode). Voir plus bas. |
@@ -53,7 +61,11 @@ d'une appli.
     star: '.card.featured',        // carte vedette (contour de la couleur d'appli)
     nav: '.nav a[href]',           // liens repris dans la palette (« Aller à »)
     commands: [{ group: 'Actions', label: 'Sauvegarder maintenant', icon: 'box', run: () => {} }],
-    search: async q => [],         // résultats de recherche : [{ label, hint, icon, href | run }]
+    top: '#lo-top',                // conteneur de la barre de recherche du haut (1.3.0)
+    searchPlaceholder: 'Chercher…',          // texte d'invite (ordinateur)
+    searchPlaceholderShort: 'Chercher…',     // texte d'invite plus court (téléphone)
+    search: async q => [],         // résultats : [{ group, label, sub, hint, icon, thumb, href | run }]
+    submit: q => {},               // facultatif : Entrée sans résultat choisi (ex. Torrent Labs lance la recherche)
     status: async () => [],        // barre d'état : [{ label, value, tone: ok|warn|fail|busy }]
     onMode: mode => {}             // relier le mode (light | dark) au thème de l'appli
   });
@@ -67,9 +79,12 @@ d'une appli.
 API : `LabsOS.open(texte)` ouvre la palette, `LabsOS.update({ version })` change une option après coup,
 `LabsOS.setStatus([...])` remplace l'état affiché, `LabsOS.refresh()` relance l'état et les décorations,
 `LabsOS.setMode('auto' | 'dark' | 'light')`, `LabsOS.cycleMode()`, `LabsOS.url('backup')` donne l'adresse d'une autre appli,
-`LabsOS.foot(élément, spec)` dessine le pied du menu (ci-dessous).
+`LabsOS.foot(élément, spec)` dessine le pied du menu (ci-dessous), `LabsOS.top(élément)` monte la barre du haut
+après coup (application monopage qui redessine sa coque), `LabsOS.focusSearch(texte)` y place le curseur,
+`LabsOS.drawer(true | false)` ouvre ou ferme le tiroir du menu sur téléphone.
 
-Options facultatives : `host` (nom affiché, défaut : nom d'hôte), `suite`
+Options facultatives : `searchInputId` (identifiant donné au champ de la barre du haut), `onDrawer(ouvert)`
+(appelée quand le tiroir s'ouvre ou se ferme), `host` (nom affiché, défaut : nom d'hôte), `suite`
 (adresses des autres applis), `statusBar: false`, `aurora: false`,
 `paletteKey: false` (l'appli ouvre elle-même la palette avec `LabsOS.open()`),
 `appKeys: false` (désactive les touches 1 à 5), `placeholder`.
@@ -101,6 +116,42 @@ LabsOS.foot('#pied', {
 `tone` : `ok`, `warn`, `fail`, `busy` ou vide (gris). Une ligne `null` ou `hidden: true` est ignorée.
 Rappeler `LabsOS.foot` avec de nouvelles données le met à jour. Modèle : le pied d'Asset Labs.
 
+### Gabarit commun (depuis 1.3.0)
+
+Décidé le 2026-11-06 par Aurélien : les 5 applis ont le même menu, la même barre du haut et les mêmes écarts.
+
+```html
+<div class="lo-shell">
+  <aside class="lo-side" aria-label="Menu">
+    <div class="lo-side-head"><a class="lo-brand" href="/"><img src="logo.svg" alt=""><span class="lo-wm">backup<i>.labs</i></span></a></div>
+    <nav class="lo-nav">
+      <div class="lo-nav-sec"><a href="/" aria-current="page"><svg>…</svg>Accueil</a></div>
+      <div class="lo-nav-sec"><span class="lo-nav-title">Protéger</span><a href="/jobs"><svg>…</svg>Sauvegardes</a></div>
+    </nav>
+    <footer class="lo-foot" id="pied"></footer>
+  </aside>
+  <div class="lo-main">
+    <header class="lo-top" id="lo-top"></header>     <!-- rempli par le kit (option top) -->
+    <main class="lo-page">…</main>
+  </div>
+</div>
+```
+
+Règles :
+
+- **Largeur du menu** : `--lo-side-w` = 15,5 rem (celle d'Asset Labs). Ligne du logo de la hauteur de la barre du haut (`--lo-top-h`).
+- **Pas de page « Journal », « Logs » ni « Versions » dans le menu** : on y accède par les icônes et la ligne de version
+  du pied du menu ; la palette et la barre du haut les retrouvent (« Aller à »).
+- **Barre de recherche** toujours en haut, jamais dans le menu ; résultats au fil de la frappe, par catégorie.
+  Les éléments de l'appli placés dans `.lo-top` restent à droite (ex. bouton « Rechercher » de Torrent Labs) ;
+  avec la classe `lo-top-start`, avant le champ.
+- **Texte et écarts** (référence Backup Labs) : racine à 85 % sur ordinateur, 100 % sur téléphone ; jetons
+  `--lo-fs-*` (0,8125 · 0,875 · 1 · 1,125 · 1,375 · 1,75 rem), `--lo-page-x` / `--lo-page-y` (marges de page),
+  `--lo-head-gap` (titre → contenu), `--lo-gap` (entre blocs), `--lo-pad` (intérieur des cartes), `--lo-r` (8 px).
+  Une appli relie ses cartes, grilles et titres à ces jetons dans son pont.
+- **Téléphone** (moins de 52 rem) : le menu devient un tiroir (bouton menu à gauche de la recherche), plus de barre d'état.
+- **Toute l'interface en français.**
+
 ### Adresses des autres applis
 
 Par ordre de priorité :
@@ -111,8 +162,8 @@ Par ordre de priorité :
 3. la déduction depuis le nom d'hôte : `projet-labs.mondomaine.fr` →
    `backup-labs.mondomaine.fr`.
 
-Pour une appli dont l'adresse est inconnue, la palette indique « à régler » et
-ouvre un champ pour la saisir.
+Pour une appli dont l'adresse est inconnue, la touche correspondante ouvre un
+champ pour la saisir (la palette ne liste plus les autres applis depuis 1.3.0).
 
 ## Propagation
 
