@@ -6,7 +6,7 @@ Depuis le 2026-11-05, l'appli utilise **Labs OS**, l'interface commune de la sui
 
 Le thème « Terminal » ci-dessous est **retiré** (0.3.0). Pont `static/css/labs-os-bridge.css`, chargé après `terminal.css` : bleu nuit, accent orange de l'appli (le bleu `#00aaff` ne sert plus), IBM Plex Sans pour l'interface, JetBrains Mono pour les données (titres de torrents, tailles, compteurs), plus de majuscules, de cadres ASCII ni de scanlines. Menu à gauche, barre de recherche entre crochets. Restent propres à l'appli les 12 couleurs des trackers. Interface en français (0.5.1).
 
-**Échelle et écarts (0.6.4, kit 1.5.0)** : 1 rem = 16 px, toutes les tailles par jetons `--lo-fs-*` (plancher 13 px), aucune taille en dur dans `monitor.css`, `downloads.css` et le pont ; tailles en px de `terminal.css` ramenées sur l'échelle dans le pont. Titre de carte (`.panel-title`) 18 px gras, contenu à `--lo-title-gap` ; champs à `--lo-field-gap` / `--lo-form-gap`. Page Inscriptions : carte de liste au gabarit `lo-item` (pastille + boutons sur une rangée centrée), pastilles `.pill` = `lo-pill`.
+**Échelle et écarts (0.6.4, kit 1.6.0 depuis 0.6.5)** : racine imposée par le kit (14 px sur ordinateur, 16 px sur téléphone), toutes les tailles par jetons `--lo-fs-*`, aucune taille en dur dans `monitor.css`, `downloads.css` et le pont ; tailles en px de `terminal.css` ramenées sur l'échelle dans le pont. Titre de carte (`.panel-title`) 18 px gras, contenu à `--lo-title-gap` ; champs à `--lo-field-gap` / `--lo-form-gap`. Page Inscriptions : carte de liste au gabarit `lo-item` (pastille + boutons sur une rangée centrée), pastilles `.pill` = `lo-pill`.
 
 ---
 

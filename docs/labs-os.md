@@ -145,9 +145,11 @@ Règles :
 - **Barre de recherche** toujours en haut, jamais dans le menu ; résultats au fil de la frappe, par catégorie.
   Les éléments de l'appli placés dans `.lo-top` restent à droite (ex. bouton « Rechercher » de Torrent Labs) ;
   avec la classe `lo-top-start`, avant le champ.
-- **Texte et écarts** (référence Backup Labs, kit 1.5.0) : **1 rem = 16 px sur ordinateur comme sur téléphone** — le kit
-  l'impose (`:root:root { font-size: 100% }`), les anciennes racines à 85 % des applis sont neutralisées. Échelle de texte
-  `--lo-fs-*` : 13 · 14 · 16 · 18 · 22 · 28 px ; **rien sous `--lo-fs-xs` (13 px)**, sauf barre d'état et touches clavier.
+- **Texte et écarts** (référence Backup Labs, kit 1.6.0) : le kit impose la racine — **87,5 % sur ordinateur (1 rem = 14 px,
+  texte courant 14 px, la norme des applis de gestion)**, **100 % sous 52 rem** (téléphone : 16 px, champs sans zoom iOS, cibles
+  ≥ 44 px). Les applis ne fixent plus la taille de `html`. Échelle `--lo-fs-*` : ordinateur 12,25 · 13,1 · 14 · 15,75 · 19,25 ·
+  24,5 px, téléphone 14 · 15 · 16 · 18 · 22 · 28 px ; **rien sous `--lo-fs-xs`**, sauf barre d'état et touches clavier.
+  Historique : 85 % (texte trop petit, jusqu'à 10 px), puis 100 % en 1.5.0 (trop gros, mises en page d'Asset débordantes).
   Écarts : `--lo-page-x` / `--lo-page-y` (marges de page), `--lo-head-gap` (titre de page → contenu), `--lo-gap` (entre blocs),
   `--lo-gap-sm` (entre éléments d'une liste), `--lo-pad` (intérieur des cartes), `--lo-title-gap` (titre de carte → contenu),
   `--lo-field-gap` (libellé → champ → aide), `--lo-form-gap` (rangées d'un formulaire), `--lo-item-gap` (lignes d'une carte
