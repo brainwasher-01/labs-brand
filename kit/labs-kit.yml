@@ -1,14 +1,14 @@
 # Labs OS — modèle du workflow de propagation, à copier dans .github/workflows/labs-kit.yml de chaque appli.
 # Remplacer KIT_DIR (dossier servi par l'appli, ex. app/static/labs-os) et IMAGE_WORKFLOW (fichier du workflow d'image).
 # Déclenché par Projet Labs (bouton « Propager à la suite », événement repository_dispatch « labs-kit »),
-# à la main (Actions → Kit Labs OS → Run workflow) ou chaque nuit.
+# à la main (Actions → Kit Labs OS → Run workflow) ou chaque lundi (filet de sécurité, pour économiser le quota gratuit).
 name: Kit Labs OS
 on:
   repository_dispatch:
     types: [labs-kit]
   workflow_dispatch:
   schedule:
-    - cron: "17 3 * * *"
+    - cron: "17 3 * * 1"
 permissions:
   contents: write
   actions: write
