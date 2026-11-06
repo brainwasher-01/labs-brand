@@ -54,7 +54,7 @@ d'une appli.
 <script src="/labs-os/labs-os.js"></script>
 <script>
   LabsOS.init({
-    app: 'projet',                 // backup | projet | torrent | finance | asset
+    app: 'projet',                 // backup | projet | torrent | finance | plex
     version: '1.2.0',              // affichée dans la barre d'état
     title: '.page-head h1',        // titres mis entre crochets
     cards: '.card, .panel',        // cartes de l'appli (repérées par le kit)
