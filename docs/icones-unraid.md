@@ -17,7 +17,20 @@ coller l'adresse, *Apply*.
 | Finance Labs | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/finance-labs.png` |
 | Projet Labs | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/projet-labs.png` |
 | Torrent Labs | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/torrent-labs.png` |
+| Dashboard Labs | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/dashboard-labs.png` |
 | Suite (dossier « Labs ») | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/labs.png` |
 
 Copier un PNG à la main dans le cache d'Unraid ne suffit pas : sans adresse
 dans le template, Unraid affiche un « ? ».
+
+## Produire le PNG d'une nouvelle appli
+
+PNG 256 × 256, fond transparent, rendu directement depuis le SVG de `logos/`
+(même rendu que les PNG existants, vérifié sur torrent-labs) :
+
+```bash
+rsvg-convert -w 256 -h 256 logos/<appli>.svg -o logos/<appli>.png
+```
+
+Projet Labs ne stocke que du texte : le PNG se dépose dans le dépôt GitHub par
+*Add file → Upload files* dans `logos/`.
