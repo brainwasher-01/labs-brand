@@ -11,3 +11,4 @@
 
 ## 2026-11-07
 - Kit Labs OS 1.7.0 enregistré (accessibilité commune issue de la critique + audit, passes 1 à 3) : plus de texte sous --lo-fs-xs dans le kit, focus de la barre d'état, couleur du texte d'exemple, lien « Aller au contenu », tiroir inerte, LabsOS.confirm, --lo-measure ; règle Plex Sans (menu, boutons) / JetBrains Mono (données). Testé sur demo.html en sombre et clair, ordinateur et téléphone. Propagation à faire après l'envoi vers GitHub.
+- Kit Labs OS 1.7.0 envoyé vers GitHub (contenu vérifié octet pour octet contre la version testée) puis propagé aux 5 applis et à Dashboard Labs (événement labs-kit envoyé, 6/6).
