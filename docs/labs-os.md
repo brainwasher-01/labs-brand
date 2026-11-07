@@ -81,18 +81,28 @@ API : `LabsOS.open(texte)` ouvre la palette, `LabsOS.update({ version })` change
 `LabsOS.setMode('auto' | 'dark' | 'light')`, `LabsOS.cycleMode()`, `LabsOS.url('backup')` donne l'adresse d'une autre appli,
 `LabsOS.foot(élément, spec)` dessine le pied du menu (ci-dessous), `LabsOS.top(élément)` monte la barre du haut
 après coup (application monopage qui redessine sa coque), `LabsOS.focusSearch(texte)` y place le curseur,
-`LabsOS.drawer(true | false)` ouvre ou ferme le tiroir du menu sur téléphone.
+`LabsOS.drawer(true | false)` ouvre ou ferme le tiroir du menu sur téléphone (1.7.0 : la page derrière devient inerte, le focus va dans le menu puis revient sur le bouton),
+`LabsOS.confirm({ title, text, ok, cancel, danger, type })` ouvre la **fenêtre de confirmation commune** (1.7.0) et renvoie une promesse `true` / `false`.
+
+**Confirmer une action (1.7.0).** Toute action qui supprime, écrase ou remplace passe par `LabsOS.confirm`, jamais par `confirm()` ou `prompt()` du navigateur. `danger: true` : cadre et bouton rouges, focus de départ sur *Annuler*. `type: 'nom'` : pour ce qui ne s'annule pas, le bouton reste grisé tant que le nom n'est pas retapé. La touche Tab reste dans la fenêtre, Échap ou un clic à côté répondent *Annuler*, le focus revient ensuite sur le bouton d'origine.
+
+```js
+if (await LabsOS.confirm({ title: 'Restaurer à la place de l\'actuel', text: 'L\'application est arrêtée pendant l\'opération.', ok: 'Restaurer à la place', danger: true })) { … }
+```
 
 Options facultatives : `searchInputId` (identifiant donné au champ de la barre du haut), `onDrawer(ouvert)`
 (appelée quand le tiroir s'ouvre ou se ferme), `host` (nom affiché, défaut : nom d'hôte), `suite`
 (adresses des autres applis), `statusBar: false`, `aurora: false`,
 `paletteKey: false` (l'appli ouvre elle-même la palette avec `LabsOS.open()`),
-`appKeys: false` (désactive les touches 1 à 5), `placeholder`.
+`appKeys: false` (désactive les touches 1 à 5), `placeholder`, `main` (sélecteur de la zone principale, défaut `main, .lo-page, [role=main]` : cible du lien d'évitement et zone rendue inerte quand le tiroir est ouvert), `skip: false` (pas de lien « Aller au contenu »).
+
+**Accessibilité commune (1.7.0).** Le kit ajoute lui-même un lien « Aller au contenu » (premier arrêt de Tab, visible seulement au clavier), donne la couleur `--lo-faint` (≥ 4,5:1 dans les deux modes) au texte d'exemple de tous les champs et un focus visible aux boutons de la barre d'état. Plus aucun texte du kit sous `--lo-fs-xs` (barre d'état, pied du menu, palette), seules les touches `kbd` y restent. Jeton `--lo-measure` (72 caractères) et classe `lo-prose` : la page reste pleine largeur, les lignes d'un texte long non.
 
 ### Menu et pied du menu (règle commune depuis 1.2.0)
 
-- Pas de sous-titre sous le nom de l'appli ; menu rangé en **catégories** (titres courts en chasse fixe, comme
-  Backup Labs : *Protéger*, *Récupérer*, *Système*…), sans intitulé « Navigation ».
+- Pas de sous-titre sous le nom de l'appli ; menu rangé en **catégories** (titres courts en IBM Plex Sans, comme
+  Backup Labs : *Protéger*, *Récupérer*, *Système*…), sans intitulé « Navigation ». Menu, boutons et titres sont en
+  Plex Sans ; JetBrains Mono est réservé aux données (chemins, heures, chiffres, identifiants) — décision d'Aurélien du 2026-11-07.
 - Pas de phrase d'explication sous un titre de page : seulement, si utile, une ligne d'infos (chiffres, dates)
   en chasse fixe, **nettement séparée** du titre.
 - Le bas du menu affiche **toujours** le même composant, rempli par l'appli :
@@ -148,7 +158,7 @@ Règles :
 - **Texte et écarts** (référence Backup Labs, kit 1.6.0) : le kit impose la racine — **87,5 % sur ordinateur (1 rem = 14 px,
   texte courant 14 px, la norme des applis de gestion)**, **100 % sous 52 rem** (téléphone : 16 px, champs sans zoom iOS, cibles
   ≥ 44 px). Les applis ne fixent plus la taille de `html`. Échelle `--lo-fs-*` : ordinateur 12,25 · 13,1 · 14 · 15,75 · 19,25 ·
-  24,5 px, téléphone 14 · 15 · 16 · 18 · 22 · 28 px ; **rien sous `--lo-fs-xs`**, sauf barre d'état et touches clavier.
+  24,5 px, téléphone 14 · 15 · 16 · 18 · 22 · 28 px ; **rien sous `--lo-fs-xs`**, sauf les touches clavier (la barre d'état et le pied du menu y sont depuis 1.7.0).
   Historique : 85 % (texte trop petit, jusqu'à 10 px), puis 100 % en 1.5.0 (trop gros, mises en page d'Asset débordantes).
   Écarts : `--lo-page-x` / `--lo-page-y` (marges de page), `--lo-head-gap` (titre de page → contenu), `--lo-gap` (entre blocs),
   `--lo-gap-sm` (entre éléments d'une liste), `--lo-pad` (intérieur des cartes), `--lo-title-gap` (titre de carte → contenu),
