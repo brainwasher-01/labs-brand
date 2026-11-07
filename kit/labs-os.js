@@ -18,7 +18,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '1.6.2';
+  var KIT_VERSION = '1.7.0';
   var APPS = [
     { id: 'backup',  name: 'Backup Labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet Labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
@@ -165,6 +165,7 @@
 
     if (opts.top) buildTop(opts.top);
     buildDrawer();
+    buildSkip();
     decorate();
     if (window.MutationObserver) { var t = null; new MutationObserver(function () { clearTimeout(t); t = setTimeout(decorate, 60); }).observe(document.body, { childList: true, subtree: true }); }
   }
@@ -362,10 +363,33 @@
   }
   /* Tiroir du menu sur téléphone : html.lo-drawer ouvre .lo-side ; un lien du menu le referme. */
   function setDrawer(on) {
+    var was = root.classList.contains('lo-drawer');
     root.classList.toggle('lo-drawer', !!on);
     var b = top.el && top.el.querySelector('.lo-burger');
     if (b) { b.setAttribute('aria-expanded', on ? 'true' : 'false'); b.setAttribute('aria-label', on ? 'Fermer le menu' : 'Ouvrir le menu'); }
+    // 1.7.0 : tiroir ouvert = contenu de la page inerte (ni clic ni Tab derrière), menu ramené en haut, focus dedans.
+    var m = mainEl(), side = document.querySelector('.lo-side');
+    if (m && side && !side.contains(m)) { if (on) m.setAttribute('inert', ''); else m.removeAttribute('inert'); }
+    if (on && !was && side) {
+      var sc = side.querySelector('.lo-nav') || side; if (sc.scrollTop) sc.scrollTop = 0; if (side.scrollTop) side.scrollTop = 0;
+      var f = side.querySelector('a[href], button:not([disabled])'); if (f) setTimeout(function () { f.focus({ preventScroll: true }); }, 30);
+    } else if (!on && was && b) b.focus({ preventScroll: true });
     if (opts.onDrawer) { try { opts.onDrawer(!!on); } catch (e) {} }
+  }
+  /* Zone principale de la page : option main (sélecteur), sinon main, .lo-page ou [role=main]. */
+  function mainEl() {
+    return (opts.main && document.querySelector(opts.main)) || document.querySelector('main, .lo-page, [role="main"]');
+  }
+  /* Lien « Aller au contenu » (1.7.0) : premier arrêt de Tab, saute le menu et la barre du haut. */
+  function buildSkip() {
+    if (opts.skip === false || document.querySelector('.lo-skip')) return;
+    var a = document.createElement('a'); a.className = 'lo-skip'; a.href = '#'; a.textContent = 'Aller au contenu';
+    a.addEventListener('click', function (e) {
+      e.preventDefault(); var m = mainEl(); if (!m) return;
+      if (!m.hasAttribute('tabindex')) m.setAttribute('tabindex', '-1');
+      m.focus({ preventScroll: false }); if (m.scrollIntoView) m.scrollIntoView({ block: 'start' });
+    });
+    document.body.insertBefore(a, document.body.firstChild);
   }
   function buildDrawer() {
     var sc = document.createElement('div'); sc.className = 'lo-side-scrim'; sc.setAttribute('aria-hidden', 'true');
@@ -374,6 +398,46 @@
     document.addEventListener('click', function (e) {
       if (!root.classList.contains('lo-drawer')) return;
       var a = e.target.closest('.lo-side a[href]'); if (a) setDrawer(false);
+    });
+  }
+
+  /* ── Fenêtre de confirmation commune (1.7.0) ──
+     LabsOS.confirm({ title, text, ok, cancel, danger, type }) → Promise<boolean>.
+     danger : bouton rouge, cadre rouge. type : texte à retaper (nom, identifiant) pour une action qui ne s'annule pas ;
+     le bouton reste grisé tant que la saisie ne correspond pas. Échap, clic hors de la fenêtre ou Annuler = false.
+     Le focus reste dans la fenêtre (Tab boucle) et revient ensuite sur l'élément d'origine. */
+  function confirmBox(o) {
+    o = o || {};
+    return new Promise(function (resolve) {
+      var back = document.activeElement, id = 'lo-cf-' + Date.now().toString(36);
+      var sc = document.createElement('div'); sc.className = 'lo-cf-scrim';
+      sc.innerHTML = '<div class="lo-cf' + (o.danger ? ' lo-cf-danger' : '') + '" role="alertdialog" aria-modal="true" aria-labelledby="' + id + '-t"' + (o.text ? ' aria-describedby="' + id + '-d"' : '') + '>' +
+        '<h2 id="' + id + '-t">' + esc(o.title || 'Confirmer') + '</h2>' +
+        (o.text ? '<p id="' + id + '-d">' + esc(o.text) + '</p>' : '') +
+        (o.type ? '<label><span>Pour confirmer, tape <code>' + esc(o.type) + '</code></span><input type="text" autocomplete="off" spellcheck="false" autocapitalize="off"></label>' : '') +
+        '<div class="lo-cf-row"><button type="button" class="lo-cf-no">' + esc(o.cancel || 'Annuler') + '</button>' +
+        '<button type="button" class="lo-cf-ok"' + (o.type ? ' disabled' : '') + '>' + esc(o.ok || 'Confirmer') + '</button></div></div>';
+      document.body.appendChild(sc);
+      var box = sc.firstChild, ok = box.querySelector('.lo-cf-ok'), no = box.querySelector('.lo-cf-no'), inp = box.querySelector('input');
+      var matches = function () { return !o.type || (inp && inp.value.trim() === String(o.type)); };
+      var done = function (v) { document.removeEventListener('keydown', onKey, true); sc.remove(); if (back && back.focus) back.focus({ preventScroll: true }); resolve(v); };
+      var onKey = function (e) {
+        if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); done(false); return; }
+        if (e.key === 'Enter' && e.target === inp) { e.preventDefault(); if (matches()) done(true); return; }
+        if (e.key === 'Tab') {
+          var f = [].filter.call(box.querySelectorAll('input, button'), function (x) { return !x.disabled; });
+          var i = f.indexOf(document.activeElement);
+          if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
+          else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
+          else if (i < 0) { e.preventDefault(); f[0].focus(); }
+        }
+      };
+      document.addEventListener('keydown', onKey, true);
+      if (inp) inp.addEventListener('input', function () { ok.disabled = !matches(); });
+      ok.addEventListener('click', function () { if (matches()) done(true); });
+      no.addEventListener('click', function () { done(false); });
+      sc.addEventListener('mousedown', function (e) { if (e.target === sc) done(false); });
+      setTimeout(function () { (inp || (o.danger ? no : ok)).focus(); }, 0);
     });
   }
 
@@ -428,6 +492,7 @@
     top: function (target) { if (started) buildTop(target); else opts.top = target; },
     focusSearch: function (q) { if (!top.input) return; if (q != null) top.input.value = q; top.input.focus(); if (q) drawTop(); },
     drawer: setDrawer,
+    confirm: confirmBox,
     url: urlFor
   };
 })();
