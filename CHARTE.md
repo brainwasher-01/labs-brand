@@ -20,7 +20,7 @@
    réservés aux états (réussi, à vérifier, échec). Jamais la couleur seule :
    toujours un mot ou un pictogramme avec.
 3. **Des mots simples.** On écrit pour quelqu'un qui n'est pas informaticien
-   (voir [vocabulaire.md](vocabulaire.md)).
+   (voir [vocabulaire.md](docs/vocabulaire.md)).
 4. **Valeurs par défaut sûres.** Les réglages techniques existent, mais repliés
    dans « Options avancées ».
 5. **Local d'abord.** Les applis tournent sur le réseau local : polices et
@@ -54,7 +54,7 @@ Les changements des règles communes passent par
 ## Interface Labs OS
 
 Décidé le 2026-11-05 par Aurélien : toutes les applis Labs partagent une même
-coque, **Labs OS**. Une seule source, le dossier [`kit/`](../kit/) de ce dépôt ;
+coque, **Labs OS**. Une seule source, le dossier [`kit/`](kit/) de ce dépôt ;
 chaque appli en garde une copie locale (principe « local d'abord ») et la met à
 jour par **propagation**.
 
@@ -164,7 +164,7 @@ lecture suffit ; ou un jeton classique avec `repo`).
 
 ## Crate, appli associée : hors Labs OS
 
-Crate garde sa propre charte ([`../apps/crate/`](../apps/crate/README.md)) :
+Crate garde sa propre charte ([`apps/crate/`](apps/crate/README.md)) :
 la propagation ne le vise jamais (elle ne lit que la liste `apps` de
 `catalogue.json`, où Crate n'est pas), et ses changements ne reviennent pas
 dans la suite.
@@ -179,5 +179,5 @@ Crate seule.
 ## Ce qui reste propre à chaque appli
 
 Ses écrans, son vocabulaire métier, ses couleurs de données (graphiques, tags
-de trackers, affiches) et son pont. Les règles de [composants.md](composants.md)
-et [principes.md](principes.md) restent valables.
+de trackers, affiches) et son pont. Les règles de [composants.md](docs/composants.md)
+et [principes.md](docs/principes.md) restent valables.
