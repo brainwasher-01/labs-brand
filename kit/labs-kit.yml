@@ -24,7 +24,12 @@ jobs:
         id: sync
         env:
           REF: ${{ github.event.client_payload.ref || 'main' }}
-        run: echo "result=$(sh scripts/sync-labs-kit.sh KIT_DIR "$REF")" >> "$GITHUB_OUTPUT"
+        # Le résultat passe par une variable : un échec du script (ref inexistante, réseau)
+        # fait alors échouer l'étape, au lieu d'être masqué par « echo ».
+        run: |
+          set -eu
+          result="$(sh scripts/sync-labs-kit.sh KIT_DIR "$REF")"
+          echo "result=$result" >> "$GITHUB_OUTPUT"
       - name: Commiter et reconstruire l'image
         if: startsWith(steps.sync.outputs.result, 'changed')
         env:
