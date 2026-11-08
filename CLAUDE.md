@@ -25,3 +25,5 @@ chartes par appli. Pas de code applicatif.
   pas de ligne `Co-Authored-By`, `Claude-Session` ni « Generated with ».
 - Logos : construction dans `docs/logos.md` ; toujours fournir SVG + PNG
   256×256 à fond transparent.
+- Contrôles avant livraison : `python3 tests/check-catalogue.py` (catalogue) et
+  `python3 tests/check-links.py [fichier.md…]` (liens relatifs, défaut CHARTE.md).
