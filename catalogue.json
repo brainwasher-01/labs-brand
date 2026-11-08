@@ -1,6 +1,6 @@
 {
   "suite": "Labs",
-  "updated": "2026-11-07",
+  "updated": "2026-11-08",
   "repository": "https://github.com/brainwasher-01/labs-brand",
   "common_docs": {
     "principes": "docs/principes.md",
@@ -125,7 +125,8 @@
       "logo_png": "logos/dashboard-labs.png",
       "logo_png_status": "à exporter",
       "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/dashboard-labs.png",
-      "repository": "brainwasher-01/dashboard-labs"
+      "repository": "brainwasher-01/dashboard-labs",
+      "kit_dir": "static/labs-os"
     }
   ],
   "associated_apps": [

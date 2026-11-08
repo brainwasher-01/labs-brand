@@ -19,6 +19,7 @@ Reprise de labs-brand le 2026-11-05 : voir [[CHARTE]].
 Voir [[JOURNAL]].
 
 ## État
+- 2026-11-08 : `catalogue.json` : `kit_dir` de Dashboard Labs déclaré (`static/labs-os`), contrôle `python3 tests/check-catalogue.py`.
 - 2026-11-06 : kit 1.4.0 (échelle unique des hauteurs de contrôles, rangées alignées ; les 5 applis s'alignent dessus).
 - 2026-11-06 : kit 1.5.0 (1 rem = 16 px imposé partout, plancher de texte 13 px, jetons d'écart des formulaires et cartes, composants lo-panel / lo-field / lo-check / lo-item / lo-pill / lo-toolbar ; les 5 applis passent à 100 %).
 - 2026-11-06 : kit 1.6.0 (racine 87,5 % sur ordinateur / 100 % sur téléphone imposée par le kit, petits jetons relevés : 1.5.0 était trop gros et faisait déborder Asset).
