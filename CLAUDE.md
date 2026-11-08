@@ -4,6 +4,8 @@ Dépôt **public** d'identité de la suite Labs : logos, règles communes,
 chartes par appli. Pas de code applicatif.
 
 - Sommaire : `README.md` ; index de la suite : `CATALOGUE.md` + `catalogue.json`.
+- Modèle de workflow des applis : `kit/labs-kit.yml` (contrôle
+  `python3 tests/check-labs-kit-sync.py` : l'étape de recopie doit échouer si le script échoue).
 - Règles communes : `DESIGN.md` et `docs/`. Les thèmes sont **propres à chaque
   appli** pour l'instant (`docs/themes.md`).
 - Une appli ne modifie que **son** dossier `apps/<appli>/` (charte
