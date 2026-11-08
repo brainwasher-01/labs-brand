@@ -13,7 +13,14 @@ Reprise de labs-brand le 2026-11-05 : voir [[CHARTE]].
 - `apps/<appli>/` : charte de chaque appli ; `docs/` : règles communes ; `catalogue.json` + `CATALOGUE.md` : index.
 
 ## Installation / déploiement
-À compléter.
+Rien à construire ni à installer : dépôt de documentation et kit statique. Contrôle : `python3 tests/check-catalogue.py`.
+
+Mettre à jour l'interface commune **Labs OS** (version actuelle du kit : **1.7.0**) :
+1. Modifier `kit/` ici, jamais dans une appli. Augmenter `kit/VERSION`, reporter la version dans `catalogue.json` (`kit.version`) et `CATALOGUE.md`, noter le changement dans `CHANGELOG.md`.
+2. Enregistrer sur `main` (Projet Labs envoie la version vers GitHub, en différé).
+3. Propager : Projet Labs, page « La suite », bouton « Propager à la suite », ou outil MCP `propagate_ui`. Projet Labs envoie l'événement `repository_dispatch` `labs-kit` à chaque dépôt listé dans `catalogue.json` (`apps`, champs `repo` et `kit_dir`).
+4. Dans chaque appli, le workflow « Kit Labs OS » (`.github/workflows/labs-kit.yml`, copié du modèle `kit/labs-kit.yml`) lance `scripts/sync-labs-kit.sh <kit_dir> <ref>`, commite si le kit a changé, puis relance le workflow d'image. Il tourne aussi chaque lundi et à la demande.
+5. Vérifier avec `kit_status` que chaque appli est « à jour », puis mettre à jour les conteneurs dans Unraid.
 
 ## Décisions
 Voir [[JOURNAL]].

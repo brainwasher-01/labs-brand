@@ -11,6 +11,8 @@ chartes par appli. Pas de code applicatif.
   modèles de `apps/_modele/`.
 - Changement du commun (`docs/`, `logos/`) : écrire d'abord une ligne dans
   `docs/propositions.md`.
+- Mettre à jour et propager le kit : procédure dans `PROJECT.md`
+  (« Installation / déploiement », contrôle `python3 tests/check-project-doc.py`).
 - À chaque changement : mettre à jour `CATALOGUE.md`, `catalogue.json` si le
   nom, la couleur, le rôle ou l'état d'une appli change, et `CHANGELOG.md`.
 - Rien de privé : pas d'adresse IP, de secret, de jeton, de donnée personnelle
