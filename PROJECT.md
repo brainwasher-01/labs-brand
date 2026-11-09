@@ -10,13 +10,13 @@ Reprise de labs-brand le 2026-11-05 : voir [[CHARTE]].
 
 ## Architecture
 - `kit/` : Labs OS (`labs-os.css`, `labs-os.js`, polices, `VERSION`). Depuis 1.3.0 : gabarit commun (menu `lo-side`, barre de recherche `lo-top`, tiroir mobile, jetons de texte et d'écarts). Mode d'emploi : `docs/labs-os.md`.
-- `kit/labs-kit.yml` : modèle du workflow « Kit Labs OS » de chaque appli. Depuis le 2026-11-08, l'étape « Recopier le kit » échoue si `sync-labs-kit.sh` échoue (ref inexistante, réseau) au lieu de passer au vert ; contrôle hors ligne `python3 tests/check-labs-kit-sync.py`. À recopier dans `.github/workflows/labs-kit.yml` des applis.
+- `kit/labs-kit.yml` : modèle du workflow « Kit Labs OS » de chaque appli. Depuis le 2026-11-08, l'étape « Recopier le kit » échoue si `sync-labs-kit.sh` échoue (ref inexistante, réseau) au lieu de passer au vert ; contrôle hors ligne `python3 tests/check-labs-kit-sync.py`. `actions/checkout` y est épinglé par SHA en v7.0.1 (contrôle `python3 kit/tests/labs-kit-yml.py`). À recopier dans `.github/workflows/labs-kit.yml` des applis.
 - `apps/<appli>/` : charte de chaque appli ; `docs/` : règles communes ; `catalogue.json` + `CATALOGUE.md` : index.
 
 ## Installation / déploiement
 Rien à construire ni à installer : dépôt de documentation et kit statique. Contrôle : `python3 tests/check-catalogue.py`.
 
-Mettre à jour l'interface commune **Labs OS** (version actuelle du kit : **1.7.0**) :
+Mettre à jour l'interface commune **Labs OS** (version actuelle du kit : **1.8.0**) :
 1. Modifier `kit/` ici, jamais dans une appli. Augmenter `kit/VERSION`, reporter la version dans `catalogue.json` (`kit.version`) et `CATALOGUE.md`, noter le changement dans `CHANGELOG.md`.
 2. Enregistrer sur `main` (Projet Labs envoie la version vers GitHub, en différé).
 3. Propager : Projet Labs, page « La suite », bouton « Propager à la suite », ou outil MCP `propagate_ui`. Projet Labs envoie l'événement `repository_dispatch` `labs-kit` à chaque dépôt listé dans `catalogue.json` (`apps`, champs `repo` et `kit_dir`).
@@ -27,6 +27,8 @@ Mettre à jour l'interface commune **Labs OS** (version actuelle du kit : **1.7.
 Voir [[JOURNAL]].
 
 ## État
+- 2026-11-09 : kit 1.8.0 (palette de commandes accessible : combobox, liste nommée, aria-activedescendant ; test `kit/tests/palette-a11y.mjs`). Repris sur `main` depuis `agent/labs-brand-palette-a11y`. À propager par le Gardien après fusion.
+- 2026-11-09 : modèle `kit/labs-kit.yml` : `actions/checkout` épinglé par SHA en v7.0.1 (contrôle `python3 kit/tests/labs-kit-yml.py`). Repris depuis `agent/labs-brand-checkout-sha`. À recopier dans `.github/workflows/labs-kit.yml` des applis.
 - 2026-11-08 : `CHARTE.md` : 5 liens relatifs cassés corrigés (`docs/…`, `kit/`, `apps/crate/README.md`), contrôle `python3 tests/check-links.py`.
 - 2026-11-08 : `catalogue.json` : `kit_dir` de Dashboard Labs déclaré (`static/labs-os`), contrôle `python3 tests/check-catalogue.py`.
 - 2026-11-06 : kit 1.4.0 (échelle unique des hauteurs de contrôles, rangées alignées ; les 5 applis s'alignent dessus).

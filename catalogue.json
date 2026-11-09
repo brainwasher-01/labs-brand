@@ -1,6 +1,6 @@
 {
   "suite": "Labs",
-  "updated": "2026-11-08",
+  "updated": "2026-11-09",
   "repository": "https://github.com/brainwasher-01/labs-brand",
   "common_docs": {
     "principes": "docs/principes.md",
@@ -164,7 +164,7 @@
   ],
   "kit": {
     "name": "Labs OS",
-    "version": "1.7.0",
+    "version": "1.8.0",
     "path": "kit/",
     "doc": "docs/labs-os.md",
     "dispatch_event": "labs-kit"

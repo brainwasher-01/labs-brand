@@ -18,7 +18,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '1.7.0';
+  var KIT_VERSION = '1.8.0';
   var APPS = [
     { id: 'backup',  name: 'Backup Labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet Labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
@@ -157,7 +157,7 @@
       renderStatus(); setInterval(renderStatus, 1000); refreshStatus(); setInterval(refreshStatus, opts.statusEvery || 15000); }
 
     var scrim = document.createElement('div'); scrim.className = 'lo-scrim';
-    scrim.innerHTML = '<div class="lo-palette" role="dialog" aria-modal="true" aria-label="Palette de commandes"><div class="lo-palette-in"><span class="lo-b">[</span><input type="text" autocomplete="off" spellcheck="false" aria-label="Commande"><span class="lo-b">]</span></div><ul role="listbox"></ul>' +
+    scrim.innerHTML = '<div class="lo-palette" role="dialog" aria-modal="true" aria-label="Palette de commandes"><div class="lo-palette-in"><span class="lo-b">[</span><input type="text" autocomplete="off" spellcheck="false" aria-label="Commande" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="lo-pal-list"><span class="lo-b">]</span></div><ul id="lo-pal-list" role="listbox" aria-label="Résultats"></ul>' +
       '<div class="lo-palette-foot"><span><kbd>↑</kbd> <kbd>↓</kbd> naviguer</span><span><kbd>Entrée</kbd> ouvrir</span><span><kbd>1</kbd>–<kbd>5</kbd> changer d\'appli</span><span><kbd>Échap</kbd> fermer</span></div></div>';
     document.body.appendChild(scrim); els.scrim = scrim; els.input = scrim.querySelector('input'); els.list = scrim.querySelector('ul');
     scrim.addEventListener('click', function (e) { if (e.target === scrim) closePalette(); var it = e.target.closest('.lo-it'); if (it) runItem(+it.getAttribute('data-i')); });
@@ -238,16 +238,16 @@
       cb(sorted.concat(local), false);
     }).catch(function () { if (isLive()) cb(local, false); });
   }
-  function itemHtml(c, i, selected) {
+  function itemHtml(c, i, selected, pre) {
     var lead = c.thumb ? '<img class="lo-thumb" src="' + esc(c.thumb) + '" alt="" loading="lazy">' : c.logo ? logo(c.logo) : '<span class="lo-ic">' + svgIcon(c.icon) + '</span>';
-    return '<li class="lo-it" role="option" id="lo-opt-' + i + '" data-i="' + i + '" aria-selected="' + selected + '">' + lead +
+    return '<li class="lo-it" role="option" id="' + (pre || 'lo-opt-') + i + '" data-i="' + i + '" aria-selected="' + selected + '">' + lead +
       '<span class="lo-l">' + esc(c.label) + (c.sub ? '<small>' + esc(c.sub) + '</small>' : '') + '</span>' + (c.hint ? '<span class="lo-h">' + esc(c.hint) + '</span>' : '') + '</li>';
   }
-  function listHtml(items, cur, empty) {
+  function listHtml(items, cur, empty, pre) {
     var g = null, html = '';
     items.forEach(function (c, i) {
       if (c.group !== g) { g = c.group; html += '<li class="lo-grp" role="presentation">' + esc(g) + '</li>'; }
-      html += itemHtml(c, i, i === cur);
+      html += itemHtml(c, i, i === cur, pre);
     });
     if (empty) html += '<li class="lo-empty" role="presentation">' + esc(empty) + '</li>';
     return html;
@@ -262,12 +262,12 @@
     if (!started) return;
     closeTop();
     inputMode = o.input || null; sel = 0;
-    els.scrim.classList.add('lo-open');
+    els.scrim.classList.add('lo-open'); els.input.setAttribute('aria-expanded', 'true');
     els.input.value = o.query || '';
     els.input.placeholder = inputMode ? inputMode.prompt : (opts.placeholder || 'Aller, lancer, chercher…');
     drawPalette(); els.input.focus();
   }
-  function closePalette() { els.scrim.classList.remove('lo-open'); inputMode = null; }
+  function closePalette() { els.scrim.classList.remove('lo-open'); els.input.setAttribute('aria-expanded', 'false'); els.input.removeAttribute('aria-activedescendant'); inputMode = null; }
   function drawPalette() {
     var q = els.input.value.trim();
     if (inputMode) {
@@ -281,7 +281,8 @@
   }
   function paint(empty) {
     sel = Math.min(sel, Math.max(0, shown.length - 1));
-    els.list.innerHTML = listHtml(shown, sel, empty);
+    els.list.innerHTML = listHtml(shown, sel, empty, 'lo-pal-');
+    if (shown.length) els.input.setAttribute('aria-activedescendant', 'lo-pal-' + sel); else els.input.removeAttribute('aria-activedescendant');
     var cur = els.list.querySelector('[aria-selected="true"]'); if (cur && cur.scrollIntoView) cur.scrollIntoView({ block: 'nearest' });
   }
   function runItem(i) {
