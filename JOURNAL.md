@@ -15,3 +15,6 @@
 
 ## 2026-11-09
 - Branches agent/labs-brand-palette-a11y et agent/labs-brand-checkout-sha (fusion en conflit sur PROJECT.md) reprises sur une seule branche à partir de main : agent/labs-brand-kit-1-8-0 (kit 1.8.0, palette accessible, checkout épinglé par SHA). À fusionner par Aurélien ; les deux anciennes branches restent à écarter.
+
+## 2026-11-10
+- Kit Labs OS 2.0.0 publié sur main (nouvel habillage, police Geist téléchargée par sync-labs-kit.sh avec version épinglée et empreinte vérifiée). Propagé à Projet Labs seulement au 10 nov. ; Backup, Finance, Torrent et Dashboard restent à adapter puis à propager, Plex Labs en attente de la décision d'Aurélien (PROJECT.md annonce la propagation aux cinq : à corriger). Chaque appli doit recevoir le nouveau scripts/sync-labs-kit.sh avant le kit, sinon elle retombe sur la police du système ; le workflow du lundi prend le kit sans attendre.
