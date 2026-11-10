@@ -224,3 +224,17 @@ Crate seule.
 Ses écrans, son vocabulaire métier, ses couleurs de données (graphiques, tags
 de trackers, affiches) et son pont. Les règles de [composants.md](composants.md)
 et [principes.md](principes.md) restent valables.
+
+## Habillage 2.0.0 (2026-11-10)
+
+Le kit 2.0.0 change l'apparence de toute la suite sans changer le balisage : les classes `lo-*` et les jetons `--lo-*` gardent leur nom.
+
+- **Police** : Geist partout. La chasse fixe passe par `--lo-font-code` et ne sert qu'au code, aux chemins techniques et aux terminaux. `--lo-font-mono` vaut la police de texte, pour que l'habillage écrit en « mono » par les applis suive sans modification.
+- **Couleurs** : surfaces neutres, blanc en clair et quasi noir en sombre. L'accent est la couleur de l'appli (`--lo-accent`). Vert, ambre, rouge et bleu restent réservés aux états.
+- **Coque** : menu de 260 px translucide, barre du haut de 56 px, recherche en pilule centrée. Plus de crochets, de grain, d'aurore ni de barre d'état en bas. Tiroir sur téléphone.
+- **Composants** : boutons pleins sans contour (rayon 10 px), segments à pastille (`.lo-seg`), cartes à coins de 16 px (`.lo-panel`, `.lo-item`), pastilles « un point et un mot » (`.lo-pill`), terminal (`.lo-term`, `.lo-term-bar`, `.lo-term-lights`, `.lo-term-title`, `.lo-term-body`, couleurs `.lo-t-*`).
+- **Écarts** : 12 px entre éléments d'un bloc (`--lo-gap-sm`), 16 px entre blocs et entre colonnes (`--lo-gap`), 24 px autour des titres de page.
+- **Largeur** : le contenu prend toute la largeur disponible. Pas de colonne étroite ni de tableau partiel dans une carte large.
+- **Terminal** : tout journal de commandes garde l'allure d'un terminal (chasse fixe, fond sombre dans les deux thèmes, feux, couleurs).
+
+Chaque appli relie ses composants propres au kit dans une petite feuille chargée en dernier. Origine du langage visuel : HolyArrs (AGPL-3.0), dont aucun code n'est repris.
