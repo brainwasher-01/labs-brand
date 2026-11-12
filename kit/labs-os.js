@@ -18,13 +18,14 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '2.0.0';
+  var KIT_VERSION = '2.1.0';
   var APPS = [
     { id: 'backup',  name: 'Backup Labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet Labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
     { id: 'torrent', name: 'Torrent Labs', color: '#ff9b6a', d: 'M24 20h16 M32 20v24' },
     { id: 'finance', name: 'Finance Labs', color: '#6cc7f0', d: 'M27 44V20h11 M27 31h9' },
-    { id: 'plex',    name: 'Plex Labs',    color: '#f2b84b', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' }
+    { id: 'plex',    name: 'Plex Labs',    color: '#f2b84b', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
+    { id: 'mixer',   name: 'Mixer Labs',   color: '#8ef26a', d: 'M25 44V20l7 12 7-12v24' }
   ];
   var ICONS = {
     search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
@@ -130,7 +131,7 @@
   function urlFor(id) {
     if (opts.suite && opts.suite[id]) return opts.suite[id];
     var s = savedUrls(); if (s[id]) return s[id];
-    var m = location.hostname.match(/^(backup|projet|torrent|finance|plex|asset)-labs(\..+)$/);
+    var m = location.hostname.match(/^(backup|projet|torrent|finance|plex|mixer|asset)-labs(\..+)$/);
     if (m) return location.protocol + '//' + id + '-labs' + m[2] + (location.port ? ':' + location.port : '') + '/';
     return null;
   }
@@ -158,7 +159,7 @@
 
     var scrim = document.createElement('div'); scrim.className = 'lo-scrim';
     scrim.innerHTML = '<div class="lo-palette" role="dialog" aria-modal="true" aria-label="Palette de commandes"><div class="lo-palette-in"><span class="lo-b">[</span><input type="text" autocomplete="off" spellcheck="false" aria-label="Commande" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="lo-pal-list"><span class="lo-b">]</span></div><ul id="lo-pal-list" role="listbox" aria-label="Résultats"></ul>' +
-      '<div class="lo-palette-foot"><span><kbd>↑</kbd> <kbd>↓</kbd> naviguer</span><span><kbd>Entrée</kbd> ouvrir</span><span><kbd>1</kbd>–<kbd>5</kbd> changer d\'appli</span><span><kbd>Échap</kbd> fermer</span></div></div>';
+      '<div class="lo-palette-foot"><span><kbd>↑</kbd> <kbd>↓</kbd> naviguer</span><span><kbd>Entrée</kbd> ouvrir</span><span><kbd>1</kbd>–<kbd>6</kbd> changer d\'appli</span><span><kbd>Échap</kbd> fermer</span></div></div>';
     document.body.appendChild(scrim); els.scrim = scrim; els.input = scrim.querySelector('input'); els.list = scrim.querySelector('ul');
     scrim.addEventListener('click', function (e) { if (e.target === scrim) closePalette(); var it = e.target.closest('.lo-it'); if (it) runItem(+it.getAttribute('data-i')); });
     els.input.addEventListener('input', function () { sel = 0; drawPalette(); });
@@ -197,7 +198,7 @@
 
   /* ── Palette ── */
   /* Commandes locales (palette et barre du haut). Depuis 1.3.0 : plus d'entrées « Ouvrir une autre appli »
-     ni « Régler l'adresse » dans les résultats ; on change d'appli avec les touches 1 à 5. Le Journal, les
+     ni « Régler l'adresse » dans les résultats ; on change d'appli avec les touches 1 à 6. Le Journal, les
      Réglages et les notes de version (pied du menu) restent trouvables ici, puisqu'ils ne sont plus dans le menu. */
   function baseCommands() {
     var list = [], seen = {};
@@ -464,7 +465,7 @@
     if (typing || e.ctrlKey || e.metaKey || e.altKey) return;
     if (e.key === '/' && top.input && !modalOpen()) { e.preventDefault(); top.input.focus(); top.input.select(); return; }
     if (opts.appKeys === false) return;
-    if (/^[1-5]$/.test(e.key) && !modalOpen()) { var a = APPS[+e.key - 1]; if (a.id !== opts.app) { e.preventDefault(); goApp(a.id); } }
+    if (/^[1-9]$/.test(e.key) && +e.key <= APPS.length && !modalOpen()) { var a = APPS[+e.key - 1]; if (a.id !== opts.app) { e.preventDefault(); goApp(a.id); } }
   }, true);
 
   /* ── API publique ── */
