@@ -1,16 +1,19 @@
 # Crate — charte
 
-> **Hors suite Labs (appli associée).** Crate garde son nom, son logo et son
-> thème. Il est référencé ici pour que Projet Labs voie toutes les applis au
-> même endroit ; les règles communes de `docs/` lui servent de
-> recommandations, pas d'obligations (voir « Écarts assumés »).
+> **Dans la suite depuis le 2026-11-12, hors du schéma « … Labs ».** Crate
+> s'appelle Crate (sans « .labs ») et garde son logo C vinyle ; il passe sous
+> Labs OS (coquille, menu, contrôles du kit). Couleur orange en dérogation à la
+> règle des 40°. Les téléchargements partent dans Digger. Proposition et
+> maquettes : `docs/propositions/labs-os.md` du projet crate dans Projet Labs.
+> Les sections ci-dessous décrivent le thème « Bac de disquaire » actuel, en
+> cours de remplacement.
 
 ## Identité
 
 | | |
 |---|---|
 | Nom affiché | Crate |
-| Nom écrit (logo texte) | `CRATE` (Archivo étroit, très gras, en capitales ; pas de `.labs`) |
+| Nom écrit (logo texte) | `Crate` (pas de `.labs`) |
 | Rôle | Curation, enrichissement et organisation d'une bibliothèque musicale auto-hébergée : fiches artistes, albums, labels, pistes et genres ; notes, écoutes et playlists ; contrôle qualité des métadonnées (NFO, tags, MusicBrainz) ; nouveautés des artistes et labels suivis ; téléchargements Soulseek ; lecteur audio intégré |
 | North Star visuelle | « Fouiller le bac » : on feuillette sa collection comme un bac de disquaire |
 | Nom du conteneur | `crate` |

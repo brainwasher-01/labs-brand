@@ -14,19 +14,9 @@ de couleur ou de charte.
 | [Torrent Labs](apps/torrent-labs/README.md) | `torrent.labs` | `#ff9b6a` | ![](logos/torrent-labs.svg) | Recherche de torrents sur tous les indexeurs de Prowlarr, résultats en direct, envoi vers qBittorrent (ex-TorrentScope) | complète | [thèmes](apps/torrent-labs/theme.md) |
 | [Dashboard Labs](apps/dashboard-labs/README.md) (en conception) | `dashboard.labs` | Lunaire `#e6edf3` (`#1b2230` sur fond clair), crochets du logo en dégradé de la suite | ![](logos/dashboard-labs.svg) | Page d'accueil et tableau de bord du quotidien (ordinateur, iPad, iPhone) : Skynet, médias, maison, journée, veille, accès rapide, avec un assistant qui agit | complète | [thèmes](apps/dashboard-labs/theme.md) |
 | [Mixer Labs](apps/mixer-labs/README.md) (en conception) | `mixer.labs` | Lime `#8ef26a` (`#34791b` sur fond clair) | ![](logos/mixer-labs.svg) | Construction de DJ sets sur timeline : on pose des morceaux de Crate et on dessine chaque transition (volume, égaliseur, filtre, effets, tempo) ; pas de mix en direct | complète | [thèmes](apps/mixer-labs/theme.md) |
+| [Crate](apps/crate/README.md) | `Crate` (sans « .labs ») | `#d9701f` (`#a85310` sur fond clair ; dérogation à la règle des 40°) | ![](apps/crate/logo/crate.svg) | Curation d'une bibliothèque musicale auto-hébergée : fiches, notes, playlists, qualité des métadonnées, nouveautés des artistes suivis, lecteur audio (téléchargements dans Digger) | complète | [thèmes](apps/crate/theme.md) |
 
 Couleur réservée : rose `#f27ec6`, gardé pour un futur projet.
-
-## Applis associées (hors suite Labs)
-
-Applis qui ne font pas partie de la suite Labs : elles gardent leur nom, leur
-logo et leur thème. Elles sont référencées ici pour avoir toutes les applis
-au même endroit ; leur charte, leur logo et leurs captures sont dans leur
-dossier `apps/<appli>/`.
-
-| Appli | Nom écrit | Couleur | Logo | Rôle | Charte | Thèmes |
-|---|---|---|---|---|---|---|
-| [Crate](apps/crate/README.md) | `CRATE` | `#d9701f` | ![](apps/crate/logo/crate.svg) | Curation et enrichissement d'une bibliothèque musicale auto-hébergée : fiches, notes, playlists, qualité des métadonnées, nouveautés des artistes suivis, téléchargements Soulseek, lecteur audio — **hors suite Labs (appli associée)** | complète | [thèmes](apps/crate/theme.md) |
 
 ## Règles communes
 

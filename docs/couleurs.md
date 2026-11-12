@@ -11,6 +11,7 @@
 | Torrent Labs | `#ff9b6a` | logo |
 | Dashboard Labs | `#e6edf3` (Lunaire, neutre ; `#1b2230` sur fond clair) | logo (bordure et initiale ; crochets en dégradé de la suite), accent |
 | Mixer Labs | `#8ef26a` (Lime, 104° ; `#34791b` sur fond clair, 5,4:1 sur blanc) | logo, accent, piste A du studio |
+| Crate | `#d9701f` (orange, 26° ; `#a85310` sur fond clair, 5,4:1 sur blanc) : **dérogation** à la règle des 40° (identité installée, décision d'Aurélien du 2026-11-12) | trou du vinyle du logo, accent |
 
 Une nouvelle appli prend une teinte libre **de même clarté** (lisible sur
 `#0b1015` comme sur blanc), différente des autres d'au moins 40° de teinte.

@@ -61,7 +61,7 @@
   --lo-ctl-gap: .5rem;                   /* entre deux contrôles d'une même rangée */
   /* Couleur de chaque appli : [sombre] et variante foncée [clair] ≥ 4,5:1 sur blanc */
   --lo-c-backup: #7ee2a8; --lo-c-projet: #b49cff; --lo-c-torrent: #ff9b6a; --lo-c-finance: #6cc7f0; --lo-c-plex: #f2b84b;
-  --lo-c-mixer: #8ef26a;
+  --lo-c-mixer: #8ef26a; --lo-c-crate: #d9701f;
 }
 :root[data-lo-app="backup"]  { --lo-app: #7ee2a8; --lo-app-ink: #13784a; }
 :root[data-lo-app="projet"]  { --lo-app: #b49cff; --lo-app-ink: #5b3fd1; }
@@ -69,6 +69,7 @@
 :root[data-lo-app="finance"] { --lo-app: #6cc7f0; --lo-app-ink: #16729f; }
 :root[data-lo-app="plex"]    { --lo-app: #f2b84b; --lo-app-ink: #8a5c00; }
 :root[data-lo-app="mixer"]   { --lo-app: #8ef26a; --lo-app-ink: #34791b; }
+:root[data-lo-app="crate"]   { --lo-app: #d9701f; --lo-app-ink: #a85310; }
 
 /* Échelle (1.6.0) : le kit impose la racine — 87,5 % sur ordinateur (14 px), 100 % sous 52 rem (téléphone, petite
    tablette). Sélecteur renforcé (:root:root) : il l'emporte sur toute racine posée par une appli, quel que soit l'ordre

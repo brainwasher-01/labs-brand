@@ -162,12 +162,15 @@ Le jeton GitHub de Projet Labs doit pouvoir écrire sur les dépôts des applis
 exige pour l'événement `labs-kit` — et *Metadata* en lecture ; *Actions* en
 lecture suffit ; ou un jeton classique avec `repo`).
 
-## Crate, appli associée : hors Labs OS
+## Crate : dans la suite, hors du schéma « … Labs »
 
-Crate garde sa propre charte ([`apps/crate/`](apps/crate/README.md)) :
-la propagation ne le vise jamais (elle ne lit que la liste `apps` de
-`catalogue.json`, où Crate n'est pas), et ses changements ne reviennent pas
-dans la suite.
+Depuis le 2026-11-12 (décision d'Aurélien), Crate fait partie de la suite et
+reçoit Labs OS par la propagation (`kit_dir` : `frontend/public/labs-os`).
+Il garde son **logo C vinyle** et s'appelle **Crate**, sans « .labs » : le
+kit le connaît sous l'identifiant `crate` (`data-lo-app="crate"`, palette,
+touche 7) avec son propre logo. Sa couleur, l'orange `#d9701f` (`#a85310` sur
+fond clair), est une dérogation à la règle des 40° (6° de Torrent, 13° de
+Plex). Les téléchargements de Crate partent dans une autre appli, Digger.
 
 ## Projets créés dans Projet Labs
 

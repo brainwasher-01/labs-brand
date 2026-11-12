@@ -148,19 +148,17 @@
       "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/mixer-labs.png",
       "repository": "brainwasher-01/mixer-labs",
       "kit_dir": "frontend/public/labs-os"
-    }
-  ],
-  "associated_apps": [
+    },
     {
       "id": "crate",
       "name": "Crate",
-      "wordmark": "CRATE",
+      "wordmark": "Crate",
       "initial": null,
       "color": "#d9701f",
       "color_text_on_light": "#a85310",
-      "role": "Curation et enrichissement d'une bibliothèque musicale auto-hébergée : fiches, notes, playlists, qualité des métadonnées, nouveautés des artistes suivis, téléchargements Soulseek, lecteur audio",
-      "suite": false,
-      "suite_note": "hors suite Labs (appli associée)",
+      "role": "Curation d'une bibliothèque musicale auto-hébergée : fiches, notes, playlists, qualité des métadonnées, nouveautés des artistes suivis, lecteur audio (les téléchargements partent dans Digger)",
+      "suite": true,
+      "suite_note": "dans la suite depuis le 2026-11-12, hors du schéma « … Labs » : nom « Crate » seul, logo C vinyle gardé ; couleur en dérogation à la règle des 40° (6° de Torrent, 13° de Plex)",
       "repository": "brainwasher-01/crate",
       "container": "crate",
       "status": "en service",
@@ -177,15 +175,18 @@
       "captures": "apps/crate/captures/",
       "logo_svg": "apps/crate/logo/crate.svg",
       "logo_png": "apps/crate/logo/crate.png",
-      "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/apps/crate/logo/crate.png"
+      "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/apps/crate/logo/crate.png",
+      "kit_dir": "frontend/public/labs-os",
+      "kit_status": "à brancher"
     }
   ],
+  "associated_apps": [],
   "reserved_colors": [
     { "color": "#f27ec6", "name": "rose", "note": "réservé par Aurélien pour un futur projet (2026-11-06)" }
   ],
   "kit": {
     "name": "Labs OS",
-    "version": "2.2.0",
+    "version": "2.4.0",
     "path": "kit/",
     "doc": "docs/labs-os.md",
     "dispatch_event": "labs-kit"
