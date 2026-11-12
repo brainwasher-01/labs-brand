@@ -17,8 +17,8 @@
 | Nom du conteneur | `digger` |
 | Dépôt | `brainwasher-01/digger` (privé) |
 | Couleur | **Fuchsia** `#e45bd0` (309° ; 6,4:1 sur `#07090f`), `#a8279a` sur fond clair (6,1:1 sur blanc) |
-| Logo | [`../../logos/digger.svg`](../../logos/digger.svg) — bac de disques vu de face, pochettes feuilletées qui dépassent, un disque sorti avec son macaron fuchsia ; construction de Crate (voir `docs/logos.md`). PNG pour Unraid à exporter |
-| Icône Unraid | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/digger.png` (à déposer) |
+| Logo | [`../../logos/digger.svg`](../../logos/digger.svg) — bac de disques vu de face, pochettes feuilletées qui dépassent, un disque sorti avec son macaron fuchsia ; construction de Crate (voir `docs/logos.md`). PNG 256 px : [`../../logos/digger.png`](../../logos/digger.png) |
+| Icône Unraid | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/digger.png` |
 | Technologie | Serveur Python, FastAPI, SQLite ; interface React, TypeScript, Vite ; kit Labs OS dans `frontend/public/labs-os/` |
 | Appli liée | Crate : Digger reçoit ses demandes et lui remet les fichiers reçus (dossier de dépôt, manifeste `digger.json`) |
 | État | en construction (squelette 0.1.0) |
