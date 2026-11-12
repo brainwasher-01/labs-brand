@@ -259,6 +259,6 @@ Le kit 2.0.0 change l'apparence de toute la suite sans changer le balisage : les
 - **Composants** : boutons pleins sans contour (rayon 10 px), segments à pastille (`.lo-seg`), cartes à coins de 16 px (`.lo-panel`, `.lo-item`), pastilles « un point et un mot » (`.lo-pill`), terminal (`.lo-term`, `.lo-term-bar`, `.lo-term-lights`, `.lo-term-title`, `.lo-term-body`, couleurs `.lo-t-*`).
 - **Écarts** : 12 px entre éléments d'un bloc (`--lo-gap-sm`), 16 px entre blocs et entre colonnes (`--lo-gap`), 24 px autour des titres de page.
 - **Largeur** : le contenu prend toute la largeur disponible. Pas de colonne étroite ni de tableau partiel dans une carte large.
-- **Terminal** : tout journal de commandes garde l'allure d'un terminal (cha sse fixe, fond sombre dans les deux thèmes, feux, couleurs).
+- **Terminal** : tout journal de commandes garde l'allure d'un terminal (chasse fixe, fond sombre dans les deux thèmes, feux, couleurs).
 
 Chaque appli relie ses composants propres au kit dans une petite feuille chargée en dernier. Origine du langage visuel : HolyArrs (AGPL-3.0), dont aucun code n'est repris.
