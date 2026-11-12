@@ -16,7 +16,7 @@ Reprise de labs-brand le 2026-11-05 : voir [[CHARTE]].
 ## Installation / déploiement
 Rien à construire ni à installer : dépôt de documentation et kit statique. Contrôle : `python3 tests/check-catalogue.py`.
 
-Mettre à jour l'interface commune **Labs OS** (version actuelle du kit : **2.1.0**) :
+Mettre à jour l'interface commune **Labs OS** (version actuelle du kit : **2.2.0**) :
 1. Modifier `kit/` ici, jamais dans une appli. Augmenter `kit/VERSION`, reporter la version dans `catalogue.json` (`kit.version`) et `CATALOGUE.md`, noter le changement dans `CHANGELOG.md`.
 2. Enregistrer sur `main` (Projet Labs envoie la version vers GitHub, en différé).
 3. Propager : Projet Labs, page « La suite », bouton « Propager à la suite », ou outil MCP `propagate_ui`. Projet Labs envoie l'événement `repository_dispatch` `labs-kit` à chaque dépôt listé dans `catalogue.json` (`apps`, champs `repo` et `kit_dir`).
@@ -27,6 +27,7 @@ Mettre à jour l'interface commune **Labs OS** (version actuelle du kit : **2.1.
 Voir [[JOURNAL]].
 
 ## État
+- 2026-11-12 : kit **2.2.0** — menu réductible sur toute la suite (bouton en tête du menu, touche `[`, choix mémorisé `labs.side`, noms en info-bulle), roue dentée des Réglages redessinée (l'ancienne ressemblait à un réglage de luminosité), pied du menu dans l'ordre mode · outils | déconnexion, noms d'appli « Backup .labs », mots jamais coupés au milieu. À propager.
 - 2026-11-12 : kit **2.1.0** — Mixer Labs rejoint la suite (en conception, Lime `#8ef26a`, `#34791b` sur fond clair) : appli `mixer` connue du kit (`--lo-c-mixer`, `data-lo-app="mixer"`, palette, adresse `mixer-labs.<domaine>`), touches d'appli de 1 à 6 (bornées au nombre d'applis connues). Charte `apps/mixer-labs/`, logo `logos/mixer-labs.svg` (PNG à exporter). Dashboard Labs toujours absent du kit (prévu avec son premier code). À propager.
 - 2026-11-10 : kit **2.0.0** — nouvel habillage de la suite (police Geist, surfaces neutres, menu translucide de 260 px, recherche en pilule, segments, cartes à coins de 16 px, composant `.lo-term`, écarts 12 / 16 / 24 px, contenu pleine largeur ; crochets, grain, aurore et barre d'état retirés). Langage visuel inspiré de HolyArrs (AGPL-3.0), sans reprise de code. La police Geist est téléchargée par `sync-labs-kit.sh` (version épinglée, empreinte vérifiée) : **chaque appli doit avoir le nouveau script avant la propagation**. Propagé à Backup, Finance, Torrent, Dashboard et Projet ; Plex Labs en attente de la décision d'Aurélien.
 - 2026-11-09 : kit 1.8.0 (palette de commandes accessible : combobox, liste nommée, aria-activedescendant ; test `kit/tests/palette-a11y.mjs`). Repris sur `main` depuis `agent/labs-brand-palette-a11y`. À propager par le Gardien après fusion.

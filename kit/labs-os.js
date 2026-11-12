@@ -18,14 +18,14 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '2.1.0';
+  var KIT_VERSION = '2.2.0';
   var APPS = [
-    { id: 'backup',  name: 'Backup Labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
-    { id: 'projet',  name: 'Projet Labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
-    { id: 'torrent', name: 'Torrent Labs', color: '#ff9b6a', d: 'M24 20h16 M32 20v24' },
-    { id: 'finance', name: 'Finance Labs', color: '#6cc7f0', d: 'M27 44V20h11 M27 31h9' },
-    { id: 'plex',    name: 'Plex Labs',    color: '#f2b84b', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
-    { id: 'mixer',   name: 'Mixer Labs',   color: '#8ef26a', d: 'M25 44V20l7 12 7-12v24' }
+    { id: 'backup',  name: 'Backup .labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
+    { id: 'projet',  name: 'Projet .labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
+    { id: 'torrent', name: 'Torrent .labs', color: '#ff9b6a', d: 'M24 20h16 M32 20v24' },
+    { id: 'finance', name: 'Finance .labs', color: '#6cc7f0', d: 'M27 44V20h11 M27 31h9' },
+    { id: 'plex',    name: 'Plex .labs',    color: '#f2b84b', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
+    { id: 'mixer',   name: 'Mixer .labs',   color: '#8ef26a', d: 'M25 44V20l7 12 7-12v24' }
   ];
   var ICONS = {
     search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
@@ -34,7 +34,9 @@
     link: '<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/>',
     file: '<path d="M6 3h8l4 4v14H6zM14 3v4h4M9 13h6M9 17h4"/>',
     play: '<path d="M7 4l13 8-13 8z"/>',
-    gear: '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',
+    gear: '<path d="M12.22 2h-.44a2 2 0 00-2 2v.18a2 2 0 01-1 1.73l-.43.25a2 2 0 01-2 0l-.15-.08a2 2 0 00-2.73.73l-.22.38a2 2 0 00.73 2.73l.15.1a2 2 0 011 1.72v.51a2 2 0 01-1 1.74l-.15.09a2 2 0 00-.73 2.73l.22.38a2 2 0 002.73.73l.15-.08a2 2 0 012 0l.43.25a2 2 0 011 1.73V20a2 2 0 002 2h.44a2 2 0 002-2v-.18a2 2 0 011-1.73l.43-.25a2 2 0 012 0l.15.08a2 2 0 002.73-.73l.22-.39a2 2 0 00-.73-2.73l-.15-.08a2 2 0 01-1-1.74v-.5a2 2 0 011-1.74l.15-.09a2 2 0 00.73-2.73l-.22-.38a2 2 0 00-2.73-.73l-.15.08a2 2 0 01-2 0l-.43-.25a2 2 0 01-1-1.73V4a2 2 0 00-2-2z"/><circle cx="12" cy="12" r="3"/>',
+    side: '<rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M9 4v16M15.5 10l-2 2 2 2"/>',
+    sideOpen: '<rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M9 4v16M13.5 10l2 2-2 2"/>',
     box: '<path d="M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10"/>',
     down: '<path d="M12 4v11M7 11l5 5 5-5M5 20h14"/>',
     restore: '<path d="M4 12a8 8 0 108-8M4 4v5h5"/>',
@@ -97,15 +99,19 @@
     });
     if (s.version) h += '<a class="lo-foot-row lo-foot-ver" href="' + esc(s.version.href || '#') + '" title="' + esc(s.version.title || 'Notes de version') + '">' + svgIcon('tag') + '<span class="lo-t">' + esc(s.version.label) + '</span></a>';
     h += '</div><div class="lo-foot-tools">';
-    (s.tools || []).forEach(function (t, i) {
+    var m = wantedMode(), modeBtn = s.mode === false ? '' : '<button type="button" class="lo-tool" data-lo-tool="mode" title="' + MODE_LABEL[m] + ' (changer)" aria-label="' + MODE_LABEL[m] + ', changer">' + svgIcon(m === 'auto' ? 'auto' : m === 'dark' ? 'moon' : 'sun') + '</button>';
+    var tools = s.tools || [];
+    if (tools.indexOf('mode') < 0) h += modeBtn;   // 2.2.0 : le mode ouvre la rangée (mode, outils… | déconnexion)
+    tools.forEach(function (t, i) {
+      if (t === 'mode') { h += modeBtn; return; }
       if (t === '-') { h += '<span class="lo-sp"></span>'; return; }
       if (!t || t.hidden) return;
       var cur = t.href && location.hash && t.href === location.hash.split('?')[0] ? ' aria-current="page"' : '';
       h += t.href ? '<a class="lo-tool" href="' + esc(t.href) + '"' + cur : '<button type="button" class="lo-tool" data-lo-tool="' + i + '"';
       h += ' title="' + esc(t.label) + '" aria-label="' + esc(t.label) + '">' + svgIcon(t.icon) + (t.href ? '</a>' : '</button>');
     });
-    if (s.mode !== false) { var m = wantedMode(); h += '<button type="button" class="lo-tool" data-lo-tool="mode" title="' + MODE_LABEL[m] + ' (changer)" aria-label="' + MODE_LABEL[m] + ', changer">' + svgIcon(m === 'auto' ? 'auto' : m === 'dark' ? 'moon' : 'sun') + '</button>'; }
     el.innerHTML = h + '</div>';
+    sideTitles();
   }
   function setFoot(target, spec) {
     var el = typeof target === 'string' ? document.querySelector(target) : target; if (!el) return;
@@ -123,6 +129,40 @@
   }
   if (mq && mq.addEventListener) mq.addEventListener('change', function () { if (wantedMode() === 'auto') applyMode(); });
   applyMode();
+
+  /* ── Menu réductible (2.2.0) ──
+     Sur ordinateur, un bouton en tête du menu le réduit à ses icônes (html.lo-side-mini) ; le choix est mémorisé
+     dans ce navigateur (labs.side) pour toute la suite. Réduit, chaque lien garde son nom en info-bulle.
+     Sur téléphone, le tiroir reste entier. Raccourci : [ (hors saisie). Option sideToggle: false pour s'en passer. */
+  var SIDE_KEY = 'labs.side';
+  function sideMini() { return root.classList.contains('lo-side-mini'); }
+  if (load(SIDE_KEY, '') === 'mini') root.classList.add('lo-side-mini');
+  function sideTitles() {
+    var mini = sideMini();
+    document.querySelectorAll('.lo-side .lo-nav a, .lo-side .lo-nav .lo-nav-it, .lo-side .lo-foot-row').forEach(function (a) {
+      var t = a.querySelector('.lo-t'); if (!t) return;
+      var label = (t.textContent || '').trim();
+      if (mini) { if (!a.hasAttribute('title')) { a.setAttribute('title', label); a.setAttribute('data-lo-tip', '1'); } }
+      else if (a.getAttribute('data-lo-tip')) { a.removeAttribute('title'); a.removeAttribute('data-lo-tip'); }
+    });
+    var b = document.querySelector('.lo-side-toggle');
+    if (b) {
+      var l = mini ? 'Déplier le menu' : 'Réduire le menu';
+      b.setAttribute('aria-label', l); b.setAttribute('title', l + ' ( [ )'); b.setAttribute('aria-expanded', mini ? 'false' : 'true');
+      b.innerHTML = svgIcon(mini ? 'sideOpen' : 'side');
+    }
+  }
+  function setSide(mini) {
+    root.classList.toggle('lo-side-mini', !!mini); save(SIDE_KEY, mini ? 'mini' : 'full'); sideTitles();
+    if (opts.onSide) { try { opts.onSide(!!mini); } catch (e) {} }
+  }
+  function buildSideToggle() {
+    if (opts.sideToggle === false) { root.classList.remove('lo-side-mini'); return; }
+    var head = document.querySelector('.lo-side .lo-side-head'); if (!head || head.querySelector('.lo-side-toggle')) return;
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'lo-side-toggle';
+    b.addEventListener('click', function () { setSide(!sideMini()); });
+    head.appendChild(b); sideTitles();
+  }
 
   /* ── Adresses des autres applis ──
      1. options de l'appli (suite: {backup: 'https://…'}) ; 2. réglage mémorisé dans ce navigateur ;
@@ -166,6 +206,7 @@
 
     if (opts.top) buildTop(opts.top);
     buildDrawer();
+    buildSideToggle();
     buildSkip();
     decorate();
     if (window.MutationObserver) { var t = null; new MutationObserver(function () { clearTimeout(t); t = setTimeout(decorate, 60); }).observe(document.body, { childList: true, subtree: true }); }
@@ -173,6 +214,7 @@
 
   /* Titres entre crochets, coins en crochet sur les cartes */
   function decorate() {
+    if (sideMini()) sideTitles();
     if (opts.title) document.querySelectorAll(opts.title).forEach(function (h) { if (!h.closest('.lo-palette')) h.classList.add('lo-br'); });
     if (opts.cards) document.querySelectorAll(opts.cards).forEach(function (c) {
       if (c.classList.contains('lo-card')) return;
@@ -464,6 +506,7 @@
     var t = document.activeElement, typing = t && (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable);
     if (typing || e.ctrlKey || e.metaKey || e.altKey) return;
     if (e.key === '/' && top.input && !modalOpen()) { e.preventDefault(); top.input.focus(); top.input.select(); return; }
+    if (e.key === '[' && opts.sideToggle !== false && !modalOpen() && document.querySelector('.lo-side-toggle')) { e.preventDefault(); setSide(!sideMini()); return; }
     if (opts.appKeys === false) return;
     if (/^[1-9]$/.test(e.key) && +e.key <= APPS.length && !modalOpen()) { var a = APPS[+e.key - 1]; if (a.id !== opts.app) { e.preventDefault(); goApp(a.id); } }
   }, true);
@@ -494,6 +537,7 @@
     top: function (target) { if (started) buildTop(target); else opts.top = target; },
     focusSearch: function (q) { if (!top.input) return; if (q != null) top.input.value = q; top.input.focus(); if (q) drawTop(); },
     drawer: setDrawer,
+    side: function (mini) { if (mini == null) return sideMini(); setSide(mini); },
     confirm: confirmBox,
     url: urlFor
   };

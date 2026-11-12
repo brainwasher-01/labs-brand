@@ -119,9 +119,18 @@ LabsOS.foot('#pied', {
     { icon: 'gear', label: 'Réglages', href: '#/settings' },
     '-',
     { icon: 'logout', label: 'Se déconnecter', run: () => {} },
-  ],                                                   // le bouton de mode (auto / sombre / clair) est ajouté
+  ],                                                   // 2.2.0 : le bouton de mode (auto / sombre / clair) ouvre la rangée
 });
 ```
+
+Ordre commun du pied (2.2.0) : **à gauche** mode clair / sombre, journal, réglages ; **à droite** (après `'-'`)
+déconnexion. Le jeton `'mode'` dans `tools` place le bouton de mode ailleurs ; `mode: false` le retire.
+
+**Menu réductible (2.2.0).** Sur ordinateur, le kit ajoute un bouton en tête du menu (`.lo-side-toggle`) qui le
+réduit à ses icônes (`html.lo-side-mini`, `--lo-side-w` 4,5 rem) ; touche `[` hors saisie ; choix mémorisé dans le
+navigateur (`labs.side`) et donc commun à toute la suite. Réduit, chaque lien et chaque ligne du pied a son nom en
+info-bulle (`title`). Les liens doivent garder leur texte dans un `<span class="lo-t">`. Téléphone : tiroir entier,
+pas de bouton. Options `sideToggle: false`, `onSide(mini)` ; API `LabsOS.side()` (lire) / `LabsOS.side(true|false)`.
 
 `tone` : `ok`, `warn`, `fail`, `busy` ou vide (gris). Une ligne `null` ou `hidden: true` est ignorée.
 Rappeler `LabsOS.foot` avec de nouvelles données le met à jour. Modèle : le pied d'Plex Labs.

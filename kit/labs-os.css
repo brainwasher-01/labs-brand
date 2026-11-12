@@ -520,3 +520,33 @@ html.lo-on code, html.lo-on pre, html.lo-on samp { font-family: var(--lo-font-co
   .lo-nav a, .lo-nav .lo-nav-it { min-height: 44px; font-size: 16px; }
   .lo-seg > button, .lo-seg > a { min-height: 40px; }
 }
+
+/* ── 2.2.0 : menu réductible (bouton en tête du menu, raccourci [, choix mémorisé pour toute la suite) ──
+   html.lo-side-mini : menu réduit à ses icônes, noms en info-bulle. Ordinateur seulement : le tiroir du
+   téléphone reste entier. Les mots ne sont jamais coupés au milieu (pas de break-all ni de césure). */
+html.lo-on body { overflow-wrap: break-word; word-break: normal; hyphens: manual; }
+.lo-side-head { justify-content: space-between; }
+.lo-side-toggle { flex: none; display: grid; place-items: center; width: 32px; height: 32px; min-height: 0; padding: 0; margin-left: auto; border: 0; border-radius: 8px;
+  background: none; box-shadow: none; color: var(--lo-muted); cursor: pointer; transition: background-color 150ms var(--lo-ease, ease), color 150ms; }
+.lo-side-toggle:hover { background: color-mix(in srgb, var(--lo-s3) 70%, transparent); color: var(--lo-text); }
+.lo-side-toggle:focus-visible { outline: none; box-shadow: var(--lo-ring, 0 0 0 2px var(--lo-accent)); }
+.lo-side-toggle svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+@media (min-width: 52.0625rem) {
+  .lo-shell { transition: grid-template-columns .2s var(--lo-ease, ease); }
+  html.lo-side-mini { --lo-side-w: 4.5rem; }
+  html.lo-side-mini .lo-side { padding-left: 8px; padding-right: 8px; overflow-x: hidden; }
+  html.lo-side-mini .lo-side-head { flex-direction: column; justify-content: flex-start; gap: 6px; height: auto; padding: 4px 0; }
+  html.lo-side-mini .lo-brand { justify-content: center; width: 100%; }
+  html.lo-side-mini .lo-side-toggle { margin: 0 auto; }
+  html.lo-side-mini .lo-wm, html.lo-side-mini .lo-nav-title, html.lo-side-mini .lo-side .lo-label,
+  html.lo-side-mini .lo-nav .lo-t, html.lo-side-mini .lo-nav .lo-n, html.lo-side-mini .lo-foot .lo-t { display: none; }
+  html.lo-side-mini .lo-nav { gap: 6px; }
+  html.lo-side-mini .lo-nav-sec + .lo-nav-sec { padding-top: 6px; border-top: 1px solid var(--lo-line); }
+  html.lo-side-mini .lo-nav a, html.lo-side-mini .lo-nav .lo-nav-it { justify-content: center; padding: 0; }
+  html.lo-side-mini .lo-foot-st { justify-items: center; }
+  html.lo-side-mini .lo-foot .lo-foot-row { justify-content: center; padding: 2px; }
+  html.lo-side-mini .lo-foot-tools { flex-direction: column; }
+  html.lo-side-mini .lo-foot-tools .lo-sp { flex: none; height: 4px; }
+}
+@media (max-width: 52rem) { .lo-side-toggle { display: none; } }
+@media (prefers-reduced-motion: reduce) { .lo-shell { transition: none; } }
