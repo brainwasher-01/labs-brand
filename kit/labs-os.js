@@ -18,7 +18,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '2.2.0';
+  var KIT_VERSION = '2.3.0';
   var APPS = [
     { id: 'backup',  name: 'Backup .labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet .labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
@@ -91,10 +91,10 @@
   function renderFoot() {
     var el = foot.el, s = foot.spec; if (!el || !s) return;
     var h = '<div class="lo-foot-st">';
-    (s.rows || []).forEach(function (r) {
+    (s.rows || []).forEach(function (r, i) {
       if (!r || r.hidden) return;
-      var tag = r.href ? 'a' : 'div';
-      h += '<' + tag + ' class="lo-foot-row"' + (r.href ? ' href="' + esc(r.href) + '"' : '') + (r.title ? ' title="' + esc(r.title) + '"' : '') + '>' +
+      var tag = r.href ? 'a' : r.run ? 'button' : 'div';   // 2.3.0 : une ligne peut lancer une action (run)
+      h += '<' + tag + ' class="lo-foot-row"' + (r.href ? ' href="' + esc(r.href) + '"' : '') + (!r.href && r.run ? ' type="button" data-lo-row="' + i + '"' : '') + (r.title ? ' title="' + esc(r.title) + '"' : '') + '>' +
         (r.icon ? svgIcon(r.icon) : '<span class="lo-dot' + (r.tone ? ' lo-' + esc(r.tone) : '') + '"></span>') + '<span class="lo-t">' + esc(r.label) + '</span></' + tag + '>';
     });
     if (s.version) h += '<a class="lo-foot-row lo-foot-ver" href="' + esc(s.version.href || '#') + '" title="' + esc(s.version.title || 'Notes de version') + '">' + svgIcon('tag') + '<span class="lo-t">' + esc(s.version.label) + '</span></a>';
@@ -118,6 +118,8 @@
     if (foot.el !== el) {
       el.classList.add('lo-foot');
       el.addEventListener('click', function (e) {
+        var row = e.target.closest('[data-lo-row]');
+        if (row) { var r = (foot.spec.rows || [])[+row.getAttribute('data-lo-row')]; if (r && r.run) r.run(e); return; }
         var b = e.target.closest('[data-lo-tool]'); if (!b) return;
         var k = b.getAttribute('data-lo-tool');
         if (k === 'mode') { cycleMode(); return; }
@@ -137,11 +139,21 @@
   var SIDE_KEY = 'labs.side';
   function sideMini() { return root.classList.contains('lo-side-mini'); }
   if (load(SIDE_KEY, '') === 'mini') root.classList.add('lo-side-mini');
+  /* 2.3.0 : un texte nu dans une entrée du menu (ex. Svelte : <a><svg/>Sauvegardes</a>) est enveloppé dans .lo-t,
+     pour que le mode réduit le masque comme les autres. */
+  function wrapNavText() {
+    document.querySelectorAll('.lo-side .lo-nav a, .lo-side .lo-nav .lo-nav-it').forEach(function (a) {
+      for (var n = a.firstChild; n; n = n.nextSibling) {
+        if (n.nodeType === 3 && n.nodeValue.trim()) { var sp = document.createElement('span'); sp.className = 'lo-t'; a.insertBefore(sp, n); sp.appendChild(n); n = sp; }
+      }
+    });
+  }
   function sideTitles() {
     var mini = sideMini();
+    wrapNavText();
     document.querySelectorAll('.lo-side .lo-nav a, .lo-side .lo-nav .lo-nav-it, .lo-side .lo-foot-row').forEach(function (a) {
-      var t = a.querySelector('.lo-t'); if (!t) return;
-      var label = (t.textContent || '').trim();
+      var t = a.querySelector('.lo-t, .grow') || a;
+      var label = (a.getAttribute('aria-label') || t.textContent || '').trim(); if (!label) return;
       if (mini) { if (!a.hasAttribute('title')) { a.setAttribute('title', label); a.setAttribute('data-lo-tip', '1'); } }
       else if (a.getAttribute('data-lo-tip')) { a.removeAttribute('title'); a.removeAttribute('data-lo-tip'); }
     });
@@ -214,7 +226,7 @@
 
   /* Titres entre crochets, coins en crochet sur les cartes */
   function decorate() {
-    if (sideMini()) sideTitles();
+    if (document.querySelector('.lo-side .lo-nav')) sideTitles();
     if (opts.title) document.querySelectorAll(opts.title).forEach(function (h) { if (!h.closest('.lo-palette')) h.classList.add('lo-br'); });
     if (opts.cards) document.querySelectorAll(opts.cards).forEach(function (c) {
       if (c.classList.contains('lo-card')) return;

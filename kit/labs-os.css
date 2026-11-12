@@ -156,7 +156,8 @@ html.lo-on.lo-no-status body { padding-bottom: 0; }
 .lo-foot { display: grid; gap: .375rem; padding-top: .625rem; border-top: 1px solid var(--lo-line); font: 400 var(--lo-fs-xs)/1.35 var(--lo-font-sans); color: var(--lo-muted); }
 .lo-foot-st { display: grid; gap: .125rem; }
 .lo-foot .lo-foot-row { display: flex; align-items: center; gap: .5rem; min-width: 0; min-height: 1.625rem; padding: .125rem .375rem; margin: 0 -.375rem; border: 0; border-radius: var(--lo-r-sm); background: none; color: inherit; font: inherit; text-align: left; text-decoration: none; }
-.lo-foot a.lo-foot-row:hover { background: var(--lo-s2); color: var(--lo-text); }
+.lo-foot a.lo-foot-row:hover, .lo-foot button.lo-foot-row:hover { background: var(--lo-s2); color: var(--lo-text); }
+.lo-foot button.lo-foot-row { cursor: pointer; width: 100%; }
 .lo-foot .lo-t { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .lo-foot .lo-dot { flex: none; width: .4375rem; height: .4375rem; margin: 0 .1875rem; border-radius: 50%; background: var(--lo-faint); }
 .lo-foot .lo-dot.lo-ok { background: var(--lo-ok); } .lo-foot .lo-dot.lo-warn { background: var(--lo-warn); }
@@ -447,7 +448,7 @@ html.lo-on code, html.lo-on pre, html.lo-on samp { font-family: var(--lo-font-co
 .lo-nav .lo-n { min-width: 22px; height: 20px; padding: 0 7px; display: grid; place-items: center; border-radius: 999px; background: var(--lo-s3); color: var(--lo-text); font: 600 12px/1 var(--lo-font-sans); }
 .lo-side > .lo-foot { margin-top: auto; padding: 8px 4px 0; border-top: 1px solid var(--lo-line); font: 400 12px/1.35 var(--lo-font-sans); }
 .lo-foot .lo-foot-row { min-height: 26px; padding: 2px 8px; margin: 0; border-radius: 8px; }
-.lo-foot a.lo-foot-row:hover { background: color-mix(in srgb, var(--lo-s3) 70%, transparent); }
+.lo-foot a.lo-foot-row:hover, .lo-foot button.lo-foot-row:hover { background: color-mix(in srgb, var(--lo-s3) 70%, transparent); }
 .lo-foot .lo-foot-ver { font-family: var(--lo-font-sans); font-size: 12px; }
 .lo-foot .lo-tool { width: 36px; height: 36px; border-radius: 50%; }
 .lo-foot .lo-tool:hover, .lo-foot .lo-tool[aria-current="page"] { background: var(--lo-s3); color: var(--lo-text); }
@@ -531,22 +532,36 @@ html.lo-on body { overflow-wrap: break-word; word-break: normal; hyphens: manual
 .lo-side-toggle:hover { background: color-mix(in srgb, var(--lo-s3) 70%, transparent); color: var(--lo-text); }
 .lo-side-toggle:focus-visible { outline: none; box-shadow: var(--lo-ring, 0 0 0 2px var(--lo-accent)); }
 .lo-side-toggle svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+/* 2.3.0 : réduit / étendu sans à-coup. Rien ne change de place : les icônes, le logo et les points d'état gardent leur
+   position, la colonne se resserre et les textes s'effacent en fondu (ils sont rognés, jamais retirés d'un coup).
+   Tout ce qui n'est pas une icône dans une entrée du menu est un texte, quel que soit son balisage (les textes nus
+   sont enveloppés dans .lo-t par le kit). Réduit, le bouton de dépliage prend la place du logo au survol. */
 @media (min-width: 52.0625rem) {
-  .lo-shell { transition: grid-template-columns .2s var(--lo-ease, ease); }
-  html.lo-side-mini { --lo-side-w: 4.5rem; }
-  html.lo-side-mini .lo-side { padding-left: 8px; padding-right: 8px; overflow-x: hidden; }
-  html.lo-side-mini .lo-side-head { flex-direction: column; justify-content: flex-start; gap: 6px; height: auto; padding: 4px 0; }
-  html.lo-side-mini .lo-brand { justify-content: center; width: 100%; }
-  html.lo-side-mini .lo-side-toggle { margin: 0 auto; }
-  html.lo-side-mini .lo-wm, html.lo-side-mini .lo-nav-title, html.lo-side-mini .lo-side .lo-label,
-  html.lo-side-mini .lo-nav .lo-t, html.lo-side-mini .lo-nav .lo-n, html.lo-side-mini .lo-foot .lo-t { display: none; }
-  html.lo-side-mini .lo-nav { gap: 6px; }
-  html.lo-side-mini .lo-nav-sec + .lo-nav-sec { padding-top: 6px; border-top: 1px solid var(--lo-line); }
-  html.lo-side-mini .lo-nav a, html.lo-side-mini .lo-nav .lo-nav-it { justify-content: center; padding: 0; }
-  html.lo-side-mini .lo-foot-st { justify-items: center; }
-  html.lo-side-mini .lo-foot .lo-foot-row { justify-content: center; padding: 2px; }
-  html.lo-side-mini .lo-foot-tools { flex-direction: column; }
-  html.lo-side-mini .lo-foot-tools .lo-sp { flex: none; height: 4px; }
+  .lo-shell { transition: grid-template-columns .22s var(--lo-ease, ease); }
+  html.lo-side-mini { --lo-side-w: 4.25rem; }
+  .lo-side { overflow-x: hidden; }
+  .lo-side .lo-wm, .lo-side .lo-nav-title, .lo-side .lo-label,
+  .lo-side .lo-nav a > :not(svg):not(img):not(.lo-ico), .lo-side .lo-nav .lo-nav-it > :not(svg):not(img):not(.lo-ico),
+  .lo-side .lo-foot .lo-t, .lo-side .lo-foot-row > :not(svg):not(img):not(.lo-dot):not(i) { transition: opacity .16s var(--lo-ease, ease); }
+  .lo-side .lo-nav a, .lo-side .lo-nav .lo-nav-it, .lo-side .lo-foot-row, .lo-side .lo-brand { white-space: nowrap; overflow: hidden; }
+  .lo-side-head { position: relative; }
+  html.lo-side-mini .lo-wm, html.lo-side-mini .lo-side .lo-label,
+  html.lo-side-mini .lo-side .lo-nav a > :not(svg):not(img):not(.lo-ico), html.lo-side-mini .lo-side .lo-nav .lo-nav-it > :not(svg):not(img):not(.lo-ico),
+  html.lo-side-mini .lo-side .lo-foot .lo-t, html.lo-side-mini .lo-side .lo-foot-row > :not(svg):not(img):not(.lo-dot):not(i) { opacity: 0; pointer-events: none; }
+  /* titres de catégorie : la place reste (pas de saut vertical), un filet court remplace le mot */
+  html.lo-side-mini .lo-side .lo-nav-title { color: transparent; background: linear-gradient(var(--lo-line), var(--lo-line)) 12px 60% / 24px 1px no-repeat; }
+  /* icônes un peu plus grandes une fois seules, sans bouger leur centre */
+  html.lo-side-mini .lo-side .lo-nav a > svg, html.lo-side-mini .lo-side .lo-nav .lo-nav-it > svg, html.lo-side-mini .lo-side .lo-nav a .lo-ico { width: 21px; height: 21px; margin: 0 1.5px; }
+  .lo-side .lo-nav a > svg, .lo-side .lo-nav .lo-nav-it > svg, .lo-side .lo-nav a .lo-ico { transition: width .22s var(--lo-ease, ease), height .22s var(--lo-ease, ease), margin .22s var(--lo-ease, ease); }
+  /* bouton de dépliage : à droite quand le menu est ouvert, sur le logo (au survol) quand il est réduit */
+  html.lo-side-mini .lo-side-toggle { position: absolute; left: 6px; top: 50%; margin: -16px 0 0; opacity: 0; }
+  html.lo-side-mini .lo-side-head:hover .lo-side-toggle, html.lo-side-mini .lo-side-toggle:focus-visible { opacity: 1; background: var(--lo-s2); }
+  html.lo-side-mini .lo-side-head:hover .lo-brand img, html.lo-side-mini .lo-side-head:hover .lo-brand > svg { opacity: 0; }
+  .lo-side-toggle, .lo-brand img, .lo-brand > svg { transition: opacity .16s var(--lo-ease, ease), background-color 150ms; }
+  /* pied : les outils passent à la ligne d'eux-mêmes quand la colonne se resserre */
+  .lo-side .lo-foot-tools { flex-wrap: wrap; }
+  html.lo-side-mini .lo-foot-tools { justify-content: center; }
+  html.lo-side-mini .lo-foot-tools .lo-sp { display: none; }
 }
 @media (max-width: 52rem) { .lo-side-toggle { display: none; } }
-@media (prefers-reduced-motion: reduce) { .lo-shell { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .lo-shell, .lo-side, .lo-side * { transition: none !important; } }
