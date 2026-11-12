@@ -9,8 +9,8 @@
 | Rôle | Construction de DJ sets sur timeline : on pose des morceaux de Crate et on dessine chaque transition (volume, égaliseur, filtre, effets, tempo) ; pas de mix en direct |
 | Nom du conteneur | `mixer-labs` |
 | Couleur | **Lime** `#8ef26a` (sombre), `#34791b` sur fond clair (5,4:1 sur blanc) |
-| Logo | [`../../logos/mixer-labs.svg`](../../logos/mixer-labs.svg) — initiale M entre crochets. PNG pour Unraid à exporter |
-| Icône Unraid | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/mixer-labs.png` (à déposer) |
+| Logo | [`../../logos/mixer-labs.svg`](../../logos/mixer-labs.svg) — initiale M entre crochets. PNG 256 px : [`../../logos/mixer-labs.png`](../../logos/mixer-labs.png) |
+| Icône Unraid | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/mixer-labs.png` |
 | Technologie de l'interface | React 19, TypeScript, Vite, Tailwind v4 ; kit Labs OS dans `frontend/public/labs-os/` |
 | Appli liée | Crate (bibliothèque musicale, appli associée hors suite) : Mixer Labs lit ses morceaux et ses playlists |
 | État | en conception |
