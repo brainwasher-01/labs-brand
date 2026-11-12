@@ -18,7 +18,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '2.4.0';
+  var KIT_VERSION = '2.5.0';
   var APPS = [
     { id: 'backup',  name: 'Backup .labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet .labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
@@ -27,7 +27,9 @@
     { id: 'plex',    name: 'Plex .labs',    color: '#f2b84b', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
     { id: 'mixer',   name: 'Mixer .labs',   color: '#8ef26a', d: 'M25 44V20l7 12 7-12v24' },
     // 2.4.0 : Crate entre dans la suite hors du schéma « … Labs » : nom seul, logo C vinyle (apps/crate/logo/crate.svg)
-    { id: 'crate',   name: 'Crate',         color: '#d9701f', host: 'crate', svg: '<svg viewBox="0 0 512 512" aria-hidden="true"><defs><mask id="lo-crate-c"><rect width="512" height="512" fill="#000"/><circle cx="256" cy="256" r="196" fill="#fff"/><circle cx="256" cy="256" r="104" fill="#000"/><path d="M256 256L512 196V316Z" fill="#000"/></mask></defs><rect width="512" height="512" rx="112" fill="#18181b"/><g mask="url(#lo-crate-c)" fill="none" stroke="#f0f0f2" stroke-width="9"><circle cx="256" cy="256" r="190"/><circle cx="256" cy="256" r="166"/><circle cx="256" cy="256" r="142"/><circle cx="256" cy="256" r="118"/></g><circle cx="256" cy="256" r="22" fill="#d9701f"/></svg>' }
+    { id: 'crate',   name: 'Crate',         color: '#d9701f', host: 'crate', svg: '<svg viewBox="0 0 512 512" aria-hidden="true"><defs><mask id="lo-crate-c"><rect width="512" height="512" fill="#000"/><circle cx="256" cy="256" r="196" fill="#fff"/><circle cx="256" cy="256" r="104" fill="#000"/><path d="M256 256L512 196V316Z" fill="#000"/></mask></defs><rect width="512" height="512" rx="112" fill="#18181b"/><g mask="url(#lo-crate-c)" fill="none" stroke="#f0f0f2" stroke-width="9"><circle cx="256" cy="256" r="190"/><circle cx="256" cy="256" r="166"/><circle cx="256" cy="256" r="142"/><circle cx="256" cy="256" r="118"/></g><circle cx="256" cy="256" r="22" fill="#d9701f"/></svg>' },
+    // 2.5.0 : Digger entre dans la suite hors du schéma « … Labs » : nom seul, logo propre (logos/digger.svg)
+    { id: 'digger',  name: 'Digger',        color: '#e45bd0', host: 'digger', svg: '<svg viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="#18181b"/><g fill="#18181b" stroke="#f0f0f2" stroke-width="9" stroke-linejoin="round"><rect x="168" y="166" width="176" height="176" rx="6" transform="rotate(-20 256 416)"/><circle cx="256" cy="120" r="64"/><circle cx="256" cy="120" r="44" fill="none"/><rect x="168" y="166" width="176" height="176" rx="6"/><rect x="168" y="166" width="176" height="176" rx="6" transform="rotate(18 256 416)"/><rect x="104" y="288" width="304" height="136" rx="16"/><rect x="208" y="320" width="96" height="26" rx="13" fill="none"/></g><circle cx="256" cy="120" r="20" fill="#e45bd0"/></svg>' }
   ];
   var ICONS = {
     search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
@@ -67,7 +69,7 @@
   function norm(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
   function svgIcon(n) { return '<svg viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[n] || ICONS.arrow) + '</svg>'; }
   function logo(a) {
-    if (a.svg) return a.svg;   // logo propre (Crate)
+    if (a.svg) return a.svg;   // logo propre (Crate, Digger)
     return '<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="12" fill="#0b1015" stroke="' + a.color + '" stroke-width="2.5"/>' +
       '<path d="M20 17h-6v30h6M44 17h6v30h-6" fill="none" stroke="' + a.color + '" stroke-width="4" stroke-linecap="square"/>' +
       '<path d="' + a.d + '" fill="none" stroke="' + a.color + '" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -186,7 +188,7 @@
   function urlFor(id) {
     if (opts.suite && opts.suite[id]) return opts.suite[id];
     var s = savedUrls(); if (s[id]) return s[id];
-    var m = location.hostname.match(/^(?:(?:backup|projet|torrent|finance|plex|mixer|asset)-labs|crate)(\..+)$/);
+    var m = location.hostname.match(/^(?:(?:backup|projet|torrent|finance|plex|mixer|asset)-labs|crate|digger)(\..+)$/);
     var app = APPS.filter(function (x) { return x.id === id; })[0];
     if (m) return location.protocol + '//' + (app && app.host ? app.host : id + '-labs') + m[1] + (location.port ? ':' + location.port : '') + '/';
     return null;
@@ -215,7 +217,7 @@
 
     var scrim = document.createElement('div'); scrim.className = 'lo-scrim';
     scrim.innerHTML = '<div class="lo-palette" role="dialog" aria-modal="true" aria-label="Palette de commandes"><div class="lo-palette-in"><span class="lo-b">[</span><input type="text" autocomplete="off" spellcheck="false" aria-label="Commande" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="lo-pal-list"><span class="lo-b">]</span></div><ul id="lo-pal-list" role="listbox" aria-label="Résultats"></ul>' +
-      '<div class="lo-palette-foot"><span><kbd>↑</kbd> <kbd>↓</kbd> naviguer</span><span><kbd>Entrée</kbd> ouvrir</span><span><kbd>1</kbd>–<kbd>7</kbd> changer d\'appli</span><span><kbd>Échap</kbd> fermer</span></div></div>';
+      '<div class="lo-palette-foot"><span><kbd>↑</kbd> <kbd>↓</kbd> naviguer</span><span><kbd>Entrée</kbd> ouvrir</span><span><kbd>1</kbd>–<kbd>8</kbd> changer d\'appli</span><span><kbd>Échap</kbd> fermer</span></div></div>';
     document.body.appendChild(scrim); els.scrim = scrim; els.input = scrim.querySelector('input'); els.list = scrim.querySelector('ul');
     scrim.addEventListener('click', function (e) { if (e.target === scrim) closePalette(); var it = e.target.closest('.lo-it'); if (it) runItem(+it.getAttribute('data-i')); });
     els.input.addEventListener('input', function () { sel = 0; drawPalette(); });
