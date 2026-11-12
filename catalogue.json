@@ -144,7 +144,6 @@
       "theme": "apps/mixer-labs/theme.md",
       "logo_svg": "logos/mixer-labs.svg",
       "logo_png": "logos/mixer-labs.png",
-      "logo_png_status": "à exporter",
       "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/mixer-labs.png",
       "repository": "brainwasher-01/mixer-labs",
       "kit_dir": "frontend/public/labs-os"
@@ -198,7 +197,6 @@
       "theme": "apps/digger/theme.md",
       "logo_svg": "logos/digger.svg",
       "logo_png": "logos/digger.png",
-      "logo_png_status": "à exporter",
       "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/digger.png",
       "kit_dir": "frontend/public/labs-os"
     }
