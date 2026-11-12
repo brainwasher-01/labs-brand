@@ -18,8 +18,8 @@ coller l'adresse, *Apply*.
 | Projet Labs | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/projet-labs.png` |
 | Torrent Labs | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/torrent-labs.png` |
 | Dashboard Labs | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/dashboard-labs.png` |
-| Mixer Labs | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/mixer-labs.png` (PNG à déposer) |
-| Digger | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/digger.png` (PNG à déposer) |
+| Mixer Labs | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/mixer-labs.png` |
+| Digger | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/digger.png` |
 | Suite (dossier « Labs ») | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/labs.png` |
 
 Copier un PNG à la main dans le cache d'Unraid ne suffit pas : sans adresse
