@@ -8,7 +8,7 @@ jour par **propagation**.
 ## Ce que le kit apporte
 
 Pas de dock d'applis : retiré en 1.1.0 à la demande d'Aurélien. On passe
-d'une appli à l'autre avec les touches `1` à `5` (depuis 1.3.0, la palette ne
+d'une appli à l'autre avec les touches `1` à `6` (depuis 1.3.0, la palette ne
 propose plus d'ouvrir une autre appli).
 
 Depuis **1.3.0**, le kit fournit aussi le **gabarit commun** : même menu (largeur
@@ -19,7 +19,7 @@ même tiroir sur téléphone, même échelle de texte et mêmes écarts entre bl
 | Élément | Comportement |
 |---|---|
 | **Barre de recherche** (1.3.0) | Tout en haut de chaque page, entre crochets. Les résultats s'affichent en tapant, rangés par catégorie (ceux de l'appli d'abord, puis pages et actions). `/` y place le curseur. |
-| **Palette de commandes** | `Ctrl K` (ou `Cmd K`, ou le bouton « Ctrl K » de la barre d'état) : mêmes résultats que la barre du haut, dans une fenêtre identique dans toutes les applis. Touches `1` à `5` : changer d'appli. |
+| **Palette de commandes** | `Ctrl K` (ou `Cmd K`, ou le bouton « Ctrl K » de la barre d'état) : mêmes résultats que la barre du haut, dans une fenêtre identique dans toutes les applis. Touches `1` à `6` : changer d'appli. |
 | **Menu commun** (1.3.0) | Classes `lo-side`, `lo-nav`… : largeur `--lo-side-w` (15,5 rem), catégories, entrée active teintée, pied `LabsOS.foot`. Tiroir sur téléphone (bouton menu de la barre du haut). |
 | **Barre d'état** | En bas, façon éditeur : serveur, `appli.labs vX.Y.Z`, état fourni par l'appli, mode, heure. Masquée sur téléphone. |
 | **Crochets** | Titres de page entre `[ ]`. La carte vedette (`star`) a un simple contour fin de la couleur d'appli (plus de coins en équerre depuis 1.2.0). |
@@ -54,7 +54,7 @@ d'une appli.
 <script src="/labs-os/labs-os.js"></script>
 <script>
   LabsOS.init({
-    app: 'projet',                 // backup | projet | torrent | finance | plex
+    app: 'projet',                 // backup | projet | torrent | finance | plex | mixer
     version: '1.2.0',              // affichée dans la barre d'état
     title: '.page-head h1',        // titres mis entre crochets
     cards: '.card, .panel',        // cartes de l'appli (repérées par le kit)
@@ -94,7 +94,7 @@ Options facultatives : `searchInputId` (identifiant donné au champ de la barre 
 (appelée quand le tiroir s'ouvre ou se ferme), `host` (nom affiché, défaut : nom d'hôte), `suite`
 (adresses des autres applis), `statusBar: false`, `aurora: false`,
 `paletteKey: false` (l'appli ouvre elle-même la palette avec `LabsOS.open()`),
-`appKeys: false` (désactive les touches 1 à 5), `placeholder`, `main` (sélecteur de la zone principale, défaut `main, .lo-page, [role=main]` : cible du lien d'évitement et zone rendue inerte quand le tiroir est ouvert), `skip: false` (pas de lien « Aller au contenu »).
+`appKeys: false` (désactive les touches 1 à 6 ; depuis 2.1.0, une touche par appli connue, dans l'ordre Backup, Projet, Torrent, Finance, Plex, Mixer), `placeholder`, `main` (sélecteur de la zone principale, défaut `main, .lo-page, [role=main]` : cible du lien d'évitement et zone rendue inerte quand le tiroir est ouvert), `skip: false` (pas de lien « Aller au contenu »).
 
 **Accessibilité commune (1.7.0).** Le kit ajoute lui-même un lien « Aller au contenu » (premier arrêt de Tab, visible seulement au clavier), donne la couleur `--lo-faint` (≥ 4,5:1 dans les deux modes) au texte d'exemple de tous les champs et un focus visible aux boutons de la barre d'état. Plus aucun texte du kit sous `--lo-fs-xs` (barre d'état, pied du menu, palette), seules les touches `kbd` y restent. Jeton `--lo-measure` (72 caractères) et classe `lo-prose` : la page reste pleine largeur, les lignes d'un texte long non.
 
