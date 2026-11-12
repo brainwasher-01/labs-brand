@@ -30,6 +30,24 @@ logo de la suite (`#7ee2a8` → `#6cc7f0` → `#b49cff` → `#ff9b6a`, de haut �
 gauche à bas à droite, `x1=14 y1=17 x2=50 y2=47` en coordonnées de la grille).
 Tuile, bordure 2,5 et initiale D en Lunaire `#e6edf3`. Réservée à cette appli.
 
+## Logos propres (Crate, Digger)
+
+Crate et Digger, dans la suite hors du schéma « … Labs », n'ont pas de
+crochets. Construction commune (grille 512×512) : tuile `rect w=512 h=512
+rx=112` en `#18181b`, traits `#f0f0f2` de 9, un seul point de la couleur de
+l'appli. Crate : C vinyle, `apps/crate/logo/crate.svg`. Digger :
+`logos/digger.svg`, un bac de disques vu de face où l'on fouille.
+
+| Élément (Digger) | Valeur |
+|---|---|
+| Pochettes | Trois carrés `w=176 h=176 rx=6` (`x=168 y=166`), fond `#18181b`, en éventail autour de (256, 416) : `rotate(-20)`, droite, `rotate(18)` |
+| Disque | Sorti de la pochette du milieu : cercles `r=64` et `r=44` centrés en (256, 120) |
+| Bac | Face avant `rect x=104 y=288 w=304 h=136 rx=16`, fond `#18181b` (cache le bas des pochettes) ; poignée `rect x=208 y=320 w=96 h=26 rx=13` |
+| Point | Macaron du disque, `r=20` en (256, 120), `#e45bd0` |
+
+Le kit Labs OS embarque une copie de ces logos (champ `svg` de l'appli dans
+`kit/labs-os.js`) : la changer en même temps que le fichier.
+
 ## Fichiers
 
 `logos/<appli>.svg` (vectoriel, pour l'interface et le favicon) et

@@ -12,6 +12,7 @@
 | Dashboard Labs | `#e6edf3` (Lunaire, neutre ; `#1b2230` sur fond clair) | logo (bordure et initiale ; crochets en dégradé de la suite), accent |
 | Mixer Labs | `#8ef26a` (Lime, 104° ; `#34791b` sur fond clair, 5,4:1 sur blanc) | logo, accent, piste A du studio |
 | Crate | `#d9701f` (orange, 26° ; `#a85310` sur fond clair, 5,4:1 sur blanc) : **dérogation** à la règle des 40° (identité installée, décision d'Aurélien du 2026-11-12) | trou du vinyle du logo, accent |
+| Digger | `#e45bd0` (Fuchsia, 309° ; `#a8279a` sur fond clair, 6,1:1 sur blanc) : **dérogation** à la règle des 40° (14° du rose réservé, 54° de Projet Labs ; décision d'Aurélien du 2026-11-12) | macaron du disque du logo, accent |
 
 Une nouvelle appli prend une teinte libre **de même clarté** (lisible sur
 `#0b1015` comme sur blanc), différente des autres d'au moins 40° de teinte.
@@ -21,7 +22,8 @@ une seule appli de la suite peut être neutre.
 **Place restante** (au 2026-11-12) : Mixer Labs (104°) a pris la dernière
 plage libre (79° à 106°). Avec les six teintes et le rose réservé, aucune
 teinte n'est plus à 40° de toutes les autres : une nouvelle appli prendra le
-rose réservé ou demandera de revoir la règle.
+rose réservé ou demandera de revoir la règle. Digger (309°) a pris le fuchsia
+en dérogation, à 14° du rose réservé, qui reste réservé.
 
 ## Couleur réservée
 

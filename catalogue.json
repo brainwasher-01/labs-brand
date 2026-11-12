@@ -178,6 +178,29 @@
       "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/apps/crate/logo/crate.png",
       "kit_dir": "frontend/public/labs-os",
       "kit_status": "à brancher"
+    },
+    {
+      "id": "digger",
+      "name": "Digger",
+      "wordmark": "Digger",
+      "initial": null,
+      "color": "#e45bd0",
+      "color_text_on_light": "#a8279a",
+      "color_name": "Fuchsia",
+      "role": "Trouve et télécharge la musique sur Soulseek (slskd) et la remet à Crate, qui garde la curation et les imports : recherche, transferts, demandes de Crate, artistes et labels suivis",
+      "suite": true,
+      "suite_note": "dans la suite depuis le 2026-11-12, hors du schéma « … Labs » : nom « Digger » seul, logo propre sur la construction de Crate ; couleur en dérogation à la règle des 40° (14° du rose réservé, 54° de Projet Labs)",
+      "repository": "brainwasher-01/digger",
+      "container": "digger",
+      "status": "en construction",
+      "charter_status": "complète",
+      "charter": "apps/digger/README.md",
+      "theme": "apps/digger/theme.md",
+      "logo_svg": "logos/digger.svg",
+      "logo_png": "logos/digger.png",
+      "logo_png_status": "à exporter",
+      "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/digger.png",
+      "kit_dir": "frontend/public/labs-os"
     }
   ],
   "associated_apps": [],
@@ -186,7 +209,7 @@
   ],
   "kit": {
     "name": "Labs OS",
-    "version": "2.4.0",
+    "version": "2.5.0",
     "path": "kit/",
     "doc": "docs/labs-os.md",
     "dispatch_event": "labs-kit"

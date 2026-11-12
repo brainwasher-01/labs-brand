@@ -15,6 +15,7 @@ de couleur ou de charte.
 | [Dashboard Labs](apps/dashboard-labs/README.md) (en conception) | `dashboard.labs` | Lunaire `#e6edf3` (`#1b2230` sur fond clair), crochets du logo en dégradé de la suite | ![](logos/dashboard-labs.svg) | Page d'accueil et tableau de bord du quotidien (ordinateur, iPad, iPhone) : Skynet, médias, maison, journée, veille, accès rapide, avec un assistant qui agit | complète | [thèmes](apps/dashboard-labs/theme.md) |
 | [Mixer Labs](apps/mixer-labs/README.md) (en conception) | `mixer.labs` | Lime `#8ef26a` (`#34791b` sur fond clair) | ![](logos/mixer-labs.svg) | Construction de DJ sets sur timeline : on pose des morceaux de Crate et on dessine chaque transition (volume, égaliseur, filtre, effets, tempo) ; pas de mix en direct | complète | [thèmes](apps/mixer-labs/theme.md) |
 | [Crate](apps/crate/README.md) | `Crate` (sans « .labs ») | `#d9701f` (`#a85310` sur fond clair ; dérogation à la règle des 40°) | ![](apps/crate/logo/crate.svg) | Curation d'une bibliothèque musicale auto-hébergée : fiches, notes, playlists, qualité des métadonnées, nouveautés des artistes suivis, lecteur audio (téléchargements dans Digger) | complète | [thèmes](apps/crate/theme.md) |
+| [Digger](apps/digger/README.md) (en construction) | `Digger` (sans « .labs ») | Fuchsia `#e45bd0` (`#a8279a` sur fond clair ; dérogation à la règle des 40°) | ![](logos/digger.svg) | Trouve et télécharge la musique sur Soulseek (slskd) et la remet à Crate, qui garde la curation et les imports : recherche, transferts, demandes de Crate, artistes et labels suivis | complète | [thèmes](apps/digger/theme.md) |
 
 Couleur réservée : rose `#f27ec6`, gardé pour un futur projet.
 
@@ -22,7 +23,7 @@ Couleur réservée : rose `#f27ec6`, gardé pour un futur projet.
 
 | Sujet | Document |
 |---|---|
-| **Interface commune Labs OS** (kit 2.1.0, propagé depuis Projet Labs) | [docs/labs-os.md](docs/labs-os.md), [kit/](kit/) |
+| **Interface commune Labs OS** (kit 2.5.0, propagé depuis Projet Labs) | [docs/labs-os.md](docs/labs-os.md), [kit/](kit/) |
 | Principes | [docs/principes.md](docs/principes.md) |
 | Thèmes (Labs OS + pont de chaque appli) | [docs/themes.md](docs/themes.md) |
 | Couleurs | [docs/couleurs.md](docs/couleurs.md) |
