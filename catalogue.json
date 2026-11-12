@@ -1,6 +1,6 @@
 {
   "suite": "Labs",
-  "updated": "2026-11-09",
+  "updated": "2026-11-12",
   "repository": "https://github.com/brainwasher-01/labs-brand",
   "common_docs": {
     "principes": "docs/principes.md",
@@ -127,6 +127,27 @@
       "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/dashboard-labs.png",
       "repository": "brainwasher-01/dashboard-labs",
       "kit_dir": "static/labs-os"
+    },
+    {
+      "id": "mixer-labs",
+      "name": "Mixer Labs",
+      "wordmark": "mixer.labs",
+      "initial": "M",
+      "color": "#8ef26a",
+      "color_text_on_light": "#34791b",
+      "color_name": "Lime",
+      "role": "Construction de DJ sets sur timeline : on pose des morceaux de Crate et on dessine chaque transition (volume, égaliseur, filtre, effets, tempo) ; pas de mix en direct",
+      "container": "mixer-labs",
+      "status": "en conception",
+      "charter_status": "complète",
+      "charter": "apps/mixer-labs/README.md",
+      "theme": "apps/mixer-labs/theme.md",
+      "logo_svg": "logos/mixer-labs.svg",
+      "logo_png": "logos/mixer-labs.png",
+      "logo_png_status": "à exporter",
+      "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/mixer-labs.png",
+      "repository": "brainwasher-01/mixer-labs",
+      "kit_dir": "frontend/public/labs-os"
     }
   ],
   "associated_apps": [
@@ -164,7 +185,7 @@
   ],
   "kit": {
     "name": "Labs OS",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "path": "kit/",
     "doc": "docs/labs-os.md",
     "dispatch_event": "labs-kit"

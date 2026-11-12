@@ -21,6 +21,7 @@ Initiales existantes (chemins SVG) :
 | P (Projet Labs et Plex Labs, de couleurs différentes) | `M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26` |
 | T | `M24 20h16 M32 20v24` |
 | D | `M26 20h4.5a12 12 0 0 1 0 24H26z` |
+| M | `M25 44V20l7 12 7-12v24` |
 
 ## Variante prisme (Dashboard Labs)
 

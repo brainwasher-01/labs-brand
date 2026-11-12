@@ -13,6 +13,7 @@ de couleur ou de charte.
 | [Projet Labs](apps/projet-labs/README.md) | `projet.labs` | `#b49cff` | ![](logos/projet-labs.svg) | Base de connaissances Markdown versionnée, pont MCP avec Claude, restauration en un clic ; cohérence de la suite et propagation de Labs OS | complète | [thèmes](apps/projet-labs/theme.md) |
 | [Torrent Labs](apps/torrent-labs/README.md) | `torrent.labs` | `#ff9b6a` | ![](logos/torrent-labs.svg) | Recherche de torrents sur tous les indexeurs de Prowlarr, résultats en direct, envoi vers qBittorrent (ex-TorrentScope) | complète | [thèmes](apps/torrent-labs/theme.md) |
 | [Dashboard Labs](apps/dashboard-labs/README.md) (en conception) | `dashboard.labs` | Lunaire `#e6edf3` (`#1b2230` sur fond clair), crochets du logo en dégradé de la suite | ![](logos/dashboard-labs.svg) | Page d'accueil et tableau de bord du quotidien (ordinateur, iPad, iPhone) : Skynet, médias, maison, journée, veille, accès rapide, avec un assistant qui agit | complète | [thèmes](apps/dashboard-labs/theme.md) |
+| [Mixer Labs](apps/mixer-labs/README.md) (en conception) | `mixer.labs` | Lime `#8ef26a` (`#34791b` sur fond clair) | ![](logos/mixer-labs.svg) | Construction de DJ sets sur timeline : on pose des morceaux de Crate et on dessine chaque transition (volume, égaliseur, filtre, effets, tempo) ; pas de mix en direct | complète | [thèmes](apps/mixer-labs/theme.md) |
 
 Couleur réservée : rose `#f27ec6`, gardé pour un futur projet.
 
@@ -31,7 +32,7 @@ dossier `apps/<appli>/`.
 
 | Sujet | Document |
 |---|---|
-| **Interface commune Labs OS** (kit 2.0.0, propagé depuis Projet Labs) | [docs/labs-os.md](docs/labs-os.md), [kit/](kit/) |
+| **Interface commune Labs OS** (kit 2.1.0, propagé depuis Projet Labs) | [docs/labs-os.md](docs/labs-os.md), [kit/](kit/) |
 | Principes | [docs/principes.md](docs/principes.md) |
 | Thèmes (Labs OS + pont de chaque appli) | [docs/themes.md](docs/themes.md) |
 | Couleurs | [docs/couleurs.md](docs/couleurs.md) |
