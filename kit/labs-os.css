@@ -27,7 +27,7 @@
 
 @property --lo-app { syntax: '<color>'; inherits: true; initial-value: #7ee2a8; }
 
-/* ── Jetons ─────────────────────────────────────────────────────────────── */
+/* ── Jetons ───────────────────────────────────────────────────────────────── */
 :root {
   --lo-font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --lo-font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
@@ -61,7 +61,7 @@
   --lo-ctl-gap: .5rem;                   /* entre deux contrôles d'une même rangée */
   /* Couleur de chaque appli : [sombre] et variante foncée [clair] ≥ 4,5:1 sur blanc */
   --lo-c-backup: #7ee2a8; --lo-c-projet: #b49cff; --lo-c-torrent: #ff9b6a; --lo-c-finance: #6cc7f0; --lo-c-plex: #f2b84b;
-  --lo-c-mixer: #8ef26a; --lo-c-crate: #d9701f;
+  --lo-c-mixer: #8ef26a; --lo-c-crate: #d9701f; --lo-c-digger: #e45bd0;
 }
 :root[data-lo-app="backup"]  { --lo-app: #7ee2a8; --lo-app-ink: #13784a; }
 :root[data-lo-app="projet"]  { --lo-app: #b49cff; --lo-app-ink: #5b3fd1; }
@@ -70,6 +70,7 @@
 :root[data-lo-app="plex"]    { --lo-app: #f2b84b; --lo-app-ink: #8a5c00; }
 :root[data-lo-app="mixer"]   { --lo-app: #8ef26a; --lo-app-ink: #34791b; }
 :root[data-lo-app="crate"]   { --lo-app: #d9701f; --lo-app-ink: #a85310; }
+:root[data-lo-app="digger"]  { --lo-app: #e45bd0; --lo-app-ink: #a8279a; }
 
 /* Échelle (1.6.0) : le kit impose la racine — 87,5 % sur ordinateur (14 px), 100 % sous 52 rem (téléphone, petite
    tablette). Sélecteur renforcé (:root:root) : il l'emporte sur toute racine posée par une appli, quel que soit l'ordre
@@ -112,7 +113,7 @@ html.lo-on body::after { content: ""; position: fixed; inset: 0; pointer-events:
   background: radial-gradient(50rem 20rem at 22% -5rem, var(--lo-glow), transparent 70%), radial-gradient(32rem 16rem at 88% -6rem, color-mix(in srgb, var(--lo-app) 13%, transparent), transparent 70%); }
 :root[data-lo-mode="light"] .lo-aurora { opacity: .6; }
 
-/* ── Place réservée à la coque ──────────────────────────────────────────── */
+/* ── Place réservée à la coque ────────────────────────────────────────── */
 html.lo-on body { padding-bottom: var(--lo-status-h); }
 html.lo-on.lo-no-status body { padding-bottom: 0; }
 
