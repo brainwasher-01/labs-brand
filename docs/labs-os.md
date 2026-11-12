@@ -8,7 +8,7 @@ jour par **propagation**.
 ## Ce que le kit apporte
 
 Pas de dock d'applis : retiré en 1.1.0 à la demande d'Aurélien. On passe
-d'une appli à l'autre avec les touches `1` à `6` (depuis 1.3.0, la palette ne
+d'une appli à l'autre avec les touches `1` à `8` (depuis 1.3.0, la palette ne
 propose plus d'ouvrir une autre appli).
 
 Depuis **1.3.0**, le kit fournit aussi le **gabarit commun** : même menu (largeur
@@ -19,7 +19,7 @@ même tiroir sur téléphone, même échelle de texte et mêmes écarts entre bl
 | Élément | Comportement |
 |---|---|
 | **Barre de recherche** (1.3.0) | Tout en haut de chaque page, entre crochets. Les résultats s'affichent en tapant, rangés par catégorie (ceux de l'appli d'abord, puis pages et actions). `/` y place le curseur. |
-| **Palette de commandes** | `Ctrl K` (ou `Cmd K`, ou le bouton « Ctrl K » de la barre d'état) : mêmes résultats que la barre du haut, dans une fenêtre identique dans toutes les applis. Touches `1` à `6` : changer d'appli. |
+| **Palette de commandes** | `Ctrl K` (ou `Cmd K`, ou le bouton « Ctrl K » de la barre d'état) : mêmes résultats que la barre du haut, dans une fenêtre identique dans toutes les applis. Touches `1` à `8` : changer d'appli. |
 | **Menu commun** (1.3.0) | Classes `lo-side`, `lo-nav`… : largeur `--lo-side-w` (15,5 rem), catégories, entrée active teintée, pied `LabsOS.foot`. Tiroir sur téléphone (bouton menu de la barre du haut). |
 | **Barre d'état** | En bas, façon éditeur : serveur, `appli.labs vX.Y.Z`, état fourni par l'appli, mode, heure. Masquée sur téléphone. |
 | **Crochets** | Titres de page entre `[ ]`. La carte vedette (`star`) a un simple contour fin de la couleur d'appli (plus de coins en équerre depuis 1.2.0). |
@@ -54,7 +54,7 @@ d'une appli.
 <script src="/labs-os/labs-os.js"></script>
 <script>
   LabsOS.init({
-    app: 'projet',                 // backup | projet | torrent | finance | plex | mixer
+    app: 'projet',                 // backup | projet | torrent | finance | plex | mixer | crate | digger
     version: '1.2.0',              // affichée dans la barre d'état
     title: '.page-head h1',        // titres mis entre crochets
     cards: '.card, .panel',        // cartes de l'appli (repérées par le kit)
@@ -94,7 +94,7 @@ Options facultatives : `searchInputId` (identifiant donné au champ de la barre 
 (appelée quand le tiroir s'ouvre ou se ferme), `host` (nom affiché, défaut : nom d'hôte), `suite`
 (adresses des autres applis), `statusBar: false`, `aurora: false`,
 `paletteKey: false` (l'appli ouvre elle-même la palette avec `LabsOS.open()`),
-`appKeys: false` (désactive les touches 1 à 6 ; depuis 2.1.0, une touche par appli connue, dans l'ordre Backup, Projet, Torrent, Finance, Plex, Mixer), `placeholder`, `main` (sélecteur de la zone principale, défaut `main, .lo-page, [role=main]` : cible du lien d'évitement et zone rendue inerte quand le tiroir est ouvert), `skip: false` (pas de lien « Aller au contenu »).
+`appKeys: false` (désactive les touches 1 à 8 ; depuis 2.1.0, une touche par appli connue, dans l'ordre Backup, Projet, Torrent, Finance, Plex, Mixer, Crate, Digger), `placeholder`, `main` (sélecteur de la zone principale, défaut `main, .lo-page, [role=main]` : cible du lien d'évitement et zone rendue inerte quand le tiroir est ouvert), `skip: false` (pas de lien « Aller au contenu »).
 
 **Accessibilité commune (1.7.0).** Le kit ajoute lui-même un lien « Aller au contenu » (premier arrêt de Tab, visible seulement au clavier), donne la couleur `--lo-faint` (≥ 4,5:1 dans les deux modes) au texte d'exemple de tous les champs et un focus visible aux boutons de la barre d'état. Plus aucun texte du kit sous `--lo-fs-xs` (barre d'état, pied du menu, palette), seules les touches `kbd` y restent. Jeton `--lo-measure` (72 caractères) et classe `lo-prose` : la page reste pleine largeur, les lignes d'un texte long non.
 
@@ -224,6 +224,18 @@ touche 7) avec son propre logo. Sa couleur, l'orange `#d9701f` (`#a85310` sur
 fond clair), est une dérogation à la règle des 40° (6° de Torrent, 13° de
 Plex). Les téléchargements de Crate partent dans une autre appli, Digger.
 
+## Digger : dans la suite, hors du schéma « … Labs »
+
+Depuis le 2026-11-12 (décision d'Aurélien), Digger rejoint la suite comme
+Crate : il s'appelle **Digger**, sans « .labs », et reçoit Labs OS par la
+propagation (`kit_dir` : `frontend/public/labs-os`, dépôt
+`brainwasher-01/digger`). Le kit le connaît sous l'identifiant `digger`
+(`data-lo-app="digger"`, palette, touche 8, adresse `digger.<domaine>`) avec
+son propre logo (bac de disques, construction de Crate). Sa couleur, le
+fuchsia `#e45bd0` (`#a8279a` sur fond clair), est une dérogation à la règle
+des 40° (14° du rose réservé). Digger cherche et télécharge la musique sur
+Soulseek et la remet à Crate, qui garde la curation et les imports.
+
 ## Projets créés dans Projet Labs
 
 Un projet du groupe **Labs** reprend à sa création la charte de la suite
@@ -247,6 +259,6 @@ Le kit 2.0.0 change l'apparence de toute la suite sans changer le balisage : les
 - **Composants** : boutons pleins sans contour (rayon 10 px), segments à pastille (`.lo-seg`), cartes à coins de 16 px (`.lo-panel`, `.lo-item`), pastilles « un point et un mot » (`.lo-pill`), terminal (`.lo-term`, `.lo-term-bar`, `.lo-term-lights`, `.lo-term-title`, `.lo-term-body`, couleurs `.lo-t-*`).
 - **Écarts** : 12 px entre éléments d'un bloc (`--lo-gap-sm`), 16 px entre blocs et entre colonnes (`--lo-gap`), 24 px autour des titres de page.
 - **Largeur** : le contenu prend toute la largeur disponible. Pas de colonne étroite ni de tableau partiel dans une carte large.
-- **Terminal** : tout journal de commandes garde l'allure d'un terminal (chasse fixe, fond sombre dans les deux thèmes, feux, couleurs).
+- **Terminal** : tout journal de commandes garde l'allure d'un terminal (cha sse fixe, fond sombre dans les deux thèmes, feux, couleurs).
 
 Chaque appli relie ses composants propres au kit dans une petite feuille chargée en dernier. Origine du langage visuel : HolyArrs (AGPL-3.0), dont aucun code n'est repris.
