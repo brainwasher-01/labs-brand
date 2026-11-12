@@ -172,6 +172,18 @@ touche 7) avec son propre logo. Sa couleur, l'orange `#d9701f` (`#a85310` sur
 fond clair), est une dérogation à la règle des 40° (6° de Torrent, 13° de
 Plex). Les téléchargements de Crate partent dans une autre appli, Digger.
 
+## Digger : dans la suite, hors du schéma « … Labs »
+
+Depuis le 2026-11-12 (décision d'Aurélien), Digger rejoint la suite comme
+Crate : il s'appelle **Digger**, sans « .labs », et reçoit Labs OS par la
+propagation (`kit_dir` : `frontend/public/labs-os`, dépôt
+`brainwasher-01/digger`). Le kit le connaît sous l'identifiant `digger`
+(`data-lo-app="digger"`, palette, touche 8, adresse `digger.<domaine>`) avec
+son propre logo (bac de disques, construction de Crate). Sa couleur, le
+fuchsia `#e45bd0` (`#a8279a` sur fond clair), est une dérogation à la règle
+des 40° (14° du rose réservé). Digger cherche et télécharge la musique sur
+Soulseek et la remet à Crate, qui garde la curation et les imports.
+
 ## Projets créés dans Projet Labs
 
 Un projet du groupe **Labs** reprend à sa création la charte de la suite
