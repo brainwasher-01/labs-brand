@@ -42,4 +42,4 @@ Voir [[JOURNAL]].
 
 ## Feuille de route
 - [ ] Captures des cinq applis avec le gabarit 1.3.0 dans `apps/*/captures/`
-- [ ] PNG 256 px de Digger (`logos/digger.png`) et de Mixer Labs à exporter puis déposer dans le dépôt GitHub
+- [x] PNG 256 px de Digger (`logos/digger.png`) et de Mixer Labs (`logos/mixer-labs.png`) déposés le 2026-11-12 (rendu du SVG par Browserless)
