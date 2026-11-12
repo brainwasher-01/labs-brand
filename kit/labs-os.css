@@ -27,7 +27,7 @@
 
 @property --lo-app { syntax: '<color>'; inherits: true; initial-value: #7ee2a8; }
 
-/* ── Jetons ───────────────────────────────────────────────────────────────── */
+/* ── Jetons ─────────────────────────────────────────────────────────────── */
 :root {
   --lo-font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --lo-font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
@@ -113,7 +113,7 @@ html.lo-on body::after { content: ""; position: fixed; inset: 0; pointer-events:
   background: radial-gradient(50rem 20rem at 22% -5rem, var(--lo-glow), transparent 70%), radial-gradient(32rem 16rem at 88% -6rem, color-mix(in srgb, var(--lo-app) 13%, transparent), transparent 70%); }
 :root[data-lo-mode="light"] .lo-aurora { opacity: .6; }
 
-/* ── Place réservée à la coque ────────────────────────────────────────── */
+/* ── Place réservée à la coque ──────────────────────────────────────────── */
 html.lo-on body { padding-bottom: var(--lo-status-h); }
 html.lo-on.lo-no-status body { padding-bottom: 0; }
 
