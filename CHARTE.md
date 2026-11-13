@@ -7,7 +7,7 @@
 | Appli | Nom écrit | Couleur | Rôle |
 |---|---|---|---|
 | Backup Labs | `backup.labs` | `#7ee2a8` | Sauvegarde tout-en-un pour Unraid (applications, Plex, dossiers, clé Unraid ; copies sur une autre machine) |
-| Plex Labs | `plex.labs` | `#f2b84b` | Gestion des visuels d'une médiathèque Plex : synchronisation des affiches, logos et backgrounds, création de covers, cartes d'épisodes et placeholders (ex-Asset Labs) |
+| Cover Labs (ex-Plex Labs) | `cover.labs` | `#f2b84b` | Gestion des visuels d'une médiathèque Plex : synchronisation des affiches, logos et backgrounds, création de covers, cartes d'épisodes et placeholders (ex-Asset Labs) |
 | Finance Labs | `finance.labs` | `#6cc7f0` | Finances personnelles du foyer, 100 % locales : import des relevés bancaires, comptes et titulaires, vue d'ensemble du patrimoine, simulateur |
 | Projet Labs | `projet.labs` | `#b49cff` | — |
 | Torrent Labs | `torrent.labs` | `#ff9b6a` | Recherche de torrents sur tous les indexeurs de Prowlarr, résultats en direct, envoi vers qBittorrent (ex-TorrentScope) |
@@ -98,7 +98,7 @@ d'une appli.
 <script src="/labs-os/labs-os.js"></script>
 <script>
   LabsOS.init({
-    app: 'projet',                 // backup | projet | torrent | finance | plex
+    app: 'projet',                 // backup | projet | torrent | finance | plex (Cover Labs)
     version: '1.6.0',              // affichée dans la barre d'état
     title: '.page-head h1',        // titres mis entre crochets
     cards: '.card, .panel',        // cartes qui reçoivent les coins en crochet
@@ -170,7 +170,7 @@ Il garde son **logo C vinyle** et s'appelle **Crate**, sans « .labs » : le
 kit le connaît sous l'identifiant `crate` (`data-lo-app="crate"`, palette,
 touche 7) avec son propre logo. Sa couleur, l'orange `#d9701f` (`#a85310` sur
 fond clair), est une dérogation à la règle des 40° (6° de Torrent, 13° de
-Plex). Les téléchargements de Crate partent dans une autre appli, Digger.
+Cover Labs). Les téléchargements de Crate partent dans une autre appli, Digger.
 
 ## Digger : dans la suite, hors du schéma « … Labs »
 

@@ -1,4 +1,4 @@
-# Plex Labs — écrans
+# Cover Labs (ex-Plex Labs) — écrans
 
 | Écran | Rôle |
 |---|---|

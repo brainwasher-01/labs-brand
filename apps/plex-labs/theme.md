@@ -1,4 +1,4 @@
-# Plex Labs — thèmes
+# Cover Labs (ex-Plex Labs) — thèmes
 
 ## Labs OS (thème actuel)
 
@@ -77,7 +77,7 @@ Mêmes rôles ; seules les valeurs ci-dessous changent (l'ambre d'action
 | Texte | Figtree (variable, embarquée) | 500 ; 550 menu |
 | Titres | Figtree | 750 (sections), 800 (pages) |
 | Boutons, pastilles, étiquettes | Figtree | 650 |
-| Nom écrit `plex.labs`, fichiers, chemins, heures du journal | Geist Mono (variable, embarquée) | 700 (nom), 500 |
+| Nom écrit `cover.labs` (ex-`plex.labs`), fichiers, chemins, heures du journal | Geist Mono (variable, embarquée) | 700 (nom), 500 |
 
 Tailles en `rem` : 0,75 / 0,8125 / 0,875 / 1 / 1,25 / 1,75 rem. La racine
 vaut 16 px jusqu'à 1920 px de large, puis grandit avec l'écran (24 px sur un

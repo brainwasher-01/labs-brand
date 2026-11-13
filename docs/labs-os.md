@@ -12,7 +12,7 @@ d'une appli à l'autre avec les touches `1` à `8` (depuis 1.3.0, la palette ne
 propose plus d'ouvrir une autre appli).
 
 Depuis **1.3.0**, le kit fournit aussi le **gabarit commun** : même menu (largeur
-d'Plex Labs, catégories façon Backup Labs), même barre de recherche tout en haut,
+de Cover Labs (ex-Plex Labs), catégories façon Backup Labs), même barre de recherche tout en haut,
 même tiroir sur téléphone, même échelle de texte et mêmes écarts entre blocs
 (référence : Backup Labs). Détail plus bas, « Gabarit commun ».
 
@@ -54,7 +54,7 @@ d'une appli.
 <script src="/labs-os/labs-os.js"></script>
 <script>
   LabsOS.init({
-    app: 'projet',                 // backup | projet | torrent | finance | plex | mixer | crate | digger
+    app: 'projet',                 // backup | projet | torrent | finance | plex (Cover Labs ; « cover » accepté depuis 2.6.0) | mixer | crate | digger
     version: '1.2.0',              // affichée dans la barre d'état
     title: '.page-head h1',        // titres mis entre crochets
     cards: '.card, .panel',        // cartes de l'appli (repérées par le kit)
@@ -94,7 +94,7 @@ Options facultatives : `searchInputId` (identifiant donné au champ de la barre 
 (appelée quand le tiroir s'ouvre ou se ferme), `host` (nom affiché, défaut : nom d'hôte), `suite`
 (adresses des autres applis), `statusBar: false`, `aurora: false`,
 `paletteKey: false` (l'appli ouvre elle-même la palette avec `LabsOS.open()`),
-`appKeys: false` (désactive les touches 1 à 8 ; depuis 2.1.0, une touche par appli connue, dans l'ordre Backup, Projet, Torrent, Finance, Plex, Mixer, Crate, Digger), `placeholder`, `main` (sélecteur de la zone principale, défaut `main, .lo-page, [role=main]` : cible du lien d'évitement et zone rendue inerte quand le tiroir est ouvert), `skip: false` (pas de lien « Aller au contenu »).
+`appKeys: false` (désactive les touches 1 à 8 ; depuis 2.1.0, une touche par appli connue, dans l'ordre Backup, Projet, Torrent, Finance, Cover, Mixer, Crate, Digger), `placeholder`, `main` (sélecteur de la zone principale, défaut `main, .lo-page, [role=main]` : cible du lien d'évitement et zone rendue inerte quand le tiroir est ouvert), `skip: false` (pas de lien « Aller au contenu »).
 
 **Accessibilité commune (1.7.0).** Le kit ajoute lui-même un lien « Aller au contenu » (premier arrêt de Tab, visible seulement au clavier), donne la couleur `--lo-faint` (≥ 4,5:1 dans les deux modes) au texte d'exemple de tous les champs et un focus visible aux boutons de la barre d'état. Plus aucun texte du kit sous `--lo-fs-xs` (barre d'état, pied du menu, palette), seules les touches `kbd` y restent. Jeton `--lo-measure` (72 caractères) et classe `lo-prose` : la page reste pleine largeur, les lignes d'un texte long non.
 
@@ -133,7 +133,7 @@ info-bulle (`title`). Les liens doivent garder leur texte dans un `<span class="
 pas de bouton. Options `sideToggle: false`, `onSide(mini)` ; API `LabsOS.side()` (lire) / `LabsOS.side(true|false)`.
 
 `tone` : `ok`, `warn`, `fail`, `busy` ou vide (gris). Une ligne `null` ou `hidden: true` est ignorée.
-Rappeler `LabsOS.foot` avec de nouvelles données le met à jour. Modèle : le pied d'Plex Labs.
+Rappeler `LabsOS.foot` avec de nouvelles données le met à jour. Modèle : le pied de Cover Labs (ex-Plex Labs).
 
 ### Gabarit commun (depuis 1.3.0)
 
@@ -158,7 +158,7 @@ Décidé le 2026-11-06 par Aurélien : les 5 applis ont le même menu, la même 
 
 Règles :
 
-- **Largeur du menu** : `--lo-side-w` = 15,5 rem (celle d'Plex Labs). Ligne du logo de la hauteur de la barre du haut (`--lo-top-h`).
+- **Largeur du menu** : `--lo-side-w` = 15,5 rem (celle de Cover Labs, ex-Plex Labs). Ligne du logo de la hauteur de la barre du haut (`--lo-top-h`).
 - **Pas de page « Journal », « Logs » ni « Versions » dans le menu** : on y accède par les icônes et la ligne de version
   du pied du menu ; la palette et la barre du haut les retrouvent (« Aller à »).
 - **Barre de recherche** toujours en haut, jamais dans le menu ; résultats au fil de la frappe, par catégorie.
@@ -229,7 +229,7 @@ Il garde son **logo C vinyle** et s'appelle **Crate**, sans « .labs » : le
 kit le connaît sous l'identifiant `crate` (`data-lo-app="crate"`, palette,
 touche 7) avec son propre logo. Sa couleur, l'orange `#d9701f` (`#a85310` sur
 fond clair), est une dérogation à la règle des 40° (6° de Torrent, 13° de
-Plex). Les téléchargements de Crate partent dans une autre appli, Digger.
+Cover Labs). Les téléchargements de Crate partent dans une autre appli, Digger.
 
 ## Digger : dans la suite, hors du schéma « … Labs »
 
