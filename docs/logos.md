@@ -18,7 +18,7 @@ Initiales existantes (chemins SVG) :
 |---|---|
 | B | `M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7` |
 | F | `M27 44V20h11 M27 31h9` |
-| P (Projet Labs et Plex Labs, de couleurs différentes) | `M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26` |
+| P (Projet Labs et Cover Labs, ex-Plex Labs, de couleurs différentes ; le C de Cover Labs est proposé dans [propositions.md](propositions.md)) | `M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26` |
 | T | `M24 20h16 M32 20v24` |
 | D | `M26 20h4.5a12 12 0 0 1 0 24H26z` |
 | M | `M25 44V20l7 12 7-12v24` |
@@ -36,14 +36,17 @@ Crate et Digger, dans la suite hors du schéma « … Labs », n'ont pas de
 crochets. Construction commune (grille 512×512) : tuile `rect w=512 h=512
 rx=112` en `#18181b`, traits `#f0f0f2` de 9, un seul point de la couleur de
 l'appli. Crate : C vinyle, `apps/crate/logo/crate.svg`. Digger :
-`logos/digger.svg`, un bac de disques vu de face où l'on fouille.
+`logos/digger.svg`, trois disques dans un bac, le dernier tiré vers le haut
+(proposition d'origine du 2026-11-12, remise le 2026-11-13 à la demande
+d'Aurélien).
 
 | Élément (Digger) | Valeur |
 |---|---|
-| Pochettes | Trois carrés `w=176 h=176 rx=6` (`x=168 y=166`), fond `#18181b`, en éventail autour de (256, 416) : `rotate(-20)`, droite, `rotate(18)` |
-| Disque | Sorti de la pochette du milieu : cercles `r=64` et `r=44` centrés en (256, 120) |
-| Bac | Face avant `rect x=104 y=288 w=304 h=136 rx=16`, fond `#18181b` (cache le bas des pochettes) ; poignée `rect x=208 y=320 w=96 h=26 rx=13` |
-| Point | Macaron du disque, `r=20` en (256, 120), `#e45bd0` |
+| Traits | `#f0f0f2`, épaisseur 26, bouts et angles arrondis (un trait seul : à 9 comme les sillons de Crate, il disparaît à 32 px) |
+| Bac | `M112 236v152h288V236` (U ouvert vers le haut) |
+| Disques rangés | Deux traits debout, `M176 380V250` et `M240 380V232` |
+| Disque tiré | Trait penché `M318 380l26-196`, qui dépasse du bac |
+| Point | Macaron du disque tiré, `r=34` en (352, 134), `#e45bd0` |
 
 Le kit Labs OS embarque une copie de ces logos (champ `svg` de l'appli dans
 `kit/labs-os.js`) : la changer en même temps que le fichier.
@@ -71,7 +74,7 @@ couleur propre ni d'entrée au catalogue.
 |---|---|
 | Fond | Carré plein `#0b1015`, sans tuile ni bordure : GitHub recadre en cercle |
 | Crochets | Mêmes tracés que les logos, en `#e6edf3` |
-| Contenu | Cinq lignes alignées à gauche, trait 3,2 arrondi, une par appli dans l'ordre Backup, Plex, Finance, Projet, Torrent : `M24.5 21.5h15`, `M24.5 26.75h10`, `M24.5 32h13`, `M24.5 37.25h7`, `M24.5 42.5h11` (pas de 5,25) |
+| Contenu | Cinq lignes alignées à gauche, trait 3,2 arrondi, une par appli dans l'ordre Backup, Plex (aujourd'hui Cover Labs), Finance, Projet, Torrent : `M24.5 21.5h15`, `M24.5 26.75h10`, `M24.5 32h13`, `M24.5 37.25h7`, `M24.5 42.5h11` (pas de 5,25) |
 
 Écarts assumés : fond plein et PNG 512 px (GitHub demande au moins 420 px et
 un fond opaque). Une nouvelle appli ajoute une ligne de sa couleur, en

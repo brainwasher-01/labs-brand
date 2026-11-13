@@ -17,7 +17,7 @@
 | Nom du conteneur | `digger` |
 | Dépôt | `brainwasher-01/digger` (privé) |
 | Couleur | **Fuchsia** `#e45bd0` (309° ; 6,4:1 sur `#07090f`), `#a8279a` sur fond clair (6,1:1 sur blanc) |
-| Logo | [`../../logos/digger.svg`](../../logos/digger.svg) — bac de disques vu de face, pochettes feuilletées qui dépassent, un disque sorti avec son macaron fuchsia ; construction de Crate (voir `docs/logos.md`). PNG 256 px : [`../../logos/digger.png`](../../logos/digger.png) |
+| Logo | [`../../logos/digger.svg`](../../logos/digger.svg) — trois disques dans un bac, le dernier tiré vers le haut, son macaron fuchsia au-dessus (proposition d'origine du 2026-11-12, remise le 2026-11-13) ; construction de Crate (voir `docs/logos.md`). PNG 256 px : [`../../logos/digger.png`](../../logos/digger.png) |
 | Icône Unraid | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/digger.png` |
 | Technologie | Serveur Python, FastAPI, SQLite ; interface React, TypeScript, Vite ; kit Labs OS dans `frontend/public/labs-os/` |
 | Appli liée | Crate : Digger reçoit ses demandes et lui remet les fichiers reçus (dossier de dépôt, manifeste `digger.json`) |
@@ -72,4 +72,5 @@ Voir [theme.md](theme.md).
 
 | Date | Changement |
 |---|---|
+| 2026-11-13 | Logo remis à la proposition d'origine validée par Aurélien : trois disques dans un bac, le dernier tiré vers le haut (kit 2.6.0) |
 | 2026-11-12 | Charte créée : nom « Digger » seul, couleur Fuchsia en dérogation, logo propre sur la construction de Crate, kit Labs OS 2.5.0 (choix d'Aurélien) |
