@@ -176,6 +176,13 @@ Règles :
   ses propres variables branchées dessus dans son pont). Composants prêts à l'emploi : voir `docs/composants.md`.
 - **Téléphone** (moins de 52 rem) : le menu devient un tiroir (bouton menu à gauche de la recherche), plus de barre d'état.
 - **Toute l'interface en français.**
+- **Rangées égales** (décidé le 2026-11-13 par Aurélien) : des éléments identiques placés côte à côte (tuiles, cartes
+  d'agents, d'applis, de services) se rangent en lignes **de même longueur** dès que leur nombre le permet. 6 éléments →
+  3 + 3 ; 8 → 4 + 4 ; 16 → 4 + 4 + 4 + 4 ; jamais 4 + 2 ni 5 + 3. Donc pas de `repeat(auto-fill, …)` pour un nombre
+  connu d'éléments : le nombre de colonnes est un diviseur du nombre d'éléments, choisi parmi ceux qui tiennent dans la
+  largeur (3 ou 4 par ligne de préférence, sinon le plus grand diviseur qui tient ; une seule colonne sur téléphone si
+  rien d'autre ne tient). Un nombre premier (5, 7…) garde le remplissage normal. Référence : `labsCols(n, max)` de
+  Projet Labs (`app/static/switchboard.js`, bloc « Agents »), à reprendre dans le kit à sa prochaine version.
 
 ### Adresses des autres applis
 
