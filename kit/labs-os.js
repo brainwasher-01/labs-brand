@@ -18,18 +18,20 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '2.5.0';
+  var KIT_VERSION = '2.6.0';
   var APPS = [
     { id: 'backup',  name: 'Backup .labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet .labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
     { id: 'torrent', name: 'Torrent .labs', color: '#ff9b6a', d: 'M24 20h16 M32 20v24' },
     { id: 'finance', name: 'Finance .labs', color: '#6cc7f0', d: 'M27 44V20h11 M27 31h9' },
-    { id: 'plex',    name: 'Plex .labs',    color: '#f2b84b', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
+    // 2.6.0 : Plex Labs devient Cover Labs (nom affiché) ; l'identifiant reste 'plex' jusqu'au déploiement de l'appli renommée
+    { id: 'plex',    name: 'Cover .labs',   color: '#f2b84b', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
     { id: 'mixer',   name: 'Mixer .labs',   color: '#8ef26a', d: 'M25 44V20l7 12 7-12v24' },
     // 2.4.0 : Crate entre dans la suite hors du schéma « … Labs » : nom seul, logo C vinyle (apps/crate/logo/crate.svg)
     { id: 'crate',   name: 'Crate',         color: '#d9701f', host: 'crate', svg: '<svg viewBox="0 0 512 512" aria-hidden="true"><defs><mask id="lo-crate-c"><rect width="512" height="512" fill="#000"/><circle cx="256" cy="256" r="196" fill="#fff"/><circle cx="256" cy="256" r="104" fill="#000"/><path d="M256 256L512 196V316Z" fill="#000"/></mask></defs><rect width="512" height="512" rx="112" fill="#18181b"/><g mask="url(#lo-crate-c)" fill="none" stroke="#f0f0f2" stroke-width="9"><circle cx="256" cy="256" r="190"/><circle cx="256" cy="256" r="166"/><circle cx="256" cy="256" r="142"/><circle cx="256" cy="256" r="118"/></g><circle cx="256" cy="256" r="22" fill="#d9701f"/></svg>' },
-    // 2.5.0 : Digger entre dans la suite hors du schéma « … Labs » : nom seul, logo propre (logos/digger.svg)
-    { id: 'digger',  name: 'Digger',        color: '#e45bd0', host: 'digger', svg: '<svg viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="#18181b"/><g fill="#18181b" stroke="#f0f0f2" stroke-width="9" stroke-linejoin="round"><rect x="168" y="166" width="176" height="176" rx="6" transform="rotate(-20 256 416)"/><circle cx="256" cy="120" r="64"/><circle cx="256" cy="120" r="44" fill="none"/><rect x="168" y="166" width="176" height="176" rx="6"/><rect x="168" y="166" width="176" height="176" rx="6" transform="rotate(18 256 416)"/><rect x="104" y="288" width="304" height="136" rx="16"/><rect x="208" y="320" width="96" height="26" rx="13" fill="none"/></g><circle cx="256" cy="120" r="20" fill="#e45bd0"/></svg>' }
+    // 2.5.0 : Digger entre dans la suite hors du schéma « … Labs » : nom seul, logo propre (logos/digger.svg) ;
+    // 2.6.0 : logo de la proposition d'origine (trois disques dans un bac, le dernier tiré vers le haut)
+    { id: 'digger',  name: 'Digger',        color: '#e45bd0', host: 'digger', svg: '<svg viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="#18181b"/><g fill="none" stroke="#f0f0f2" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"><path d="M112 236v152h288V236"/><path d="M176 380V250M240 380V232"/><path d="M318 380l26-196"/></g><circle cx="352" cy="134" r="34" fill="#e45bd0"/></svg>' }
   ];
   var ICONS = {
     search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
@@ -188,7 +190,7 @@
   function urlFor(id) {
     if (opts.suite && opts.suite[id]) return opts.suite[id];
     var s = savedUrls(); if (s[id]) return s[id];
-    var m = location.hostname.match(/^(?:(?:backup|projet|torrent|finance|plex|mixer|asset)-labs|crate|digger)(\..+)$/);
+    var m = location.hostname.match(/^(?:(?:backup|projet|torrent|finance|plex|cover|mixer|asset)-labs|crate|digger)(\..+)$/);
     var app = APPS.filter(function (x) { return x.id === id; })[0];
     if (m) return location.protocol + '//' + (app && app.host ? app.host : id + '-labs') + m[1] + (location.port ? ':' + location.port : '') + '/';
     return null;
@@ -535,7 +537,7 @@
     apps: APPS.map(function (a) { return { id: a.id, name: a.name, color: a.color }; }),
     init: function (o) {
       opts = o || {};
-      if (opts.app === 'asset') opts.app = 'plex';   // ancien identifiant de Plex Labs, accepté jusqu'à la mise à jour de l'appli
+      if (opts.app === 'asset' || opts.app === 'cover') opts.app = 'plex';   // Cover Labs (ex-Plex Labs, ex-Asset Labs) : identifiant 'plex' jusqu'au déploiement du renommage
       if (opts.app) root.setAttribute('data-lo-app', opts.app);
       applyMode();
       // Barre du haut montée tout de suite si son conteneur existe déjà : les scripts « defer » de l'appli la trouvent.

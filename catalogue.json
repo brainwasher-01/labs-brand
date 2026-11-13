@@ -1,6 +1,6 @@
 {
   "suite": "Labs",
-  "updated": "2026-11-12",
+  "updated": "2026-11-13",
   "repository": "https://github.com/brainwasher-01/labs-brand",
   "common_docs": {
     "principes": "docs/principes.md",
@@ -36,11 +36,11 @@
     },
     {
       "id": "plex-labs",
-      "name": "Plex Labs",
-      "wordmark": "plex.labs",
+      "name": "Cover Labs",
+      "wordmark": "cover.labs",
       "initial": "A",
       "color": "#f2b84b",
-      "role": "Gestion des visuels d'une médiathèque Plex : synchronisation des affiches, logos et backgrounds, création de covers, cartes d'épisodes et placeholders (ex-Asset Labs)",
+      "role": "Gestion des visuels d'une médiathèque Plex : synchronisation des affiches, logos et backgrounds, création de covers, cartes d'épisodes et placeholders (ex-Plex Labs, ex-Asset Labs ; Plex reste le nom de l'intégration)",
       "container": "plex-labs",
       "status": "en service",
       "charter_status": "complète",
@@ -157,7 +157,7 @@
       "color_text_on_light": "#a85310",
       "role": "Curation d'une bibliothèque musicale auto-hébergée : fiches, notes, playlists, qualité des métadonnées, nouveautés des artistes suivis, lecteur audio (les téléchargements partent dans Digger)",
       "suite": true,
-      "suite_note": "dans la suite depuis le 2026-11-12, hors du schéma « … Labs » : nom « Crate » seul, logo C vinyle gardé ; couleur en dérogation à la règle des 40° (6° de Torrent, 13° de Plex)",
+      "suite_note": "dans la suite depuis le 2026-11-12, hors du schéma « … Labs » : nom « Crate » seul, logo C vinyle gardé ; couleur en dérogation à la règle des 40° (6° de Torrent, 13° de Cover Labs)",
       "repository": "brainwasher-01/crate",
       "container": "crate",
       "status": "en service",
@@ -207,7 +207,7 @@
   ],
   "kit": {
     "name": "Labs OS",
-    "version": "2.5.0",
+    "version": "2.6.0",
     "path": "kit/",
     "doc": "docs/labs-os.md",
     "dispatch_event": "labs-kit"

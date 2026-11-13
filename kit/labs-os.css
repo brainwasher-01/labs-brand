@@ -567,3 +567,17 @@ html.lo-on body { overflow-wrap: break-word; word-break: normal; hyphens: manual
 }
 @media (max-width: 52rem) { .lo-side-toggle { display: none; } }
 @media (prefers-reduced-motion: reduce) { .lo-shell, .lo-side, .lo-side * { transition: none !important; } }
+
+/* ── 2.6.0 : rien de coupé par « … » (passe d'Aurélien sur toute la suite : aucun texte coupé, rien de collé) ──
+   Les textes de contenu passent à la ligne au lieu d'être coupés : titre d'une carte de liste (.lo-item-title),
+   résultats de la recherche et de la palette (.lo-it .lo-l et sa ligne de détail), états du pied du menu (.lo-foot .lo-t).
+   Restent sur une ligne (libellés courts et fixes) : nom écrit du logo (.lo-wm), entrées du menu (.lo-nav .lo-t), titre
+   d'un terminal (.lo-term-title). Menu réduit (html.lo-side-mini) : inchangé, les textes y sont masqués. */
+.lo-item-title { overflow: visible; text-overflow: clip; white-space: normal; overflow-wrap: break-word; }
+.lo-it { padding-block: .5rem; }
+.lo-it .lo-l, .lo-it .lo-l small { overflow: visible; text-overflow: clip; white-space: normal; overflow-wrap: break-word; }
+.lo-foot .lo-t { overflow: visible; text-overflow: clip; white-space: normal; overflow-wrap: break-word; }
+@media (min-width: 52.0625rem) {
+  html:not(.lo-side-mini) .lo-side .lo-foot-row { white-space: normal; }
+  html.lo-side-mini .lo-side .lo-foot .lo-t { white-space: nowrap; overflow: hidden; }
+}

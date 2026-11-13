@@ -16,7 +16,7 @@ Reprise de labs-brand le 2026-11-05 : voir [[CHARTE]].
 ## Installation / déploiement
 Rien à construire ni à installer : dépôt de documentation et kit statique. Contrôle : `python3 tests/check-catalogue.py`.
 
-Mettre à jour l'interface commune **Labs OS** (version actuelle du kit : **2.5.0** ; 2.5.0 : Digger dans la suite, nom seul et logo propre) :
+Mettre à jour l'interface commune **Labs OS** (version actuelle du kit : **2.6.0** ; 2.6.0 : logo d'origine de Digger, Plex Labs affichée Cover Labs, plus de texte coupé par « … ») :
 1. Modifier `kit/` ici, jamais dans une appli. Augmenter `kit/VERSION`, reporter la version dans `catalogue.json` (`kit.version`) et `CATALOGUE.md`, noter le changement dans `CHANGELOG.md`.
 2. Enregistrer sur `main` (Projet Labs envoie la version vers GitHub, en différé).
 3. Propager : Projet Labs, page « La suite », bouton « Propager à la suite », ou outil MCP `propagate_ui`. Projet Labs envoie l'événement `repository_dispatch` `labs-kit` à chaque dépôt listé dans `catalogue.json` (`apps`, champs `repo` et `kit_dir`).
@@ -27,6 +27,7 @@ Mettre à jour l'interface commune **Labs OS** (version actuelle du kit : **2.5.
 Voir [[JOURNAL]].
 
 ## État
+- 2026-11-13 : kit **2.6.0** — logo de Digger remis à la proposition d'origine (trois disques dans un bac, le dernier tiré vers le haut) ; Plex Labs renommée **Cover Labs** (noms affichés ; identifiant `plex` gardé jusqu'au déploiement, `cover` accepté) ; plus de texte coupé par « … » dans le kit (cartes de liste, recherche, palette, pied du menu). À propager.
 - 2026-11-12 : kit **2.5.0** — Digger rejoint la suite (en construction), hors du schéma « … Labs » comme Crate : nom « Digger » seul, Fuchsia `#e45bd0` en dérogation à la règle des 40° (`#a8279a` sur fond clair), logo propre `logos/digger.svg` (PNG à exporter), charte `apps/digger/`. Appli `digger` connue du kit (palette, touche 8, `--lo-c-digger`, `data-lo-app="digger"`, adresse `digger.<domaine>`, logo propre). À propager.
 - 2026-11-12 : kit **2.2.0** — menu réductible sur toute la suite (bouton en tête du menu, touche `[`, choix mémorisé `labs.side`, noms en info-bulle), roue dentée des Réglages redessinée (l'ancienne ressemblait à un réglage de luminosité), pied du menu dans l'ordre mode · outils | déconnexion, noms d'appli « Backup .labs », mots jamais coupés au milieu. À propager.
 - 2026-11-12 : kit **2.1.0** — Mixer Labs rejoint la suite (en conception, Lime `#8ef26a`, `#34791b` sur fond clair) : appli `mixer` connue du kit (`--lo-c-mixer`, `data-lo-app="mixer"`, palette, adresse `mixer-labs.<domaine>`), touches d'appli de 1 à 6 (bornées au nombre d'applis connues). Charte `apps/mixer-labs/`, logo `logos/mixer-labs.svg` (PNG à exporter). Dashboard Labs toujours absent du kit (prévu avec son premier code). À propager.
