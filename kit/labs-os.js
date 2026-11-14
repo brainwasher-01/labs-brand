@@ -18,7 +18,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '2.8.3';
+  var KIT_VERSION = '2.8.4';
   var APPS = [
     { id: 'backup',  name: 'Backup .labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet .labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
@@ -388,8 +388,23 @@
     if (opts.searchInputId) box.querySelector('input').id = opts.searchInputId;
     top.el = el; top.input = box.querySelector('input'); top.drop = box.querySelector('.lo-drop'); top.box = box;
     var narrow = window.matchMedia ? window.matchMedia('(max-width: 52rem)') : null;
-    var setPh = function () { top.input.placeholder = (narrow && narrow.matches && opts.searchPlaceholderShort) || opts.searchPlaceholder || opts.placeholder || 'Rechercher'; top.input.placeholder = noDots(top.input.placeholder); };
+    /* 2.8.4 : le texte d'attente n'est jamais coupé : le long s'il tient dans le champ, sinon le court, sinon « Rechercher » */
+    var phCanvas = null;
+    var fits = function (t) {
+      var inp = top.input, cs = getComputedStyle(inp), room = inp.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      if (!(room > 0)) return true;
+      phCanvas = phCanvas || document.createElement('canvas'); var cx = phCanvas.getContext('2d'); if (!cx) return true;
+      cx.font = cs.fontStyle + ' ' + cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily;
+      return cx.measureText(t).width <= room - 2;
+    };
+    var setPh = function () {
+      var long = noDots(opts.searchPlaceholder || opts.placeholder || 'Rechercher'), short = noDots(opts.searchPlaceholderShort || '');
+      var list = (narrow && narrow.matches && short) ? [short, 'Rechercher'] : [long].concat(short ? [short] : [], ['Rechercher']);
+      for (var i = 0; i < list.length; i++) { if (fits(list[i]) || i === list.length - 1) { top.input.placeholder = list[i]; return; } }
+    };
     setPh(); if (narrow && narrow.addEventListener) narrow.addEventListener('change', setPh);
+    window.addEventListener('resize', function () { clearTimeout(top.phT); top.phT = setTimeout(setPh, 100); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(setPh);
     top.input.addEventListener('input', function () { clearTimeout(top.timer); top.timer = setTimeout(drawTop, 120); });
     top.input.addEventListener('focus', function () { if (top.input.value.trim()) drawTop(); });
     top.input.addEventListener('keydown', function (e) {

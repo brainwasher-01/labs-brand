@@ -2,6 +2,7 @@
 
 | Date | Changement |
 |---|---|
+| 2026-11-14 | Kit Labs OS **2.8.4** : le texte d'attente de la barre de recherche n'est plus coupé (vu sur iPad en portrait, 834 px : « Chercher un film, une série, un ») : le kit mesure le champ et prend le texte long s'il tient, sinon `searchPlaceholderShort`, sinon « Rechercher » ; recalculé au redimensionnement et au chargement des polices. |
 | 2026-11-14 | Kit Labs OS **2.8.3** : plus de « … » dans les textes d'attente de la barre de recherche et de la palette (« Rechercher », « Aller, lancer, chercher ») ; un « … » final fourni par une appli (`placeholder`, `searchPlaceholder`, `searchPlaceholderShort`) est retiré par le kit. Constat du contrôle automatique de Mixer Labs. |
 | 2026-11-14 | Kit Labs OS **2.8.2** : option `hints` : sans libellé juste avant, le « i » va au titre du bloc qui contient le texte (carte, panneau, section) au lieu de rester seul ; dans une case à cocher, il suit le mot en gras ; le retour à la ligne laissé par le texte masqué disparaît ; « Aucun… », « Rien… » enfin reconnus (2.8.1 cherchait un caractère invisible après le mot : les états vides devenaient des info-bulles). |
 | 2026-11-14 | Kit Labs OS **2.8.1** : option `hints` : un état vide visé (« Aucun… », « Rien… », « Pas de… », « Pas encore… ») reste affiché au lieu de devenir une info-bulle. |
