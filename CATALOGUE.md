@@ -23,7 +23,7 @@ Couleur réservée : rose `#f27ec6`, gardé pour un futur projet.
 
 | Sujet | Document |
 |---|---|
-| **Interface commune Labs OS** (kit 2.8.0, propagé depuis Projet Labs) | [docs/labs-os.md](docs/labs-os.md), [kit/](kit/) |
+| **Interface commune Labs OS** (kit 2.8.1, propagé depuis Projet Labs) | [docs/labs-os.md](docs/labs-os.md), [kit/](kit/) |
 | Principes | [docs/principes.md](docs/principes.md) |
 | Thèmes (Labs OS + pont de chaque appli) | [docs/themes.md](docs/themes.md) |
 | Couleurs | [docs/couleurs.md](docs/couleurs.md) |

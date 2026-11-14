@@ -18,7 +18,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '2.8.0';
+  var KIT_VERSION = '2.8.1';
   var APPS = [
     { id: 'backup',  name: 'Backup .labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet .labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
@@ -590,6 +590,7 @@
      Un <details> visé devient une bulle dont le libellé est son <summary>. data-lo-keep : à laisser affiché. */
   function squash(t) { return String(t || '').replace(/\s+/g, ' ').trim(); }
   var LABELISH = /^(H[1-6]|LABEL|LEGEND|SUMMARY|DT|TH)$/;
+  var EMPTY_STATE = /^(aucun|aucune|rien|pas de|pas d'|pas encore|personne|vide)/i;
   function hintAnchor(el) {
     for (var n = el.previousElementSibling, k = 0; n && k < 4; n = n.previousElementSibling, k++) {
       if (n.hidden || n.hasAttribute('data-lo-hint')) continue;
@@ -613,6 +614,7 @@
       if (el.querySelector('a[href], button, input, select, textarea, [data-lo-info]')) return;
       var isDet = el.tagName === 'DETAILS', sum = isDet ? el.querySelector('summary') : null;
       var text = squash(isDet ? (el.textContent || '').replace(sum ? sum.textContent : '', '') : el.textContent); if (!text) return;
+      if (!isDet && EMPTY_STATE.test(text)) return;          // 2.8.1 : un état vide (« Aucun… », « Rien… ») reste affiché
       el.setAttribute('data-lo-hint', '1');
       var b = document.createElement('button'); b.type = 'button'; b.className = 'lo-info'; b.setAttribute('data-lo-info', text);
       b.setAttribute('aria-label', isDet && sum ? squash(sum.textContent) : 'Explication'); b._loSrc = isDet ? null : el;
