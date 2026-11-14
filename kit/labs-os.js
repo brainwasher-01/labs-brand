@@ -18,7 +18,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '2.8.1';
+  var KIT_VERSION = '2.8.2';
   var APPS = [
     { id: 'backup',  name: 'Backup .labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet .labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
@@ -590,7 +590,7 @@
      Un <details> visé devient une bulle dont le libellé est son <summary>. data-lo-keep : à laisser affiché. */
   function squash(t) { return String(t || '').replace(/\s+/g, ' ').trim(); }
   var LABELISH = /^(H[1-6]|LABEL|LEGEND|SUMMARY|DT|TH)$/;
-  var EMPTY_STATE = /^(aucun|aucune|rien|pas de|pas d'|pas encore|personne|vide)/i;
+  var EMPTY_STATE = /^(aucun|aucune|rien|pas de|pas d'|pas encore|personne|vide)(?![a-zà-ÿ])/i;
   function hintAnchor(el) {
     for (var n = el.previousElementSibling, k = 0; n && k < 4; n = n.previousElementSibling, k++) {
       if (n.hidden || n.hasAttribute('data-lo-hint')) continue;
@@ -603,7 +603,11 @@
       }
     }
     var p = el.parentElement;
-    if (p && p.tagName === 'LABEL') return p.querySelector('span, b, strong') || p;
+    if (p && p.tagName === 'LABEL') return p.querySelector('b, strong') || p.querySelector('span') || p;
+    if (p && p.parentElement && p.parentElement.tagName === 'LABEL' && p.querySelector('b, strong')) return p.querySelector('b, strong');
+    // 2.8.2 : sinon, le titre du bloc qui la contient (carte, panneau, section)
+    var box = el.closest('fieldset, section, article, .card, .lo-panel, .panel, [class*="card"]');
+    if (box) { var t = box.querySelector('h1, h2, h3, h4, legend, .lo-panel-title'); if (t && !t.contains(el) && (t.compareDocumentPosition(el) & 4)) return t; }
     return null;
   }
   function hintify(sel) {
@@ -623,6 +627,8 @@
       else if (at) at.appendChild(b);
       else el.parentNode.insertBefore(b, el);
       el.hidden = true; el.style.setProperty('display', 'none', 'important');
+      var br = el.previousSibling; while (br && br.nodeType === 3 && !br.nodeValue.trim()) br = br.previousSibling;
+      if (br && br.tagName === 'BR') br.style.display = 'none';            // 2.8.2 : pas de ligne vide laissée par le texte masqué
     });
   }
   function infoOf(t) { return t && t.closest ? t.closest('[data-lo-info]') : null; }
