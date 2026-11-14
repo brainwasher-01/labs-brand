@@ -533,6 +533,7 @@ html.lo-on body { overflow-wrap: break-word; word-break: normal; hyphens: manual
   background: none; box-shadow: none; color: var(--lo-muted); cursor: pointer; transition: background-color 150ms var(--lo-ease, ease), color 150ms; }
 .lo-side-toggle:hover { background: color-mix(in srgb, var(--lo-s3) 70%, transparent); color: var(--lo-text); }
 .lo-side-toggle:focus-visible { outline: none; box-shadow: var(--lo-ring, 0 0 0 2px var(--lo-accent)); }
+.lo-side-toggle > * { pointer-events: none; }
 .lo-side-toggle svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
 /* 2.3.0 : réduit / étendu sans à-coup. Rien ne change de place : les icônes, le logo et les points d'état gardent leur
    position, la colonne se resserre et les textes s'effacent en fondu (ils sont rognés, jamais retirés d'un coup).
@@ -581,3 +582,22 @@ html.lo-on body { overflow-wrap: break-word; word-break: normal; hyphens: manual
   html:not(.lo-side-mini) .lo-side .lo-foot-row { white-space: normal; }
   html.lo-side-mini .lo-side .lo-foot .lo-t { white-space: nowrap; overflow: hidden; }
 }
+
+/* ── 2.7.0 : info-bulles « i » (règle de la suite : aucun paragraphe d'explication à l'écran) ──
+   <button type="button" data-lo-info="Texte" aria-label="À propos de …"></button> ; le kit pose l'icône et la bulle.
+   Bouton rond de 18 px, zone de toucher portée à 24 px par sa marge transparente (WCAG 2.5.8), aligné sur la ligne de texte. */
+.lo-info { display: inline-grid; place-items: center; flex: none; width: 1.125rem; height: 1.125rem; min-height: 0; margin: 0 .25rem; padding: 0;
+  border: 0; border-radius: 50%; background: transparent; color: var(--lo-faint); cursor: help; vertical-align: -.2em;
+  box-shadow: 0 0 0 3px transparent; transition: color 150ms, background-color 150ms; }
+.lo-info::after { content: ""; position: absolute; inset: -3px; }
+.lo-info { position: relative; }
+.lo-info svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; pointer-events: none; }
+.lo-info:hover, .lo-info[aria-expanded="true"] { color: var(--lo-accent); }
+.lo-info:focus-visible { outline: none; box-shadow: var(--lo-ring, 0 0 0 2px var(--lo-accent)); }
+.lo-tip-pop { position: fixed; z-index: 2147483600; left: 0; top: 0; max-width: min(20rem, calc(100vw - 1rem)); padding: .625rem .75rem;
+  background: var(--lo-s1); color: var(--lo-text); border: 1px solid var(--lo-line-2); border-radius: 10px; box-shadow: var(--lo-pop, 0 8px 24px rgb(0 0 0 / .25));
+  font: 400 var(--lo-fs-sm)/1.5 var(--lo-font-sans); white-space: normal; overflow-wrap: break-word; text-align: left;
+  opacity: 0; visibility: hidden; transform: translateY(-2px); transition: opacity 120ms var(--lo-ease, ease-out), transform 120ms var(--lo-ease, ease-out), visibility 0s 120ms; pointer-events: none; }
+.lo-tip-pop.lo-on { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+@media (max-width: 52rem) { .lo-info { width: 1.25rem; height: 1.25rem; } .lo-info::after { inset: -6px; } }
+@media (prefers-reduced-motion: reduce) { .lo-tip-pop { transition: none; } }

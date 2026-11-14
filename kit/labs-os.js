@@ -18,7 +18,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '2.6.0';
+  var KIT_VERSION = '2.7.0';
   var APPS = [
     { id: 'backup',  name: 'Backup .labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet .labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
@@ -59,7 +59,8 @@
     menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
     film: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/>',
     tv: '<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/>',
-    folder: '<path d="M3 6h6l2 2h10v11H3z"/>'
+    folder: '<path d="M3 6h6l2 2h10v11H3z"/>',
+    info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.01"/>'
   };
   var root = document.documentElement;
   var opts = {}, started = false, els = {}, shown = [], sel = 0, inputMode = null, searchSeq = 0, top = { el: null, input: null, drop: null, shown: [], sel: -1, seq: 0, timer: 0 };
@@ -167,8 +168,14 @@
     var b = document.querySelector('.lo-side-toggle');
     if (b) {
       var l = mini ? 'Déplier le menu' : 'Réduire le menu';
-      b.setAttribute('aria-label', l); b.setAttribute('title', l + ' ( [ )'); b.setAttribute('aria-expanded', mini ? 'false' : 'true');
-      b.innerHTML = svgIcon(mini ? 'sideOpen' : 'side');
+      /* 2.7.0 : l'icône n'est réécrite que si l'état change. La réécrire à chaque appel relançait le MutationObserver
+         de decorate() (boucle sans fin) et retirait l'icône sous le pointeur : un clic un peu long n'arrivait jamais. */
+      var st = mini ? 'mini' : 'full';
+      if (b.getAttribute('data-lo-state') !== st) {
+        b.setAttribute('data-lo-state', st);
+        b.setAttribute('aria-label', l); b.setAttribute('title', l + ' ( [ )'); b.setAttribute('aria-expanded', mini ? 'false' : 'true');
+        b.innerHTML = svgIcon(mini ? 'sideOpen' : 'side');
+      }
     }
   }
   function setSide(mini) {
@@ -229,7 +236,10 @@
     buildSideToggle();
     buildSkip();
     decorate();
-    if (window.MutationObserver) { var t = null; new MutationObserver(function () { clearTimeout(t); t = setTimeout(decorate, 60); }).observe(document.body, { childList: true, subtree: true }); }
+    if (window.MutationObserver) { var t = null; new MutationObserver(function (recs) {
+      /* 2.7.0 : les changements de la coque elle-même (barre d'état chaque seconde, bouton du menu, info-bulles) ne relancent rien */
+      for (var i = 0; i < recs.length; i++) { var n = recs[i].target; if (!(n.closest && n.closest('.lo-status, .lo-side-toggle, .lo-tip-pop'))) { clearTimeout(t); t = setTimeout(decorate, 60); return; } }
+    }).observe(document.body, { childList: true, subtree: true }); }
   }
 
   /* Titres entre crochets, coins en crochet sur les cartes */
@@ -531,6 +541,72 @@
     if (/^[1-9]$/.test(e.key) && +e.key <= APPS.length && !modalOpen()) { var a = APPS[+e.key - 1]; if (a.id !== opts.app) { e.preventDefault(); goApp(a.id); } }
   }, true);
 
+
+  /* ── Info-bulles (2.7.0) ──
+     Règle de la suite : aucun paragraphe d'explication à l'écran, seulement des info-bulles « i ».
+     Balisage : <button type="button" data-lo-info="Le texte" aria-label="À propos de …"></button>
+     (ou LabsOS.info('Le texte', 'À propos de …') qui renvoie ce HTML). Le kit dessine le bouton rond, montre le texte
+     au survol, au focus clavier et au toucher (un toucher l'épingle, un second ou Échap le ferme), et le relie au bouton
+     par aria-describedby. Fonctionne sans LabsOS.init : les écouteurs sont posés au chargement du script. */
+  var tip = { el: null, b: null, pinned: false };
+  function infoHtml(text, label) {
+    return '<button type="button" class="lo-info" data-lo-info="' + esc(text) + '" aria-label="' + esc(label || 'Information') + '"></button>';
+  }
+  function upgradeInfo(scope) {
+    (scope || document).querySelectorAll('[data-lo-info]:not([data-lo-info-on])').forEach(function (b) {
+      b.setAttribute('data-lo-info-on', '1'); b.classList.add('lo-info');
+      if (b.tagName !== 'BUTTON') { b.setAttribute('role', 'button'); if (!b.hasAttribute('tabindex')) b.tabIndex = 0; }
+      if (!b.getAttribute('aria-label')) b.setAttribute('aria-label', 'Information');
+      if (!b.querySelector('svg')) b.innerHTML = svgIcon('info');
+    });
+  }
+  function tipShow(b, pin) {
+    if (!b || !b.getAttribute('data-lo-info')) return;
+    if (!tip.el) { tip.el = document.createElement('div'); tip.el.className = 'lo-tip-pop'; tip.el.id = 'lo-tip-pop'; tip.el.setAttribute('role', 'tooltip'); document.body.appendChild(tip.el); }
+    if (tip.b && tip.b !== b) tip.b.removeAttribute('aria-describedby');
+    tip.b = b; tip.pinned = !!pin;
+    tip.el.textContent = b.getAttribute('data-lo-info');
+    b.setAttribute('aria-describedby', 'lo-tip-pop'); b.setAttribute('aria-expanded', 'true');
+    tip.el.classList.add('lo-on'); tipPlace();
+  }
+  function tipHide() {
+    if (!tip.el || !tip.b) return;
+    tip.el.classList.remove('lo-on'); tip.b.removeAttribute('aria-describedby'); tip.b.setAttribute('aria-expanded', 'false');
+    tip.b = null; tip.pinned = false;
+  }
+  function tipPlace() {
+    if (!tip.b || !tip.el) return;
+    var r = tip.b.getBoundingClientRect(), vw = document.documentElement.clientWidth, vh = window.innerHeight, m = 8;
+    tip.el.style.left = '0px'; tip.el.style.top = '0px';
+    var w = tip.el.offsetWidth, h = tip.el.offsetHeight;
+    var x = Math.min(Math.max(m, r.left + r.width / 2 - w / 2), vw - w - m);
+    var y = r.bottom + m; if (y + h > vh - m && r.top - m - h >= m) y = r.top - m - h;
+    tip.el.style.left = Math.round(x) + 'px'; tip.el.style.top = Math.round(y) + 'px';
+  }
+  function infoOf(t) { return t && t.closest ? t.closest('[data-lo-info]') : null; }
+  document.addEventListener('mouseover', function (e) { var b = infoOf(e.target); if (b && !tip.pinned) tipShow(b, false); });
+  document.addEventListener('mouseout', function (e) { var b = infoOf(e.target); if (b && b === tip.b && !tip.pinned && !b.contains(e.relatedTarget)) tipHide(); });
+  document.addEventListener('focusin', function (e) { var b = infoOf(e.target); if (b) tipShow(b, tip.pinned && tip.b === b); });
+  document.addEventListener('focusout', function (e) { var b = infoOf(e.target); if (b && b === tip.b) tipHide(); });
+  document.addEventListener('click', function (e) {
+    var b = infoOf(e.target);
+    if (b) { e.preventDefault(); e.stopPropagation(); if (tip.b === b && tip.pinned) tipHide(); else tipShow(b, true); return; }
+    if (tip.pinned) tipHide();
+  }, true);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && tip.b) { tipHide(); e.stopPropagation(); return; }
+    var b = infoOf(e.target); if (b && b.tagName !== 'BUTTON' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); tipShow(b, true); }
+  }, true);
+  window.addEventListener('resize', tipHide);
+  document.addEventListener('scroll', function () { if (tip.b) tipPlace(); }, true);
+  if (window.MutationObserver) {
+    var tipT = null;
+    var tipObs = function () { new MutationObserver(function (recs) {
+      for (var i = 0; i < recs.length; i++) { var n = recs[i].target; if (!(n.closest && n.closest('.lo-status, .lo-side-toggle, .lo-tip-pop, .lo-info'))) { clearTimeout(tipT); tipT = setTimeout(function () { upgradeInfo(); if (tip.b && !document.contains(tip.b)) tipHide(); }, 30); return; } }
+    }).observe(document.body, { childList: true, subtree: true }); upgradeInfo(); };
+    if (document.body) tipObs(); else document.addEventListener('DOMContentLoaded', tipObs);
+  }
+
   /* ── API publique ── */
   window.LabsOS = {
     version: KIT_VERSION,
@@ -559,6 +635,8 @@
     drawer: setDrawer,
     side: function (mini) { if (mini == null) return sideMini(); setSide(mini); },
     confirm: confirmBox,
+    info: infoHtml,
+    infos: upgradeInfo,
     url: urlFor
   };
 })();

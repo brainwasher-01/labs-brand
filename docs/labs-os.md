@@ -29,6 +29,19 @@ même tiroir sur téléphone, même échelle de texte et mêmes écarts entre bl
 | **Ambiance** | Fond bleu nuit, léger grain **sous** le contenu (jamais par-dessus le texte), aurore de la couleur d'appli en haut de page. Aucun halo coloré. |
 | **Polices** | IBM Plex Sans (texte) et JetBrains Mono (données, nom écrit), embarquées (licence OFL). |
 
+## Règles d'écran communes (2.7.0, à appliquer dans toutes les applis)
+
+Règles d'Aurélien pour toute la suite, vérifiées à chaque passe d'interface. Elles valent pour chaque écran, à chaque taille.
+
+1. **Aucun paragraphe d'explication à l'écran.** Une explication (à quoi sert un bloc, ce que fait un réglage, comment lire un chiffre) va dans une **info-bulle « i »** : petit bouton rond posé à côté du libellé, qui montre le texte au survol, au focus clavier et au toucher. Restent à l'écran : les libellés, les titres, les infos chiffrées, les états, les messages d'erreur (qui disent le problème et la marche à suivre) et les états vides courts (« Aucune sauvegarde »).
+   - Composant commun du kit : `<button type="button" data-lo-info="Le texte" aria-label="À propos de …"></button>`, ou `LabsOS.info(texte, libellé)` qui renvoie ce HTML. Le kit dessine le bouton (18 px, zone de toucher de 24 px), place la bulle sans sortir de l'écran, la relie par `aria-describedby`, l'épingle au toucher et la ferme par Échap, un second toucher ou un clic ailleurs. Aucun `LabsOS.init` nécessaire. Ne jamais recoder une info-bulle dans une appli.
+   - Pas d'attribut `title` comme seule explication : invisible au toucher et au clavier.
+2. **Jamais de « … » dans un texte d'interface** : ni ellipse CSS (`text-overflow: ellipsis`, `-webkit-line-clamp`), ni texte coupé à la main. Un texte trop long passe à la ligne (`overflow-wrap: break-word`, sans césure). Exceptions : libellés fixes du kit (nom écrit du logo, entrées du menu, titre d'un terminal), et « Recherche… » / « Chargement… » qui disent qu'une action est en cours.
+3. **Rien ne se touche ni ne se chevauche.** Contenu à **8 px au moins** du bord de son bloc ; **12 px** entre éléments d'un bloc (`--lo-gap-sm`), **16 px** entre blocs et entre colonnes (`--lo-gap`), **24 px** autour des titres de page. Contrôle automatique conseillé : pour chaque élément visible, distance au bord de son bloc parent ≥ 8 px (contrôle `cramped` de la passe de nuit de Projet Labs).
+4. **Prendre la largeur** : texte, tableaux, formulaires et listes occupent toute la largeur de leur carte ; jamais de colonne étroite avec un vide à droite.
+5. **Vert, ambre, rouge (et bleu) réservés aux états** : jamais pour décorer, jamais pour une donnée qui n'est pas un état.
+6. **Vérifier en vrai** : captures en 2560×1440, 1920×1080, iPad Pro 11 paysage (1210×834) et portrait (834×1210), iPhone (440×956), téléphone pliant ouvert (~640×904), en sombre et en clair, sur toutes les pages.
+
 ## Fichiers du kit
 
 | Fichier | Rôle |

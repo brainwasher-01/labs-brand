@@ -16,7 +16,7 @@ Reprise de labs-brand le 2026-11-05 : voir [[CHARTE]].
 ## Installation / déploiement
 Rien à construire ni à installer : dépôt de documentation et kit statique. Contrôle : `python3 tests/check-catalogue.py`.
 
-Mettre à jour l'interface commune **Labs OS** (version actuelle du kit : **2.6.0** ; 2.6.0 : logo d'origine de Digger, Plex Labs affichée Cover Labs, plus de texte coupé par « … ») :
+Mettre à jour l'interface commune **Labs OS** (version actuelle du kit : **2.7.0** ; 2.7.0 : info-bulles « i » communes, règles d'écran écrites, boucle du bouton de menu corrigée) :
 1. Modifier `kit/` ici, jamais dans une appli. Augmenter `kit/VERSION`, reporter la version dans `catalogue.json` (`kit.version`) et `CATALOGUE.md`, noter le changement dans `CHANGELOG.md`.
 2. Enregistrer sur `main` (Projet Labs envoie la version vers GitHub, en différé).
 3. Propager : Projet Labs, page « La suite », bouton « Propager à la suite », ou outil MCP `propagate_ui`. Projet Labs envoie l'événement `repository_dispatch` `labs-kit` à chaque dépôt listé dans `catalogue.json` (`apps`, champs `repo` et `kit_dir`).
@@ -27,6 +27,7 @@ Mettre à jour l'interface commune **Labs OS** (version actuelle du kit : **2.6.
 Voir [[JOURNAL]].
 
 ## État
+- 2026-11-14 : kit **2.7.0** — info-bulle « i » commune (`data-lo-info`, `LabsOS.info`), règles d'écran de la suite écrites dans `docs/labs-os.md` (pas de paragraphe d'explication, pas de « … », 8 px du bord, prendre la largeur), boucle du bouton de réduction du menu corrigée (clics perdus). À propager.
 - 2026-11-13 : kit **2.6.0** — logo de Digger remis à la proposition d'origine (trois disques dans un bac, le dernier tiré vers le haut) ; Plex Labs renommée **Cover Labs** (noms affichés ; identifiant `plex` gardé jusqu'au déploiement, `cover` accepté) ; plus de texte coupé par « … » dans le kit (cartes de liste, recherche, palette, pied du menu). À propager.
 - 2026-11-12 : kit **2.5.0** — Digger rejoint la suite (en construction), hors du schéma « … Labs » comme Crate : nom « Digger » seul, Fuchsia `#e45bd0` en dérogation à la règle des 40° (`#a8279a` sur fond clair), logo propre `logos/digger.svg` (PNG à exporter), charte `apps/digger/`. Appli `digger` connue du kit (palette, touche 8, `--lo-c-digger`, `data-lo-app="digger"`, adresse `digger.<domaine>`, logo propre). À propager.
 - 2026-11-12 : kit **2.2.0** — menu réductible sur toute la suite (bouton en tête du menu, touche `[`, choix mémorisé `labs.side`, noms en info-bulle), roue dentée des Réglages redessinée (l'ancienne ressemblait à un réglage de luminosité), pied du menu dans l'ordre mode · outils | déconnexion, noms d'appli « Backup .labs », mots jamais coupés au milieu. À propager.
