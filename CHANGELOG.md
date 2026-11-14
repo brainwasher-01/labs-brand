@@ -2,6 +2,7 @@
 
 | Date | Changement |
 |---|---|
+| 2026-11-14 | Kit Labs OS **2.8.3** : plus de « … » dans les textes d'attente de la barre de recherche et de la palette (« Rechercher », « Aller, lancer, chercher ») ; un « … » final fourni par une appli (`placeholder`, `searchPlaceholder`, `searchPlaceholderShort`) est retiré par le kit. Constat du contrôle automatique de Mixer Labs. |
 | 2026-11-14 | Kit Labs OS **2.8.2** : option `hints` : sans libellé juste avant, le « i » va au titre du bloc qui contient le texte (carte, panneau, section) au lieu de rester seul ; dans une case à cocher, il suit le mot en gras ; le retour à la ligne laissé par le texte masqué disparaît ; « Aucun… », « Rien… » enfin reconnus (2.8.1 cherchait un caractère invisible après le mot : les états vides devenaient des info-bulles). |
 | 2026-11-14 | Kit Labs OS **2.8.1** : option `hints` : un état vide visé (« Aucun… », « Rien… », « Pas de… », « Pas encore… ») reste affiché au lieu de devenir une info-bulle. |
 | 2026-11-14 | Kit Labs OS **2.8.0** : option **`hints`** de `LabsOS.init` (sélecteur des paragraphes d'explication d'une appli) : le kit les masque et les remplace par une info-bulle « i » au bout du libellé ou du titre qui les précède (un `<details>` garde son résumé), la bulle relit le texte à chaque ouverture ; un paragraphe qui contient un lien, un bouton ou un champ reste affiché, `data-lo-keep` pour en garder un autre. Règle « pas de paragraphe d'explication » appliquée à toute la suite sans réécrire chaque écran. |

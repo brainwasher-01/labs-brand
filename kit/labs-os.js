@@ -18,7 +18,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '2.8.2';
+  var KIT_VERSION = '2.8.3';
   var APPS = [
     { id: 'backup',  name: 'Backup .labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet .labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
@@ -68,6 +68,8 @@
   /* ── Stockage prudent ── */
   function load(k, d) { try { var v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } }
   function save(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  /* 2.8.3 : jamais de « … » à la fin d'un texte d'attente (règle de la suite) : retiré aussi de ceux fournis par l'appli */
+  function noDots(t) { return String(t == null ? '' : t).replace(/\s*(…|\.\.\.)\s*$/, ''); }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function norm(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
   function svgIcon(n) { return '<svg viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[n] || ICONS.arrow) + '</svg>'; }
@@ -337,7 +339,7 @@
     inputMode = o.input || null; sel = 0;
     els.scrim.classList.add('lo-open'); els.input.setAttribute('aria-expanded', 'true');
     els.input.value = o.query || '';
-    els.input.placeholder = inputMode ? inputMode.prompt : (opts.placeholder || 'Aller, lancer, chercher…');
+    els.input.placeholder = noDots(inputMode ? inputMode.prompt : (opts.placeholder || 'Aller, lancer, chercher'));
     drawPalette(); els.input.focus();
   }
   function closePalette() { els.scrim.classList.remove('lo-open'); els.input.setAttribute('aria-expanded', 'false'); els.input.removeAttribute('aria-activedescendant'); inputMode = null; }
@@ -386,7 +388,7 @@
     if (opts.searchInputId) box.querySelector('input').id = opts.searchInputId;
     top.el = el; top.input = box.querySelector('input'); top.drop = box.querySelector('.lo-drop'); top.box = box;
     var narrow = window.matchMedia ? window.matchMedia('(max-width: 52rem)') : null;
-    var setPh = function () { top.input.placeholder = (narrow && narrow.matches && opts.searchPlaceholderShort) || opts.searchPlaceholder || opts.placeholder || 'Rechercher…'; };
+    var setPh = function () { top.input.placeholder = (narrow && narrow.matches && opts.searchPlaceholderShort) || opts.searchPlaceholder || opts.placeholder || 'Rechercher'; top.input.placeholder = noDots(top.input.placeholder); };
     setPh(); if (narrow && narrow.addEventListener) narrow.addEventListener('change', setPh);
     top.input.addEventListener('input', function () { clearTimeout(top.timer); top.timer = setTimeout(drawTop, 120); });
     top.input.addEventListener('focus', function () { if (top.input.value.trim()) drawTop(); });
