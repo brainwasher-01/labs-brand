@@ -601,3 +601,6 @@ html.lo-on body { overflow-wrap: break-word; word-break: normal; hyphens: manual
 .lo-tip-pop.lo-on { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
 @media (max-width: 52rem) { .lo-info { width: 1.25rem; height: 1.25rem; } .lo-info::after { inset: -6px; } }
 @media (prefers-reduced-motion: reduce) { .lo-tip-pop { transition: none; } }
+/* 2.8.0 : <details> d'explication changé en info-bulle (option hints) : son résumé reste, suivi du bouton « i » */
+.lo-hint-label { display: inline-flex; align-items: center; gap: .125rem; color: var(--lo-muted, var(--lo-faint)); font-size: var(--lo-fs-sm); }
+[data-lo-hint] { display: none !important; }

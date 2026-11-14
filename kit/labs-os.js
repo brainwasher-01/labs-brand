@@ -18,7 +18,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '2.7.0';
+  var KIT_VERSION = '2.8.0';
   var APPS = [
     { id: 'backup',  name: 'Backup .labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet .labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
@@ -565,7 +565,7 @@
     if (!tip.el) { tip.el = document.createElement('div'); tip.el.className = 'lo-tip-pop'; tip.el.id = 'lo-tip-pop'; tip.el.setAttribute('role', 'tooltip'); document.body.appendChild(tip.el); }
     if (tip.b && tip.b !== b) tip.b.removeAttribute('aria-describedby');
     tip.b = b; tip.pinned = !!pin;
-    tip.el.textContent = b.getAttribute('data-lo-info');
+    tip.el.textContent = b._loSrc && b._loSrc.isConnected ? squash(b._loSrc.textContent) : b.getAttribute('data-lo-info');
     b.setAttribute('aria-describedby', 'lo-tip-pop'); b.setAttribute('aria-expanded', 'true');
     tip.el.classList.add('lo-on'); tipPlace();
   }
@@ -582,6 +582,46 @@
     var x = Math.min(Math.max(m, r.left + r.width / 2 - w / 2), vw - w - m);
     var y = r.bottom + m; if (y + h > vh - m && r.top - m - h >= m) y = r.top - m - h;
     tip.el.style.left = Math.round(x) + 'px'; tip.el.style.top = Math.round(y) + 'px';
+  }
+  /* 2.8.0 : paragraphes d'explication changés en info-bulles par le kit. LabsOS.init({ hints: '.hint, p.help' }) :
+     chaque élément visé (texte seul : sans lien, bouton ni champ, sinon il reste affiché) est masqué et remplacé par un
+     bouton « i » posé au bout du libellé ou du titre qui le précède dans son bloc (sinon à sa place). La bulle relit le
+     texte de l'élément masqué à chaque ouverture : un texte que l'appli change ensuite reste juste.
+     Un <details> visé devient une bulle dont le libellé est son <summary>. data-lo-keep : à laisser affiché. */
+  function squash(t) { return String(t || '').replace(/\s+/g, ' ').trim(); }
+  var LABELISH = /^(H[1-6]|LABEL|LEGEND|SUMMARY|DT|TH)$/;
+  function hintAnchor(el) {
+    for (var n = el.previousElementSibling, k = 0; n && k < 4; n = n.previousElementSibling, k++) {
+      if (n.hidden || n.hasAttribute('data-lo-hint')) continue;
+      if (LABELISH.test(n.tagName) || n.classList.contains('lo-label') || n.classList.contains('lo-panel-title')) return n;
+      if (n.querySelector) { var h = n.querySelector('h1,h2,h3,h4,h5,h6,legend,.lo-label,.lo-panel-title'); if (h && !n.querySelector('input,select,textarea')) return h; }
+      if (/^(INPUT|SELECT|TEXTAREA)$/.test(n.tagName) || (n.querySelector && n.querySelector('input,select,textarea'))) {
+        var lab = n.id ? document.querySelector('label[for="' + n.id.replace(/"/g, '') + '"]') : null;
+        if (!lab) for (var m = n.previousElementSibling; m; m = m.previousElementSibling) if (m.tagName === 'LABEL' || m.classList.contains('lo-label')) { lab = m; break; }
+        if (lab && lab.parentNode === el.parentNode) return lab;
+      }
+    }
+    var p = el.parentElement;
+    if (p && p.tagName === 'LABEL') return p.querySelector('span, b, strong') || p;
+    return null;
+  }
+  function hintify(sel) {
+    if (!sel) return;
+    var list; try { list = document.querySelectorAll(sel); } catch (e) { return; }
+    list.forEach(function (el) {
+      if (el.hasAttribute('data-lo-hint') || el.hasAttribute('data-lo-keep') || el.closest('.lo-tip-pop, [contenteditable]')) return;
+      if (el.querySelector('a[href], button, input, select, textarea, [data-lo-info]')) return;
+      var isDet = el.tagName === 'DETAILS', sum = isDet ? el.querySelector('summary') : null;
+      var text = squash(isDet ? (el.textContent || '').replace(sum ? sum.textContent : '', '') : el.textContent); if (!text) return;
+      el.setAttribute('data-lo-hint', '1');
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'lo-info'; b.setAttribute('data-lo-info', text);
+      b.setAttribute('aria-label', isDet && sum ? squash(sum.textContent) : 'Explication'); b._loSrc = isDet ? null : el;
+      var at = isDet ? null : hintAnchor(el);
+      if (isDet && sum) { var w = document.createElement('span'); w.className = 'lo-hint-label'; w.textContent = squash(sum.textContent); w.appendChild(b); el.parentNode.insertBefore(w, el); }
+      else if (at) at.appendChild(b);
+      else el.parentNode.insertBefore(b, el);
+      el.hidden = true; el.style.setProperty('display', 'none', 'important');
+    });
   }
   function infoOf(t) { return t && t.closest ? t.closest('[data-lo-info]') : null; }
   document.addEventListener('mouseover', function (e) { var b = infoOf(e.target); if (b && !tip.pinned) tipShow(b, false); });
@@ -602,8 +642,8 @@
   if (window.MutationObserver) {
     var tipT = null;
     var tipObs = function () { new MutationObserver(function (recs) {
-      for (var i = 0; i < recs.length; i++) { var n = recs[i].target; if (!(n.closest && n.closest('.lo-status, .lo-side-toggle, .lo-tip-pop, .lo-info'))) { clearTimeout(tipT); tipT = setTimeout(function () { upgradeInfo(); if (tip.b && !document.contains(tip.b)) tipHide(); }, 30); return; } }
-    }).observe(document.body, { childList: true, subtree: true }); upgradeInfo(); };
+      for (var i = 0; i < recs.length; i++) { var n = recs[i].target; if (!(n.closest && n.closest('.lo-status, .lo-side-toggle, .lo-tip-pop, .lo-info'))) { clearTimeout(tipT); tipT = setTimeout(function () { hintify(opts.hints); upgradeInfo(); if (tip.b && !document.contains(tip.b)) tipHide(); }, 30); return; } }
+    }).observe(document.body, { childList: true, subtree: true, characterData: false }); hintify(opts.hints); upgradeInfo(); };
     if (document.body) tipObs(); else document.addEventListener('DOMContentLoaded', tipObs);
   }
 
@@ -618,7 +658,7 @@
       applyMode();
       // Barre du haut montée tout de suite si son conteneur existe déjà : les scripts « defer » de l'appli la trouvent.
       if (opts.top && typeof opts.top === 'string' && document.querySelector(opts.top)) buildTop(opts.top);
-      var go = function () { if (started) return; started = true; build(); };
+      var go = function () { if (started) return; started = true; build(); hintify(opts.hints); upgradeInfo(); };
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
     },
     open: function (query) { openPalette({ query: query }); },
@@ -636,7 +676,7 @@
     side: function (mini) { if (mini == null) return sideMini(); setSide(mini); },
     confirm: confirmBox,
     info: infoHtml,
-    infos: upgradeInfo,
+    infos: function (scope) { hintify(opts.hints); upgradeInfo(scope); },
     url: urlFor
   };
 })();
