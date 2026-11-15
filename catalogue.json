@@ -1,6 +1,6 @@
 {
   "suite": "Labs",
-  "updated": "2026-11-13",
+  "updated": "2026-11-15",
   "repository": "https://github.com/brainwasher-01/labs-brand",
   "common_docs": {
     "principes": "docs/principes.md",
@@ -35,21 +35,21 @@
       "kit_dir": "web/static/labs-os"
     },
     {
-      "id": "plex-labs",
+      "id": "cover-labs",
       "name": "Cover Labs",
       "wordmark": "cover.labs",
-      "initial": "A",
+      "initial": "C",
       "color": "#f2b84b",
       "role": "Gestion des visuels d'une médiathèque Plex : synchronisation des affiches, logos et backgrounds, création de covers, cartes d'épisodes et placeholders (ex-Plex Labs, ex-Asset Labs ; Plex reste le nom de l'intégration)",
-      "container": "plex-labs",
+      "container": "cover-labs",
       "status": "en service",
       "charter_status": "complète",
-      "charter": "apps/plex-labs/README.md",
-      "theme": "apps/plex-labs/theme.md",
-      "logo_svg": "logos/plex-labs.svg",
-      "logo_png": "logos/plex-labs.png",
-      "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/plex-labs.png",
-      "repository": "brainwasher-01/plex-labs",
+      "charter": "apps/cover-labs/README.md",
+      "theme": "apps/cover-labs/theme.md",
+      "logo_svg": "logos/cover-labs.svg",
+      "logo_png": "logos/cover-labs.png",
+      "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/cover-labs.png",
+      "repository": "brainwasher-01/cover-labs",
       "kit_dir": "app/static/labs-os"
     },
     {
@@ -207,7 +207,7 @@
   ],
   "kit": {
     "name": "Labs OS",
-    "version": "2.8.4",
+    "version": "2.9.0",
     "path": "kit/",
     "doc": "docs/labs-os.md",
     "dispatch_event": "labs-kit"
