@@ -18,14 +18,15 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var KIT_VERSION = '2.8.4';
+  var KIT_VERSION = '2.9.0';
   var APPS = [
     { id: 'backup',  name: 'Backup .labs',  color: '#7ee2a8', d: 'M26 20v24 M26 20h6a5.5 5.5 0 0 1 0 11h-6 M26 31h7a6.5 6.5 0 0 1 0 13h-7' },
     { id: 'projet',  name: 'Projet .labs',  color: '#b49cff', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
     { id: 'torrent', name: 'Torrent .labs', color: '#ff9b6a', d: 'M24 20h16 M32 20v24' },
     { id: 'finance', name: 'Finance .labs', color: '#6cc7f0', d: 'M27 44V20h11 M27 31h9' },
-    // 2.6.0 : Plex Labs devient Cover Labs (nom affiché) ; l'identifiant reste 'plex' jusqu'au déploiement de l'appli renommée
-    { id: 'plex',    name: 'Cover .labs',   color: '#f2b84b', d: 'M26 44V20h6.5a6.5 6.5 0 0 1 0 13H26' },
+    // 2.9.0 : Cover Labs (ex-Plex Labs) a sa clé 'cover', son adresse cover-labs et son logo C (le P est abandonné) ;
+    // 'plex' et 'asset' restent acceptés comme alias dans LabsOS.init et dans l'option suite
+    { id: 'cover',   name: 'Cover .labs',   color: '#f2b84b', host: 'cover-labs', d: 'M40.7 22.8A12 12 0 1 0 40.7 41.2' },
     { id: 'mixer',   name: 'Mixer .labs',   color: '#8ef26a', d: 'M25 44V20l7 12 7-12v24' },
     // 2.4.0 : Crate entre dans la suite hors du schéma « … Labs » : nom seul, logo C vinyle (apps/crate/logo/crate.svg)
     { id: 'crate',   name: 'Crate',         color: '#d9701f', host: 'crate', svg: '<svg viewBox="0 0 512 512" aria-hidden="true"><defs><mask id="lo-crate-c"><rect width="512" height="512" fill="#000"/><circle cx="256" cy="256" r="196" fill="#fff"/><circle cx="256" cy="256" r="104" fill="#000"/><path d="M256 256L512 196V316Z" fill="#000"/></mask></defs><rect width="512" height="512" rx="112" fill="#18181b"/><g mask="url(#lo-crate-c)" fill="none" stroke="#f0f0f2" stroke-width="9"><circle cx="256" cy="256" r="190"/><circle cx="256" cy="256" r="166"/><circle cx="256" cy="256" r="142"/><circle cx="256" cy="256" r="118"/></g><circle cx="256" cy="256" r="22" fill="#d9701f"/></svg>' },
@@ -197,8 +198,10 @@
      3. déduite du nom d'hôte : projet-labs.mondomaine.fr → backup-labs.mondomaine.fr. */
   function savedUrls() { try { return JSON.parse(load('labs.suite', '{}')) || {}; } catch (e) { return {}; } }
   function urlFor(id) {
-    if (opts.suite && opts.suite[id]) return opts.suite[id];
-    var s = savedUrls(); if (s[id]) return s[id];
+    if (id === 'plex' || id === 'asset') id = 'cover';   // 2.9.0 : anciens identifiants de Cover Labs
+    var given = opts.suite && (opts.suite[id] || (id === 'cover' && (opts.suite.plex || opts.suite.asset)));
+    if (given) return given;
+    var s = savedUrls(); if (s[id] || (id === 'cover' && s.plex)) return s[id] || s.plex;
     var m = location.hostname.match(/^(?:(?:backup|projet|torrent|finance|plex|cover|mixer|asset)-labs|crate|digger)(\..+)$/);
     var app = APPS.filter(function (x) { return x.id === id; })[0];
     if (m) return location.protocol + '//' + (app && app.host ? app.host : id + '-labs') + m[1] + (location.port ? ':' + location.port : '') + '/';
@@ -678,8 +681,9 @@
     apps: APPS.map(function (a) { return { id: a.id, name: a.name, color: a.color }; }),
     init: function (o) {
       opts = o || {};
-      if (opts.app === 'asset' || opts.app === 'cover') opts.app = 'plex';   // Cover Labs (ex-Plex Labs, ex-Asset Labs) : identifiant 'plex' jusqu'au déploiement du renommage
-      if (opts.app) root.setAttribute('data-lo-app', opts.app);
+      if (opts.app === 'asset' || opts.app === 'plex') opts.app = 'cover';   // 2.9.0 : Cover Labs (ex-Plex Labs, ex-Asset Labs) a la clé 'cover'
+      /* Le CSS du kit garde le jeton interne « plex » (--lo-c-plex, [data-lo-app="plex"]) : l'attribut reste donc « plex » pour Cover Labs */
+      if (opts.app) root.setAttribute('data-lo-app', opts.app === 'cover' ? 'plex' : opts.app);
       applyMode();
       // Barre du haut montée tout de suite si son conteneur existe déjà : les scripts « defer » de l'appli la trouvent.
       if (opts.top && typeof opts.top === 'string' && document.querySelector(opts.top)) buildTop(opts.top);
