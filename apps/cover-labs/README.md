@@ -23,11 +23,11 @@
 ## Thèmes
 
 Deux thèmes, clair (référence) et sombre, qui suivent le système ou le choix
-fait dans le menu : voir [theme.md](theme.md), jetons dans [`theme/`](theme/).
+fait dans le menu : voir [../cover-labs/theme.md](theme.md), jetons dans [`theme/`](theme/).
 
 ## Écrans
 
-Voir [ecrans.md](ecrans.md).
+Voir [../cover-labs/ecrans.md](ecrans.md).
 
 ## Vocabulaire propre
 

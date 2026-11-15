@@ -10,8 +10,8 @@ Pont en tête d'`app/static/app.css` (`:root[data-theme]`) : fonds, surfaces, te
 
 *Thème d'origine, avant Labs OS (historique) :*
 
-Fichiers : [`theme/plex-labs.css`](theme/plex-labs.css) (copie de référence
-des variables de l'interface) et [`theme/tokens.json`](theme/tokens.json).
+Fichiers : [`../cover-labs/theme/plex-labs.css`](theme/plex-labs.css) (copie de référence
+des variables de l'interface) et [`../cover-labs/theme/tokens.json`](theme/tokens.json).
 Thème clair par défaut, sombre si le système l'est ; le bouton du menu force
 l'un ou l'autre, choix mémorisé par navigateur (`localStorage`, clé
 `pcs-theme`), appliqué avant l'affichage.
@@ -95,5 +95,5 @@ vaut 16 px jusqu'à 1920 px de large, puis grandit avec l'écran (24 px sur un
 
 ## Fichiers
 
-[`theme/plex-labs.css`](theme/plex-labs.css) (variables des deux thèmes) et
-[`theme/tokens.json`](theme/tokens.json). Le reste des styles vit dans l'appli.
+[`../cover-labs/theme/plex-labs.css`](theme/plex-labs.css) (variables des deux thèmes) et
+[`../cover-labs/theme/tokens.json`](theme/tokens.json). Le reste des styles vit dans l'appli.
