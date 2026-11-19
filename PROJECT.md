@@ -10,7 +10,7 @@ Reprise de labs-brand le 2026-11-05 : voir [[CHARTE]].
 
 ## Architecture
 - `kit/` : Labs OS (`labs-os.css`, `labs-os.js`, polices, `VERSION`). Depuis 1.3.0 : gabarit commun (menu `lo-side`, barre de recherche `lo-top`, tiroir mobile, jetons de texte et d'écarts). Mode d'emploi : `docs/labs-os.md`.
-- `kit/labs-kit.yml` : modèle du workflow « Kit Labs OS » de chaque appli. Depuis le 2026-11-08, l'étape « Recopier le kit » échoue si `sync-labs-kit.sh` échoue (ref inexistante, réseau) au lieu de passer au vert ; contrôle hors ligne `python3 tests/check-labs-kit-sync.py`. `actions/checkout` y est épinglé par SHA en v7.0.1 (contrôle `python3 kit/tests/labs-kit-yml.py`). À recopier dans `.github/workflows/labs-kit.yml` des applis.
+- `kit/labs-kit.yml` : modèle du workflow « Kit Labs OS » de chaque appli. Depuis le 2026-11-08, l'étape « Recopier le kit » échoue si `sync-labs-kit.sh` échoue (ref inexistante, réseau) au lieu de passer au vert ; contrôle hors ligne `python3 tests/check-labs-kit-sync.py`. `actions/checkout` y est épinglé par SHA en v7.0.1 (contrôle `python3 kit/tests/labs-kit-yml.py`). À recopier dans `.gitea/workflows/labs-kit.yml` des applis (version Gitea depuis le 2026-11-19 : `workflow_dispatch` avec l'entrée `ref`, image relancée par l'API Gitea).
 - `apps/<appli>/` : charte de chaque appli ; `docs/` : règles communes ; `catalogue.json` + `CATALOGUE.md` : index.
 
 ## Installation / déploiement
@@ -18,15 +18,16 @@ Rien à construire ni à installer : dépôt de documentation et kit statique. C
 
 Mettre à jour l'interface commune **Labs OS** (version actuelle du kit : **2.8.4** ; 2.7.0 : info-bulles « i » communes, règles d'écran écrites, boucle du bouton de menu corrigée ; 2.8.0 / 2.8.1 : option `hints` (paragraphes d'explication changés en info-bulles, états vides gardés)) :
 1. Modifier `kit/` ici, jamais dans une appli. Augmenter `kit/VERSION`, reporter la version dans `catalogue.json` (`kit.version`) et `CATALOGUE.md`, noter le changement dans `CHANGELOG.md`.
-2. Enregistrer sur `main` (Projet Labs envoie la version vers GitHub, en différé).
-3. Propager : Projet Labs, page « La suite », bouton « Propager à la suite », ou outil MCP `propagate_ui`. Projet Labs envoie l'événement `repository_dispatch` `labs-kit` à chaque dépôt listé dans `catalogue.json` (`apps`, champs `repo` et `kit_dir`).
-4. Dans chaque appli, le workflow « Kit Labs OS » (`.github/workflows/labs-kit.yml`, copié du modèle `kit/labs-kit.yml`) lance `scripts/sync-labs-kit.sh <kit_dir> <ref>`, commite si le kit a changé, puis relance le workflow d'image. Il tourne aussi chaque lundi et à la demande.
+2. Enregistrer sur `main` (Projet Labs envoie la version vers GitHub, en différé ; labs-brand reste sur GitHub).
+3. Propager : Projet Labs, page « La suite », bouton « Propager à la suite », ou outil MCP `propagate_ui`. Projet Labs lance le workflow « Kit Labs OS » de chaque appli (`workflow_dispatch` par l'API Gitea, entrée `ref`) ; Crate, encore sur GitHub, reçoit l'événement `repository_dispatch` `labs-kit`. Dépôts : projet lié dans Projet Labs, sinon `catalogue.json` (`apps`, champs `repository`, `forge` et `kit_dir`).
+4. Dans chaque appli, le workflow « Kit Labs OS » (`.gitea/workflows/labs-kit.yml`, copié du modèle `kit/labs-kit.yml`) lance `scripts/sync-labs-kit.sh <kit_dir> <ref>`, commite si le kit a changé, puis relance le workflow d'image. Il tourne aussi chaque lundi et à la demande.
 5. Vérifier avec `kit_status` que chaque appli est « à jour », puis mettre à jour les conteneurs dans Unraid.
 
 ## Décisions
 Voir [[JOURNAL]].
 
 ## État
+- 2026-11-19 : les applis de la suite passent sur **Gitea** (Gitea Actions), labs-brand reste public sur GitHub : modèle `kit/labs-kit.yml` en version Gitea, propagation décrite dans `CHARTE.md` et `docs/labs-os.md`, `catalogue.json` (`repository` = `aurelien/<appli>`, `forge: gitea` ; Crate reste `brainwasher-01/crate`). Les copies des applis (`.gitea/workflows/labs-kit.yml`) masquent encore un échec de `sync-labs-kit.sh` (`echo "result=$(…)"`) : à remplacer par le modèle.
 - 2026-11-14 : kit **2.8.0** — option `hints` de `LabsOS.init` : les paragraphes d'explication d'une appli deviennent des info-bulles sans réécrire ses écrans. À propager.
 - 2026-11-14 : kit **2.7.0** — info-bulle « i » commune (`data-lo-info`, `LabsOS.info`), règles d'écran de la suite écrites dans `docs/labs-os.md` (pas de paragraphe d'explication, pas de « … », 8 px du bord, prendre la largeur), boucle du bouton de réduction du menu corrigée (clics perdus). À propager.
 - 2026-11-13 : kit **2.6.0** — logo de Digger remis à la proposition d'origine (trois disques dans un bac, le dernier tiré vers le haut) ; Plex Labs renommée **Cover Labs** (noms affichés ; identifiant `plex` gardé jusqu'au déploiement, `cover` accepté) ; plus de texte coupé par « … » dans le kit (cartes de liste, recherche, palette, pied du menu). À propager.
@@ -46,3 +47,4 @@ Voir [[JOURNAL]].
 ## Feuille de route
 - [ ] Captures des cinq applis avec le gabarit 1.3.0 dans `apps/*/captures/`
 - [x] PNG 256 px de Digger (`logos/digger.png`) et de Mixer Labs (`logos/mixer-labs.png`) déposés le 2026-11-12 (rendu du SVG par Browserless)
+- [ ] Recopier le modèle `kit/labs-kit.yml` (version Gitea, échec non masqué) dans `.gitea/workflows/labs-kit.yml` des 8 applis

@@ -1,12 +1,17 @@
-# Labs OS — modèle du workflow de propagation, à copier dans .github/workflows/labs-kit.yml de chaque appli.
+# Labs OS — modèle du workflow de propagation, à copier dans .gitea/workflows/labs-kit.yml de chaque appli.
 # Remplacer KIT_DIR (dossier servi par l'appli, ex. app/static/labs-os) et IMAGE_WORKFLOW (fichier du workflow d'image).
-# Déclenché par Projet Labs (bouton « Propager à la suite », événement repository_dispatch « labs-kit »),
-# à la main (Actions → Kit Labs OS → Run workflow) ou chaque lundi (filet de sécurité, pour économiser le quota gratuit).
+# Les applis sont sur Gitea (Gitea Actions) ; labs-brand reste public sur GitHub, le kit y est lu.
+# Déclenché par Projet Labs (bouton « Propager à la suite » : workflow_dispatch par l'API Gitea, entrée ref),
+# à la main (Actions → Kit Labs OS → Exécuter) ou chaque lundi (filet de sécurité).
+# Gitea Actions n'a pas de repository_dispatch : c'est pourquoi la propagation passe par workflow_dispatch.
 name: Kit Labs OS
 on:
-  repository_dispatch:
-    types: [labs-kit]
   workflow_dispatch:
+    inputs:
+      ref:
+        description: "Branche ou version de labs-brand à recopier"
+        required: false
+        default: "main"
   schedule:
     - cron: "17 3 * * 1"
 permissions:
@@ -23,7 +28,7 @@ jobs:
       - name: Recopier le kit depuis labs-brand
         id: sync
         env:
-          REF: ${{ github.event.client_payload.ref || 'main' }}
+          REF: ${{ github.event.inputs.ref || 'main' }}
         # Le résultat passe par une variable : un échec du script (ref inexistante, réseau)
         # fait alors échouer l'étape, au lieu d'être masqué par « echo ».
         run: |
@@ -33,12 +38,16 @@ jobs:
       - name: Commiter et reconstruire l'image
         if: startsWith(steps.sync.outputs.result, 'changed')
         env:
-          GH_TOKEN: ${{ github.token }}
+          TOKEN: ${{ github.token }}
         run: |
           git config user.name "Aurélien Coiffard"
-          git config user.email "aurelien.coiffard@gmail.com"
+          git config user.email "30692648+brainwasher-01@users.noreply.github.com"
           git add KIT_DIR
           git commit -m "chore(ui): sync Labs OS kit $(cat KIT_DIR/VERSION)"
           git push
-          # Un push fait avec le jeton du workflow ne relance pas les autres workflows : on lance l'image explicitement.
-          gh workflow run IMAGE_WORKFLOW --ref "${GITHUB_REF_NAME}"
+          # Un push fait avec le jeton du workflow ne relance pas les autres workflows :
+          # on lance le workflow d'image explicitement, par l'API Gitea.
+          curl -fsS -X POST \
+            -H "Authorization: token ${TOKEN}" -H "Content-Type: application/json" \
+            -d "{\"ref\":\"${GITHUB_REF_NAME}\"}" \
+            "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/workflows/IMAGE_WORKFLOW/dispatches"

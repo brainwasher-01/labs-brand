@@ -20,7 +20,7 @@
 
 ## Écrans
 
-Accueil (carte Claude, projets, activité), projet (aperçu, versions, branches, GitHub, graphe), document (lire, éditer, historique, auteurs, liens), graphe global, tags, GitHub, **La suite Labs** (applis, interface commune et propagation, propositions), réglages.
+Accueil (carte Claude, projets, activité), projet (aperçu, versions, branches, dépôt), document (lire, éditer, historique, auteurs, liens), **La suite Labs** (applis, interface commune et propagation, propositions), réglages.
 
 ## Vocabulaire propre
 
@@ -28,7 +28,7 @@ Accueil (carte Claude, projets, activité), projet (aperçu, versions, branches,
 |---|---|
 | commit | version |
 | tag `snap/…` | point de restauration |
-| repository_dispatch `labs-kit` | Propager à la suite |
+| lancement du workflow `labs-kit` (Gitea, ou `repository_dispatch` sur GitHub) | Propager à la suite |
 
 ## Écarts assumés avec le commun
 

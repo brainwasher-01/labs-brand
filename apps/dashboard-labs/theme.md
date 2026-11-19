@@ -54,4 +54,4 @@ Celles de Labs OS (`--lo-r` 8 px, écarts `--lo-gap`, `--lo-pad`). Bandeau de la
 
 ## Fichiers
 
-Pas encore de fichiers de thème : ils viendront avec le dépôt `brainwasher-01/dashboard-labs`.
+Pas encore de fichiers de thème : ils viendront avec le dépôt `aurelien/dashboard-labs` (Gitea).

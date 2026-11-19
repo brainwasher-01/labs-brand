@@ -15,7 +15,7 @@
 | Rôle | Trouver et télécharger de la musique sur Soulseek (slskd), puis la remettre à Crate : recherche, téléchargement en un clic, transferts, demandes venues de Crate (absents, meilleure version, pistes abîmées), artistes et labels suivis. Digger ne touche jamais la bibliothèque : Crate garde la curation et les imports |
 | North Star visuelle | « Fouiller les bacs » : on feuillette les disques des autres pour trouver le bon pressage |
 | Nom du conteneur | `digger` |
-| Dépôt | `brainwasher-01/digger` (privé) |
+| Dépôt | `aurelien/digger` sur Gitea (privé) |
 | Couleur | **Fuchsia** `#e45bd0` (309° ; 6,4:1 sur `#07090f`), `#a8279a` sur fond clair (6,1:1 sur blanc) |
 | Logo | [`../../logos/digger.svg`](../../logos/digger.svg) — trois disques dans un bac, le dernier tiré vers le haut, son macaron fuchsia au-dessus (proposition d'origine du 2026-11-12, remise le 2026-11-13) ; construction de Crate (voir `docs/logos.md`). PNG 256 px : [`../../logos/digger.png`](../../logos/digger.png) |
 | Icône Unraid | `https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/digger.png` |

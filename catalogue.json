@@ -1,6 +1,6 @@
 {
   "suite": "Labs",
-  "updated": "2026-11-15",
+  "updated": "2026-11-19",
   "repository": "https://github.com/brainwasher-01/labs-brand",
   "common_docs": {
     "principes": "docs/principes.md",
@@ -31,7 +31,8 @@
       "logo_svg": "logos/backup-labs.svg",
       "logo_png": "logos/backup-labs.png",
       "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/backup-labs.png",
-      "repository": "brainwasher-01/backup-labs",
+      "repository": "aurelien/backup-labs",
+      "forge": "gitea",
       "kit_dir": "web/static/labs-os"
     },
     {
@@ -49,7 +50,8 @@
       "logo_svg": "logos/cover-labs.svg",
       "logo_png": "logos/cover-labs.png",
       "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/cover-labs.png",
-      "repository": "brainwasher-01/cover-labs",
+      "repository": "aurelien/cover-labs",
+      "forge": "gitea",
       "kit_dir": "app/static/labs-os"
     },
     {
@@ -67,7 +69,8 @@
       "logo_svg": "logos/finance-labs.svg",
       "logo_png": "logos/finance-labs.png",
       "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/finance-labs.png",
-      "repository": "brainwasher-01/finance-labs",
+      "repository": "aurelien/finance-labs",
+      "forge": "gitea",
       "kit_dir": "app/static/labs-os"
     },
     {
@@ -85,7 +88,8 @@
       "logo_svg": "logos/projet-labs.svg",
       "logo_png": "logos/projet-labs.png",
       "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/projet-labs.png",
-      "repository": "brainwasher-01/projet-labs",
+      "repository": "aurelien/projet-labs",
+      "forge": "gitea",
       "kit_dir": "app/static/labs-os"
     },
     {
@@ -103,7 +107,8 @@
       "logo_svg": "logos/torrent-labs.svg",
       "logo_png": "logos/torrent-labs.png",
       "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/torrent-labs.png",
-      "repository": "brainwasher-01/torrent-labs",
+      "repository": "aurelien/torrent-labs",
+      "forge": "gitea",
       "kit_dir": "static/labs-os"
     },
     {
@@ -125,7 +130,8 @@
       "logo_png": "logos/dashboard-labs.png",
       "logo_png_status": "à exporter",
       "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/dashboard-labs.png",
-      "repository": "brainwasher-01/dashboard-labs",
+      "repository": "aurelien/dashboard-labs",
+      "forge": "gitea",
       "kit_dir": "static/labs-os"
     },
     {
@@ -145,7 +151,8 @@
       "logo_svg": "logos/mixer-labs.svg",
       "logo_png": "logos/mixer-labs.png",
       "unraid_icon": "https://raw.githubusercontent.com/brainwasher-01/labs-brand/main/logos/mixer-labs.png",
-      "repository": "brainwasher-01/mixer-labs",
+      "repository": "aurelien/mixer-labs",
+      "forge": "gitea",
       "kit_dir": "frontend/public/labs-os"
     },
     {
@@ -189,7 +196,8 @@
       "role": "Trouve et télécharge la musique sur Soulseek (slskd) et la remet à Crate, qui garde la curation et les imports : recherche, transferts, demandes de Crate, artistes et labels suivis",
       "suite": true,
       "suite_note": "dans la suite depuis le 2026-11-12, hors du schéma « … Labs » : nom « Digger » seul, logo propre sur la construction de Crate ; couleur en dérogation à la règle des 40° (14° du rose réservé, 54° de Projet Labs)",
-      "repository": "brainwasher-01/digger",
+      "repository": "aurelien/digger",
+      "forge": "gitea",
       "container": "digger",
       "status": "en construction",
       "charter_status": "complète",
@@ -210,6 +218,7 @@
     "version": "2.9.0",
     "path": "kit/",
     "doc": "docs/labs-os.md",
-    "dispatch_event": "labs-kit"
+    "dispatch_event": "labs-kit",
+    "workflow": "labs-kit.yml"
   }
 }
