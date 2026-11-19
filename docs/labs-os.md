@@ -219,21 +219,23 @@ Une modification de l'interface commune se fait **une seule fois**, dans
 1. Modifier `kit/`, augmenter `kit/VERSION`, noter le changement dans
    `CHANGELOG.md`, pousser sur `main`.
 2. Dans **Projet Labs**, page *La suite*, bouton **Propager à la suite**
-   (ou outil MCP `propagate_ui` côté Claude). Projet Labs envoie l'événement
-   `labs-kit` à chaque dépôt d'appli.
-3. Dans chaque appli, le workflow **Kit Labs OS** (`.github/workflows/labs-kit.yml`)
-   recopie le kit, commite sur `main` si quelque chose a changé, puis relance
-   le workflow d'image.
+   (ou outil MCP `propagate_ui` côté Claude). Projet Labs lance le workflow
+   **Kit Labs OS** de chaque appli (`workflow_dispatch` par l'API Gitea, avec
+   la version de labs-brand à recopier en entrée `ref`).
+3. Dans chaque appli, ce workflow (`.gitea/workflows/labs-kit.yml`, copié du
+   modèle [`kit/labs-kit.yml`](../kit/labs-kit.yml)) recopie le kit depuis ce dépôt,
+   commite sur `main` si quelque chose a changé, puis relance le workflow d'image.
 4. Mise à jour du conteneur dans Unraid, comme d'habitude.
 
-Le même workflow tourne aussi chaque nuit et à la demande (Actions → *Kit
-Labs OS* → *Run workflow*). Projet Labs affiche, pour chaque appli, la version
-du kit qu'elle embarque et signale celles en retard.
+Les applis sont hébergées sur Gitea (Gitea Actions) ; ce dépôt reste public sur
+GitHub, et le kit y est lu. Le même workflow tourne aussi chaque lundi et à la
+demande (Actions → *Kit Labs OS* → *Exécuter*). Projet Labs affiche, pour chaque
+appli, la version du kit qu'elle embarque et signale celles en retard.
 
-Le jeton GitHub de Projet Labs doit pouvoir écrire sur les dépôts des applis
-(jeton *fine-grained* : *Contents* en lecture et écriture — c'est ce que GitHub
-exige pour l'événement `labs-kit` — et *Metadata* en lecture ; *Actions* en
-lecture suffit ; ou un jeton classique avec `repo`).
+Le jeton Gitea de Projet Labs doit pouvoir écrire sur les dépôts des applis
+(dépôt en lecture et écriture : c'est ce que demande le lancement d'un workflow).
+Crate est encore sur GitHub : il reçoit l'événement `repository_dispatch`
+`labs-kit` comme avant, avec le jeton GitHub de Projet Labs.
 
 ## Crate : dans la suite, hors du schéma « … Labs »
 
@@ -250,7 +252,7 @@ Cover Labs). Les téléchargements de Crate partent dans une autre appli, Digger
 Depuis le 2026-11-12 (décision d'Aurélien), Digger rejoint la suite comme
 Crate : il s'appelle **Digger**, sans « .labs », et reçoit Labs OS par la
 propagation (`kit_dir` : `frontend/public/labs-os`, dépôt
-`brainwasher-01/digger`). Le kit le connaît sous l'identifiant `digger`
+`aurelien/digger` sur Gitea). Le kit le connaît sous l'identifiant `digger`
 (`data-lo-app="digger"`, palette, touche 8, adresse `digger.<domaine>`) avec
 son propre logo (bac de disques, construction de Crate). Sa couleur, le
 fuchsia `#e45bd0` (`#a8279a` sur fond clair), est une dérogation à la règle
